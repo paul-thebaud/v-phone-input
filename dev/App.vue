@@ -10,7 +10,7 @@
             cols="12"
             md="6"
           >
-            <input-card :input-props="inputProps" />
+            <input-card :input-props="cleanedInputProps" />
           </v-col>
           <v-col
             cols="12"
@@ -32,6 +32,18 @@ import InputCard from './InputCard.vue';
 
 @Component({ components: { InputCard, PropsCard } })
 export default class App extends Vue {
-  inputProps = {};
+  inputProps = {} as Record<string, any>;
+
+  get cleanedInputProps() {
+    const cleanedInputProps = {} as Record<string, any>;
+
+    Object.keys(this.inputProps).forEach((prop) => {
+      if (this.inputProps[prop] !== '') {
+        cleanedInputProps[prop] = this.inputProps[prop];
+      }
+    });
+
+    return cleanedInputProps;
+  }
 }
 </script>
