@@ -90,16 +90,22 @@
 import PhoneNumber from 'awesome-phonenumber';
 import Vue from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
-import { InputValidationRule, InputValidationRules } from 'vuetify';
 import { VAutocomplete, VSelect, VTextField } from 'vuetify/lib';
 import { Country, CountryIso2 } from '@/utils/countries';
 import { getOption } from '@/utils/options';
 import { DisplayMode, formatForMode, validateMode } from '@/utils/displayModes';
+import { InputValidationRules } from 'vuetify';
 
 type VPhoneInputRefs = Vue['$refs'] & {
   countryInput: InstanceType<typeof VSelect | typeof VAutocomplete>;
   phoneInput: InstanceType<typeof VTextField> & { validate: () => boolean };
 }
+
+type VPhoneInputRule =
+  ((phoneString: string, countryString: string, objectValue: any) => string | boolean)
+  | ((phoneString: string, countryString: string) => string | boolean)
+  | ((phoneString: string) => string | boolean);
+type VPhoneInputRules = (VPhoneInputRule | string)[];
 
 @Component({
   name: 'VPhoneInput',
@@ -171,7 +177,7 @@ export default class VPhoneInput extends Vue {
   readonly value!: string;
 
   @Prop({ type: Array, default: () => [] })
-  readonly rules!: InputValidationRules;
+  readonly rules!: VPhoneInputRules;
 
   readonly $refs!: VPhoneInputRefs;
 
@@ -255,11 +261,11 @@ export default class VPhoneInput extends Vue {
   }
 
   get phoneRules(): InputValidationRules {
-    const rules = this.rules.map((rule: InputValidationRule | string) => (
+    const rules = this.rules.map((rule) => (
       typeof rule === 'function'
-        ? () => rule(this.phoneObject)
+        ? (() => rule(this.lazyValue, this.activeCountryOrFallback.iso2, this.phoneObject))
         : rule
-    ));
+    )) as InputValidationRules;
     if (this.disabledValidation) {
       return rules;
     }
