@@ -97,7 +97,8 @@ import { getOption } from '@/utils/options';
 import { DisplayMode, formatForMode, validateMode } from '@/utils/displayModes';
 
 type VPhoneInputRefs = Vue['$refs'] & {
-  phoneInput: { validate: () => boolean };
+  countryInput: InstanceType<typeof VSelect | typeof VAutocomplete>;
+  phoneInput: InstanceType<typeof VTextField> & { validate: () => boolean };
 }
 
 @Component({
@@ -142,6 +143,9 @@ export default class VPhoneInput extends Vue {
   @Prop({ type: Function, default: getOption('computeCountryAriaLabel') })
   readonly computeCountryAriaLabel!: (label: string) => string;
 
+  @Prop({ type: Function, default: getOption('computeInvalidMessage') })
+  readonly computeInvalidMessage!: (label: string) => string;
+
   @Prop({ type: Function, default: getOption('guessCountry') })
   readonly guessCountry!: () => Promise<CountryIso2>;
 
@@ -153,9 +157,6 @@ export default class VPhoneInput extends Vue {
 
   @Prop({ type: String, default: getOption('label') })
   readonly label!: string;
-
-  @Prop({ type: String, default: getOption('invalidMessage') })
-  readonly invalidMessage!: string;
 
   @Prop({ type: Object, default: () => ({}) })
   readonly countryInputProps!: object;
@@ -265,7 +266,7 @@ export default class VPhoneInput extends Vue {
 
     return [
       ...rules,
-      () => !this.lazyValue || this.phoneObject.valid || this.invalidMessage,
+      () => !this.lazyValue || this.phoneObject.valid || this.computeInvalidMessage(this.label),
     ];
   }
 

@@ -7,7 +7,7 @@ export const DEFAULT_OPTIONS = {
   label: 'Phone',
   countryLabel: 'Country',
   computeCountryAriaLabel: (label: string) => `Country for ${label}`,
-  invalidMessage: 'Given phone number is invalid.',
+  computeInvalidMessage: (label: string) => `The "${label}" field is not a valid phone number.`,
   hideCountryLabel: false,
   guessCountry,
   allCountries: countries,
