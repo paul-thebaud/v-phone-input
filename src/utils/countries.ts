@@ -1240,6 +1240,8 @@ export interface Country {
   dialCode: string;
 }
 
+export type CountryGuesser = () => Promise<CountryIso2>;
+
 export async function guessCountry(): Promise<CountryIso2> {
   let response;
   try {
@@ -1254,6 +1256,23 @@ export async function guessCountry(): Promise<CountryIso2> {
   }
 
   return countryData[1];
+}
+
+let memoizedGuessedCountry = undefined as CountryIso2 | undefined;
+let memoizedGuessCountryPromise = undefined as Promise<CountryIso2> | undefined;
+
+export async function memoizedGuessCountry(): Promise<CountryIso2> {
+  if (memoizedGuessedCountry) {
+    return memoizedGuessedCountry;
+  }
+
+  if (memoizedGuessCountryPromise) {
+    return memoizedGuessCountryPromise;
+  }
+
+  memoizedGuessCountryPromise = guessCountry();
+
+  return memoizedGuessedCountry = await memoizedGuessCountryPromise;
 }
 
 export default allCountries.map(([name, iso2, dialCode]) => ({

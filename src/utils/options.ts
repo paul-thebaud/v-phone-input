@@ -1,4 +1,4 @@
-import countries, { CountryIso2, guessCountry } from '@/utils/countries';
+import countries, { CountryGuesser, CountryIso2, memoizedGuessCountry } from '@/utils/countries';
 import { DISPLAY_MODE_E164, DISPLAY_MODE_NATIONAL } from '@/utils/displayModes';
 
 export const DEFAULT_OPTIONS = {
@@ -9,7 +9,7 @@ export const DEFAULT_OPTIONS = {
   computeCountryAriaLabel: (label: string) => `Country for ${label}`,
   computeInvalidMessage: (label: string) => `The "${label}" field is not a valid phone number.`,
   hideCountryLabel: false,
-  guessCountry,
+  guessCountry: memoizedGuessCountry as CountryGuesser,
   allCountries: countries,
   preferredCountries: [] as CountryIso2[],
   onlyCountries: [] as CountryIso2[],
