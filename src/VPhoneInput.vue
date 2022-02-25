@@ -8,6 +8,8 @@
       :aria-label="countryInputAriaLabel"
       :loading="loading || (!disabledLoadingCountry && !initiated)"
       :items="sortedCountries"
+      :autocomplete="disabledSearchingCountry ? undefined : 'new-password'"
+      :aria-autocomplete="disabledSearchingCountry ? undefined : 'off'"
       class="v-phone-input__country"
       item-text="name"
       item-value="iso2"
