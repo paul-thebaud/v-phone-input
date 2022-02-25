@@ -11,21 +11,20 @@
       class="v-phone-input__country"
       item-text="name"
       item-value="iso2"
-      auto-select-first
       v-bind="{ ...$attrs, ...countryInputProps }"
     >
       <template #selection>
         <slot
           name="selection"
-          :item="activeCountry"
+          :item="activeCountryOrFallback"
         >
           <div
-            :class="activeCountry.iso2.toLowerCase()"
+            :class="activeCountryOrFallback.iso2.toLowerCase()"
             class="v-phone-input__selection__img vpi__flag"
           >
             <span
               class="d-sr-only"
-              v-text="activeCountry.name"
+              v-text="activeCountryOrFallback.name"
             />
           </div>
         </slot>
@@ -171,20 +170,20 @@ export default class VPhoneInput extends Vue {
 
   initiated = false;
 
-  lazyCountry = '';
+  lazyCountry = '' as CountryIso2 | undefined;
 
   lazyValue = '';
 
-  get countryInputLabel() {
+  get countryInputLabel(): string | undefined {
     return this.hideCountryLabel ? undefined : this.countryLabel;
   }
 
-  get countryInputAriaLabel() {
+  get countryInputAriaLabel(): string | undefined {
     return this.hideCountryLabel ? this.countryLabel : undefined;
   }
 
-  get allCountriesByIso2() {
-    const allCountriesByIso2 = {} as Record<string, Country>;
+  get allCountriesByIso2(): Record<CountryIso2, Country> {
+    const allCountriesByIso2 = {} as Record<CountryIso2, Country>;
 
     this.allCountries.forEach((country) => {
       allCountriesByIso2[country.iso2] = country;
@@ -193,11 +192,21 @@ export default class VPhoneInput extends Vue {
     return allCountriesByIso2;
   }
 
-  get activeCountry() {
+  get fallbackCountry(): Country {
+    return this.findCountry(this.defaultCountry)
+      || this.findCountry(this.preferredCountries[0])
+      || this.filteredCountries[0];
+  }
+
+  get activeCountry(): Country | undefined {
     return this.findCountry(this.lazyCountry);
   }
 
-  get filteredCountries() {
+  get activeCountryOrFallback(): Country {
+    return this.activeCountry || this.fallbackCountry;
+  }
+
+  get filteredCountries(): Country[] {
     if (this.onlyCountries.length) {
       return this.getCountries(this.onlyCountries);
     }
@@ -212,15 +221,15 @@ export default class VPhoneInput extends Vue {
     return this.allCountries;
   }
 
-  get sortedCountries() {
+  get sortedCountries(): Country[] {
     const preferredCountries = this.getCountries(this.preferredCountries)
       .map((country) => ({ ...country, preferred: true }));
 
     return [...preferredCountries, ...this.filteredCountries];
   }
 
-  get phoneObject() {
-    const phone = PhoneNumber(this.lazyValue || '', this.lazyCountry).toJSON();
+  get phoneObject(): any {
+    const phone = PhoneNumber(this.lazyValue || '', this.activeCountryOrFallback.iso2).toJSON();
     if (!this.lazyValue) {
       return {
         ...phone, number: { input: '' },
@@ -230,15 +239,15 @@ export default class VPhoneInput extends Vue {
     return phone;
   }
 
-  get phoneText() {
+  get phoneText(): string {
     return formatForMode(this.phoneObject, this.textMode);
   }
 
-  get phoneValue() {
+  get phoneValue(): string {
     return formatForMode(this.phoneObject, this.valueMode);
   }
 
-  get phoneRules() {
+  get phoneRules(): InputValidationRules {
     const rules = this.rules.map((rule: InputValidationRule | string) => (
       typeof rule === 'function'
         ? () => rule(this.phoneObject)
@@ -255,12 +264,12 @@ export default class VPhoneInput extends Vue {
   }
 
   @Watch('value')
-  onValueChange(value: string) {
+  onValueChange(value: string): void {
     this.lazyValue = value.trim();
   }
 
   @Watch('lazyValue')
-  onLazyValueChange(newValue: string) {
+  onLazyValueChange(newValue: string): void {
     if (newValue) {
       if (newValue[0] === '+') {
         const iso2 = this.getPhoneIso2(newValue);
@@ -274,29 +283,38 @@ export default class VPhoneInput extends Vue {
   }
 
   @Watch('phoneObject.valid')
-  onPhoneObjectValidChange(valid: boolean) {
+  onPhoneObjectValidChange(valid: boolean): void {
     if (valid) {
       this.lazyValue = this.phoneText;
     }
   }
 
+  @Watch('lazyCountry')
+  onLazyCountryChange(): void {
+    this.$nextTick(() => {
+      this.lazyCountry = this.lazyCountry || this.fallbackCountry.iso2;
+    });
+  }
+
   @Watch('activeCountry')
-  onActiveCountryChange(country: Country) {
+  onActiveCountryChange(country: Country | undefined): void {
     if (country && !this.initiated) {
       this.initiated = true;
     }
-
-    this.$refs.phoneInput.validate();
-    this.$emit('update:country', country);
   }
 
-  created() {
+  @Watch('activeCountryOrFallback')
+  onActiveCountryOrFallbackChange(): void {
+    this.$refs.phoneInput.validate();
+  }
+
+  created(): void {
     if (this.value) {
       this.onValueChange(this.value);
     }
   }
 
-  async mounted() {
+  async mounted(): Promise<void> {
     try {
       await this.initializeCountry();
     } catch (error) {
@@ -306,7 +324,7 @@ export default class VPhoneInput extends Vue {
     }
   }
 
-  async initializeCountry() {
+  async initializeCountry(): Promise<void> {
     if (this.lazyValue && this.lazyValue[0] === '+') {
       const iso2 = this.getPhoneIso2(this.lazyValue);
       if (iso2) {
@@ -316,9 +334,6 @@ export default class VPhoneInput extends Vue {
       }
     }
 
-    const fallbackCountry = this.findCountry(this.defaultCountry)?.iso2
-      || this.findCountry(this.preferredCountries[0])?.iso2
-      || this.filteredCountries[0]?.iso2;
     if (!this.disabledFetchingCountry) {
       try {
         if (this.lazyValue === '') {
@@ -334,10 +349,10 @@ export default class VPhoneInput extends Vue {
       }
     }
 
-    this.lazyCountry = this.lazyCountry || fallbackCountry;
+    this.lazyCountry = this.lazyCountry || this.fallbackCountry.iso2;
   }
 
-  getPhoneIso2(phone: string): string | undefined {
+  getPhoneIso2(phone: string): CountryIso2 | undefined {
     const iso2 = PhoneNumber(phone).getRegionCode();
 
     return iso2 ? this.findCountry(iso2)?.iso2 : undefined;
@@ -346,11 +361,11 @@ export default class VPhoneInput extends Vue {
   /**
    * Get a list of countries matching given ISO2 codes.
    *
-   * @param {string[]} countriesIso2
+   * @param {CountryIso2[]} countriesIso2
    *
    * @returns {Country[]}
    */
-  getCountries(countriesIso2 = [] as string[]) {
+  getCountries(countriesIso2 = [] as CountryIso2[]): Country[] {
     return countriesIso2
       .map((iso2) => this.findCountry(iso2))
       .filter((c): c is Country => !!c);
@@ -359,12 +374,12 @@ export default class VPhoneInput extends Vue {
   /**
    * Find a country using its ISO2 code.
    *
-   * @param {string} iso2
+   * @param {CountryIso2 | undefined} iso2
    *
    * @returns {Country | undefined}
    */
-  findCountry(iso2 = '' as string) {
-    return this.allCountriesByIso2[iso2.toUpperCase()];
+  findCountry(iso2 = undefined as CountryIso2 | undefined): Country | undefined {
+    return this.allCountriesByIso2[(iso2 || '').toUpperCase()];
   }
 }
 </script>
