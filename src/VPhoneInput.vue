@@ -92,7 +92,7 @@ import Vue from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import { InputValidationRule, InputValidationRules } from 'vuetify';
 import { VAutocomplete, VSelect, VTextField } from 'vuetify/lib';
-import { Country, CountryIso2, guessCountry } from '@/utils/countries';
+import { Country, CountryIso2 } from '@/utils/countries';
 import { getOption } from '@/utils/options';
 import { DisplayMode, formatForMode, validateMode } from '@/utils/displayModes';
 
@@ -139,6 +139,12 @@ export default class VPhoneInput extends Vue {
   @Prop({ type: Boolean, default: getOption('hideCountryLabel') })
   readonly hideCountryLabel!: boolean;
 
+  @Prop({ type: Function, default: getOption('computeCountryAriaLabel') })
+  readonly computeCountryAriaLabel!: (label: string) => string;
+
+  @Prop({ type: Function, default: getOption('guessCountry') })
+  readonly guessCountry!: () => Promise<CountryIso2>;
+
   @Prop({ type: String, default: getOption('textMode'), validator: validateMode })
   readonly textMode!: DisplayMode;
 
@@ -179,7 +185,7 @@ export default class VPhoneInput extends Vue {
   }
 
   get countryInputAriaLabel(): string | undefined {
-    return this.hideCountryLabel ? this.countryLabel : undefined;
+    return this.computeCountryAriaLabel(this.label);
   }
 
   get allCountriesByIso2(): Record<CountryIso2, Country> {
@@ -337,7 +343,7 @@ export default class VPhoneInput extends Vue {
     if (!this.disabledFetchingCountry) {
       try {
         if (this.lazyValue === '') {
-          const guessedCountry = this.findCountry(await guessCountry())?.iso2;
+          const guessedCountry = this.findCountry(await this.guessCountry())?.iso2;
           if (!this.lazyCountry && guessedCountry) {
             this.lazyCountry = guessedCountry;
           }

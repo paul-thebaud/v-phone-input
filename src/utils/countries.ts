@@ -1240,11 +1240,17 @@ export interface Country {
   dialCode: string;
 }
 
-export async function guessCountry() {
-  const response = await fetch('https://ip2c.org/s');
+export async function guessCountry(): Promise<CountryIso2> {
+  let response;
+  try {
+    response = await fetch('https://ip2c.org/s');
+  } catch (error) {
+    throw new Error('unable to fetch the country');
+  }
+
   const countryData = (await response.text() || '').toString().split(';');
   if (!countryData || countryData[0] !== '1') {
-    throw new Error('unable to fetch the country');
+    throw new Error('invalid response for country');
   }
 
   return countryData[1];

@@ -1,4 +1,4 @@
-import countries, { CountryIso2 } from '@/utils/countries';
+import countries, { CountryIso2, guessCountry } from '@/utils/countries';
 import { DISPLAY_MODE_E164, DISPLAY_MODE_NATIONAL } from '@/utils/displayModes';
 
 export const DEFAULT_OPTIONS = {
@@ -6,8 +6,10 @@ export const DEFAULT_OPTIONS = {
   loading: false,
   label: 'Phone',
   countryLabel: 'Country',
+  computeCountryAriaLabel: (label: string) => `Country for ${label}`,
   invalidMessage: 'Given phone number is invalid.',
   hideCountryLabel: false,
+  guessCountry,
   allCountries: countries,
   preferredCountries: [] as CountryIso2[],
   onlyCountries: [] as CountryIso2[],
