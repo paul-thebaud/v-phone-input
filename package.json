@@ -1,5 +1,5 @@
 {
-  "name": "vuetify-phone-input",
+  "name": "v-phone-input",
   "version": "1.0.0-alpha.1",
   "license": "MIT",
   "description": "International phone field for Vuetify 2.0 and Vue JS 2.",
@@ -13,10 +13,10 @@
     "input",
     "international phone"
   ],
-  "main": "dist/vuetify-phone-input.ssr.js",
-  "browser": "dist/vuetify-phone-input.esm.js",
-  "module": "dist/vuetify-phone-input.esm.js",
-  "unpkg": "dist/vuetify-phone-input.min.js",
+  "main": "dist/v-phone-input.ssr.js",
+  "browser": "dist/v-phone-input.esm.js",
+  "module": "dist/v-phone-input.esm.js",
+  "unpkg": "dist/v-phone-input.min.js",
   "types": "dist/types/src/entry.esm.d.ts",
   "files": [
     "dist/*",

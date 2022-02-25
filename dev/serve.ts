@@ -1,12 +1,12 @@
 import Vue, { VNode } from 'vue';
 import App from './App.vue';
 import Vuetify from 'vuetify';
-import VuetifyPhoneInput from '@/entry.esm';
+import VPhoneInput from '@/entry.esm';
 import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Vuetify);
-Vue.use(VuetifyPhoneInput);
+Vue.use(VPhoneInput);
 
 Vue.config.productionTip = false;
 

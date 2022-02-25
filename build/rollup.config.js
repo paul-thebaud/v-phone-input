@@ -90,7 +90,7 @@ if (!argv.format || argv.format === 'es') {
     input: 'src/entry.esm.ts',
     external,
     output: {
-      file: 'dist/vuetify-phone-input.esm.js',
+      file: 'dist/v-phone-input.esm.js',
       format: 'esm',
       exports: 'named',
     },
@@ -130,9 +130,9 @@ if (!argv.format || argv.format === 'cjs') {
     external,
     output: {
       compact: true,
-      file: 'dist/vuetify-phone-input.ssr.js',
+      file: 'dist/v-phone-input.ssr.js',
       format: 'cjs',
-      name: 'VuetifyPhoneInput',
+      name: 'VPhoneInput',
       exports: 'auto',
       globals,
     },
@@ -159,9 +159,9 @@ if (!argv.format || argv.format === 'iife') {
     external,
     output: {
       compact: true,
-      file: 'dist/vuetify-phone-input.min.js',
+      file: 'dist/v-phone-input.min.js',
       format: 'iife',
-      name: 'VuetifyPhoneInput',
+      name: 'VPhoneInput',
       exports: 'auto',
       globals,
     },

@@ -2,8 +2,8 @@ import _Vue, { PluginFunction } from 'vue';
 import VPhoneInput from '@/VPhoneInput.vue';
 import { mergeOptions, VPhoneInputOptions } from '@/utils/options';
 
-const install: PluginFunction<any> = function installVuetifyPhoneInput(Vue: typeof _Vue, customOptions = {} as VPhoneInputOptions) {
-  mergeOptions(customOptions);
+const install: PluginFunction<any> = function installVPhoneInput(Vue: typeof _Vue, options = {} as VPhoneInputOptions) {
+  mergeOptions(options);
 
   Vue.component('VPhoneInput', VPhoneInput);
 };

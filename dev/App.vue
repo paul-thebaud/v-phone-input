@@ -2,8 +2,8 @@
   <v-app id="app">
     <v-main>
       <v-container>
-        <h1 class="text-h2 text-center my-8">
-          Vuetify Phone Input
+        <h1 class="text-h4 text-md-h2 text-center my-8">
+          VPhoneInput
         </h1>
         <v-row>
           <v-col sm="6">
