@@ -2,9 +2,14 @@
   <v-app id="app">
     <v-main>
       <v-container>
-        <h1 class="text-h4 text-md-h2 text-center my-8">
-          VPhoneInput
-        </h1>
+        <div class="my-8">
+          <h1 class="text-h4 text-md-h2 text-center mb-4">
+            VPhoneInput
+          </h1>
+          <p class="text-body-1 text-md-h5 text-center">
+            International phone field for Vuetify 2.0 and Vue JS 2.
+          </p>
+        </div>
         <v-row>
           <v-col
             cols="12"
