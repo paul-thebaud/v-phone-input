@@ -16,7 +16,7 @@
           v-for="prop in switchesProps"
           :key="`switches-${prop}`"
           cols="12"
-          md="6"
+          sm="6"
         >
           <v-switch
             v-model="inputPropsSynced[prop]"
@@ -34,7 +34,7 @@ import Vue from 'vue';
 import { Component, ModelSync } from 'vue-property-decorator';
 
 @Component
-export default class PropsEditorCard extends Vue {
+export default class PropsCard extends Vue {
   @ModelSync('inputProps')
   readonly inputPropsSynced!: Record<string, any>;
 
