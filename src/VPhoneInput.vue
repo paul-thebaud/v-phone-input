@@ -11,7 +11,7 @@
       class="v-phone-input__country"
       item-text="name"
       item-value="iso2"
-      v-bind="{ ...$attrs, ...countryInputProps }"
+      v-bind="$attrs"
     >
       <template #selection>
         <slot
@@ -48,9 +48,27 @@
       :label="label"
       :rules="phoneRules"
       :loading="loading"
+      :placeholder="placeholder"
+      :persistent-placeholder="persistentPlaceholder"
+      :append-icon="appendIcon"
+      :append-outer-icon="appendOuterIcon"
+      :prepend-inner-icon="prependInnerIcon"
+      :prepend-icon="prependIcon"
+      :clear-icon="clearIcon"
+      :hint="hint"
+      :persistent-hint="persistentHint"
+      :clearable="clearable"
+      :autofocus="autofocus"
+      :error="error"
+      :error-count="errorCount"
+      :error-messages="errorMessages"
+      :messages="messages"
+      :success="success"
+      :success-messages="successMessages"
+      :validate-on-blur="validateOnBlur"
       class="v-phone-input__phone"
       type="tel"
-      v-bind="{ ...$attrs, ...phoneInputProps }"
+      v-bind="$attrs"
     >
       <template #append>
         <slot name="append" />
@@ -161,23 +179,71 @@ export default class VPhoneInput extends Vue {
   @Prop({ type: String, default: getOption('valueMode'), validator: validateMode })
   readonly valueMode!: DisplayMode;
 
-  @Prop({ type: String, default: getOption('label') })
-  readonly label!: string;
-
-  @Prop({ type: Object, default: () => ({}) })
-  readonly countryInputProps!: object;
-
-  @Prop({ type: Object, default: () => ({}) })
-  readonly phoneInputProps!: object;
-
   @Prop({ type: Boolean, default: false })
   readonly loading!: boolean;
 
-  @Prop({ type: String, default: '' })
-  readonly value!: string;
+  @Prop({ type: String, default: getOption('label') })
+  readonly label!: string;
+
+  @Prop({ type: String })
+  readonly placeholder!: string | undefined;
+
+  @Prop({ type: Boolean })
+  readonly persistentPlaceholder!: boolean | undefined;
+
+  @Prop({ type: String })
+  readonly appendIcon!: string | undefined;
+
+  @Prop({ type: String })
+  readonly appendOuterIcon!: string | undefined;
+
+  @Prop({ type: String })
+  readonly prependInnerIcon!: string | undefined;
+
+  @Prop({ type: String })
+  readonly prependIcon!: string | undefined;
+
+  @Prop({ type: String })
+  readonly clearIcon!: string | undefined;
+
+  @Prop({ type: String })
+  readonly hint!: string | undefined;
+
+  @Prop({ type: Boolean })
+  readonly persistentHint!: boolean | undefined;
+
+  @Prop({ type: Boolean })
+  readonly clearable!: boolean | undefined;
+
+  @Prop({ type: Boolean })
+  readonly autofocus!: boolean | undefined;
+
+  @Prop({ type: Boolean })
+  readonly error!: boolean | undefined;
+
+  @Prop({ type: [Number, String] })
+  readonly errorCount!: number | string | undefined;
+
+  @Prop({ type: [Array, String] })
+  readonly errorMessages!: string[] | string | undefined;
+
+  @Prop({ type: [Array, String] })
+  readonly messages!: string[] | string | undefined;
+
+  @Prop({ type: Boolean })
+  readonly success!: boolean | undefined;
+
+  @Prop({ type: [Array, String] })
+  readonly successMessages!: string[] | string | undefined;
+
+  @Prop({ type: Boolean })
+  readonly validateOnBlur!: boolean | undefined;
 
   @Prop({ type: Array, default: () => [] })
   readonly rules!: VPhoneInputRules;
+
+  @Prop({ type: String, default: '' })
+  readonly value!: string;
 
   readonly $refs!: VPhoneInputRefs;
 
