@@ -23,12 +23,11 @@
           <div
             :class="activeCountryOrFallback.iso2.toLowerCase()"
             class="v-phone-input__selection__img vpi__flag"
-          >
-            <span
-              class="d-sr-only"
-              v-text="activeCountryOrFallback.name"
-            />
-          </div>
+          />
+          <span
+            class="d-sr-only"
+            v-text="activeCountryOrFallback.name"
+          />
         </slot>
       </template>
       <template #item="{ item }">
@@ -36,11 +35,15 @@
           name="item"
           :item="item"
         >
-          <span
-            :class="item.iso2.toLowerCase()"
-            class="v-phone-input__selection__img vpi__flag"
-          />
-          <span v-text="`${item.name} +${item.dialCode}`" />
+          <v-list-item-icon>
+            <span
+              :class="item.iso2.toLowerCase()"
+              class="v-phone-input__selection__img vpi__flag"
+            />
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title v-text="`${item.name} +${item.dialCode}`" />
+          </v-list-item-content>
         </slot>
       </template>
     </component>
@@ -133,57 +136,6 @@ type VPhoneInputRules = (VPhoneInputRule | string)[];
   components: { VAutocomplete, VSelect, VTextField },
 })
 export default class VPhoneInput extends Vue {
-  @Prop({ type: Array, default: () => getOption('allCountries') })
-  readonly allCountries!: Country[];
-
-  @Prop({ type: Array, default: () => getOption('preferredCountries') })
-  readonly preferredCountries!: CountryIso2[];
-
-  @Prop({ type: Array, default: () => getOption('onlyCountries') })
-  readonly onlyCountries!: CountryIso2[];
-
-  @Prop({ type: Array, default: () => getOption('ignoredCountries') })
-  readonly ignoredCountries!: CountryIso2[];
-
-  @Prop({ type: String, default: getOption('defaultCountry') })
-  readonly defaultCountry!: CountryIso2;
-
-  @Prop({ type: Boolean, default: getOption('disabledLoadingCountry') })
-  readonly disabledLoadingCountry!: boolean;
-
-  @Prop({ type: Boolean, default: getOption('disabledFetchingCountry') })
-  readonly disabledFetchingCountry!: boolean;
-
-  @Prop({ type: Boolean, default: getOption('disabledSearchingCountry') })
-  readonly disabledSearchingCountry!: boolean;
-
-  @Prop({ type: Boolean, default: getOption('disabledValidation') })
-  readonly disabledValidation!: boolean;
-
-  @Prop({ type: String, default: getOption('countryLabel') })
-  readonly countryLabel!: string;
-
-  @Prop({ type: Boolean, default: getOption('hideCountryLabel') })
-  readonly hideCountryLabel!: boolean;
-
-  @Prop({ type: Function, default: getOption('computeCountryAriaLabel') })
-  readonly computeCountryAriaLabel!: (label: string) => string;
-
-  @Prop({ type: Function, default: getOption('computeInvalidMessage') })
-  readonly computeInvalidMessage!: (label: string) => string;
-
-  @Prop({ type: Function, default: getOption('guessCountry') })
-  readonly guessCountry!: () => Promise<CountryIso2>;
-
-  @Prop({ type: String, default: getOption('textMode'), validator: validateMode })
-  readonly textMode!: DisplayMode;
-
-  @Prop({ type: String, default: getOption('valueMode'), validator: validateMode })
-  readonly valueMode!: DisplayMode;
-
-  @Prop({ type: Boolean, default: false })
-  readonly loading!: boolean;
-
   @Prop({ type: String, default: getOption('label') })
   readonly label!: string;
 
@@ -240,6 +192,57 @@ export default class VPhoneInput extends Vue {
 
   @Prop({ type: Boolean })
   readonly validateOnBlur!: boolean | undefined;
+
+  @Prop({ type: Boolean, default: false })
+  readonly loading!: boolean;
+
+  @Prop({ type: Array, default: () => getOption('allCountries') })
+  readonly allCountries!: Country[];
+
+  @Prop({ type: Array, default: () => getOption('preferredCountries') })
+  readonly preferredCountries!: CountryIso2[];
+
+  @Prop({ type: Array, default: () => getOption('onlyCountries') })
+  readonly onlyCountries!: CountryIso2[];
+
+  @Prop({ type: Array, default: () => getOption('ignoredCountries') })
+  readonly ignoredCountries!: CountryIso2[];
+
+  @Prop({ type: String, default: getOption('defaultCountry') })
+  readonly defaultCountry!: CountryIso2;
+
+  @Prop({ type: Boolean, default: getOption('disabledLoadingCountry') })
+  readonly disabledLoadingCountry!: boolean;
+
+  @Prop({ type: Boolean, default: getOption('disabledFetchingCountry') })
+  readonly disabledFetchingCountry!: boolean;
+
+  @Prop({ type: Boolean, default: getOption('disabledSearchingCountry') })
+  readonly disabledSearchingCountry!: boolean;
+
+  @Prop({ type: Boolean, default: getOption('disabledValidation') })
+  readonly disabledValidation!: boolean;
+
+  @Prop({ type: String, default: getOption('countryLabel') })
+  readonly countryLabel!: string;
+
+  @Prop({ type: Boolean, default: getOption('hideCountryLabel') })
+  readonly hideCountryLabel!: boolean;
+
+  @Prop({ type: Function, default: getOption('computeCountryAriaLabel') })
+  readonly computeCountryAriaLabel!: (label: string) => string;
+
+  @Prop({ type: Function, default: getOption('computeInvalidMessage') })
+  readonly computeInvalidMessage!: (label: string) => string;
+
+  @Prop({ type: Function, default: getOption('guessCountry') })
+  readonly guessCountry!: () => Promise<CountryIso2>;
+
+  @Prop({ type: String, default: getOption('textMode'), validator: validateMode })
+  readonly textMode!: DisplayMode;
+
+  @Prop({ type: String, default: getOption('valueMode'), validator: validateMode })
+  readonly valueMode!: DisplayMode;
 
   @Prop({ type: Array, default: () => [] })
   readonly rules!: VPhoneInputRules;
@@ -311,6 +314,7 @@ export default class VPhoneInput extends Vue {
 
   get phoneObject(): any {
     const phone = PhoneNumber(this.lazyValue || '', this.activeCountryOrFallback.iso2).toJSON();
+    console.log(phone);
     if (!this.lazyValue) {
       return {
         ...phone, number: { input: '' },

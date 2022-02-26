@@ -37,7 +37,7 @@ import InputCard from './InputCard.vue';
 
 @Component({ components: { InputCard, PropsCard } })
 export default class App extends Vue {
-  inputProps = {} as Record<string, any>;
+  inputProps = {disabledFetchingCountry: true} as Record<string, any>;
 
   get cleanedInputProps() {
     const cleanedInputProps = {} as Record<string, any>;
