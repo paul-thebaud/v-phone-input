@@ -7,9 +7,19 @@
       :label="countryInputLabel"
       :aria-label="countryInputAriaLabel"
       :items="sortedCountries"
-      :loading="loading || (!disableGuessLoading && guessingCountry)"
       :autocomplete="enableSearchingCountry ? 'new-password' : undefined"
       :aria-autocomplete="enableSearchingCountry ? 'off' : undefined"
+      :loading="loading || (!disableGuessLoading && guessingCountry)"
+      :disabled="disabled"
+      :readonly="readonly"
+      :outlined="outlined"
+      :filled="filled"
+      :shaped="shaped"
+      :flat="flat"
+      :solo="solo"
+      :solo-inverted="soloInverted"
+      :rounded="rounded"
+      :dense="dense"
       :item-text="getCountryText"
       item-value="iso2"
       class="v-phone-input__country"
@@ -55,8 +65,9 @@
       ref="phoneInput"
       v-model="lazyValue"
       :label="label"
+      :hint="hint"
+      :persistent-hint="persistentHint"
       :rules="mergedRules"
-      :loading="loading"
       :placeholder="placeholder"
       :persistent-placeholder="persistentPlaceholder"
       :append-icon="appendIcon"
@@ -64,8 +75,17 @@
       :prepend-inner-icon="prependInnerIcon"
       :prepend-icon="prependIcon"
       :clear-icon="clearIcon"
-      :hint="hint"
-      :persistent-hint="persistentHint"
+      :loading="loading"
+      :disabled="disabled"
+      :readonly="readonly"
+      :outlined="outlined"
+      :filled="filled"
+      :shaped="shaped"
+      :flat="flat"
+      :solo="solo"
+      :solo-inverted="soloInverted"
+      :rounded="rounded"
+      :dense="dense"
       :clearable="clearable"
       :autofocus="autofocus"
       :error="error"
@@ -155,6 +175,30 @@ export default class VPhoneInput extends Vue {
   @Prop({ type: String })
   readonly clearIcon!: string | undefined;
 
+  @Prop({ type: Boolean })
+  readonly outlined!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly filled!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly shaped!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly flat!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly solo!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly soloInverted!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly rounded!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly dense!: boolean;
+
   @Prop({ type: String })
   readonly hint!: string | undefined;
 
@@ -187,6 +231,12 @@ export default class VPhoneInput extends Vue {
 
   @Prop({ type: Boolean })
   readonly validateOnBlur!: boolean | undefined;
+
+  @Prop({ type: Boolean })
+  readonly readonly!: boolean;
+
+  @Prop({ type: Boolean })
+  readonly disabled!: boolean;
 
   @Prop({ type: Boolean, default: false })
   readonly loading!: boolean;
