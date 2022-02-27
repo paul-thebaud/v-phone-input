@@ -1,14 +1,15 @@
-import Vue, { VNode } from 'vue';
-import App from './App.vue';
-import Vuetify from 'vuetify';
 import VPhoneInput from '@/entry.esm';
-import 'vuetify/dist/vuetify.min.css';
-import '@mdi/font/css/materialdesignicons.css'
-
-Vue.use(Vuetify);
-Vue.use(VPhoneInput);
+import '@mdi/font/css/materialdesignicons.css';
+import 'flag-icons/css/flag-icons.min.css';
+import Vue, { VNode } from 'vue';
+import Vuetify from 'vuetify';
+import App from './App.vue';
 
 Vue.config.productionTip = false;
+
+Vue.use(Vuetify);
+
+Vue.use(VPhoneInput);
 
 new Vue({
   vuetify: new Vuetify(),

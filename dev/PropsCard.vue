@@ -3,15 +3,16 @@
     <v-card-title>
       <h2 class="text-h6">Configuration</h2>
     </v-card-title>
+    <v-divider role="presentation" />
+    <v-card-text>
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        label="Dark theme"
+      />
+    </v-card-text>
+    <v-divider role="presentation" />
     <v-card-text>
       <v-row dense>
-        <v-col cols="12">
-          <v-switch
-            v-model="$vuetify.theme.dark"
-            label="Dark theme"
-            hide-details
-          />
-        </v-col>
         <v-col cols="12">
           <v-text-field
             v-model="search"
@@ -42,11 +43,14 @@
 import Vue from 'vue';
 import { Component, ModelSync } from 'vue-property-decorator';
 import { VSwitch, VTextField } from 'vuetify/lib';
+import { titleCase } from './utils';
 
 @Component
 export default class PropsCard extends Vue {
   @ModelSync('inputProps')
   readonly inputPropsSynced!: Record<string, any>;
+
+  titleCase = titleCase;
 
   search = '';
 
@@ -54,23 +58,22 @@ export default class PropsCard extends Vue {
     return {
       label: VTextField,
       placeholder: VTextField,
-      solo: VSwitch,
-      soloInverted: VSwitch,
       outlined: VSwitch,
       filled: VSwitch,
       shaped: VSwitch,
       flat: VSwitch,
       rounded: VSwitch,
       dense: VSwitch,
+      solo: VSwitch,
+      soloInverted: VSwitch,
       loading: VSwitch,
       disabled: VSwitch,
       readonly: VSwitch,
       error: VSwitch,
       success: VSwitch,
       hideCountryLabel: VSwitch,
-      disabledFetchingCountry: VSwitch,
-      disabledSearchingCountry: VSwitch,
-      disabledValidation: VSwitch,
+      enableSearchingCountry: VSwitch,
+      disableValidation: VSwitch,
     };
   }
 
@@ -87,12 +90,6 @@ export default class PropsCard extends Vue {
     });
 
     return propsInputs;
-  }
-
-  titleCase(text: string) {
-    const result = text.replace(/([A-Z])/g, ' $1');
-
-    return result.charAt(0).toUpperCase() + result.slice(1);
   }
 };
 </script>

@@ -1,14 +1,14 @@
-.v-phone-input__selection__img {
-  margin: 0 8px;
-}
-
 .v-phone-input {
   display: flex;
   align-items: flex-start;
 
-  &__country {
-    flex-grow: 1;
-    max-width: 75px !important;
+  &__country.v-input {
+    min-width: 0;
+    max-width: 75px;
+
+    .v-phone-country-icon {
+      margin: 0 4px;
+    }
 
     &.v-text-field--outlined, &.v-text-field--solo, &.v-text-field--filled {
       border-top-right-radius: 0;
@@ -28,7 +28,7 @@
     }
 
     &.v-autocomplete {
-      transition: max-width .25s;
+      transition: min-width .25s, max-width .25s;
 
       .v-select__selections {
         flex-wrap: nowrap;
@@ -40,8 +40,8 @@
       }
 
       &.v-input--is-focused {
-        max-width: 70% !important;
-        width: 70%;
+        min-width: 70%;
+        max-width: 70%;
 
         input {
           min-width: 65px;
@@ -50,7 +50,7 @@
     }
   }
 
-  &__phone {
+  &__phone.v-input {
     flex-grow: 1;
 
     &.v-text-field--outlined, &.v-text-field--solo, &.v-text-field--filled {

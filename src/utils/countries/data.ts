@@ -13,7 +13,8 @@
 //    iso2 code,
 //    International dial code
 // ]
-const allCountries = [
+
+export default [
   [
     'Afghanistan (‫افغانستان‬‎)',
     'af',
@@ -1230,53 +1231,4 @@ const allCountries = [
     'ax',
     '358',
   ],
-] as string[][];
-
-export type CountryIso2 = string;
-
-export interface Country {
-  name: string;
-  iso2: CountryIso2;
-  dialCode: string;
-}
-
-export type CountryGuesser = () => Promise<CountryIso2>;
-
-export async function guessCountry(): Promise<CountryIso2> {
-  let response;
-  try {
-    response = await fetch('https://ip2c.org/s');
-  } catch (error) {
-    throw new Error('unable to fetch the country');
-  }
-
-  const countryData = (await response.text() || '').toString().split(';');
-  if (!countryData || countryData[0] !== '1') {
-    throw new Error('invalid response for country');
-  }
-
-  return countryData[1];
-}
-
-let memoizedGuessedCountry = undefined as CountryIso2 | undefined;
-let memoizedGuessCountryPromise = undefined as Promise<CountryIso2> | undefined;
-
-export async function memoizedGuessCountry(): Promise<CountryIso2> {
-  if (memoizedGuessedCountry) {
-    return memoizedGuessedCountry;
-  }
-
-  if (memoizedGuessCountryPromise) {
-    return memoizedGuessCountryPromise;
-  }
-
-  memoizedGuessCountryPromise = guessCountry();
-
-  return memoizedGuessedCountry = await memoizedGuessCountryPromise;
-}
-
-export default allCountries.map(([name, iso2, dialCode]) => ({
-  name,
-  iso2: iso2.toUpperCase(),
-  dialCode,
-})) as Country[];
+];
