@@ -1,0 +1,26 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+    branches: [ master, develop ]
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install -s --no-progress --non-interactive
+      - name: Lint
+        run: yarn lint
+      - name: Build
+        run: yarn build
