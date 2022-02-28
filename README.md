@@ -1,11 +1,16 @@
 # VPhoneInput
 
-International phone field for Vuetify 2.0 and Vue JS 2.
+[![Tests](https://github.com/paul-thebaud/v-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/paul-thebaud/v-phone-input/actions/workflows/tests.yml)
+![NPM version](https://img.shields.io/npm/v/v-phone-input)
+![NPM downloads](https://img.shields.io/npm/dt/v-phone-input)
+![MIT license](https://img.shields.io/npm/l/v-phone-input)
+
+International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
+[Vue JS 2](https://vuejs.org/).
 
 - Standardized value using E164 formatted phone numbers (example: +330123456789).
 - Searchable countries, validation, automatic format when a phone number is valid, and many more.
-- Modulable with customizable country's icon component customization, labels, validation message,
-  etc.
+- Modulable with customizable country's icon component, labels, validation message, etc.
 - Accessibility friendly with SR only adapted namings.
 
 Proudly supported by the [CoWork'HIT](https://coworkhit.com).
@@ -50,6 +55,10 @@ export default {
 
 ## Documentation
 
+### Requirements
+
+VPhoneInput requires `Vue@2` and `Vuetify@2` to be installed and working in your project.
+
 ### Installation
 
 You can install this package though Yarn:
@@ -90,7 +99,7 @@ directly to the input or defined globally using [input options](#options).
 | `invalidMessage`         | `string` or `undefined`    | `undefined`                    | Override the value returned by `computeInvalidMessage` option (see [Options](#options)).                                          |
 | `rules`                  | `Function[]` or `string[]` | `[]`                           | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
 | `displayFormat`          | `PhoneNumberFormat`        | `'national'`                   | Format to use when displaying valid phone numbers (see [Phone Number Formats](#phone-number-formats)).                            |
-| `value`                  | `string`                   | `''`                           | Value of the phone input. You may use it using `v-model` or `@input` (see [Handling input example](#handling-input)).             |
+| `value`                  | `string`                   | `''`                           | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
 
 ## Options
 
@@ -99,7 +108,7 @@ values for [input props](#props).
 
 | Name                      | Type                                                      | Default                                                                   | Description                                                                                                                                                                                  |
 |---------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `countryIconComponent`    | `VueConstructor`                                          | `VPhoneCountryFlag`                                                       | A vue component to display a country icon (flag, ISO-2 code, etc.). The component will receive a [`Country` object](#country) and a `decorative` boolean.                                    |
+| `countryIconComponent`    | `VueConstructor` or `string` or `undefined`               | `VPhoneCountryFlag`                                                       | A vue component to display a country icon (flag, ISO-2 code, etc.). The component will receive a [`Country` object](#country) and a `decorative` boolean.                                    |
 | `computeCountryAriaLabel` | `(options: { label: string }) => string`                  | `'Country for {label}'`                                                   | A function returning the `aria-label` of the country input. Function will receive an options object containing the phone input label, and must return a string.                              |
 | `computeInvalidMessage`   | `(options: { label: string, example: string }) => string` | `'The "{label}" field is not a valid phone number (example: {example}).'` | A function returning the message when phone input is invalid. Function will receive an options object containing the phone input label and a phone number example, and must return a string. |
 
@@ -139,10 +148,6 @@ Vue.use(VPhoneInputPlugin, {
 ```
 
 ### Examples
-
-#### Handling input
-
-TODO
 
 #### Validation
 
