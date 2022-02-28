@@ -38,6 +38,7 @@ Plugin installation:
 ```javascript
 import Vue from 'vue';
 import VPhoneInputPlugin from 'v-phone-input';
+import 'flag-icons/css/flag-icons.min.css';
 
 Vue.use(VPhoneInputPlugin);
 ```
@@ -63,7 +64,9 @@ export default {
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Usage](#usage)
 - [Props](#props)
+- [Slots](#slots)
 - [Options](#options)
 - [Examples](#examples)
     - [Validation](#validation)
@@ -96,6 +99,41 @@ npm install v-phone-input flag-icons
 
 > `flag-icons` package is required if you want the input to display countries' flags.
 
+### Usage
+
+You can globally define the input using the provided plugin. This will register the `v-phone-input`
+component globally.
+
+```javascript
+import Vue from 'vue';
+import VPhoneInputPlugin from 'v-phone-input';
+import 'flag-icons/css/flag-icons.min.css';
+
+const options = {};
+
+Vue.use(VPhoneInputPlugin, options);
+```
+
+You may also only define the field on a per-file basis. Notice that with this method, you won't be
+able to define default [options](#options) for the input.
+
+```vue
+
+<template>
+  <v-phone-input v-model="phone" />
+</template>
+
+<script>
+import { VPhoneInput } from 'v-phone-input';
+import 'flag-icons/css/flag-icons.min.css';
+
+export default {
+  components: { VPhoneInput },
+  data: () => ({ phone: '' }),
+};
+</script>
+```
+
 ### Props
 
 VPhoneInput provides many props to customize the input behaviors or display. Each prop may be passed
@@ -121,6 +159,10 @@ directly to the input or defined globally using [input options](#options).
 | `rules`                  | `Function[]` or `string[]` | `[]`                           | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
 | `displayFormat`          | `PhoneNumberFormat`        | `'national'`                   | Format to use when displaying valid phone numbers (see [Phone Number Formats](#phone-number-formats)).                            |
 | `value`                  | `string`                   | `''`                           | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
+
+## Slots
+
+TODO
 
 ## Options
 
