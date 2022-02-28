@@ -44,7 +44,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue';
 import { VSwitch, VTextField } from 'vuetify/lib';
-import { titleCase } from './utils';
+import { titleCase } from '../utils';
 
 export default Vue.extend({
   name: 'PropsCard',

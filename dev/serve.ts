@@ -1,12 +1,7 @@
-import VPhoneInputPlugin from '@/entry.esm';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import '@mdi/font/css/materialdesignicons.css';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'flag-icons/css/flag-icons.min.css';
+import './bootstrap';
 import Vue, { VNode } from 'vue';
 import Vuetify from 'vuetify';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'world-flags-sprite/stylesheets/flags32.css';
+import VPhoneInputPlugin from '@/entry.esm';
 import App from './App.vue';
 
 Vue.config.productionTip = false;

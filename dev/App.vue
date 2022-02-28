@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import InputCard from './InputCard.vue';
-import PropsCard from './PropsCard.vue';
+import InputCard from './components/InputCard.vue';
+import PropsCard from './components/PropsCard.vue';
 
 export default Vue.extend({
   name: 'App',

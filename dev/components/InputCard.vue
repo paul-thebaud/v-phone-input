@@ -38,7 +38,7 @@
 import { countries } from '@/entry.esm';
 import PhoneNumber from 'awesome-phonenumber';
 import Vue, { PropType } from 'vue';
-import { titleCase } from './utils';
+import { titleCase } from '../utils';
 
 export default Vue.extend({
   name: 'InputCard',
