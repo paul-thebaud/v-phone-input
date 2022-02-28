@@ -250,7 +250,7 @@ export default class VPhoneInput extends Vue {
   @Prop({ type: String, default: () => getOption('countryLabel') })
   readonly countryLabel!: string;
 
-  @Prop({ type: String })
+  @Prop({ type: String, default: () => getOption('countryAriaLabel') })
   readonly countryAriaLabel!: string | undefined;
 
   @Prop({ type: Boolean, default: () => getOption('hideCountryLabel') })
@@ -265,20 +265,20 @@ export default class VPhoneInput extends Vue {
   @Prop({ type: Array, default: () => getOption('onlyCountries') })
   readonly onlyCountries!: CountryIso2[];
 
-  @Prop({ type: Array, default: () => getOption('ignoredCountries') })
-  readonly ignoredCountries!: CountryIso2[];
+  @Prop({ type: Array, default: () => getOption('ignoreCountries') })
+  readonly ignoreCountries!: CountryIso2[];
 
   @Prop({ type: String, default: () => getOption('defaultCountry') })
-  readonly defaultCountry!: CountryIso2;
+  readonly defaultCountry!: CountryIso2 | undefined;
 
   @Prop({ type: Object, default: () => getOption('countryGuesser') })
   readonly countryGuesser!: CountryGuesser;
 
-  @Prop({ type: Boolean, default: () => getOption('disableGuessLoading') })
-  readonly disableGuessLoading!: boolean;
-
   @Prop({ type: Boolean, default: () => getOption('disableGuessingCountry') })
   readonly disableGuessingCountry!: boolean;
+
+  @Prop({ type: Boolean, default: () => getOption('disableGuessLoading') })
+  readonly disableGuessLoading!: boolean;
 
   @Prop({ type: Boolean, default: () => getOption('enableSearchingCountry') })
   readonly enableSearchingCountry!: boolean;
@@ -286,7 +286,7 @@ export default class VPhoneInput extends Vue {
   @Prop({ type: Boolean, default: () => getOption('disableValidation') })
   readonly disableValidation!: boolean;
 
-  @Prop({ type: String })
+  @Prop({ type: String, default: () => getOption('invalidMessage') })
   readonly invalidMessage!: string | undefined;
 
   @Prop({ type: String, default: () => getOption('displayFormat') })
@@ -347,10 +347,10 @@ export default class VPhoneInput extends Vue {
       return this.getCountries(this.onlyCountries);
     }
 
-    if (this.ignoredCountries.length) {
+    if (this.ignoreCountries.length) {
       return this.allCountries.filter(
-        ({ iso2 }) => this.ignoredCountries.indexOf(iso2.toUpperCase()) === -1
-          && this.ignoredCountries.indexOf(iso2.toLowerCase()) === -1,
+        ({ iso2 }) => this.ignoreCountries.indexOf(iso2.toUpperCase()) === -1
+          && this.ignoreCountries.indexOf(iso2.toLowerCase()) === -1,
       );
     }
 
