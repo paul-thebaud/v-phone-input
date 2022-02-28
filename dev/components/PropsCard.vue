@@ -18,7 +18,7 @@
         <v-col cols="12">
           <v-text-field
             v-model="search"
-            prepend-inner-icon="mdi-magnify"
+            :prepend-inner-icon="mdiMagnify"
             label="Search"
             hide-details
           />
@@ -42,6 +42,8 @@
 </template>
 
 <script lang="ts">
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { mdiMagnify } from '@mdi/js';
 import Vue, { PropType } from 'vue';
 import { VSwitch, VTextField } from 'vuetify/lib';
 import { titleCase } from '../utils';
@@ -56,6 +58,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      mdiMagnify,
       titleCase,
       search: '',
       inputPropsSynced: this.inputProps,

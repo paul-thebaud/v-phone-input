@@ -1,17 +1,15 @@
-const devPresets = ['@vue/babel-preset-app'];
-const buildPresets = [
-  [
-    '@babel/preset-env',
-  ],
-  '@babel/preset-typescript',
-];
+let presets = ['@vue/babel-preset-app'];
+if (process.env.NODE_ENV === 'production') {
+  presets = [
+    ['@babel/preset-env'],
+    '@babel/preset-typescript',
+  ];
+  if (process.env.DEMO_ENV === 'production') {
+    presets[0].push({ useBuiltIns: 'usage', corejs: 3 });
+  }
+}
 
 module.exports = {
-  presets: (process.env.NODE_ENV === 'development' ? devPresets : buildPresets),
-  plugins: [
-    ['@babel/proposal-decorators', { legacy: true }],
-    ['@babel/proposal-class-properties', { loose: true }],
-    ['@babel/plugin-proposal-private-methods', { loose: true }],
-    ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
-  ],
+  presets,
+  plugins: [],
 };
