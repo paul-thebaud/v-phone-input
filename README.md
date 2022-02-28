@@ -143,32 +143,36 @@ export default {
 VPhoneInput provides many props to customize the input behaviors or display. Each prop may be passed
 directly to the input or defined globally using [input options](#options).
 
-| Name                     | Type                       | Default                        | Description                                                                                                                       |
-|--------------------------|----------------------------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `label`                  | `string`                   | `'Phone'`                      | The phone input label.                                                                                                            |
-| `countryIconMode`        | `string` or `undefined`    | `undefined`                    | The country icon display mode (see [Country icon modes](#country-icon-modes)).                                                    |
-| `countryLabel`           | `string`                   | `'Country'`                    | The country input label.                                                                                                          |
-| `hideCountryLabel`       | `string`                   | `false`                        | Hide the country label.                                                                                                           |
-| `countryAriaLabel`       | `string` or `undefined`    | `undefined`                    | Override the value returned by `computeCountryAriaLabel` option (see [Options](#options)).                                        |
-| `allCountries`           | `Country[]`                | `TODO`                         | Array of countries to use.                                                                                                        |
-| `preferredCountries`     | `CountryIso2[]`            | `[]`                           | Array of countries' codes to propose as first option of country input.                                                            |
-| `onlyCountries`          | `CountryIso2[]`            | `[]`                           | Array of countries' codes to display as options of country input (will hide others).                                              |
-| `ignoreCountries`        | `CountryIso2[]`            | `[]`                           | Array of countries' codes to hide from country input.                                                                             |
-| `defaultCountry`         | `CountryIso2`              | `undefined`                    | Default country to select when not guessing nor detecting from current value.                                                     |
-| `countryGuesser`         | `CountryGuesser`           | `new MemoIp2cCountryGuesser()` | Country guesser implementation to use when guessing country (see [Country Guesser](#country-guesser)).                            |
-| `disableGuessingCountry` | `boolean`                  | `false`                        | Disable guessing country.                                                                                                         |
-| `disableGuessLoading`    | `boolean`                  | `false`                        | Disable passing the country input in a loading state when guessing country.                                                       |
-| `enableSearchingCountry` | `boolean`                  | `false`                        | Turns the country input into a `VAutocomplete` input (see [Enabling searching countries example](#enabling-searching-countries)). |
-| `disableValidation`      | `boolean`                  | `false`                        | Disable the phone number automatic validation. You can still use `rules` props to validate the input.                             |
-| `invalidMessage`         | `string` or `undefined`    | `undefined`                    | Override the value returned by `computeInvalidMessage` option (see [Options](#options)).                                          |
-| `rules`                  | `Function[]` or `string[]` | `[]`                           | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
-| `displayFormat`          | `PhoneNumberFormat`        | `'national'`                   | Format to use when displaying valid phone numbers (see [Phone Number Formats](#phone-number-formats)).                            |
-| `value`                  | `string`                   | `''`                           | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
+| Name                     | Type                                        | Default                        | Description                                                                                                                       |
+|--------------------------|---------------------------------------------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `label`                  | `string`                                    | `'Phone'`                      | The phone input label.                                                                                                            |
+| `countryIconMode`        | `string` or `VueConstructor` or `undefined` | `undefined`                    | The country icon display mode (see [Country icon modes](#country-icon-modes)).                                                    |
+| `countryLabel`           | `string`                                    | `'Country'`                    | The country input label.                                                                                                          |
+| `hideCountryLabel`       | `string`                                    | `false`                        | Hide the country label.                                                                                                           |
+| `countryAriaLabel`       | `string` or `undefined`                     | `undefined`                    | Override the value returned by `computeCountryAriaLabel` option (see [Options](#options)).                                        |
+| `allCountries`           | `Country[]`                                 | `TODO`                         | Array of countries to use.                                                                                                        |
+| `preferredCountries`     | `CountryIso2[]`                             | `[]`                           | Array of countries' codes to propose as first option of country input.                                                            |
+| `onlyCountries`          | `CountryIso2[]`                             | `[]`                           | Array of countries' codes to display as options of country input (will hide others).                                              |
+| `ignoreCountries`        | `CountryIso2[]`                             | `[]`                           | Array of countries' codes to hide from country input.                                                                             |
+| `defaultCountry`         | `CountryIso2`                               | `undefined`                    | Default country to select when not guessing nor detecting from current value.                                                     |
+| `countryGuesser`         | `CountryGuesser`                            | `new MemoIp2cCountryGuesser()` | Country guesser implementation to use when guessing country (see [Country Guesser](#country-guesser)).                            |
+| `disableGuessingCountry` | `boolean`                                   | `false`                        | Disable guessing country.                                                                                                         |
+| `disableGuessLoading`    | `boolean`                                   | `false`                        | Disable passing the country input in a loading state when guessing country.                                                       |
+| `enableSearchingCountry` | `boolean`                                   | `false`                        | Turns the country input into a `VAutocomplete` input (see [Enabling searching countries example](#enabling-searching-countries)). |
+| `disableValidation`      | `boolean`                                   | `false`                        | Disable the phone number automatic validation. You can still use `rules` props to validate the input.                             |
+| `invalidMessage`         | `string` or `undefined`                     | `undefined`                    | Override the value returned by `computeInvalidMessage` option (see [Options](#options)).                                          |
+| `rules`                  | `Function[]` or `string[]`                  | `[]`                           | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
+| `displayFormat`          | `PhoneNumberFormat`                         | `'national'`                   | Format to use when displaying valid phone numbers (see [Phone Number Formats](#phone-number-formats)).                            |
+| `value`                  | `string`                                    | `''`                           | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
+
+> You can also pass most of the
+> [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props) props to the component
+> to customize display, errors, etc.
 
 ### Options
 
-Plugin options are used to change some default behavior of the input or globally customize default
-values for [input props](#props).
+Plugin options are used to change some behavior of the input or globally customize default values
+for [input props](#props).
 
 | Name                      | Type                                                      | Default                                                                   | Description                                                                                                                                                                                  |
 |---------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -187,22 +191,9 @@ Vue.use(VPhoneInputPlugin, {
   // Customize invalid message of phone input.
   computeInvalidMessage: ({ label, example }) =>
     `Le champ ${label} n'est pas un numéro de téléphone valide (exemple : ${example}).`,
-});
-```
-
-Options may also be used to define custom default values for `VPhoneInput` props:
-
-```javascript
-import Vue from 'vue';
-import VPhoneInputPlugin, { Ip2cCountryGuesser } from 'v-phone-input';
-import 'flag-icons/css/flag-icons.min.css';
-
-Vue.use(VPhoneInputPlugin, {
+  // Options can also be used to change some default props' values.
   countryIconMode: 'svg',
-  disableGuessLoading: true,
-  disableGuessingCountry: true,
   enableSearchingCountry: true,
-  countryGuesser: new Ip2cCountryGuesser(),
 });
 ```
 
@@ -226,7 +217,7 @@ see [v-text-field API](https://vuetifyjs.com/en/api/v-text-field/#slots)):
 - `prepend-inner`
 - `progress`
 
-The input also provides a [special slot for country icon display](#custom-slot).
+The input also provides a special `country-icon` slot for [countries' icons display](#custom-slot).
 
 ### Examples
 
