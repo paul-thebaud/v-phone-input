@@ -137,7 +137,7 @@
 <script lang="ts">
 import { VPhoneInputRules } from '@/types/components';
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
-import { PhoneNumberFormat, PhoneNumberJson } from '@/types/phone';
+import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
 import { getOption } from '@/utils/options';
 import PhoneNumber from 'awesome-phonenumber';
 import Vue, { PropType } from 'vue';
@@ -348,7 +348,7 @@ export default Vue.extend({
       mergedRules: [] as InputValidationRules,
       lazyCountry: undefined as CountryIso2 | undefined,
       lazyValue: this.value || '',
-      lazyPhone: { number: { input: '' } } as PhoneNumberJson,
+      lazyPhone: { number: { input: '' } } as PhoneNumberObject,
     };
   },
   computed: {
@@ -475,10 +475,10 @@ export default Vue.extend({
         this.$emit('input', newValue);
       }
     },
-    makePhoneNumber(value?: string, iso2?: CountryIso2): PhoneNumberJson {
+    makePhoneNumber(value?: string, iso2?: CountryIso2): PhoneNumberObject {
       return PhoneNumber((value || '').trim(), iso2).toJSON();
     },
-    formatPhoneNumber(phone: PhoneNumberJson): string {
+    formatPhoneNumber(phone: PhoneNumberObject): string {
       return phone.number[this.displayFormat] || phone.number.input;
     },
     async initializeCountry(): Promise<void> {

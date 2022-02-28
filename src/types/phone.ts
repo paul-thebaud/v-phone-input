@@ -6,8 +6,8 @@ export type PhoneNumberFormat = 'e164' |
   'rfc3966' |
   'significant';
 
-export type PhoneNumberJson = {
-  number: { input: string } & Record<PhoneNumberFormat, string | undefined>;
+export type PhoneNumberObject = {
+  number: { input: string } & Partial<Record<PhoneNumberFormat, string>>;
   possibility: string;
   possible: boolean;
   valid: boolean;

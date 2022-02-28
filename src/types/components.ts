@@ -1,5 +1,5 @@
 import { Country } from '@/types/countries';
-import { PhoneNumberJson } from '@/types/phone';
+import { PhoneNumberObject } from '@/types/phone';
 import Vue from 'vue';
 import { VAutocomplete, VSelect, VTextField } from 'vuetify/lib/components';
 
@@ -15,7 +15,7 @@ export type VPhoneInputRefs = Vue['$refs'] & {
 }
 
 export type VPhoneInputRule =
-  ((input: string, country: string, phone: PhoneNumberJson) => string | boolean)
+  ((input: string, country: string, phone: PhoneNumberObject) => string | boolean)
   | ((input: string, country: string) => string | boolean)
   | ((input: string) => string | boolean);
 
