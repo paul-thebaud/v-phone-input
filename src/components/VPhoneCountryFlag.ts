@@ -1,5 +1,5 @@
+import { VPhoneCountryIconProps } from '@/types/components';
 import Vue, { CreateElement, RenderContext, VNode } from 'vue';
-import { VPhoneCountryIconProps } from '@/components/types';
 
 export default Vue.extend({
   name: 'VPhoneCountryFlag',

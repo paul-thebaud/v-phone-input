@@ -1,4 +1,4 @@
-import { CountryIso2 } from '@/utils/countries/types';
+import { CountryIso2 } from '@/types/countries';
 import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';
 
 export default class MemoIp2cCountryGuesser extends Ip2cCountryGuesser {
@@ -9,6 +9,6 @@ export default class MemoIp2cCountryGuesser extends Ip2cCountryGuesser {
       this.memoGuessPromise = super.guess();
     }
 
-    return await this.memoGuessPromise;
+    return this.memoGuessPromise;
   }
 }

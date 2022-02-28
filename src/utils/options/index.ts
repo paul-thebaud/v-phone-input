@@ -1,14 +1,13 @@
 import VPhoneCountryFlag from '@/components/VPhoneCountryFlag';
+import { PluginOptions } from '@/types/options';
 import countries from '@/utils/countries';
 import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
-import { PluginOptions } from '@/utils/options/types';
+import localization from '@/utils/options/localization';
 
 export const DEFAULT_OPTIONS: PluginOptions = {
-  label: 'Phone',
+  ...localization,
   countryIconComponent: VPhoneCountryFlag,
-  countryLabel: 'Country',
   countryAriaLabel: undefined,
-  computeCountryAriaLabel: ({ label }) => `Country for ${label}`,
   hideCountryLabel: false,
   allCountries: countries,
   preferredCountries: [],
@@ -21,8 +20,6 @@ export const DEFAULT_OPTIONS: PluginOptions = {
   enableSearchingCountry: false,
   disableValidation: false,
   invalidMessage: undefined,
-  computeInvalidMessage: ({ label, example }) =>
-    `The "${label}" field is not a valid phone number (example: ${example}).`,
   displayFormat: 'national',
 };
 

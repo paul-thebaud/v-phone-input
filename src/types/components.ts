@@ -1,4 +1,5 @@
-import { Country } from '@/utils/countries/types';
+import { Country } from '@/types/countries';
+import PhoneNumber from 'awesome-phonenumber';
 import Vue from 'vue';
 import { VAutocomplete, VSelect, VTextField } from 'vuetify/lib/components';
 
@@ -14,7 +15,7 @@ export type VPhoneInputRefs = Vue['$refs'] & {
 }
 
 export type VPhoneInputRule =
-  ((input: string, country: string, phone: any) => string | boolean)
+  ((input: string, country: string, phone: PhoneNumber) => string | boolean)
   | ((input: string, country: string) => string | boolean)
   | ((input: string) => string | boolean);
 

@@ -1,4 +1,4 @@
-import { Country, CountryGuesser, CountryIso2 } from '@/utils/countries/types';
+import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
 import { VueConstructor } from 'vue';
 
 export type PhoneNumberFormat = 'e164' |

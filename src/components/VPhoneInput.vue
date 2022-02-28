@@ -1,8 +1,8 @@
 <template>
   <div class="v-phone-input">
     <component
-      ref="countryInput"
       :is="enableSearchingCountry ? 'v-autocomplete' : 'v-select'"
+      ref="countryInput"
       v-model="lazyCountry"
       :label="countryInputLabel"
       :aria-label="countryInputAriaLabel"
@@ -133,10 +133,10 @@
 </template>
 
 <script lang="ts">
-import { VPhoneInputRefs, VPhoneInputRules } from '@/components/types';
-import { Country, CountryGuesser, CountryIso2 } from '@/utils/countries/types';
+import { VPhoneInputRefs, VPhoneInputRules } from '@/types/components';
+import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
+import { PhoneNumberFormat } from '@/types/options';
 import { getOption } from '@/utils/options';
-import { PhoneNumberFormat } from '@/utils/options/types';
 import PhoneNumber from 'awesome-phonenumber';
 import Vue, { VueConstructor } from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
@@ -384,7 +384,7 @@ export default class VPhoneInput extends Vue {
 
   @Watch('value')
   onValueChange() {
-    const number = this.lazyPhone.toJSON().number;
+    const { number } = this.lazyPhone.toJSON();
     if (this.value !== number.input && this.value !== number.e164) {
       this.lazyValue = this.value || '';
     }
@@ -425,7 +425,7 @@ export default class VPhoneInput extends Vue {
 
   @Watch('lazyPhone', { deep: true })
   onLazyPhoneChange() {
-    const number = this.lazyPhone.toJSON().number;
+    const { number } = this.lazyPhone.toJSON();
     const newValue = number.e164 || number.input;
     if (newValue !== this.value) {
       this.$emit('input', newValue);
