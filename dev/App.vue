@@ -31,24 +31,27 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
 import InputCard from './InputCard.vue';
 import PropsCard from './PropsCard.vue';
 
-@Component({ components: { InputCard, PropsCard } })
-export default class App extends Vue {
-  inputProps = {} as Record<string, any>;
+export default Vue.extend({
+  name: 'App',
+  components: { PropsCard, InputCard },
+  data: () => ({
+    inputProps: {} as Record<string, unknown>,
+  }),
+  computed: {
+    cleanedInputProps(): Record<string, unknown> {
+      const cleanedInputProps = {} as Record<string, unknown>;
 
-  get cleanedInputProps() {
-    const cleanedInputProps = {} as Record<string, any>;
+      Object.keys(this.inputProps).forEach((prop) => {
+        if (this.inputProps[prop] !== '') {
+          cleanedInputProps[prop] = this.inputProps[prop];
+        }
+      });
 
-    Object.keys(this.inputProps).forEach((prop) => {
-      if (this.inputProps[prop] !== '') {
-        cleanedInputProps[prop] = this.inputProps[prop];
-      }
-    });
-
-    return cleanedInputProps;
-  }
-}
+      return cleanedInputProps;
+    },
+  },
+});
 </script>

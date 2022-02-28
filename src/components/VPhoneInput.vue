@@ -61,6 +61,7 @@
         </slot>
       </template>
     </component>
+    <!-- eslint-disable vuejs-accessibility/no-autofocus -->
     <v-text-field
       ref="phoneInput"
       v-model="lazyValue"
@@ -98,6 +99,7 @@
       class="v-phone-input__phone"
       type="tel"
     >
+      <!-- eslint-enable vuejs-accessibility/no-autofocus -->
       <template #append>
         <slot name="append" />
       </template>
@@ -133,375 +135,405 @@
 </template>
 
 <script lang="ts">
-import { VPhoneInputRefs, VPhoneInputRules } from '@/types/components';
+import { VPhoneInputRules } from '@/types/components';
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
-import { PhoneNumberFormat } from '@/types/options';
+import { PhoneNumberFormat, PhoneNumberJson } from '@/types/phone';
 import { getOption } from '@/utils/options';
 import PhoneNumber from 'awesome-phonenumber';
-import Vue, { VueConstructor } from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
+import Vue, { PropType } from 'vue';
 import { InputValidationRules } from 'vuetify';
 import { VSelect, VTextField } from 'vuetify/lib';
 
-@Component({
+export default Vue.extend({
   name: 'VPhoneInput',
-  inheritAttrs: false,
   components: { VSelect, VTextField },
-})
-export default class VPhoneInput extends Vue {
-  readonly $refs!: VPhoneInputRefs;
-
-  @Prop({ type: String, default: () => getOption('label') })
-  readonly label!: string;
-
-  @Prop({ type: String })
-  readonly placeholder!: string | undefined;
-
-  @Prop({ type: Boolean })
-  readonly persistentPlaceholder!: boolean | undefined;
-
-  @Prop({ type: String })
-  readonly appendIcon!: string | undefined;
-
-  @Prop({ type: String })
-  readonly appendOuterIcon!: string | undefined;
-
-  @Prop({ type: String })
-  readonly prependInnerIcon!: string | undefined;
-
-  @Prop({ type: String })
-  readonly prependIcon!: string | undefined;
-
-  @Prop({ type: String })
-  readonly clearIcon!: string | undefined;
-
-  @Prop({ type: Boolean })
-  readonly outlined!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly filled!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly shaped!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly flat!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly solo!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly soloInverted!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly rounded!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly dense!: boolean;
-
-  @Prop({ type: String })
-  readonly hint!: string | undefined;
-
-  @Prop({ type: Boolean })
-  readonly persistentHint!: boolean | undefined;
-
-  @Prop({ type: Boolean })
-  readonly clearable!: boolean | undefined;
-
-  @Prop({ type: Boolean })
-  readonly autofocus!: boolean | undefined;
-
-  @Prop({ type: Boolean })
-  readonly error!: boolean | undefined;
-
-  @Prop({ type: [Number, String] })
-  readonly errorCount!: number | string | undefined;
-
-  @Prop({ type: [Array, String] })
-  readonly errorMessages!: string[] | string | undefined;
-
-  @Prop({ type: [Array, String] })
-  readonly messages!: string[] | string | undefined;
-
-  @Prop({ type: Boolean })
-  readonly success!: boolean | undefined;
-
-  @Prop({ type: [Array, String] })
-  readonly successMessages!: string[] | string | undefined;
-
-  @Prop({ type: Boolean })
-  readonly validateOnBlur!: boolean | undefined;
-
-  @Prop({ type: Boolean })
-  readonly readonly!: boolean;
-
-  @Prop({ type: Boolean })
-  readonly disabled!: boolean;
-
-  @Prop({ type: Boolean, default: false })
-  readonly loading!: boolean;
-
-  @Prop({ type: Array, default: () => [] })
-  readonly rules!: VPhoneInputRules;
-
-  @Prop({ type: [String, Function, Object], default: () => getOption('countryIconComponent') })
-  readonly countryIconComponent!: VueConstructor;
-
-  @Prop({ type: String, default: () => getOption('countryLabel') })
-  readonly countryLabel!: string;
-
-  @Prop({ type: String, default: () => getOption('countryAriaLabel') })
-  readonly countryAriaLabel!: string | undefined;
-
-  @Prop({ type: Boolean, default: () => getOption('hideCountryLabel') })
-  readonly hideCountryLabel!: boolean;
-
-  @Prop({ type: Array, default: () => getOption('allCountries') })
-  readonly allCountries!: Country[];
-
-  @Prop({ type: Array, default: () => getOption('preferredCountries') })
-  readonly preferredCountries!: CountryIso2[];
-
-  @Prop({ type: Array, default: () => getOption('onlyCountries') })
-  readonly onlyCountries!: CountryIso2[];
-
-  @Prop({ type: Array, default: () => getOption('ignoreCountries') })
-  readonly ignoreCountries!: CountryIso2[];
-
-  @Prop({ type: String, default: () => getOption('defaultCountry') })
-  readonly defaultCountry!: CountryIso2 | undefined;
-
-  @Prop({ type: Object, default: () => getOption('countryGuesser') })
-  readonly countryGuesser!: CountryGuesser;
-
-  @Prop({ type: Boolean, default: () => getOption('disableGuessingCountry') })
-  readonly disableGuessingCountry!: boolean;
-
-  @Prop({ type: Boolean, default: () => getOption('disableGuessLoading') })
-  readonly disableGuessLoading!: boolean;
-
-  @Prop({ type: Boolean, default: () => getOption('enableSearchingCountry') })
-  readonly enableSearchingCountry!: boolean;
-
-  @Prop({ type: Boolean, default: () => getOption('disableValidation') })
-  readonly disableValidation!: boolean;
-
-  @Prop({ type: String, default: () => getOption('invalidMessage') })
-  readonly invalidMessage!: string | undefined;
-
-  @Prop({ type: String, default: () => getOption('displayFormat') })
-  readonly displayFormat!: PhoneNumberFormat;
-
-  @Prop({ type: String, default: '' })
-  readonly value!: string;
-
-  guessingCountry = false;
-
-  mergedRules = [] as InputValidationRules;
-
-  lazyCountry: string | undefined;
-
-  lazyValue: string;
-
-  lazyPhone: PhoneNumber;
-
-  constructor() {
-    super();
-
-    this.lazyCountry = '';
-    this.lazyValue = this.value || '';
-    this.lazyPhone = this.makePhoneNumber();
-  }
-
-  get countryInputLabel(): string | undefined {
-    return this.hideCountryLabel ? undefined : this.countryLabel;
-  }
-
-  get countryInputAriaLabel(): string | undefined {
-    return this.countryAriaLabel || getOption('computeCountryAriaLabel')({ label: this.label });
-  }
-
-  get fallbackCountry(): Country {
-    return this.findCountry(this.defaultCountry)
-      || this.findCountry(this.preferredCountries[0])
-      || this.filteredCountries[0];
-  }
-
-  get activeCountry(): Country {
-    return this.findCountry(this.lazyCountry)
-      || this.fallbackCountry;
-  }
-
-  get allCountriesByIso2(): Record<CountryIso2, Country> {
-    const allCountriesByIso2 = {} as Record<CountryIso2, Country>;
-
-    this.allCountries.forEach((country) => {
-      allCountriesByIso2[country.iso2] = country;
-    });
-
-    return allCountriesByIso2;
-  }
-
-  get filteredCountries(): Country[] {
-    if (this.onlyCountries.length) {
-      return this.getCountries(this.onlyCountries);
-    }
-
-    if (this.ignoreCountries.length) {
-      return this.allCountries.filter(
-        ({ iso2 }) => this.ignoreCountries.indexOf(iso2.toUpperCase()) === -1
-          && this.ignoreCountries.indexOf(iso2.toLowerCase()) === -1,
-      );
-    }
-
-    return this.allCountries;
-  }
-
-  get sortedCountries(): Country[] {
-    const preferredCountries = this.getCountries(this.preferredCountries)
-      .map((country) => ({ ...country, preferred: true }));
-
-    return [...preferredCountries, ...this.filteredCountries];
-  }
-
-  @Watch('disableValidation')
-  @Watch('rules', { immediate: true, deep: true })
-  onRulesChange() {
-    const rules = this.rules.map((rule) => (
-      typeof rule === 'function'
-        ? (() => rule(this.lazyValue, this.activeCountry.iso2, this.lazyPhone))
-        : rule
-    )) as InputValidationRules;
-    if (this.disableValidation) {
-      this.mergedRules = rules;
-    } else {
-      this.mergedRules = [
-        ...rules,
-        () => !this.lazyValue || this.lazyPhone.isValid() || this.computeInvalidMessage(),
-      ];
-    }
-  }
-
-  @Watch('value')
-  onValueChange() {
-    const { number } = this.lazyPhone.toJSON();
-    if (this.value !== number.input && this.value !== number.e164) {
-      this.lazyValue = this.value || '';
-    }
-  }
-
-  @Watch('lazyCountry')
-  onLazyCountryChange(_: CountryIso2, oldLazyCountry: CountryIso2) {
-    if (this.lazyCountry) {
-      this.guessingCountry = false;
-    } else {
-      this.$nextTick(() => {
-        if (!this.lazyCountry) {
-          this.lazyCountry = oldLazyCountry;
-        }
+  inheritAttrs: false,
+  props: {
+    label: {
+      type: String,
+      default: () => getOption('label'),
+    },
+    placeholder: {
+      type: String,
+      default: undefined,
+    },
+    persistentPlaceholder: {
+      type: Boolean,
+      default: undefined,
+    },
+    appendIcon: {
+      type: String,
+      default: undefined,
+    },
+    appendOuterIcon: {
+      type: String,
+      default: undefined,
+    },
+    prependInnerIcon: {
+      type: String,
+      default: undefined,
+    },
+    prependIcon: {
+      type: String,
+      default: undefined,
+    },
+    clearIcon: {
+      type: String,
+      default: undefined,
+    },
+    outlined: {
+      type: Boolean,
+      default: undefined,
+    },
+    filled: {
+      type: Boolean,
+      default: undefined,
+    },
+    shaped: {
+      type: Boolean,
+      default: undefined,
+    },
+    flat: {
+      type: Boolean,
+      default: undefined,
+    },
+    solo: {
+      type: Boolean,
+      default: undefined,
+    },
+    soloInverted: {
+      type: Boolean,
+      default: undefined,
+    },
+    rounded: {
+      type: Boolean,
+      default: undefined,
+    },
+    dense: {
+      type: Boolean,
+      default: undefined,
+    },
+    hint: {
+      type: String,
+      default: undefined,
+    },
+    persistentHint: {
+      type: Boolean,
+      default: undefined,
+    },
+    clearable: {
+      type: Boolean,
+      default: undefined,
+    },
+    autofocus: {
+      type: Boolean,
+      default: undefined,
+    },
+    error: {
+      type: Boolean,
+      default: undefined,
+    },
+    errorCount: {
+      type: [Number, String],
+      default: undefined,
+    },
+    errorMessages: {
+      type: [Array, String],
+      default: undefined,
+    },
+    messages: {
+      type: [Array, String],
+      default: undefined,
+    },
+    success: {
+      type: Boolean,
+      default: undefined,
+    },
+    successMessages: {
+      type: [Array, String],
+      default: undefined,
+    },
+    validateOnBlur: {
+      type: Boolean,
+      default: undefined,
+    },
+    readonly: {
+      type: Boolean,
+      default: undefined,
+    },
+    disabled: {
+      type: Boolean,
+      default: undefined,
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    rules: {
+      type: Array as PropType<VPhoneInputRules>,
+      default: () => [],
+    },
+    countryIconComponent: {
+      type: [String, Function, Object],
+      default: () => getOption('countryIconComponent'),
+    },
+    countryLabel: {
+      type: String,
+      default: () => getOption('countryLabel'),
+    },
+    countryAriaLabel: {
+      type: String,
+      default: () => getOption('countryAriaLabel'),
+    },
+    hideCountryLabel: {
+      type: Boolean,
+      default: () => getOption('hideCountryLabel'),
+    },
+    allCountries: {
+      type: Array as PropType<Country[]>,
+      default: () => getOption('allCountries'),
+    },
+    preferredCountries: {
+      type: Array as PropType<CountryIso2[]>,
+      default: () => getOption('preferredCountries'),
+    },
+    onlyCountries: {
+      type: Array as PropType<CountryIso2[]>,
+      default: () => getOption('onlyCountries'),
+    },
+    ignoreCountries: {
+      type: Array as PropType<CountryIso2[]>,
+      default: () => getOption('ignoreCountries'),
+    },
+    defaultCountry: {
+      type: String as PropType<CountryIso2 | undefined>,
+      default: () => getOption('defaultCountry'),
+    },
+    countryGuesser: {
+      type: Object as PropType<CountryGuesser>,
+      default: () => getOption('countryGuesser'),
+    },
+    disableGuessingCountry: {
+      type: Boolean,
+      default: () => getOption('disableGuessingCountry'),
+    },
+    disableGuessLoading: {
+      type: Boolean,
+      default: () => getOption('disableGuessLoading'),
+    },
+    enableSearchingCountry: {
+      type: Boolean,
+      default: () => getOption('enableSearchingCountry'),
+    },
+    disableValidation: {
+      type: Boolean,
+      default: () => getOption('disableValidation'),
+    },
+    invalidMessage: {
+      type: String,
+      default: () => getOption('invalidMessage'),
+    },
+    displayFormat: {
+      type: String as PropType<PhoneNumberFormat>,
+      default: () => getOption('displayFormat'),
+    },
+    value: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      guessingCountry: false,
+      mergedRules: [] as InputValidationRules,
+      lazyCountry: undefined as CountryIso2 | undefined,
+      lazyValue: this.value || '',
+      lazyPhone: { number: { input: '' } } as PhoneNumberJson,
+    };
+  },
+  computed: {
+    countryInputLabel(): string | undefined {
+      return this.hideCountryLabel ? undefined : this.countryLabel;
+    },
+    countryInputAriaLabel(): string | undefined {
+      return this.countryAriaLabel || getOption('computeCountryAriaLabel')({ label: this.label });
+    },
+    fallbackCountry(): Country {
+      return this.findCountry(this.defaultCountry)
+        || this.findCountry(this.preferredCountries[0])
+        || this.filteredCountries[0];
+    },
+    activeCountry(): Country {
+      return this.findCountry(this.lazyCountry)
+        || this.fallbackCountry;
+    },
+    allCountriesByIso2(): Record<CountryIso2, Country> {
+      const allCountriesByIso2 = {} as Record<CountryIso2, Country>;
+
+      this.allCountries.forEach((country) => {
+        allCountriesByIso2[country.iso2] = country;
       });
-    }
-  }
 
-  @Watch('lazyValue')
-  onLazyValueChange() {
-    const lazyCountry = this.lazyValue.startsWith('+') ? undefined : this.lazyCountry;
-    const lazyPhone = this.makePhoneNumber(this.lazyValue, lazyCountry);
-    const iso2 = lazyPhone.getRegionCode();
-    if (iso2 && this.lazyCountry !== iso2) {
-      this.lazyCountry = iso2;
-    }
-  }
+      return allCountriesByIso2;
+    },
+    filteredCountries(): Country[] {
+      if (this.onlyCountries.length) {
+        return this.getCountries(this.onlyCountries);
+      }
 
-  @Watch('lazyCountry')
-  @Watch('lazyValue')
-  onLazyCountryOrValueChange() {
-    this.lazyPhone = this.makePhoneNumber(this.lazyValue, this.lazyCountry);
+      if (this.ignoreCountries.length) {
+        return this.allCountries.filter(
+          ({ iso2 }) => this.ignoreCountries.indexOf(iso2.toUpperCase()) === -1
+            && this.ignoreCountries.indexOf(iso2.toLowerCase()) === -1,
+        );
+      }
 
-    if (this.lazyPhone.isValid()) {
-      this.lazyValue = this.formatPhoneNumber(this.lazyPhone);
-    }
-  }
+      return this.allCountries;
+    },
+    sortedCountries(): Country[] {
+      const preferredCountries = this.getCountries(this.preferredCountries)
+        .map((country) => ({ ...country, preferred: true }));
 
-  @Watch('lazyPhone', { deep: true })
-  onLazyPhoneChange() {
-    const { number } = this.lazyPhone.toJSON();
-    const newValue = number.e164 || number.input;
-    if (newValue !== this.value) {
-      this.$emit('input', newValue);
-    }
-  }
-
+      return [...preferredCountries, ...this.filteredCountries];
+    },
+  },
+  watch: {
+    disableValidation: 'onValidationChange',
+    rules: {
+      handler: 'onValidationChange',
+      immediate: true,
+      deep: true,
+    },
+    value: 'onValueChange',
+    lazyCountry: 'onLazyCountryChange',
+    lazyValue: 'onLazyValueChange',
+    lazyPhone: {
+      handler: 'onLazyPhoneChange',
+      deep: true,
+    },
+  },
   mounted(): void {
     this.onLazyValueChange();
-
     this.$nextTick(() => {
       this.initializeCountry();
     });
-  }
-
-  makePhoneNumber(value?: string, iso2?: CountryIso2): PhoneNumber {
-    return PhoneNumber((value || '').trim(), iso2);
-  }
-
-  formatPhoneNumber(phone: PhoneNumber): string {
-    return phone.getNumber(this.displayFormat);
-  }
-
-  async initializeCountry(): Promise<void> {
-    if (this.lazyCountry) {
-      return;
-    }
-
-    if (!this.disableGuessingCountry) {
-      this.guessingCountry = true;
-
-      const guessedCountry = this.findCountry(await this.countryGuesser.guess());
-      if (!this.lazyCountry && guessedCountry) {
-        this.lazyCountry = guessedCountry.iso2;
+  },
+  methods: {
+    onValidationChange() {
+      const rules = this.rules.map((rule) => (
+        typeof rule === 'function'
+          ? (() => rule(this.lazyValue, this.activeCountry.iso2, this.lazyPhone))
+          : rule
+      )) as InputValidationRules;
+      if (this.disableValidation) {
+        this.mergedRules = rules;
+      } else {
+        this.mergedRules = [
+          ...rules,
+          () => !this.lazyValue || this.lazyPhone.valid || this.computeInvalidMessage(),
+        ];
+      }
+    },
+    onValueChange() {
+      if (this.value !== this.lazyPhone.number.input && this.value !== this.lazyPhone.number.e164) {
+        this.lazyValue = this.value || '';
+      }
+    },
+    onLazyCountryChange(_: CountryIso2, oldLazyCountry: CountryIso2) {
+      if (this.lazyCountry) {
+        this.guessingCountry = false;
+      } else {
+        this.$nextTick(() => {
+          if (!this.lazyCountry) {
+            this.lazyCountry = oldLazyCountry;
+          }
+        });
       }
 
-      this.guessingCountry = false;
-    }
+      this.onLazyCountryOrValueChange();
+    },
+    onLazyValueChange() {
+      const lazyCountry = this.lazyValue.startsWith('+') ? undefined : this.lazyCountry;
+      const lazyPhone = this.makePhoneNumber(this.lazyValue, lazyCountry);
+      const iso2 = lazyPhone.regionCode;
+      if (iso2 && this.lazyCountry !== iso2) {
+        this.lazyCountry = iso2;
+      }
 
-    this.lazyCountry = this.lazyCountry || this.activeCountry.iso2;
-  }
+      this.onLazyCountryOrValueChange();
+    },
+    onLazyCountryOrValueChange() {
+      this.lazyPhone = this.makePhoneNumber(this.lazyValue, this.lazyCountry);
 
-  getCountryText(country: Country): string {
-    return `${country.name} ${country.iso2} ${country.dialCode}`;
-  }
+      if (this.lazyPhone.valid) {
+        this.lazyValue = this.formatPhoneNumber(this.lazyPhone);
+      }
+    },
+    onLazyPhoneChange() {
+      const newValue = this.lazyPhone.number.e164 || this.lazyPhone.number.input;
+      if (newValue !== this.value) {
+        this.$emit('input', newValue);
+      }
+    },
+    makePhoneNumber(value?: string, iso2?: CountryIso2): PhoneNumberJson {
+      return PhoneNumber((value || '').trim(), iso2).toJSON();
+    },
+    formatPhoneNumber(phone: PhoneNumberJson): string {
+      return phone.number[this.displayFormat] || phone.number.input;
+    },
+    async initializeCountry(): Promise<void> {
+      if (this.lazyCountry) {
+        return;
+      }
 
-  /**
-   * Get a list of countries matching given ISO2 codes.
-   *
-   * @param {CountryIso2[]} countriesIso2
-   *
-   * @returns {Country[]}
-   */
-  getCountries(countriesIso2 = [] as CountryIso2[]): Country[] {
-    return countriesIso2
-      .map((iso2) => this.findCountry(iso2))
-      .filter((c): c is Country => !!c);
-  }
+      if (!this.disableGuessingCountry) {
+        this.guessingCountry = true;
 
-  /**
-   * Find a country using its ISO2 code.
-   *
-   * @param {CountryIso2 | undefined} iso2
-   *
-   * @returns {Country | undefined}
-   */
-  findCountry(iso2 = undefined as CountryIso2 | undefined): Country | undefined {
-    return this.allCountriesByIso2[(iso2 || '').toUpperCase()];
-  }
+        try {
+          const guessedCountry = this.findCountry(await this.countryGuesser.guess());
+          if (!this.lazyCountry && guessedCountry) {
+            this.lazyCountry = guessedCountry.iso2;
+          }
+        } finally {
+          this.guessingCountry = false;
+        }
+      }
 
-  computeInvalidMessage(): string {
-    return this.invalidMessage || getOption('computeInvalidMessage')({
-      label: this.label,
-      example: this.formatPhoneNumber(PhoneNumber.getExample(this.activeCountry.iso2)),
-    });
-  }
-}
+      this.lazyCountry = this.lazyCountry || this.activeCountry.iso2;
+    },
+    getCountryText(country: Country): string {
+      return `${country.name} ${country.iso2} ${country.dialCode}`;
+    },
+    /**
+     * Get a list of countries matching given ISO2 codes.
+     *
+     * @param {CountryIso2[]} countriesIso2
+     *
+     * @returns {Country[]}
+     */
+    getCountries(countriesIso2 = [] as CountryIso2[]): Country[] {
+      return countriesIso2
+        .map((iso2) => this.findCountry(iso2))
+        .filter((c): c is Country => !!c);
+    },
+    /**
+     * Find a country using its ISO2 code.
+     *
+     * @param {CountryIso2 | undefined} iso2
+     *
+     * @returns {Country | undefined}
+     */
+    findCountry(iso2 = undefined as CountryIso2 | undefined): Country | undefined {
+      return this.allCountriesByIso2[(iso2 || '').toUpperCase()];
+    },
+    computeInvalidMessage(): string {
+      return this.invalidMessage || getOption('computeInvalidMessage')({
+        label: this.label,
+        example: this.formatPhoneNumber(PhoneNumber.getExample(this.activeCountry.iso2).toJSON()),
+      });
+    },
+  },
+});
 </script>
 
 <style

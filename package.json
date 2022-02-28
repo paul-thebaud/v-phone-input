@@ -31,6 +31,7 @@
   ],
   "sideEffects": false,
   "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue src dev",
     "serve": "vue-cli-service serve dev/serve.ts",
     "prebuild": "rimraf ./dist",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
@@ -82,8 +83,6 @@
     "ttypescript": "^1.5.12",
     "typescript": "^4.0.3",
     "vue": "^2.6.14",
-    "vue-class-component": "^7.2.6",
-    "vue-property-decorator": "^9.1.2",
     "vue-template-compiler": "^2.6.14",
     "vuetify": "^2.6.3",
     "vuetify-loader": "^1.7.3"

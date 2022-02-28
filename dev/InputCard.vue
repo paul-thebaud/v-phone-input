@@ -1,7 +1,9 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2 class="text-h6">Input preview</h2>
+      <h2 class="text-h6">
+        Input preview
+      </h2>
     </v-card-title>
     <v-divider role="presentation" />
     <v-card-text>
@@ -19,12 +21,12 @@
         dense
       >
         <v-list-item
-          v-for="(resolver, name) in inputInfo"
+          v-for="(value, name) in inputInfo"
           :key="`info-${name}`"
         >
           <v-list-item-content>
             <v-list-item-title v-text="titleCase(name)" />
-            <v-list-item-subtitle v-text="resolver(inputValue)" />
+            <v-list-item-subtitle v-text="value" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -33,38 +35,40 @@
 </template>
 
 <script lang="ts">
-import countries from '@/utils/countries';
+import { countries } from '@/entry.esm';
 import PhoneNumber from 'awesome-phonenumber';
-import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
+import Vue, { PropType } from 'vue';
 import { titleCase } from './utils';
 
-@Component
-export default class InputCard extends Vue {
-  @Prop({ type: Object, default: () => ({}) })
-  readonly inputProps!: Record<string, any>;
+export default Vue.extend({
+  name: 'InputCard',
+  props: {
+    inputProps: {
+      type: Object as PropType<Record<string, unknown>>,
+      default: () => ({}),
+    },
+  },
+  data: () => ({
+    titleCase,
+    inputValue: '',
+  }),
+  computed: {
+    inputInfo() {
+      const phone = PhoneNumber(this.inputValue);
+      const iso2 = phone.getRegionCode();
+      const country = countries.find((c) => c.iso2 === iso2)?.name || 'Unknown';
 
-  titleCase = titleCase;
-
-  inputValue = '';
-
-  get inputInfo() {
-    return {
-      value: (value: string) => value,
-      valid: (value: string) => PhoneNumber(value).isValid(),
-      country: (value: string) => {
-        const country = PhoneNumber(value).getRegionCode();
-        if (!country) {
-          return 'Unknown';
-        }
-
-        return countries.find((c) => c.iso2 === country)?.name;
-      },
-    };
-  }
-
-  onInputValue(value: string) {
-    this.inputValue = value;
-  }
-};
+      return {
+        value: this.inputValue || '-',
+        valid: phone.isValid(),
+        country,
+      };
+    },
+  },
+  methods: {
+    onInputValue(value: string): void {
+      this.inputValue = value;
+    },
+  },
+});
 </script>

@@ -1,11 +1,6 @@
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
+import { PhoneNumberFormat } from '@/types/phone';
 import { VueConstructor } from 'vue';
-
-export type PhoneNumberFormat = 'e164' |
-  'international' |
-  'national' |
-  'rfc3966' |
-  'significant';
 
 export type CountryAriaLabelResolver = (options: { label: string }) => string;
 

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export function titleCase(text: string) {
   const result = text.replace(/([A-Z])/g, ' $1');
 

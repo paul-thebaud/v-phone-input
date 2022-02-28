@@ -1,5 +1,5 @@
 import VPhoneCountryFlag from '@/components/VPhoneCountryFlag';
-import VPhoneInput from '@/components/VPhoneInput';
+import VPhoneInput from '@/components/VPhoneInput.vue';
 import { PluginOptions } from '@/types/options';
 import countries from '@/utils/countries';
 import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';

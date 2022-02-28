@@ -28,9 +28,9 @@ Plugin installation:
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInput from 'v-phone-input';
+import VPhoneInputPlugin from 'v-phone-input';
 
-Vue.use(VPhoneInput);
+Vue.use(VPhoneInputPlugin);
 ```
 
 Component usage:
@@ -107,9 +107,9 @@ You may customize the options when registering the Vue plugin:
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInput from 'v-phone-input';
+import VPhoneInputPlugin from 'v-phone-input';
 
-Vue.use(VPhoneInput, {
+Vue.use(VPhoneInputPlugin, {
   // Customize the way country icon are displayed.
   countryIconComponent: {
     props: { country: Object },
@@ -128,9 +128,9 @@ Options may also be used to define custom default values for `VPhoneInput` props
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInput, { Ip2cCountryGuesser } from 'v-phone-input';
+import VPhoneInputPlugin, { Ip2cCountryGuesser } from 'v-phone-input';
 
-Vue.use(VPhoneInput, {
+Vue.use(VPhoneInputPlugin, {
   disableGuessLoading: true,
   disableGuessingCountry: true,
   enableSearchingCountry: true,
