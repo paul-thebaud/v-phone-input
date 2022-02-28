@@ -187,10 +187,10 @@ import VPhoneInputPlugin from 'v-phone-input';
 
 Vue.use(VPhoneInputPlugin, {
   // Customize aria-label of country input.
-  computeCountryAriaLabel: ({ label }) => `Pays pour ${label}`,
+  computeCountryAriaLabel: ({ label }) => `Country for ${label}`,
   // Customize invalid message of phone input.
   computeInvalidMessage: ({ label, example }) =>
-    `Le champ ${label} n'est pas un numéro de téléphone valide (exemple : ${example}).`,
+    `${label} must be a valid phone number (example: ${example}).`,
   // Options can also be used to change some default props' values.
   countryIconMode: 'svg',
   enableSearchingCountry: true,
@@ -381,21 +381,21 @@ props:
   is useful to make the country input related to the phone input.
 - `invalidMessage` or `computeInvalidMessage`: message displayed when the phone number is invalid.
 
-Translations can be defined on a per-input basis (example in French):
+Translations can be defined on a per-input basis:
 
 ```vue
 
 <template>
   <v-phone-input
-      label="Numéro de téléphone"
-      country-label="Pays"
-      country-aria-label="Pays pour le numéro de téléphone"
-      invalid-message="Le numéro de téléphone doit être un numéro de téléphone valide (exemple : 01 23 45 67 89)."
+      label="Phone number"
+      country-label="Country"
+      country-aria-label="Country for phone number"
+      invalid-message="Phone number must be a valid phone number (example: 01 23 45 67 89)."
   />
 </template>
 ```
 
-Translations can also be defined for all inputs as a default behavior (example in French):
+Translations can also be defined for all inputs as a default behavior:
 
 ```javascript
 import Vue from 'vue';
@@ -403,11 +403,11 @@ import VPhoneInputPlugin from 'v-phone-input';
 
 // Without any localization library.
 Vue.use(VPhoneInputPlugin, {
-  label: 'Numéro de téléphone',
-  countryLabel: 'Pays',
-  computeCountryAriaLabel: ({ label }) => `Pays pour ${label}`,
+  label: 'Phone number',
+  countryLabel: 'Country',
+  computeCountryAriaLabel: ({ label }) => `Country for ${label}`,
   computeInvalidMessage: ({ label, example }) =>
-    `Le champ ${label} doit être un numéro de téléphone valide (exemple : ${example}).`,
+    `${label} must be a valid phone number (example: ${example}).`,
 });
 
 // Using Vue-I18N localization library.
