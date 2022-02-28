@@ -352,3 +352,22 @@ type PhoneNumberObject = {
   regionCode: CountryIso2 | undefined;
 }
 ```
+
+## Contributing
+
+Please see [CONTRIBUTING file](CONTRIBUTING.md) for more details.
+
+Informal discussion regarding bugs, new features, and implementation of
+existing features takes place in the
+[GitHub issue page this repository](https://github.com/paul-thebaud/v-phone-input/issues).
+
+## Credits
+
+- [Paul Thébaud](https://github/paul-thebaud)
+- [CoWork'HIT](https://coworkhit.com)
+- [All Contributors](https://github.com/paul-thebaud/v-phone-input/graphs/contributors)
+
+## License
+
+PhpUnitGen is an open-sourced software licensed under the
+[MIT license](https://opensource.org/licenses/MIT).
