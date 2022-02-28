@@ -15,6 +15,10 @@ International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 
 Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 
+**Motivation:** There are already multiple libraries to provide phone number input on Vuetify. But
+for those already published are not actively maintained or does not put focus on providing great
+accessibility. This new library aims to provide those two.
+
 ## TD;DR
 
 Installation using Yarn:
@@ -62,15 +66,15 @@ export default {
 - [Props](#props)
 - [Options](#options)
 - [Examples](#examples)
-  - [Validation](#validation)
-  - [Enabling searching countries](#enabling-searching-countries)
-  - [Localization](#localization)
+    - [Validation](#validation)
+    - [Enabling searching countries](#enabling-searching-countries)
+    - [Localization](#localization)
 - [Types](#types)
-  - [Country ISO-2](#country-iso-2)
-  - [Country](#country)
-  - [Country Guesser](#country-guesser)
-  - [Phone Number Formats](#phone-number-formats)
-  - [Phone Number](#phone-number)
+    - [Country ISO-2](#country-iso-2)
+    - [Country](#country)
+    - [Country Guesser](#country-guesser)
+    - [Phone Number Formats](#phone-number-formats)
+    - [Phone Number](#phone-number)
 
 ### Requirements
 
@@ -252,12 +256,13 @@ props:
 Translations can be defined on a per-input basis (example in French):
 
 ```vue
+
 <template>
   <v-phone-input
-    label="Numéro de téléphone"
-    country-label="Pays"
-    country-aria-label="Pays pour le numéro de téléphone"
-    invalid-message="Le numéro de téléphone doit être un numéro de téléphone valide (exemple : 01 23 45 67 89)."
+      label="Numéro de téléphone"
+      country-label="Pays"
+      country-aria-label="Pays pour le numéro de téléphone"
+      invalid-message="Le numéro de téléphone doit être un numéro de téléphone valide (exemple : 01 23 45 67 89)."
   />
 </template>
 ```
@@ -273,7 +278,10 @@ Vue.use(VPhoneInputPlugin, {
   label: 'Numéro de téléphone',
   countryLabel: 'Pays',
   computeCountryAriaLabel: ({ label }) => `Pays pour ${label}`,
-  computeInvalidMessage: ({ label, example }) => `Le champ ${label} doit être un numéro de téléphone valide (exemple : ${example}).`,
+  computeInvalidMessage: ({
+                            label,
+                            example
+                          }) => `Le champ ${label} doit être un numéro de téléphone valide (exemple : ${example}).`,
 });
 
 // Using Vue-I18N localization library.
@@ -357,8 +365,8 @@ type PhoneNumberObject = {
 
 Please see [CONTRIBUTING file](CONTRIBUTING.md) for more details.
 
-Informal discussion regarding bugs, new features, and implementation of
-existing features takes place in the
+Informal discussion regarding bugs, new features, and implementation of existing features takes
+place in the
 [GitHub issue page this repository](https://github.com/paul-thebaud/v-phone-input/issues).
 
 ## Credits
