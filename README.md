@@ -160,11 +160,7 @@ directly to the input or defined globally using [input options](#options).
 | `displayFormat`          | `PhoneNumberFormat`        | `'national'`                   | Format to use when displaying valid phone numbers (see [Phone Number Formats](#phone-number-formats)).                            |
 | `value`                  | `string`                   | `''`                           | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
 
-## Slots
-
-TODO
-
-## Options
+### Options
 
 Plugin options are used to change some default behavior of the input or globally customize default
 values for [input props](#props).
@@ -209,6 +205,26 @@ Vue.use(VPhoneInputPlugin, {
   countryGuesser: new Ip2cCountryGuesser(),
 });
 ```
+
+### Slots
+
+The following slots are passed to the country select input (
+see [v-select API](https://vuetifyjs.com/en/api/v-select/#slots)):
+
+- `selection`
+- `item`
+
+The following slots are passed to the phone text input (
+see [v-text-field API](https://vuetifyjs.com/en/api/v-text-field/#slots)):
+
+- `append`
+- `append-outer`
+- `counter`
+- `label`
+- `message`
+- `prepend`
+- `prepend-inner`
+- `progress`
 
 ### Examples
 
@@ -320,10 +336,8 @@ Vue.use(VPhoneInputPlugin, {
   label: 'Numéro de téléphone',
   countryLabel: 'Pays',
   computeCountryAriaLabel: ({ label }) => `Pays pour ${label}`,
-  computeInvalidMessage: ({
-                            label,
-                            example
-                          }) => `Le champ ${label} doit être un numéro de téléphone valide (exemple : ${example}).`,
+  computeInvalidMessage: ({ label, example }) =>
+    `Le champ ${label} doit être un numéro de téléphone valide (exemple : ${example}).`,
 });
 
 // Using Vue-I18N localization library.
