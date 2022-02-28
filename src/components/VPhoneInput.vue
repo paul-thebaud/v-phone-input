@@ -24,10 +24,10 @@
       item-value="iso2"
       class="v-phone-input__country"
     >
-      <template #selection>
+      <template #selection="selectionProps">
         <slot
           name="selection"
-          :item="activeCountry"
+          v-bind="{ ...selectionProps, item: activeCountry }"
         >
           <template v-if="countryIconComponent">
             <component
@@ -43,20 +43,20 @@
           />
         </slot>
       </template>
-      <template #item="{ item }">
+      <template #item="itemProps">
         <slot
           name="item"
-          :item="item"
+          v-bind="itemProps"
         >
           <v-list-item-icon v-if="countryIconComponent">
             <component
               :is="countryIconComponent"
-              :country="item"
+              :country="itemProps.item"
               :decorative="true"
             />
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="`${item.name} +${item.dialCode}`" />
+            <v-list-item-title v-text="`${itemProps.item.name} +${itemProps.item.dialCode}`" />
           </v-list-item-content>
         </slot>
       </template>
@@ -106,19 +106,19 @@
       <template #append-outer>
         <slot name="append-outer" />
       </template>
-      <template #counter="props">
+      <template #counter="counterProps">
         <slot
           name="counter"
-          v-bind="props"
+          v-bind="counterProps"
         />
       </template>
       <template #label>
         <slot name="label" />
       </template>
-      <template #message="props">
+      <template #message="messageProps">
         <slot
           name="message"
-          v-bind="props"
+          v-bind="messageProps"
         />
       </template>
       <template #prepend>
