@@ -7,5 +7,5 @@ export interface Country {
 }
 
 export interface CountryGuesser {
-  guess: () => Promise<CountryIso2>;
+  guess: () => Promise<CountryIso2 | undefined>;
 }

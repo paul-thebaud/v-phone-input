@@ -380,7 +380,7 @@ to detect the default country to use.
 
 ```typescript
 interface CountryGuesser {
-  guess: () => Promise<CountryIso2>;
+  guess: () => Promise<CountryIso2 | undefined>;
 }
 ```
 
