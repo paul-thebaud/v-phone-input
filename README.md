@@ -49,11 +49,28 @@ Component usage:
 <script>
 export default {
   data: () => ({ phone: '' }),
-}
+};
 </script>
 ```
 
 ## Documentation
+
+### Table of contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Props](#props)
+- [Options](#options)
+- [Examples](#examples)
+  - [Validation](#validation)
+  - [Enabling searching countries](#enabling-searching-countries)
+  - [Localization](#localization)
+- [Types](#types)
+  - [Country ISO-2](#country-iso-2)
+  - [Country](#country)
+  - [Country Guesser](#country-guesser)
+  - [Phone Number Formats](#phone-number-formats)
+  - [Phone Number](#phone-number)
 
 ### Requirements
 
@@ -151,27 +168,144 @@ Vue.use(VPhoneInputPlugin, {
 
 #### Validation
 
-TODO
+By default (when `disableValidation` is `false`), the input will validate that the phone number is a
+valid one by injecting a rules to the phone text input.
+
+You may add any additional rules by providing a `rules` prop to the input:
+
+```vue
+
+<template>
+  <v-phone-input :rules="rules" />
+</template>
+
+<script>
+export default {
+  computed: {
+    rules() {
+      return [
+        (value, country, phone) => !!value || 'Phone is required.',
+      ];
+    },
+  },
+};
+</script>
+```
+
+Any rule you pass as a function will receive 3 arguments (instead of one for default Vuetify rules)
+that you may use when validating user's input:
+
+- `value`: the value contained in the phone text input.
+- `country`: the country selected in the country input.
+- `phone`: the [phone number object](#phone-number).
 
 #### Enabling searching countries
 
-TODO
+You may provide a `enableSearchingCountry` with a `true` value to enable textual search in
+countries.
+
+> Since VPhoneInput does not import VAutocomplete to reduce its weight, you must provide this
+> component to Vue when dynamically using Vuetify components (e.g. when using `vuetify-loader`).
+
+To enable searching countries on a per-input basis:
+
+```vue
+
+<template>
+  <v-phone-input enable-searching-country />
+</template>
+
+<script>
+import { VAutocomplete } from 'vuetify/lib';
+
+export default {
+  // Required when dynamically using Vuetify components.
+  components: { VAutocomplete },
+};
+</script>
+```
+
+To enable searching countries for all inputs as a default behavior:
+
+```javascript
+import Vue from 'vue';
+import { VAutocomplete } from 'vuetify/lib';
+import VPhoneInputPlugin from 'v-phone-input';
+
+// Required when dynamically using Vuetify components.
+Vue.component('VAutocomplete', VAutocomplete);
+
+Vue.use(VPhoneInputPlugin, { enableSearchingCountry: true });
+```
 
 #### Localization
 
-TODO
+You may change the translations of the input by providing custom values for the following translated
+props:
+
+- `label`: label for the phone text input.
+- `countryLabel`: label for the country select input.
+- `countryAriaLabel` or `computeCountryAriaLabel`: `aria-label` for the country select input. This
+  is useful to make the country input related to the phone input.
+- `invalidMessage` or `computeInvalidMessage`: message displayed when the phone number is invalid.
+
+Translations can be defined on a per-input basis (example in French):
+
+```vue
+<template>
+  <v-phone-input
+    label="Numéro de téléphone"
+    country-label="Pays"
+    country-aria-label="Pays pour le numéro de téléphone"
+    invalid-message="Le numéro de téléphone doit être un numéro de téléphone valide (exemple : 01 23 45 67 89)."
+  />
+</template>
+```
+
+Translations can also be defined for all inputs as a default behavior (example in French):
+
+```javascript
+import Vue from 'vue';
+import VPhoneInputPlugin from 'v-phone-input';
+
+// Without any localization library.
+Vue.use(VPhoneInputPlugin, {
+  label: 'Numéro de téléphone',
+  countryLabel: 'Pays',
+  computeCountryAriaLabel: ({ label }) => `Pays pour ${label}`,
+  computeInvalidMessage: ({ label, example }) => `Le champ ${label} doit être un numéro de téléphone valide (exemple : ${example}).`,
+});
+
+// Using Vue-I18N localization library.
+import i18n from './path/to/i18n-plugin';
+
+Vue.use(VPhoneInputPlugin, {
+  label: i18n.t('phone.phoneLabel'),
+  countryLabel: i18n.t('phone.phoneCountry'),
+  computeCountryAriaLabel: (options) => i18n.t('phone.phoneCountryFor', options),
+  computeInvalidMessage: (options) => i18n.t('phone.invalidPhoneGiven', options),
+});
+```
 
 ### Types
+
+#### Country ISO-2
+
+A country ISO-2 code is a string containing 2 uppercase characters.
+
+```typescript
+type CountryIso2 = string;
+```
 
 #### Country
 
 A country object contains information about a country.
 
-```javascript
-const country = {
-  name: "France",
-  iso2: "FR",
-  dialCode: "33",
+```typescript
+interface Country {
+  name: string;       // Example: "France".
+  iso2: CountryIso2;  // Example: "FR".
+  dialCode: string;   // Example: "33".
 }
 ```
 
@@ -180,11 +314,9 @@ const country = {
 A country guesser is a class implementing `CountryGuesser` interface and provides a `guess` method
 to detect the default country to use.
 
-```javascript
-class FrDefaultCountryGuesser {
-  guess() {
-    return Promise.resolve('FR');
-  }
+```typescript
+interface CountryGuesser {
+  guess: () => Promise<CountryIso2>;
 }
 ```
 
@@ -205,3 +337,18 @@ by [awesome-phonenumber](https://www.npmjs.com/package/awesome-phonenumber)):
 - `national`: `070-712 34 56`
 - `rfc3966`: `tel:+46-70-712-34-56`
 - `significant`: `707123456`
+
+#### Phone Number
+
+A phone number is a simple object describing the VPhoneInput current value. The `number` key will
+contain an `input` string and may contain each formatted value if the phone number is valid.
+
+```typescript
+type PhoneNumberObject = {
+  number: { input: string } & Partial<Record<PhoneNumberFormat, string>>;
+  possibility: string;
+  possible: boolean;
+  valid: boolean;
+  regionCode: CountryIso2 | undefined;
+}
+```
