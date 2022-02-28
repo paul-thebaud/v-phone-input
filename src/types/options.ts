@@ -2,13 +2,15 @@ import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
 import { PhoneNumberFormat } from '@/types/phone';
 import { VueConstructor } from 'vue';
 
+export type CountryIconMode = 'svg' | 'sprite' | VueConstructor | undefined;
+
 export type CountryAriaLabelResolver = (options: { label: string }) => string;
 
 export type InvalidMessageResolver = (options: { label: string, example: string }) => string;
 
 export interface PluginOptions {
   label: string;
-  countryIconComponent: VueConstructor | undefined;
+  countryIconMode: CountryIconMode,
   countryLabel: string;
   countryAriaLabel: string | undefined;
   computeCountryAriaLabel: CountryAriaLabelResolver;

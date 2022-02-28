@@ -40,7 +40,7 @@ import Vue from 'vue';
 import VPhoneInputPlugin from 'v-phone-input';
 import 'flag-icons/css/flag-icons.min.css';
 
-Vue.use(VPhoneInputPlugin);
+Vue.use(VPhoneInputPlugin, { countryIconMode: 'svg' });
 ```
 
 Component usage:
@@ -69,6 +69,7 @@ export default {
 - [Slots](#slots)
 - [Options](#options)
 - [Examples](#examples)
+    - [Country icon modes](#country-icon-modes)
     - [Validation](#validation)
     - [Enabling searching countries](#enabling-searching-countries)
     - [Localization](#localization)
@@ -109,7 +110,7 @@ import Vue from 'vue';
 import VPhoneInputPlugin from 'v-phone-input';
 import 'flag-icons/css/flag-icons.min.css';
 
-const options = {};
+const options = { countryIconMode: 'svg' };
 
 Vue.use(VPhoneInputPlugin, options);
 ```
@@ -120,7 +121,10 @@ able to define default [options](#options) for the input.
 ```vue
 
 <template>
-  <v-phone-input v-model="phone" />
+  <v-phone-input
+      v-model="phone"
+      country-icon-mode="svg"
+  />
 </template>
 
 <script>
@@ -142,6 +146,7 @@ directly to the input or defined globally using [input options](#options).
 | Name                     | Type                       | Default                        | Description                                                                                                                       |
 |--------------------------|----------------------------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
 | `label`                  | `string`                   | `'Phone'`                      | The phone input label.                                                                                                            |
+| `countryIconMode`        | `string` or `undefined`    | `undefined`                    | The country icon display mode (see [Country icon modes](#country-icon-modes)).                                                    |
 | `countryLabel`           | `string`                   | `'Country'`                    | The country input label.                                                                                                          |
 | `hideCountryLabel`       | `string`                   | `false`                        | Hide the country label.                                                                                                           |
 | `countryAriaLabel`       | `string` or `undefined`    | `undefined`                    | Override the value returned by `computeCountryAriaLabel` option (see [Options](#options)).                                        |
@@ -167,7 +172,6 @@ values for [input props](#props).
 
 | Name                      | Type                                                      | Default                                                                   | Description                                                                                                                                                                                  |
 |---------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `countryIconComponent`    | `VueConstructor` or `string` or `undefined`               | `VPhoneCountryFlag`                                                       | A vue component to display a country icon (flag, ISO-2 code, etc.). The component will receive a [`Country` object](#country) and a `decorative` boolean.                                    |
 | `computeCountryAriaLabel` | `(options: { label: string }) => string`                  | `'Country for {label}'`                                                   | A function returning the `aria-label` of the country input. Function will receive an options object containing the phone input label, and must return a string.                              |
 | `computeInvalidMessage`   | `(options: { label: string, example: string }) => string` | `'The "{label}" field is not a valid phone number (example: {example}).'` | A function returning the message when phone input is invalid. Function will receive an options object containing the phone input label and a phone number example, and must return a string. |
 
@@ -178,12 +182,6 @@ import Vue from 'vue';
 import VPhoneInputPlugin from 'v-phone-input';
 
 Vue.use(VPhoneInputPlugin, {
-  // Customize the way country icon are displayed.
-  countryIconComponent: {
-    props: { country: Object },
-    functional: true,
-    render: (h, c) => h('span', c.props.country.iso2),
-  },
   // Customize aria-label of country input.
   computeCountryAriaLabel: ({ label }) => `Pays pour ${label}`,
   // Customize invalid message of phone input.
@@ -197,8 +195,10 @@ Options may also be used to define custom default values for `VPhoneInput` props
 ```javascript
 import Vue from 'vue';
 import VPhoneInputPlugin, { Ip2cCountryGuesser } from 'v-phone-input';
+import 'flag-icons/css/flag-icons.min.css';
 
 Vue.use(VPhoneInputPlugin, {
+  countryIconMode: 'svg',
   disableGuessLoading: true,
   disableGuessingCountry: true,
   enableSearchingCountry: true,
@@ -226,7 +226,86 @@ see [v-text-field API](https://vuetifyjs.com/en/api/v-text-field/#slots)):
 - `prepend-inner`
 - `progress`
 
+The input also provides a [special slot for country icon display](#custom-slot).
+
 ### Examples
+
+#### Country icon modes
+
+With VPhoneInput, you can choose between 5 country icon modes which are changing the way the country
+input will display.
+
+##### SVG
+
+This is the proposed way to use the input. Rely on an SVG flag icons package. You must
+install [`flag-icons`](https://www.npmjs.com/package/flag-icons) package to use it.
+
+```javascript
+import Vue from 'vue';
+import VPhoneInputPlugin from 'v-phone-input';
+import 'flag-icons/css/flag-icons.min.css';
+
+Vue.use(VPhoneInputPlugin, { countryIconMode: 'svg' });
+```
+
+##### Sprite
+
+Rely on a CSS sprite flag icons package. You must
+install [`world-flags-sprite`](https://www.npmjs.com/package/world-flags-sprite) package to use it.
+
+```javascript
+import Vue from 'vue';
+import VPhoneInputPlugin from 'v-phone-input';
+import 'world-flags-sprite/stylesheets/flags32.css';
+
+Vue.use(VPhoneInputPlugin, { countryIconMode: 'sprite' });
+```
+
+##### Custom component
+
+This allows you to register a custom component to display country icons. Component will
+receive `country` and `decorative` props. We provide a simple `VPhoneCountrySpan` component to
+simplify using a CSS class image based icon system (such as another CSS sprite file).
+
+```javascript
+import Vue from 'vue';
+import VPhoneInputPlugin, { VPhoneCountrySpan } from 'v-phone-input';
+import 'your/awesome/flag-sprite.css';
+
+Vue.use(VPhoneInputPlugin, {
+  countryIconMode: {
+    functional: true,
+    render: (h, { props }) => h(VPhoneCountrySpan, {
+      staticClass: `awesome-flag awesome-flag-${props.country.iso2.toLowerCase()}`,
+      props,
+    }),
+  },
+});
+```
+
+##### Custom slot
+
+You may also provide a custom slot for the input using the `country-icon` slot.
+
+```vue
+
+<template>
+  <v-phone-input>
+    <template #country-icon="{ country, decorative }">
+      <img
+          :src="`path/to/flags/${country.iso2}.png`"
+          :alt="decorative ? '' : country.name"
+      >
+    </template>
+  </v-phone-input>
+</template>
+```
+
+##### No icon
+
+This is the default behavior when not overriding options or props default values. This will not
+display an icon inside the list, but will show the ISO-2 code inside the selection for screen
+readers users.
 
 #### Validation
 

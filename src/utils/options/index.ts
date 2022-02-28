@@ -1,4 +1,3 @@
-import VPhoneCountryFlag from '@/components/VPhoneCountryFlag';
 import { PluginOptions } from '@/types/options';
 import countries from '@/utils/countries';
 import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
@@ -6,7 +5,7 @@ import localization from '@/utils/options/localization';
 
 export const DEFAULT_OPTIONS: PluginOptions = {
   ...localization,
-  countryIconComponent: VPhoneCountryFlag,
+  countryIconMode: undefined,
   countryAriaLabel: undefined,
   hideCountryLabel: false,
   allCountries: countries,

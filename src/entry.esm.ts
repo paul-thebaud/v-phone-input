@@ -1,4 +1,6 @@
-import VPhoneCountryFlag from '@/components/VPhoneCountryFlag';
+import VPhoneCountrySpan from '@/components/VPhoneCountrySpan';
+import VPhoneCountrySprite from '@/components/VPhoneCountrySprite';
+import VPhoneCountrySvg from '@/components/VPhoneCountrySvg';
 import VPhoneInput from '@/components/VPhoneInput.vue';
 import { PluginOptions } from '@/types/options';
 import countries from '@/utils/countries';
@@ -15,7 +17,9 @@ const install: PluginFunction<PluginOptions> = (Vue, options?) => {
 
 export {
   VPhoneInput,
-  VPhoneCountryFlag,
+  VPhoneCountrySpan,
+  VPhoneCountrySprite,
+  VPhoneCountrySvg,
   countries,
   Ip2cCountryGuesser,
   MemoIp2cCountryGuesser,

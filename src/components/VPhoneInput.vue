@@ -27,20 +27,25 @@
       <template #selection="selectionProps">
         <slot
           name="selection"
-          v-bind="{ ...selectionProps, item: activeCountry }"
+          v-bind="selectionProps"
         >
-          <template v-if="countryIconComponent">
-            <component
-              :is="countryIconComponent"
-              :country="activeCountry"
-              :decorative="false"
-              class="ml-2"
+          <slot
+            name="country-icon"
+            :country="activeCountry"
+            :decorative="false"
+          >
+            <template v-if="countryIconComponent">
+              <component
+                :is="countryIconComponent"
+                :country="activeCountry"
+                :decorative="false"
+              />
+            </template>
+            <span
+              v-else
+              v-text="activeCountry.iso2.toUpperCase()"
             />
-          </template>
-          <span
-            v-else
-            v-text="activeCountry.iso2.toUpperCase()"
-          />
+          </slot>
         </slot>
       </template>
       <template #item="itemProps">
@@ -48,12 +53,18 @@
           name="item"
           v-bind="itemProps"
         >
-          <v-list-item-icon v-if="countryIconComponent">
-            <component
-              :is="countryIconComponent"
+          <v-list-item-icon v-if="countryIconComponent || $scopedSlots['country-icon']">
+            <slot
+              name="country-icon"
               :country="itemProps.item"
               :decorative="true"
-            />
+            >
+              <component
+                :is="countryIconComponent"
+                :country="itemProps.item"
+                :decorative="true"
+              />
+            </slot>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title v-text="`${itemProps.item.name} +${itemProps.item.dialCode}`" />
@@ -135,8 +146,11 @@
 </template>
 
 <script lang="ts">
+import VPhoneCountrySprite from '@/components/VPhoneCountrySprite';
+import VPhoneCountrySvg from '@/components/VPhoneCountrySvg';
 import { VPhoneInputRules } from '@/types/components';
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
+import { CountryIconMode } from '@/types/options';
 import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
 import { getOption } from '@/utils/options';
 import PhoneNumber from 'awesome-phonenumber';
@@ -273,9 +287,9 @@ export default Vue.extend({
       type: Array as PropType<VPhoneInputRules>,
       default: () => [],
     },
-    countryIconComponent: {
-      type: [String, Function, Object],
-      default: () => getOption('countryIconComponent'),
+    countryIconMode: {
+      type: [String, Object] as PropType<CountryIconMode>,
+      default: () => getOption('countryIconMode'),
     },
     countryLabel: {
       type: String,
@@ -357,6 +371,16 @@ export default Vue.extend({
     },
     countryInputAriaLabel(): string | undefined {
       return this.countryAriaLabel || getOption('computeCountryAriaLabel')({ label: this.label });
+    },
+    countryIconComponent() {
+      switch (this.countryIconMode) {
+        case 'svg':
+          return VPhoneCountrySvg;
+        case 'sprite':
+          return VPhoneCountrySprite;
+        default:
+          return this.countryIconMode;
+      }
     },
     fallbackCountry(): Country {
       return this.findCountry(this.defaultCountry)
@@ -489,14 +513,12 @@ export default Vue.extend({
       if (!this.disableGuessingCountry) {
         this.guessingCountry = true;
 
-        try {
-          const guessedCountry = this.findCountry(await this.countryGuesser.guess());
-          if (!this.lazyCountry && guessedCountry) {
-            this.lazyCountry = guessedCountry.iso2;
-          }
-        } finally {
-          this.guessingCountry = false;
+        const guessedCountry = this.findCountry(await this.countryGuesser.guess());
+        if (!this.lazyCountry && guessedCountry) {
+          this.lazyCountry = guessedCountry.iso2;
         }
+
+        this.guessingCountry = false;
       }
 
       this.lazyCountry = this.lazyCountry || this.activeCountry.iso2;

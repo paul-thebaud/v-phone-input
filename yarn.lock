@@ -10336,6 +10336,11 @@ worker-rpc@^0.1.0:
   dependencies:
     microevent.ts "~0.1.1"
 
+world-flags-sprite@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/world-flags-sprite/-/world-flags-sprite-0.0.2.tgz#a2dc2c7dfbf385ece2ff8dd6a05c516c5c47e1f0"
+  integrity sha1-otwsffvzhezi/43WoFxRbFxH4fA=
+
 wrap-ansi@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-5.1.0.tgz#1fd1f67235d5b6d0fee781056001bfb694c03b09"
