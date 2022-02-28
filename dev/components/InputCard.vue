@@ -16,7 +16,7 @@
     <v-divider role="presentation" />
     <v-card-text>
       <v-list
-        :color="$vuetify.theme.dark ? 'blue-grey darken-4' : 'blue lighten-5'"
+        color="background"
         rounded
         dense
       >

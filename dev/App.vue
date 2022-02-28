@@ -1,14 +1,36 @@
 <template>
   <v-app id="app">
-    <v-main>
+    <v-main class="background">
       <v-container class="my-4 my-md-12">
         <div>
           <h1 class="text-h4 text-md-h2 text-center mb-4">
             VPhoneInput
           </h1>
-          <p class="text-body-1 text-md-h5 text-center mb-4 mb-md-8">
+          <p class="text-body-1 text-md-h5 text-center mb-4">
             International phone field for Vuetify 2.0 and Vue JS 2.
           </p>
+          <div class="d-flex align-center justify-center flex-wrap mb-4 mb-md-8">
+            <v-btn
+              v-for="(url, name) in links"
+              :key="`links-${name}`"
+              :href="url"
+              target="_blank"
+              rel="noopener noreferrer"
+              large
+              text
+            >
+              {{ name }}
+              <v-icon
+                role="img"
+                aria-label="Open in new tab"
+                aria-hidden="false"
+                right
+                small
+              >
+                mdi-open-in-new
+              </v-icon>
+            </v-btn>
+          </div>
         </div>
         <v-row>
           <v-col
@@ -41,6 +63,12 @@ export default Vue.extend({
     inputProps: {} as Record<string, unknown>,
   }),
   computed: {
+    links() {
+      return {
+        NPM: 'https://www.npmjs.com/package/v-phone-input',
+        GitHub: 'https://github.com/paul-thebaud/v-phone-input',
+      };
+    },
     cleanedInputProps(): Record<string, unknown> {
       const cleanedInputProps = {} as Record<string, unknown>;
 

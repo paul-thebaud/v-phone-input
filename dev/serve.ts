@@ -1,18 +1,16 @@
 import './bootstrap';
 import Vue, { VNode } from 'vue';
-import Vuetify from 'vuetify';
 import VPhoneInputPlugin from '@/entry.esm';
 import App from './App.vue';
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
-
-Vue.use(Vuetify);
 
 Vue.use(VPhoneInputPlugin, {
   countryIconMode: 'svg',
 });
 
 new Vue({
-  vuetify: new Vuetify(),
+  vuetify,
   render: (h): VNode => h(App),
 }).$mount('#app');
