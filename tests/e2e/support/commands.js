@@ -2,7 +2,6 @@
 import 'cypress-plugin-snapshots/commands';
 
 Cypress.Commands.add('visitDemo', (ipCountry) => {
-  console.log(ipCountry);
   cy.visit('/', {
     onBeforeLoad(win) {
       cy.stub(win, 'fetch').withArgs('https://ip2c.org/s')
@@ -12,4 +11,13 @@ Cypress.Commands.add('visitDemo', (ipCountry) => {
         });
     },
   });
+
+  cy.document().then((doc) => {
+    const $style = doc.createElement('style');
+    $style.innerHTML = '#app.v-application, #app.v-application * { font-family: Helvetica !important; }';
+    console.log(doc);
+    doc.head.appendChild($style);
+  });
+
+  cy.document().its('fonts.status').should('equal', 'loaded');
 });

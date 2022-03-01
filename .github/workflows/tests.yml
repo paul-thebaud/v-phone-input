@@ -8,7 +8,7 @@ on:
     - cron: '0 0 1 * *'
 
 jobs:
-  tests:
+  lint-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -17,16 +17,32 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
       - name: Lint
         run: yarn lint
+      - name: Build
+        run: yarn build
+  e2e-tests:
+    name: e2e-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: Install dependencies
+        run: yarn install -s --no-progress --non-interactive
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: yarn serve
-          wait-on: http://localhost:8080
           browser: chrome
-      - name: Build
-        run: yarn build
+          start: yarn serve
+          config: pageLoadTimeout=100000,baseUrl=http://localhost:8080
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-snapshots-${{ matrix.browser }}
+          path: tests/e2e/specs/__image_snapshots__

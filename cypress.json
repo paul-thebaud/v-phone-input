@@ -4,6 +4,7 @@
     "**/__snapshots__/*",
     "**/__image_snapshots__/*"
   ],
+  "video": false,
   "env": {
     "cypress-plugin-snapshots": {
       "autoCleanUp": false,
