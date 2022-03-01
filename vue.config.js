@@ -8,4 +8,7 @@ module.exports = {
       title: 'VPhoneInput',
     },
   },
+  transpileDependencies: [
+    'vuetify',
+  ],
 };
