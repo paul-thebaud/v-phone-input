@@ -22,7 +22,11 @@ jobs:
         run: yarn install -s --no-progress --non-interactive
       - name: Lint
         run: yarn lint
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn serve
+          wait-on: http://localhost:8080
+          browser: chrome
       - name: Build
         run: yarn build
-      - name: E2E tests
-        run: yarn test:e2e
