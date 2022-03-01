@@ -3145,6 +3145,15 @@ cli-spinners@^2.0.0, cli-spinners@^2.5.0:
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.6.1.tgz#adc954ebe281c37a6319bfa401e6dd2488ffb70d"
   integrity sha512-x/5fWmGMnbKQAaNwN+UZlV79qBLM9JFnJuJ03gIi5whrob0xV0ofNVHy9DhwGdsMJQc2OKv0oGmLzvaqvAVv+g==
 
+clipboard@^2.0.0:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.10.tgz#e61f6f7139ac5044c58c0484dcac9fb2a918bfd6"
+  integrity sha512-cz3m2YVwFz95qSEbCDi2fzLN/epEN9zXBvfgAoGkvGOJZATMl9gtTDVOtBYkx2ODUJl2kvmud7n32sV2BpYR4g==
+  dependencies:
+    good-listener "^1.2.2"
+    select "^1.1.2"
+    tiny-emitter "^2.0.0"
+
 clipboardy@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/clipboardy/-/clipboardy-2.3.0.tgz#3c2903650c68e46a91b388985bc2774287dba290"
@@ -3909,6 +3918,11 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
+
+delegate@^3.1.2:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/delegate/-/delegate-3.2.0.tgz#b66b71c3158522e8ab5744f720d8ca0c2af59166"
+  integrity sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==
 
 depd@~1.1.2:
   version "1.1.2"
@@ -5219,6 +5233,13 @@ globby@^9.2.0:
     ignore "^4.0.3"
     pify "^4.0.1"
     slash "^2.0.0"
+
+good-listener@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/good-listener/-/good-listener-1.2.2.tgz#d53b30cdf9313dffb7dc9a0d477096aa6d145c50"
+  integrity sha1-1TswzfkxPf+33JoNR3CWqm0UXFA=
+  dependencies:
+    delegate "^3.1.2"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, graceful-fs@^4.2.9:
   version "4.2.9"
@@ -8728,6 +8749,11 @@ select-hose@^2.0.0:
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
+select@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/select/-/select-1.1.2.tgz#0e7350acdec80b1108528786ec1d4418d11b396d"
+  integrity sha1-DnNQrN7ICxEIUoeG7B1EGNEbOW0=
+
 selfsigned@^1.10.8:
   version "1.10.14"
   resolved "https://registry.yarnpkg.com/selfsigned/-/selfsigned-1.10.14.tgz#ee51d84d9dcecc61e07e4aba34f229ab525c1574"
@@ -9496,6 +9522,11 @@ timsort@^0.3.0:
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
+tiny-emitter@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
+  integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
+
 to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
@@ -9957,6 +9988,13 @@ void-elements@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha1-YU9/v42AHwu18GYfWy9XhXUOTwk=
+
+vue-clipboard2@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/vue-clipboard2/-/vue-clipboard2-0.3.3.tgz#331fec85f9d4f175eb0d4feaef4d77338562af36"
+  integrity sha512-aNWXIL2DKgJyY/1OOeITwAQz1fHaCIGvUFHf9h8UcoQBG5a74MkdhS/xqoYe7DNZdQmZRL+TAdIbtUs9OyVjbw==
+  dependencies:
+    clipboard "^2.0.0"
 
 vue-eslint-parser@^8.0.0, vue-eslint-parser@^8.0.1:
   version "8.3.0"

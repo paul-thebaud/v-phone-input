@@ -6,7 +6,7 @@ import { PluginOptions } from '@/types/options';
 import countries from '@/utils/countries';
 import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';
 import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
-import { getOption, mergeOptions } from '@/utils/options';
+import { DEFAULT_OPTIONS, getOption, mergeOptions } from '@/utils/options';
 import { PluginFunction } from 'vue';
 
 const install: PluginFunction<PluginOptions> = (Vue, options?) => {
@@ -23,6 +23,7 @@ export {
   countries,
   Ip2cCountryGuesser,
   MemoIp2cCountryGuesser,
+  DEFAULT_OPTIONS,
   mergeOptions,
   getOption,
 };

@@ -45,12 +45,12 @@
         </v-col>
       </v-row>
       <v-row v-if="!moreDisplayed">
-        <v-col
-          class="d-flex"
-          cols="12"
-        >
+        <v-col cols="12">
           <v-btn
-            class="mx-auto"
+            :aria-expanded="moreDisplayed ? 'true' : 'false'"
+            aria-haspopup="true"
+            block
+            small
             text
             @click="onDisplayMore"
           >
@@ -122,7 +122,7 @@ export default Vue.extend({
         },
         displayFormat: {
           items: [
-            { value: 'national', text: 'National (default)' },
+            { value: null, text: 'National (default)' },
             { value: 'e164', text: 'E164' },
             { value: 'international', text: 'International' },
             { value: 'significant', text: 'Significant' },

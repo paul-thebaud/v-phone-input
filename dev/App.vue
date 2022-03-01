@@ -11,25 +11,23 @@
           </p>
           <div class="d-flex align-center justify-center flex-wrap mb-4 mb-md-8">
             <v-btn
-              v-for="(url, name) in links"
+              v-for="({ url, icon }, name) in links"
               :key="`links-${name}`"
               :href="url"
               target="_blank"
               rel="noopener noreferrer"
+              class="mx-1"
               :small="$vuetify.breakpoint.xsOnly"
               :large="$vuetify.breakpoint.smAndUp"
               text
             >
-              {{ name }}
               <v-icon
-                role="img"
-                aria-label="Open in new tab"
-                aria-hidden="false"
-                right
-                small
+                size="24"
+                left
               >
-                mdi-open-in-new
+                {{ icon }}
               </v-icon>
+              {{ name }}
             </v-btn>
           </div>
         </div>
@@ -63,15 +61,24 @@ export default Vue.extend({
   data: () => ({
     inputProps: {
       countryIconMode: 'svg',
-      displayFormat: 'national',
+      displayFormat: null,
     } as Record<string, unknown>,
   }),
   computed: {
     links() {
       return {
-        NPM: 'https://www.npmjs.com/package/v-phone-input',
-        GitHub: 'https://github.com/paul-thebaud/v-phone-input',
-        Docs: 'https://github.com/paul-thebaud/v-phone-input#documentation',
+        NPM: {
+          url: 'https://www.npmjs.com/package/v-phone-input',
+          icon: 'mdi-npm',
+        },
+        GitHub: {
+          url: 'https://github.com/paul-thebaud/v-phone-input',
+          icon: 'mdi-github',
+        },
+        Docs: {
+          url: 'https://github.com/paul-thebaud/v-phone-input#documentation',
+          icon: 'mdi-book-open-variant',
+        },
       };
     },
     cleanedInputProps(): Record<string, unknown> {
