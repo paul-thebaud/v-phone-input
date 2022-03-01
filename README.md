@@ -85,6 +85,9 @@ export default {
 
 VPhoneInput requires `Vue@2` and `Vuetify@2` to be installed and working in your project.
 
+> VPhoneInput utilizes features of ES2015/2017 that require the need to use polyfills for
+> Internet Explorer 11 and Safari 9/10.
+
 ### Installation
 
 You can install this package though Yarn:
