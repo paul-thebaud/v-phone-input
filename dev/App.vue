@@ -26,8 +26,9 @@
                 aria-hidden="false"
                 right
                 small
-                v-text="mdiOpenInNew"
-              />
+              >
+                mdi-open-in-new
+              </v-icon>
             </v-btn>
           </div>
         </div>
@@ -52,7 +53,6 @@
 
 <script lang="ts">
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mdiOpenInNew } from '@mdi/js';
 import Vue from 'vue';
 import InputCard from './components/InputCard.vue';
 import PropsCard from './components/PropsCard.vue';
@@ -61,7 +61,6 @@ export default Vue.extend({
   name: 'App',
   components: { PropsCard, InputCard },
   data: () => ({
-    mdiOpenInNew,
     inputProps: {} as Record<string, unknown>,
   }),
   computed: {

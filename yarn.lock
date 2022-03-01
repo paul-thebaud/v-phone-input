@@ -1092,11 +1092,6 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mdi/js@^6.5.95":
-  version "6.5.95"
-  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-6.5.95.tgz#2d895b013408f213252b77c30e0fdaaba6dc8b4b"
-  integrity sha512-x/bwEoAGP+Mo10Dfk5audNIPi7Yz8ZBrILcbXLW3ShOI/njpgodzpgpC2WYK3D2ZSC392peRRemIFb/JsyzzYQ==
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
