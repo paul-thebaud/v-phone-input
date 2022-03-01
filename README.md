@@ -20,6 +20,11 @@ Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 for those already published are not actively maintained or does not put focus on providing great
 accessibility. This new library aims to provide those two.
 
+## Demo
+
+You can try the VPhoneInput with major options configuration on
+the [GitHub pages demo](https://paul-thebaud.github.io/v-phone-input/).
+
 ## TD;DR
 
 Installation using Yarn:
