@@ -65,6 +65,10 @@ export default Vue.extend({
       inputPropsFields: {
         label: VTextField,
         placeholder: VTextField,
+        countryLabel: VTextField,
+        hint: VTextField,
+        persistentPlaceholder: VSwitch,
+        persistentHint: VSwitch,
         outlined: VSwitch,
         filled: VSwitch,
         shaped: VSwitch,
