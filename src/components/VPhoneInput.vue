@@ -23,6 +23,7 @@
       :item-text="getCountryText"
       item-value="iso2"
       class="v-phone-input__country"
+      v-bind="countryProps"
     >
       <template #selection="selectionProps">
         <slot
@@ -110,6 +111,7 @@
       :validate-on-blur="validateOnBlur"
       class="v-phone-input__phone"
       type="tel"
+      v-bind="phoneProps"
     >
       <!-- eslint-enable vuejs-accessibility/no-autofocus -->
       <template #append>
@@ -351,6 +353,14 @@ export default Vue.extend({
     value: {
       type: String,
       default: '',
+    },
+    countryProps: {
+      type: Object,
+      default: () => ({}),
+    },
+    phoneProps: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {

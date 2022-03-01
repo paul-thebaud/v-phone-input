@@ -198,6 +198,8 @@ Vue.use(VPhoneInputPlugin, { label: 'Your Phone number' });
 | `rules`                  | `Function[]` or `string[]`                  | `[]`                                                                  | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
 | `displayFormat`          | `PhoneNumberFormat`                         | `'national'`                                                          | Format to use when displaying valid phone numbers in phone text input (see [Phone number formats](#phone-number-formats)).        |
 | `value`                  | `string`                                    | `''`                                                                  | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
+| `countryProps`           | `object`                                    | `{}`                                                                  | Props to pass to the `VSelect` or `VAutocomplete` country input component.                                                        |
+| `phoneProps`             | `object`                                    | `{}`                                                                  | Props to pass to the `VTextField` phone input component.                                                                          |
 
 > You can also pass most of the
 > [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props) props to the component
