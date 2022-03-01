@@ -1,11 +1,11 @@
-name: Publish to NPM
+name: Publish
 
 on:
   release:
     types: [ created ]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,3 +21,10 @@ jobs:
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build demo
+        run: yarn build:demo
+      - name: Publish to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages
+          folder: dist_demo/
