@@ -25,6 +25,9 @@ accessibility. This new library aims to provide those two.
 You can try the VPhoneInput with major options configuration on
 the [GitHub pages demo](https://paul-thebaud.github.io/v-phone-input/).
 
+On the demo, you'll be able to try out the field option and generate your plugin registration
+options.
+
 ## TD;DR
 
 Installation using Yarn:
@@ -73,7 +76,6 @@ export default {
 - [Usage](#usage)
 - [Props](#props)
 - [Slots](#slots)
-- [Options](#options)
 - [Examples](#examples)
     - [Country icon modes](#country-icon-modes)
     - [Validation](#validation)
@@ -82,9 +84,12 @@ export default {
 - [Types](#types)
     - [Country ISO-2](#country-iso-2)
     - [Country](#country)
-    - [Country Guesser](#country-guesser)
-    - [Phone Number Formats](#phone-number-formats)
-    - [Phone Number](#phone-number)
+    - [Country guesser](#country-guesser)
+    - [Phone number formats](#phone-number-formats)
+    - [Phone number](#phone-number)
+    - [Message options](#message-options)
+    - [Message](#message)
+    - [Message resolver](#message-resolver)
 
 ### Requirements
 
@@ -125,7 +130,7 @@ Vue.use(VPhoneInputPlugin, options);
 ```
 
 You may also only define the field on a per-file basis. Notice that with this method, you won't be
-able to define default [options](#options) for the input.
+able to define props' default values for the input.
 
 ```vue
 
@@ -149,62 +154,52 @@ export default {
 
 ### Props
 
-VPhoneInput provides many props to customize the input behaviors or display. Each prop may be passed
-directly to the input or defined globally using [input options](#options).
+VPhoneInput provides many props to customize the input behaviors or display.
 
-| Name                     | Type                                        | Default                        | Description                                                                                                                       |
-|--------------------------|---------------------------------------------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `label`                  | `string`                                    | `'Phone'`                      | The phone input label.                                                                                                            |
-| `countryIconMode`        | `string` or `VueConstructor` or `undefined` | `undefined`                    | The country icon display mode (see [Country icon modes](#country-icon-modes)).                                                    |
-| `countryLabel`           | `string`                                    | `'Country'`                    | The country input label.                                                                                                          |
-| `hideCountryLabel`       | `string`                                    | `false`                        | Hide the country label.                                                                                                           |
-| `countryAriaLabel`       | `string` or `undefined`                     | `undefined`                    | Override the value returned by `computeCountryAriaLabel` option (see [Options](#options)).                                        |
-| `allCountries`           | `Country[]`                                 | `TODO`                         | Array of countries to use.                                                                                                        |
-| `preferredCountries`     | `CountryIso2[]`                             | `[]`                           | Array of countries' codes to propose as first option of country input.                                                            |
-| `onlyCountries`          | `CountryIso2[]`                             | `[]`                           | Array of countries' codes to display as options of country input (will hide others).                                              |
-| `ignoreCountries`        | `CountryIso2[]`                             | `[]`                           | Array of countries' codes to hide from country input.                                                                             |
-| `defaultCountry`         | `CountryIso2`                               | `undefined`                    | Default country to select when not guessing nor detecting from current value.                                                     |
-| `countryGuesser`         | `CountryGuesser`                            | `new MemoIp2cCountryGuesser()` | Country guesser implementation to use when guessing country (see [Country Guesser](#country-guesser)).                            |
-| `disableGuessingCountry` | `boolean`                                   | `false`                        | Disable guessing country.                                                                                                         |
-| `disableGuessLoading`    | `boolean`                                   | `false`                        | Disable passing the country input in a loading state when guessing country.                                                       |
-| `enableSearchingCountry` | `boolean`                                   | `false`                        | Turns the country input into a `VAutocomplete` input (see [Enabling searching countries example](#enabling-searching-countries)). |
-| `disableValidation`      | `boolean`                                   | `false`                        | Disable the phone number automatic validation. You can still use `rules` props to validate the input.                             |
-| `invalidMessage`         | `string` or `undefined`                     | `undefined`                    | Override the value returned by `computeInvalidMessage` option (see [Options](#options)).                                          |
-| `rules`                  | `Function[]` or `string[]`                  | `[]`                           | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
-| `displayFormat`          | `PhoneNumberFormat`                         | `'national'`                   | Format to use when displaying valid phone numbers in phone text input (see [Phone Number Formats](#phone-number-formats)).        |
-| `value`                  | `string`                                    | `''`                           | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
+You may pass those props directly the input:
 
-> You can also pass most of the
-> [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props) props to the component
-> to customize display, errors, etc.
+```vue
 
-### Options
+<template>
+  <v-phone-input label="Your Phone number" />
+</template>
+```
 
-Plugin options are used to change some behavior of the input or globally customize default values
-for [input props](#props).
-
-| Name                      | Type                                                      | Default                                                                   | Description                                                                                                                                                                                  |
-|---------------------------|-----------------------------------------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `computeCountryAriaLabel` | `(options: { label: string }) => string`                  | `'Country for {label}'`                                                   | A function returning the `aria-label` of the country input. Function will receive an options object containing the phone input label, and must return a string.                              |
-| `computeInvalidMessage`   | `(options: { label: string, example: string }) => string` | `'The "{label}" field is not a valid phone number (example: {example}).'` | A function returning the message when phone input is invalid. Function will receive an options object containing the phone input label and a phone number example, and must return a string. |
-
-You may customize the options when registering the Vue plugin:
+Or define them as default values when registering the plugin:
 
 ```javascript
 import Vue from 'vue';
 import VPhoneInputPlugin from 'v-phone-input';
 
-Vue.use(VPhoneInputPlugin, {
-  // Customize aria-label of country input.
-  computeCountryAriaLabel: ({ label }) => `Country for ${label}`,
-  // Customize invalid message of phone input.
-  computeInvalidMessage: ({ label, example }) =>
-    `${label} must be a valid phone number (example: ${example}).`,
-  // Options can also be used to change some default props' values.
-  countryIconMode: 'svg',
-  enableSearchingCountry: true,
-});
+Vue.use(VPhoneInputPlugin, { label: 'Your Phone number' });
 ```
+
+| Name                     | Type                                        | Default                                                               | Description                                                                                                                       |
+|--------------------------|---------------------------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `label`                  | [`MessageResolver`](#message-resolver)      | Phone                                                                 | The phone input label (see [Localization](#localization)).                                                                        |
+| `ariaLabel`              | [`MessageResolver`](#message-resolver)      | `undefined`                                                           | The phone input `aria-label` (see [Localization](#localization)).                                                                 |
+| `countryLabel`           | [`MessageResolver`](#message-resolver)      | Country                                                               | The country input label (see [Localization](#localization)).                                                                      |
+| `countryAriaLabel`       | [`MessageResolver`](#message-resolver)      | Country for {label}                                                   | The phone input `aria-label` (see [Localization](#localization)).                                                                 |
+| `placeholder`            | [`MessageResolver`](#message-resolver)      | `undefined`                                                           | The phone input placeholder (see [Localization](#localization)).                                                                  |
+| `hint`                   | [`MessageResolver`](#message-resolver)      | `undefined`                                                           | The phone input hint (see [Localization](#localization)).                                                                         |
+| `invalidMessage`         | [`MessageResolver`](#message-resolver)      | The "{label}" field is not a valid phone number (example: {example}). | The phone input message when number is invalid (see [Localization](#localization)).                                               |
+| `countryIconMode`        | `string` or `VueConstructor` or `undefined` | `undefined`                                                           | The country icon display mode (see [Country icon modes](#country-icon-modes)).                                                    |
+| `allCountries`           | [`Country[]`](#country)                     | An array of all possible countries                                    | Array of countries to use.                                                                                                        |
+| `preferredCountries`     | [`CountryIso2[]`](#country-iso-2)           | `[]`                                                                  | Array of countries' codes to propose as first option of country input.                                                            |
+| `onlyCountries`          | [`CountryIso2[]`](#country-iso-2)           | `[]`                                                                  | Array of countries' codes to display as options of country input (will hide others).                                              |
+| `ignoreCountries`        | [`CountryIso2[]`](#country-iso-2)           | `[]`                                                                  | Array of countries' codes to hide from country input.                                                                             |
+| `defaultCountry`         | [`CountryIso2`](#country-iso-2)             | `undefined`                                                           | Default country to select when not guessing nor detecting from current value.                                                     |
+| `countryGuesser`         | [`CountryGuesser`](#country-guesser)        | `new MemoIp2cCountryGuesser()`                                        | Country guesser implementation to use when guessing country (see [Country guesser](#country-guesser)).                            |
+| `disableGuessingCountry` | `boolean`                                   | `false`                                                               | Disable guessing country.                                                                                                         |
+| `disableGuessLoading`    | `boolean`                                   | `false`                                                               | Disable passing the country input in a loading state when guessing country.                                                       |
+| `enableSearchingCountry` | `boolean`                                   | `false`                                                               | Turns the country input into a `VAutocomplete` input (see [Enabling searching countries example](#enabling-searching-countries)). |
+| `rules`                  | `Function[]` or `string[]`                  | `[]`                                                                  | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
+| `displayFormat`          | `PhoneNumberFormat`                         | `'national'`                                                          | Format to use when displaying valid phone numbers in phone text input (see [Phone number formats](#phone-number-formats)).        |
+| `value`                  | `string`                                    | `''`                                                                  | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
+
+> You can also pass most of the
+> [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props) props to the component
+> to customize display, errors, etc.
 
 ### Slots
 
@@ -309,8 +304,8 @@ readers users.
 
 #### Validation
 
-By default (when `disableValidation` is `false`), the input will validate that the phone number is a
-valid one by injecting a rules to the phone text input.
+By default , the input will validate that the phone number is a valid one by injecting a rules to
+the phone text input.
 
 You may add any additional rules by providing a `rules` prop to the input:
 
@@ -325,7 +320,7 @@ export default {
   computed: {
     rules() {
       return [
-        (value, country, phone) => !!value || 'Phone is required.',
+        (value, phone, { label, example }) => !!value || `The "${label}" field is required.`,
       ];
     },
   },
@@ -337,8 +332,12 @@ Any rule you pass as a function will receive 3 arguments (instead of one for def
 that you may use when validating user's input:
 
 - `value`: the value contained in the phone text input.
-- `country`: the country selected in the country input.
 - `phone`: the [phone number object](#phone-number).
+- `messageOptions`: the [message options](#message-options) which you may use to inject the input
+  label or a phone example inside the message.
+
+> If you don't want the automatic validation to run, you can pass a `null` value to the
+> `invalid-message` prop.
 
 #### Enabling searching countries
 
@@ -381,16 +380,7 @@ Vue.use(VPhoneInputPlugin, { enableSearchingCountry: true });
 
 #### Localization
 
-You may change the translations of the input by providing custom values for the following translated
-props:
-
-- `label`: label for the phone text input.
-- `countryLabel`: label for the country select input.
-- `countryAriaLabel` or `computeCountryAriaLabel`: `aria-label` for the country select input. This
-  is useful to make the country input related to the phone input.
-- `invalidMessage` or `computeInvalidMessage`: message displayed when the phone number is invalid.
-
-Translations can be defined on a per-input basis:
+Localizable props may be defined on a per-input basis:
 
 ```vue
 
@@ -404,31 +394,38 @@ Translations can be defined on a per-input basis:
 </template>
 ```
 
-Translations can also be defined for all inputs as a default behavior:
+Localizable props can also be defined for all inputs as a default behavior:
 
 ```javascript
 import Vue from 'vue';
 import VPhoneInputPlugin from 'v-phone-input';
 
-// Without any localization library.
+// Example without any localization library.
 Vue.use(VPhoneInputPlugin, {
   label: 'Phone number',
   countryLabel: 'Country',
-  computeCountryAriaLabel: ({ label }) => `Country for ${label}`,
-  computeInvalidMessage: ({ label, example }) =>
+  countryAriaLabel: ({ label }) => `Country for ${label}`,
+  invalidMessage: ({ label, example }) =>
     `${label} must be a valid phone number (example: ${example}).`,
 });
 
-// Using Vue-I18N localization library.
+// Example with Vue-I18N localization library.
 import i18n from './path/to/i18n-plugin';
 
 Vue.use(VPhoneInputPlugin, {
   label: i18n.t('phone.phoneLabel'),
   countryLabel: i18n.t('phone.phoneCountry'),
-  computeCountryAriaLabel: (options) => i18n.t('phone.phoneCountryFor', options),
-  computeInvalidMessage: (options) => i18n.t('phone.invalidPhoneGiven', options),
+  countryAriaLabel: (options) => i18n.t('phone.phoneCountryFor', options),
+  invalidMessage: (options) => i18n.t('phone.invalidPhoneGiven', options),
 });
 ```
+
+> Any localizable prop is a [message resolver](#message-resolver). Notice that for `label`
+> and `ariaLabel` props, no label will be defined for the message resolver's options.
+
+> To disable a message, you should pass `null` (instead of `undefined`). This way, you'll be able
+> to disable the country label for example (be sur to provide an explicit `countryAriaLabel`
+> when doing so).
 
 ### Types
 
@@ -466,8 +463,8 @@ interface CountryGuesser {
 This package ships with two `CountryGuesser` implementations:
 
 - `Ip2cCountryGuesser` which uses [IP2C service](https://ip2c.org) to guess the country from the
-  client's IP.
-- `MemoIp2cCountryGuesser` (default) which memoize the result of `Ip2cCountryGuesser`.
+  client's IP. Notice that IP2C service might not work when using an add blocking extension.
+- `MemoIp2cCountryGuesser` (default) which memoize the result of `Ip2cCountryGuesser` promise.
 
 #### Phone Number Formats
 
@@ -494,6 +491,35 @@ type PhoneNumberObject = {
   valid: boolean;
   regionCode: CountryIso2 | undefined;
 }
+```
+
+#### Message options
+
+An object containing the input `label` (or `aria-label` if no label) and an example of a valid phone
+number for active country.
+
+```typescript
+type MessageOptions = {
+  label?: Message;
+  example: string;
+}
+```
+
+#### Message
+
+A type representing a localized message for the input which will be used as the label, hint, etc.
+
+```typescript
+export type Message = string | undefined | null;
+```
+
+#### Message resolver
+
+A type representing a function to resolve a message using current message options or directly the
+message.
+
+```typescript
+export type MessageResolver = ((options: MessageOptions) => Message) | Message;
 ```
 
 ## Contributing

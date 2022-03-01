@@ -36,7 +36,10 @@
             cols="12"
             md="6"
           >
-            <input-card :input-props="cleanedInputProps" />
+            <input-card
+              :input-props="cleanedInputProps"
+              class="input-card--sticky"
+            />
           </v-col>
           <v-col
             cols="12"
@@ -98,3 +101,13 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style
+  lang="scss"
+  scoped
+>
+  .input-card--sticky {
+    position: sticky;
+    top: 24px;
+  }
+</style>

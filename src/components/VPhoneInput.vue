@@ -4,8 +4,8 @@
       :is="enableSearchingCountry ? 'v-autocomplete' : 'v-select'"
       ref="countryInput"
       v-model="lazyCountry"
-      :label="countryInputLabel"
-      :aria-label="countryInputAriaLabel"
+      :label="computedCountryLabel"
+      :aria-label="computedCountryAriaLabel"
       :items="sortedCountries"
       :autocomplete="enableSearchingCountry ? 'new-password' : undefined"
       :aria-autocomplete="enableSearchingCountry ? 'off' : undefined"
@@ -76,12 +76,13 @@
     <v-text-field
       ref="phoneInput"
       v-model="lazyValue"
-      :label="label"
-      :hint="hint"
+      :label="computedLabel"
+      :aria-label="computedAriaLabel"
+      :placeholder="computedPlaceholder"
+      :hint="computedHint"
       :persistent-hint="persistentHint"
-      :rules="mergedRules"
-      :placeholder="placeholder"
       :persistent-placeholder="persistentPlaceholder"
+      :rules="mergedRules"
       :append-icon="appendIcon"
       :append-outer-icon="appendOuterIcon"
       :prepend-inner-icon="prependInnerIcon"
@@ -150,7 +151,7 @@ import VPhoneCountrySprite from '@/components/VPhoneCountrySprite';
 import VPhoneCountrySvg from '@/components/VPhoneCountrySvg';
 import { VPhoneInputRules } from '@/types/components';
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
-import { CountryIconMode } from '@/types/options';
+import { CountryIconMode, Message, MessageOptions, MessageResolver } from '@/types/options';
 import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
 import { getOption } from '@/utils/options';
 import PhoneNumber from 'awesome-phonenumber';
@@ -164,16 +165,40 @@ export default Vue.extend({
   inheritAttrs: false,
   props: {
     label: {
-      type: String,
+      type: [String, Function] as PropType<MessageResolver>,
       default: () => getOption('label'),
     },
+    ariaLabel: {
+      type: [String, Function] as PropType<MessageResolver>,
+      default: () => getOption('ariaLabel'),
+    },
+    countryLabel: {
+      type: [String, Function] as PropType<MessageResolver>,
+      default: () => getOption('countryLabel'),
+    },
+    countryAriaLabel: {
+      type: [String, Function] as PropType<MessageResolver>,
+      default: () => getOption('countryAriaLabel'),
+    },
     placeholder: {
-      type: String,
-      default: undefined,
+      type: [String, Function] as PropType<MessageResolver>,
+      default: () => getOption('placeholder'),
+    },
+    hint: {
+      type: [String, Function] as PropType<MessageResolver>,
+      default: () => getOption('hint'),
+    },
+    invalidMessage: {
+      type: [String, Function] as PropType<MessageResolver>,
+      default: () => getOption('invalidMessage'),
     },
     persistentPlaceholder: {
       type: Boolean,
-      default: undefined,
+      default: () => getOption('persistentPlaceholder'),
+    },
+    persistentHint: {
+      type: Boolean,
+      default: () => getOption('persistentHint'),
     },
     appendIcon: {
       type: String,
@@ -224,14 +249,6 @@ export default Vue.extend({
       default: undefined,
     },
     dense: {
-      type: Boolean,
-      default: undefined,
-    },
-    hint: {
-      type: String,
-      default: undefined,
-    },
-    persistentHint: {
       type: Boolean,
       default: undefined,
     },
@@ -291,18 +308,6 @@ export default Vue.extend({
       type: [String, Object] as PropType<CountryIconMode>,
       default: () => getOption('countryIconMode'),
     },
-    countryLabel: {
-      type: String,
-      default: () => getOption('countryLabel'),
-    },
-    countryAriaLabel: {
-      type: String,
-      default: () => getOption('countryAriaLabel'),
-    },
-    hideCountryLabel: {
-      type: Boolean,
-      default: () => getOption('hideCountryLabel'),
-    },
     allCountries: {
       type: Array as PropType<Country[]>,
       default: () => getOption('allCountries'),
@@ -339,14 +344,6 @@ export default Vue.extend({
       type: Boolean,
       default: () => getOption('enableSearchingCountry'),
     },
-    disableValidation: {
-      type: Boolean,
-      default: () => getOption('disableValidation'),
-    },
-    invalidMessage: {
-      type: String,
-      default: () => getOption('invalidMessage'),
-    },
     displayFormat: {
       type: String as PropType<PhoneNumberFormat>,
       default: () => getOption('displayFormat'),
@@ -366,12 +363,6 @@ export default Vue.extend({
     };
   },
   computed: {
-    countryInputLabel(): string | undefined {
-      return this.hideCountryLabel ? undefined : this.countryLabel;
-    },
-    countryInputAriaLabel(): string | undefined {
-      return this.countryAriaLabel || getOption('computeCountryAriaLabel')({ label: this.label });
-    },
     countryIconComponent() {
       switch (this.countryIconMode) {
         case 'svg':
@@ -420,11 +411,43 @@ export default Vue.extend({
 
       return [...preferredCountries, ...this.filteredCountries];
     },
+    phoneExample(): string {
+      return this.formatPhoneNumber(
+        PhoneNumber.getExample(this.activeCountry.iso2).toJSON(),
+      );
+    },
+    computedLabel(): Message {
+      return this.computeMessage(this.label, { example: this.phoneExample });
+    },
+    computedAriaLabel(): Message {
+      return this.computeMessage(this.ariaLabel, { example: this.phoneExample });
+    },
+    messageOptions(): MessageOptions {
+      return {
+        label: this.computedLabel || this.computedAriaLabel,
+        example: this.phoneExample,
+      };
+    },
+    computedCountryLabel(): Message {
+      return this.computeMessage(this.countryLabel, this.messageOptions);
+    },
+    computedCountryAriaLabel(): Message {
+      return this.computeMessage(this.countryAriaLabel, this.messageOptions);
+    },
+    computedPlaceholder(): Message {
+      return this.computeMessage(this.placeholder, this.messageOptions);
+    },
+    computedHint(): Message {
+      return this.computeMessage(this.hint, this.messageOptions);
+    },
+    computedInvalidMessage(): Message {
+      return this.computeMessage(this.invalidMessage, this.messageOptions);
+    },
   },
   watch: {
-    disableValidation: 'onValidationChange',
+    invalidMessage: 'onInvalidMessageChange',
     rules: {
-      handler: 'onValidationChange',
+      handler: 'onRulesChange',
       immediate: true,
       deep: true,
     },
@@ -444,18 +467,24 @@ export default Vue.extend({
     });
   },
   methods: {
-    onValidationChange() {
+    onInvalidMessageChange() {
+      this.onRulesChange();
+      if (this.$refs.phoneInput) {
+        (this.$refs.phoneInput as unknown as { validate: () => void }).validate();
+      }
+    },
+    onRulesChange() {
       const rules = this.rules.map((rule) => (
         typeof rule === 'function'
-          ? (() => rule(this.lazyValue, this.activeCountry.iso2, this.lazyPhone))
+          ? (() => rule(this.lazyValue, this.lazyPhone, this.messageOptions))
           : rule
-      )) as InputValidationRules;
-      if (this.disableValidation) {
+      ));
+      if (!this.computedInvalidMessage) {
         this.mergedRules = rules;
       } else {
         this.mergedRules = [
           ...rules,
-          () => !this.lazyValue || this.lazyPhone.valid || this.computeInvalidMessage(),
+          () => !this.lazyValue || this.lazyPhone.valid || (this.computedInvalidMessage as string),
         ];
       }
     },
@@ -554,11 +583,12 @@ export default Vue.extend({
     findCountry(iso2 = undefined as CountryIso2 | undefined): Country | undefined {
       return this.allCountriesByIso2[(iso2 || '').toUpperCase()];
     },
-    computeInvalidMessage(): string {
-      return this.invalidMessage || getOption('computeInvalidMessage')({
-        label: this.label,
-        example: this.formatPhoneNumber(PhoneNumber.getExample(this.activeCountry.iso2).toJSON()),
-      });
+    computeMessage(message: MessageResolver, options: MessageOptions): Message {
+      if (typeof message === 'function') {
+        return message(options);
+      }
+
+      return message;
     },
   },
 });

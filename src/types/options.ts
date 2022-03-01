@@ -4,17 +4,26 @@ import { VueConstructor } from 'vue';
 
 export type CountryIconMode = 'svg' | 'sprite' | VueConstructor | undefined;
 
-export type CountryAriaLabelResolver = (options: { label: string }) => string;
+export type Message = string | undefined | null;
 
-export type InvalidMessageResolver = (options: { label: string, example: string }) => string;
+export interface MessageOptions {
+  label?: Message;
+  example: string;
+}
+
+export type MessageResolver = ((options: MessageOptions) => Message) | Message;
 
 export interface PluginOptions {
-  label: string;
-  countryIconMode: CountryIconMode,
-  countryLabel: string;
-  countryAriaLabel: string | undefined;
-  computeCountryAriaLabel: CountryAriaLabelResolver;
-  hideCountryLabel: boolean;
+  label: MessageResolver;
+  ariaLabel: MessageResolver;
+  countryLabel: MessageResolver;
+  countryAriaLabel: MessageResolver;
+  placeholder: MessageResolver;
+  hint: MessageResolver;
+  invalidMessage: MessageResolver;
+  persistentPlaceholder: boolean | undefined;
+  persistentHint: boolean | undefined;
+  countryIconMode: CountryIconMode;
   allCountries: Country[];
   preferredCountries: CountryIso2[];
   onlyCountries: CountryIso2[];
@@ -24,8 +33,5 @@ export interface PluginOptions {
   disableGuessingCountry: boolean;
   disableGuessLoading: boolean;
   enableSearchingCountry: boolean;
-  disableValidation: boolean;
-  invalidMessage: string | undefined;
-  computeInvalidMessage: InvalidMessageResolver;
   displayFormat: PhoneNumberFormat;
 }

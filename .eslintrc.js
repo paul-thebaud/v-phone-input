@@ -16,5 +16,6 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'import/order': ['off'], // See https://youtrack.jetbrains.com/issue/WEB-21182
+    'object-curly-newline': ['off'],
   },
 };

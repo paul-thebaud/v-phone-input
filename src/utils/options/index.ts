@@ -1,13 +1,18 @@
-import { PluginOptions } from '@/types/options';
+import { MessageOptions, PluginOptions } from '@/types/options';
 import countries from '@/utils/countries';
 import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
-import localization from '@/utils/options/localization';
 
 export const DEFAULT_OPTIONS: PluginOptions = {
-  ...localization,
+  label: 'Phone',
+  ariaLabel: undefined,
+  countryLabel: 'Country',
+  countryAriaLabel: (options: MessageOptions) => `Country for ${options.label}`,
+  placeholder: undefined,
+  hint: undefined,
+  invalidMessage: (options: MessageOptions) => `The "${options.label}" field is not a valid phone number (example: ${options.example}).`,
+  persistentPlaceholder: undefined,
+  persistentHint: undefined,
   countryIconMode: undefined,
-  countryAriaLabel: undefined,
-  hideCountryLabel: false,
   allCountries: countries,
   preferredCountries: [],
   onlyCountries: [],
@@ -17,8 +22,6 @@ export const DEFAULT_OPTIONS: PluginOptions = {
   disableGuessingCountry: false,
   disableGuessLoading: false,
   enableSearchingCountry: false,
-  disableValidation: false,
-  invalidMessage: undefined,
   displayFormat: 'national',
 };
 

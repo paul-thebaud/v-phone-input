@@ -14,7 +14,7 @@
     </v-card-text>
     <v-divider role="presentation" />
     <v-card-text>
-      <v-row dense>
+      <v-row>
         <v-col cols="12">
           <v-text-field
             v-model="search"
@@ -24,12 +24,9 @@
           />
         </v-col>
       </v-row>
-      <v-row
-        role="list"
-        dense
-      >
+      <v-row role="list">
         <v-col
-          v-for="(fieldComponent, prop) in limitedInputPropsFields"
+          v-for="(fieldComponent, prop) in filteredInputPropsFields"
           :key="`inputs-${prop}`"
           role="listitem"
           cols="12"
@@ -42,23 +39,6 @@
             hide-details
             v-bind="inputPropsFieldsAttrs[prop] || {}"
           />
-        </v-col>
-      </v-row>
-      <v-row v-if="!moreDisplayed">
-        <v-col cols="12">
-          <v-btn
-            :aria-expanded="moreDisplayed ? 'true' : 'false'"
-            aria-haspopup="true"
-            block
-            small
-            text
-            @click="onDisplayMore"
-          >
-            <v-icon left>
-              mdi-plus
-            </v-icon>
-            Display more options
-          </v-btn>
         </v-col>
       </v-row>
     </v-card-text>
@@ -82,19 +62,20 @@ export default Vue.extend({
     return {
       titleCase,
       search: '',
-      moreDisplayed: false,
       inputPropsSynced: this.value,
       inputPropsFields: {
         countryIconMode: VSelect,
         displayFormat: VSelect,
         label: VTextField,
-        placeholder: VTextField,
+        ariaLabel: VTextField,
         countryLabel: VTextField,
-        hint: VTextField,
         countryAriaLabel: VTextField,
-        invalidMessage: VTextField,
+        placeholder: VTextField,
         persistentPlaceholder: VSwitch,
+        hint: VTextField,
         persistentHint: VSwitch,
+        invalidMessage: VTextField,
+        enableSearchingCountry: VSwitch,
         outlined: VSwitch,
         filled: VSwitch,
         shaped: VSwitch,
@@ -108,9 +89,6 @@ export default Vue.extend({
         readonly: VSwitch,
         error: VSwitch,
         success: VSwitch,
-        hideCountryLabel: VSwitch,
-        enableSearchingCountry: VSwitch,
-        disableValidation: VSwitch,
       } as Record<string, unknown>,
       inputPropsFieldsAttrs: {
         countryIconMode: {
@@ -146,33 +124,12 @@ export default Vue.extend({
 
       return inputPropsFields;
     },
-    limitedInputPropsFields(): Record<string, unknown> {
-      if (this.moreDisplayed) {
-        return this.filteredInputPropsFields;
-      }
-
-      const inputPropsFields = {} as Record<string, unknown>;
-      Object.keys(this.filteredInputPropsFields).slice(0, 4).forEach((prop) => {
-        inputPropsFields[prop] = this.inputPropsFields[prop];
-      });
-
-      return inputPropsFields;
-    },
   },
   watch: {
-    search: 'onSearchChange',
     value: 'onValueChange',
     inputPropsSynced: 'onInputPropsSyncedChange',
   },
   methods: {
-    onSearchChange(search: string): void {
-      if (search) {
-        this.onDisplayMore();
-      }
-    },
-    onDisplayMore(): void {
-      this.moreDisplayed = true;
-    },
     onValueChange(value: Record<string, unknown>): void {
       this.inputPropsSynced = value;
     },
