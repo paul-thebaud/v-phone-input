@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2 class="text-h6">
+      <h2 class="text-h5">
         Input preview
       </h2>
     </v-card-title>

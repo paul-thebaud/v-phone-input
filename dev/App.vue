@@ -3,10 +3,10 @@
     <v-main class="background">
       <v-container class="my-4 my-md-12">
         <div>
-          <h1 class="text-h4 text-md-h2 text-center mb-4">
+          <h1 class="text-h4 text-sm-h2 text-center mb-4">
             VPhoneInput
           </h1>
-          <p class="text-body-1 text-md-h5 text-center mb-4">
+          <p class="text-body-1 text-sm-h5 text-center mb-4">
             International phone field for Vuetify 2.0 and Vue JS 2.
           </p>
           <div class="d-flex align-center justify-center flex-wrap mb-4 mb-md-8">
@@ -16,7 +16,8 @@
               :href="url"
               target="_blank"
               rel="noopener noreferrer"
-              large
+              :small="$vuetify.breakpoint.xsOnly"
+              :large="$vuetify.breakpoint.smAndUp"
               text
             >
               {{ name }}
@@ -52,7 +53,6 @@
 </template>
 
 <script lang="ts">
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Vue from 'vue';
 import InputCard from './components/InputCard.vue';
 import PropsCard from './components/PropsCard.vue';
@@ -68,6 +68,7 @@ export default Vue.extend({
       return {
         NPM: 'https://www.npmjs.com/package/v-phone-input',
         GitHub: 'https://github.com/paul-thebaud/v-phone-input',
+        Docs: 'https://github.com/paul-thebaud/v-phone-input#documentation',
       };
     },
     cleanedInputProps(): Record<string, unknown> {
