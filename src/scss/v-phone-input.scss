@@ -62,7 +62,7 @@
       border-bottom-left-radius: 0;
     }
 
-    &.v-text-field--rounded {
+    &.v-text-field--rounded:not(.v-text-field--outlined) {
       > .v-input__control > .v-input__slot {
         padding-left: 16px;
       }
