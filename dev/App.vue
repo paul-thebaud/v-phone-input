@@ -17,7 +17,7 @@
           >
             <input-card
               :input-props="cleanedInputProps"
-              class="input-card--sticky"
+              :class="{ 'input-card--sticky': hasStickyInputCard }"
             />
           </v-col>
         </v-row>
@@ -33,6 +33,12 @@ import InputCard from './components/InputCard.vue';
 import InstallCard from './components/InstallCard.vue';
 import PropsCard from './components/PropsCard.vue';
 
+declare global {
+  interface Window {
+    Cypress: boolean;
+  }
+}
+
 export default Vue.extend({
   name: 'App',
   components: { AppHeading, InputCard, InstallCard, PropsCard },
@@ -43,6 +49,9 @@ export default Vue.extend({
     } as Record<string, unknown>,
   }),
   computed: {
+    hasStickyInputCard(): boolean {
+      return !window.Cypress;
+    },
     cleanedInputProps(): Record<string, unknown> {
       const cleanedInputProps = {} as Record<string, unknown>;
 

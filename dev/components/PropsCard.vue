@@ -10,6 +10,8 @@
       <v-switch
         v-model="$vuetify.theme.dark"
         label="Dark theme"
+        data-cy="dark-switch"
+        inset
       />
     </v-card-text>
     <v-divider role="presentation" />
@@ -36,6 +38,7 @@
             :is="fieldComponent"
             v-model="inputPropsSynced[prop]"
             :label="titleCase(prop)"
+            :inset="fieldComponent === VSwitch ? true : undefined"
             hide-details
             v-bind="inputPropsFieldsAttrs[prop] || {}"
           />
@@ -60,6 +63,9 @@ export default Vue.extend({
   },
   data() {
     return {
+      VSelect,
+      VSwitch,
+      VTextField,
       titleCase,
       search: '',
       inputPropsSynced: this.value,

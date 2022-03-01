@@ -1,0 +1,16 @@
+{
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "ignoreTestFiles": [
+    "**/__snapshots__/*",
+    "**/__image_snapshots__/*"
+  ],
+  "env": {
+    "cypress-plugin-snapshots": {
+      "autoCleanUp": false,
+      "imageConfig": {
+        "threshold": 0.01,
+        "thresholdType": "percent"
+      }
+    }
+  }
+}

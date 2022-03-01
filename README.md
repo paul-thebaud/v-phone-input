@@ -98,6 +98,8 @@ VPhoneInput requires `Vue@2` and `Vuetify@2` to be installed and working in your
 > VPhoneInput utilizes features of ES2015/2017 that require the need to use polyfills for
 > Internet Explorer 11 and Safari 9/10.
 
+> [Available country guessers](#country-guesser) requires fetch.
+
 ### Installation
 
 You can install this package though Yarn:
