@@ -28,7 +28,7 @@ the [GitHub pages demo](https://paul-thebaud.github.io/v-phone-input/).
 On the demo, you'll be able to try out the field option and generate your plugin registration
 options.
 
-## TD;DR
+## TL;DR
 
 Installation though Yarn:
 
