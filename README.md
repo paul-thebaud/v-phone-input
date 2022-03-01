@@ -30,13 +30,13 @@ options.
 
 ## TD;DR
 
-Installation using Yarn:
+Installation though Yarn:
 
 ```shell
 yarn add v-phone-input flag-icons
 ```
 
-Installation using NPM:
+Installation though NPM:
 
 ```shell
 npm install v-phone-input flag-icons

@@ -30,42 +30,14 @@
           <v-list-item-subtitle>
             Use it with <code>Vue.use(VuetifyPhoneInput, options)</code>
           </v-list-item-subtitle>
-          <div class="d-flex align-center mt-2 pa-4 background rounded">
-            <pre class="flex-grow-1"><code
-              class="pa-0 transparent"
-              v-text="customOptionsJson"
-            /></pre>
-            <v-btn
-              title="Copy options to clipboard"
-              icon
-              @click="onCopyOptionsJson"
-            >
-              <v-icon>
-                mdi-content-copy
-              </v-icon>
-            </v-btn>
-          </div>
+          <code-block
+            name="Options JSON"
+            :code="customOptionsJson"
+            class="mt-2"
+          />
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <v-slide-y-transition leave-absolute>
-      <v-card-text
-        v-if="copied"
-        class="pt-0"
-      >
-        <v-alert
-          type="success"
-          class="mb-0"
-          close-icon="mdi-close"
-          border="left"
-          dismissible
-          text
-          @input="onCopiedClose"
-        >
-          Options copied to clipboard.
-        </v-alert>
-      </v-card-text>
-    </v-slide-y-transition>
   </v-card>
 </template>
 
@@ -74,9 +46,11 @@ import { countries, DEFAULT_OPTIONS } from '@/entry.esm';
 import PhoneNumber from 'awesome-phonenumber';
 import Vue, { PropType } from 'vue';
 import { titleCase } from '../utils';
+import CodeBlock from './CodeBlock.vue';
 
 export default Vue.extend({
   name: 'InputCard',
+  components: { CodeBlock },
   props: {
     inputProps: {
       type: Object as PropType<Record<string, unknown>>,
@@ -85,7 +59,6 @@ export default Vue.extend({
   },
   data: () => ({
     titleCase,
-    copied: false,
     inputValue: '',
   }),
   computed: {
@@ -117,14 +90,6 @@ export default Vue.extend({
   methods: {
     onInputValue(value: string): void {
       this.inputValue = value;
-    },
-    onCopyOptionsJson() {
-      this.$copyText(this.customOptionsJson);
-
-      this.copied = true;
-    },
-    onCopiedClose() {
-      this.copied = false;
     },
   },
 });
