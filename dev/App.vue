@@ -85,7 +85,10 @@ export default Vue.extend({
       const cleanedInputProps = {} as Record<string, unknown>;
 
       Object.keys(this.inputProps).forEach((prop) => {
-        if (this.inputProps[prop] !== '') {
+        if (this.inputProps[prop] !== undefined
+          && this.inputProps[prop] !== null
+          && this.inputProps[prop] !== ''
+        ) {
           cleanedInputProps[prop] = this.inputProps[prop];
         }
       });
