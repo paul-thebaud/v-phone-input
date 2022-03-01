@@ -12,7 +12,7 @@ import VPhoneInputPlugin from '@/entry.esm';
 // @ts-ignore
 import('@/scss/v-phone-input.scss');
 
-Vue.use(VPhoneInputPlugin, { countryIconMode: 'svg' });
+Vue.use(VPhoneInputPlugin);
 
 Vue.config.productionTip = false;
 

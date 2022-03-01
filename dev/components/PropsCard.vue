@@ -40,6 +40,7 @@
             v-model="inputPropsSynced[prop]"
             :label="titleCase(prop)"
             hide-details
+            v-bind="inputPropsFieldsAttrs[prop] || {}"
           />
         </v-col>
       </v-row>
@@ -66,13 +67,13 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import { VSwitch, VTextField } from 'vuetify/lib';
+import { VSelect, VSwitch, VTextField } from 'vuetify/lib';
 import { titleCase } from '../utils';
 
 export default Vue.extend({
   name: 'PropsCard',
   props: {
-    inputProps: {
+    value: {
       type: Object as PropType<Record<string, unknown>>,
       default: () => ({}),
     },
@@ -82,12 +83,16 @@ export default Vue.extend({
       titleCase,
       search: '',
       moreDisplayed: false,
-      inputPropsSynced: this.inputProps,
+      inputPropsSynced: this.value,
       inputPropsFields: {
+        countryIconMode: VSelect,
+        displayFormat: VSelect,
         label: VTextField,
         placeholder: VTextField,
         countryLabel: VTextField,
         hint: VTextField,
+        countryAriaLabel: VTextField,
+        invalidMessage: VTextField,
         persistentPlaceholder: VSwitch,
         persistentHint: VSwitch,
         outlined: VSwitch,
@@ -106,6 +111,23 @@ export default Vue.extend({
         hideCountryLabel: VSwitch,
         enableSearchingCountry: VSwitch,
         disableValidation: VSwitch,
+      } as Record<string, unknown>,
+      inputPropsFieldsAttrs: {
+        countryIconMode: {
+          items: [
+            { value: null, text: 'None (default)' },
+            { value: 'svg', text: 'SVG (using flag-icons)' },
+            { value: 'sprite', text: 'CSS sprite (using world-flags-sprite)' },
+          ],
+        },
+        displayFormat: {
+          items: [
+            { value: 'national', text: 'National (default)' },
+            { value: 'e164', text: 'E164' },
+            { value: 'international', text: 'International' },
+            { value: 'significant', text: 'Significant' },
+          ],
+        },
       } as Record<string, unknown>,
     };
   },
@@ -139,7 +161,7 @@ export default Vue.extend({
   },
   watch: {
     search: 'onSearchChange',
-    inputProps: 'onInputPropsChange',
+    value: 'onValueChange',
     inputPropsSynced: 'onInputPropsSyncedChange',
   },
   methods: {
@@ -151,8 +173,8 @@ export default Vue.extend({
     onDisplayMore(): void {
       this.moreDisplayed = true;
     },
-    onInputPropsChange(inputProps: Record<string, unknown>): void {
-      this.inputPropsSynced = inputProps;
+    onValueChange(value: Record<string, unknown>): void {
+      this.inputPropsSynced = value;
     },
     onInputPropsSyncedChange(inputProps: Record<string, unknown>): void {
       this.$emit('input', inputProps);

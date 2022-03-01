@@ -43,7 +43,7 @@
             </template>
             <span
               v-else
-              v-text="activeCountry.iso2.toUpperCase()"
+              v-text="`+${activeCountry.dialCode}`"
             />
           </slot>
         </slot>
@@ -428,6 +428,7 @@ export default Vue.extend({
       immediate: true,
       deep: true,
     },
+    displayFormat: 'onDisplayFormatChange',
     value: 'onValueChange',
     lazyCountry: 'onLazyCountryChange',
     lazyValue: 'onLazyValueChange',
@@ -456,6 +457,11 @@ export default Vue.extend({
           ...rules,
           () => !this.lazyValue || this.lazyPhone.valid || this.computeInvalidMessage(),
         ];
+      }
+    },
+    onDisplayFormatChange(): void {
+      if (this.lazyPhone.valid) {
+        this.lazyValue = this.formatPhoneNumber(this.lazyPhone);
       }
     },
     onValueChange() {

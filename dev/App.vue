@@ -61,7 +61,10 @@ export default Vue.extend({
   name: 'App',
   components: { PropsCard, InputCard },
   data: () => ({
-    inputProps: {} as Record<string, unknown>,
+    inputProps: {
+      countryIconMode: 'svg',
+      displayFormat: 'national',
+    } as Record<string, unknown>,
   }),
   computed: {
     links() {

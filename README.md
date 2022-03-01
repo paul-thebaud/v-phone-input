@@ -163,7 +163,7 @@ directly to the input or defined globally using [input options](#options).
 | `disableValidation`      | `boolean`                                   | `false`                        | Disable the phone number automatic validation. You can still use `rules` props to validate the input.                             |
 | `invalidMessage`         | `string` or `undefined`                     | `undefined`                    | Override the value returned by `computeInvalidMessage` option (see [Options](#options)).                                          |
 | `rules`                  | `Function[]` or `string[]`                  | `[]`                           | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
-| `displayFormat`          | `PhoneNumberFormat`                         | `'national'`                   | Format to use when displaying valid phone numbers (see [Phone Number Formats](#phone-number-formats)).                            |
+| `displayFormat`          | `PhoneNumberFormat`                         | `'national'`                   | Format to use when displaying valid phone numbers in phone text input (see [Phone Number Formats](#phone-number-formats)).        |
 | `value`                  | `string`                                    | `''`                           | Value of the phone input. You may use it using `v-model` or `@input`.                                                             |
 
 > You can also pass most of the
