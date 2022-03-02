@@ -528,7 +528,7 @@ export default Vue.extend({
     onInvalidMessageChange() {
       this.onRulesChange();
       if (this.$refs.phoneInput) {
-        (this.$refs.phoneInput as unknown as { validate: () => void }).validate();
+        this.validate();
       }
     },
     onRulesChange() {
@@ -568,6 +568,8 @@ export default Vue.extend({
       }
 
       this.onLazyCountryOrValueChange();
+
+      this.validate();
     },
     onLazyValueChange() {
       const lazyCountry = this.lazyValue.startsWith('+') ? undefined : this.lazyCountry;
@@ -591,6 +593,9 @@ export default Vue.extend({
       if (newValue !== this.value) {
         this.$emit('input', newValue);
       }
+    },
+    validate() {
+      return (this.$refs.phoneInput as unknown as { validate: () => void }).validate();
     },
     makePhoneNumber(value?: string, iso2?: CountryIso2): PhoneNumberObject {
       return PhoneNumber((value || '').trim(), iso2).toJSON();
