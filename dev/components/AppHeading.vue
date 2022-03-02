@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-cy="app-header">
     <h1 class="text-h4 text-sm-h2 text-center mb-4">
       VPhoneInput
     </h1>
@@ -12,7 +12,7 @@
         :key="`links-${name}`"
         :href="url"
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener"
         class="mx-1"
         :small="$vuetify.breakpoint.xsOnly"
         :large="$vuetify.breakpoint.smAndUp"
@@ -25,6 +25,9 @@
           {{ icon }}
         </v-icon>
         {{ name }}
+        <span class="d-sr-only">
+          (open in new tab)
+        </span>
       </v-btn>
     </div>
   </div>
