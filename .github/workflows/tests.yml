@@ -40,9 +40,10 @@ jobs:
         with:
           browser: chrome
           start: yarn serve
+          wait-on: http://localhost:8080
           config: pageLoadTimeout=100000,baseUrl=http://localhost:8080
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: cypress-snapshots-${{ matrix.browser }}
+          name: cypress-snapshots
           path: tests/e2e/specs/__image_snapshots__
