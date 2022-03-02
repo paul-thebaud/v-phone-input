@@ -18,8 +18,16 @@
       :flat="flat"
       :solo="solo"
       :solo-inverted="soloInverted"
+      :background-color="backgroundColor"
+      :color="color"
+      :dark="dark"
+      :light="light"
       :rounded="rounded"
       :dense="dense"
+      :height="height"
+      :loader-height="loaderHeight"
+      :reverse="reverse"
+      :single-line="singleLine"
       :item-text="getCountryText"
       item-value="iso2"
       class="v-phone-input__country"
@@ -98,8 +106,16 @@
       :flat="flat"
       :solo="solo"
       :solo-inverted="soloInverted"
+      :background-color="backgroundColor"
+      :color="color"
+      :dark="dark"
+      :light="light"
       :rounded="rounded"
       :dense="dense"
+      :height="height"
+      :loader-height="loaderHeight"
+      :reverse="reverse"
+      :single-line="singleLine"
       :clearable="clearable"
       :autofocus="autofocus"
       :error="error"
@@ -111,7 +127,7 @@
       :validate-on-blur="validateOnBlur"
       class="v-phone-input__phone"
       type="tel"
-      v-bind="phoneProps"
+      v-bind="{ ...$attrs, ...phoneProps }"
     >
       <!-- eslint-enable vuejs-accessibility/no-autofocus -->
       <template #append>
@@ -246,11 +262,43 @@ export default Vue.extend({
       type: Boolean,
       default: undefined,
     },
+    backgroundColor: {
+      type: String,
+      default: undefined,
+    },
+    color: {
+      type: String,
+      default: undefined,
+    },
+    light: {
+      type: Boolean,
+      default: undefined,
+    },
+    dark: {
+      type: Boolean,
+      default: undefined,
+    },
     rounded: {
       type: Boolean,
       default: undefined,
     },
     dense: {
+      type: Boolean,
+      default: undefined,
+    },
+    height: {
+      type: [String, Number],
+      default: undefined,
+    },
+    loaderHeight: {
+      type: [String, Number],
+      default: undefined,
+    },
+    reverse: {
+      type: Boolean,
+      default: false,
+    },
+    singleLine: {
       type: Boolean,
       default: undefined,
     },
