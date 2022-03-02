@@ -5,7 +5,9 @@
         Input preview
       </h2>
     </v-card-title>
-    <v-divider role="presentation" />
+    <v-card-subtitle>
+      You can try the input and copy plugin options here.
+    </v-card-subtitle>
     <v-card-text>
       <v-phone-input
         :value="inputValue"

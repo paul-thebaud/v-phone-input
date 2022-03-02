@@ -5,12 +5,15 @@
         Configuration
       </h2>
     </v-card-title>
-    <v-divider role="presentation" />
+    <v-card-subtitle>
+      You can customize the input options here.
+    </v-card-subtitle>
     <v-card-text>
       <v-switch
         v-model="$vuetify.theme.dark"
         label="Dark theme"
         data-cy="dark-switch"
+        hide-details
         inset
       />
     </v-card-text>

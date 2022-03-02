@@ -1,10 +1,13 @@
 <template>
-  <v-card>
+  <v-card data-cy="install-card">
     <v-card-title>
       <h2 class="text-h5">
         Installation
       </h2>
     </v-card-title>
+    <v-card-subtitle>
+      You can install the package through Yarn or NPM.
+    </v-card-subtitle>
     <v-card-text>
       <code-block
         name="Yarn add"
