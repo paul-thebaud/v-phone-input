@@ -21,7 +21,7 @@
         v-text="code"
       /></pre>
       <v-btn
-        title="Copy options to clipboard"
+        :title="`Copy ${name} to clipboard`"
         icon
         @click="onCopyOptionsJson"
       >
