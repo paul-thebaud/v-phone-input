@@ -39,6 +39,7 @@
           <component
             :is="fieldComponent"
             v-model="inputPropsSynced[prop]"
+            :data-cy="`prop-input-${prop}`"
             :label="titleCase(prop)"
             :inset="fieldComponent === VSwitch ? true : undefined"
             hide-details

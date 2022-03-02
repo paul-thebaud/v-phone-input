@@ -16,7 +16,10 @@
       />
     </v-card-text>
     <v-divider role="presentation" />
-    <v-list dense>
+    <v-list
+      data-cy="input-card-props"
+      dense
+    >
       <v-list-item
         v-for="(value, name) in inputInfo"
         :key="`info-${name}`"

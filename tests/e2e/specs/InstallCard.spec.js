@@ -16,7 +16,7 @@ describe('InstallCard.vue', () => {
       .should('not.exist');
 
     cy.dataCy('install-card')
-      .get('button[title="Copy Yarn add to clipboard"]')
+      .find('button[title="Copy Yarn add to clipboard"]')
       .click();
 
     cy.dataCy('install-card')
@@ -31,7 +31,7 @@ describe('InstallCard.vue', () => {
       .should('not.exist');
 
     cy.dataCy('install-card')
-      .get('button[title="Copy NPM install to clipboard"]')
+      .find('button[title="Copy NPM install to clipboard"]')
       .click();
 
     cy.dataCy('install-card')
