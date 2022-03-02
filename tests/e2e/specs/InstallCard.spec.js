@@ -21,12 +21,6 @@ describe('InstallCard.vue', () => {
 
     cy.dataCy('install-card')
       .contains('Yarn add copied to clipboard.');
-
-    cy.window().then((win) => {
-      win.navigator.clipboard.readText().then((text) => {
-        assert.equal(text, 'yarn add v-phone-input');
-      });
-    });
   });
 
   it('should copy npm command and show alert', () => {
@@ -42,11 +36,5 @@ describe('InstallCard.vue', () => {
 
     cy.dataCy('install-card')
       .contains('NPM install copied to clipboard.');
-
-    cy.window().then((win) => {
-      win.navigator.clipboard.readText().then((text) => {
-        assert.equal(text, 'npm install v-phone-input');
-      });
-    });
   });
 });
