@@ -9,7 +9,7 @@
     "cypress-plugin-snapshots": {
       "autoCleanUp": false,
       "imageConfig": {
-        "threshold": 0.001,
+        "threshold": 0.011,
         "thresholdType": "percent"
       }
     }

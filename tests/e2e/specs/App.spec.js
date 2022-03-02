@@ -10,16 +10,16 @@ describe('App.vue', () => {
 
   it('should match snapshot', () => {
     cy.visitDemo();
-    cy.wait(100);
+    cy.get('body').focus();
+    cy.wait(200);
     cy.get('#app').toMatchImageSnapshot();
   });
 
   it('should toggle theme to dark and match snapshot', () => {
     cy.visitDemo();
-
-    cy.wait(100);
     cy.contains('Dark theme').parent().click();
-
+    cy.get('body').focus();
+    cy.wait(200);
     cy.get('#app').toMatchImageSnapshot();
   });
 });
