@@ -1,21 +1,25 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'cypress-plugin-snapshots/commands';
 
-Cypress.Commands.add('visitDemo', (ipCountry) => {
+Cypress.Commands.add('visitDemo', (ipCountry = undefined, config = {}) => {
   cy.visit('/', {
+    ...config,
     onBeforeLoad(win) {
       cy.stub(win, 'fetch').withArgs('https://ip2c.org/s')
         .resolves({
           ok: true,
           text: () => Promise.resolve(ipCountry ? `1;${ipCountry}` : '0'),
         });
+
+      if (config.onBeforeLoad) {
+        config.onBeforeLoad(win);
+      }
     },
   });
 
   cy.document().then((doc) => {
     const $style = doc.createElement('style');
     $style.innerHTML = '#app.v-application, #app.v-application * { font-family: Helvetica !important; }';
-    console.log(doc);
     doc.head.appendChild($style);
   });
 
