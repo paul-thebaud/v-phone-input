@@ -32,6 +32,8 @@ place in the
 
 ## Useful commands
 
+> Notice that we use Yarn as our package manager.
+
 ### Running the dev app
 
 ```shell
@@ -44,10 +46,10 @@ yarn serve
 yarn lint
 ```
 
-### Running Tests
+### Running E2E Tests
 
 ``` shell
-yarn test
+yarn test:e2e
 ```
 
 ### Building for publish
