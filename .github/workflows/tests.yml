@@ -21,8 +21,10 @@ jobs:
         run: yarn install -s --no-progress --non-interactive
       - name: Lint
         run: yarn lint
-      - name: Build
+      - name: Build package
         run: yarn build
+      - name: Build demo
+        run: yarn build:demo
   e2e-tests:
     name: e2e-tests
     runs-on: ubuntu-latest
