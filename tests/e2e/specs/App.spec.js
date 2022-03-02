@@ -10,12 +10,14 @@ describe('App.vue', () => {
 
   it('should match snapshot', () => {
     cy.visitDemo();
+    cy.wait(100);
     cy.get('#app').toMatchImageSnapshot();
   });
 
   it('should toggle theme to dark and match snapshot', () => {
     cy.visitDemo();
 
+    cy.wait(100);
     cy.contains('Dark theme').parent().click();
 
     cy.get('#app').toMatchImageSnapshot();
