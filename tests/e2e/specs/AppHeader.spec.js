@@ -1,6 +1,6 @@
 describe('AppHeader.vue', () => {
   it('should display package name and description', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
 
     cy.dataCy('app-header')
       .contains('h1', 'VPhoneInput');
@@ -9,7 +9,7 @@ describe('AppHeader.vue', () => {
   });
 
   it('should display package links', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
 
     cy.dataCy('app-header')
       .contains('NPM')

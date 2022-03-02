@@ -1,6 +1,6 @@
 describe('InstallCard.vue', () => {
   it('should display title and description', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
 
     cy.dataCy('install-card')
       .contains('h2', 'Installation');
@@ -9,7 +9,7 @@ describe('InstallCard.vue', () => {
   });
 
   it('should copy yarn command and show alert', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
 
     cy.dataCy('install-card')
       .contains('Yarn add copied to clipboard.')
@@ -30,7 +30,7 @@ describe('InstallCard.vue', () => {
   });
 
   it('should copy npm command and show alert', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
 
     cy.dataCy('install-card')
       .contains('NPM install copied to clipboard.')

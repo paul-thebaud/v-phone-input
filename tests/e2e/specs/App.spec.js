@@ -1,6 +1,6 @@
 describe('App.vue', () => {
   it('should display all titles', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
 
     cy.contains('h1', 'VPhoneInput');
     cy.contains('h2', 'Installation');
@@ -9,12 +9,12 @@ describe('App.vue', () => {
   });
 
   it('should match snapshot', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
     cy.get('#app').toMatchImageSnapshot();
   });
 
   it('should toggle theme to dark and match snapshot', () => {
-    cy.visitDemo('FR');
+    cy.visitDemo();
 
     cy.contains('Dark theme').parent().click();
 
