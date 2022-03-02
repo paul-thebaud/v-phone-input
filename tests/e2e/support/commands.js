@@ -5,7 +5,6 @@ Cypress.Commands.add('dataCy', (value) => cy.get(`[data-cy=${value}]`));
 
 Cypress.Commands.add('visitDemo', (ipCountry = undefined, config = {}) => {
   cy.visit('/', {
-    ...config,
     onBeforeLoad(win) {
       cy.stub(win, 'fetch').withArgs('https://ip2c.org/s')
         .resolves({
