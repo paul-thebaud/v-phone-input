@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card data-cy="props-card">
     <v-card-title>
       <h2 class="text-h5">
         Configuration
@@ -12,7 +12,6 @@
       <v-switch
         v-model="$vuetify.theme.dark"
         label="Dark theme"
-        data-cy="dark-switch"
         hide-details
         inset
       />

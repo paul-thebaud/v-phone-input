@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card data-cy="input-card">
     <v-card-title>
       <h2 class="text-h5">
         Input preview

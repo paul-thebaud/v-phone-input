@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'cypress-plugin-snapshots/commands';
 
+Cypress.Commands.add('dataCy', (value) => cy.get(`[data-cy=${value}]`));
+
 Cypress.Commands.add('visitDemo', (ipCountry = undefined, config = {}) => {
   cy.visit('/', {
     ...config,
