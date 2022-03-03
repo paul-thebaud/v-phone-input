@@ -1,12 +1,12 @@
 <template>
-  <div data-cy="app-header">
+  <header data-cy="app-header">
     <h1 class="text-h4 text-sm-h2 text-center mb-4">
       VPhoneInput
     </h1>
     <p class="text-body-1 text-sm-h5 text-center mb-4">
       International phone field for Vuetify 2.0 and Vue JS 2.
     </p>
-    <div class="d-flex align-center justify-center flex-wrap mb-4 mb-md-8">
+    <div class="d-flex align-center justify-center flex-wrap">
       <v-btn
         v-for="({ url, icon }, name) in links"
         :key="`links-${name}`"
@@ -30,14 +30,14 @@
         </span>
       </v-btn>
     </div>
-  </div>
+  </header>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'AppHeading',
+  name: 'AppHeader',
   data: () => ({
     links: {
       NPM: {

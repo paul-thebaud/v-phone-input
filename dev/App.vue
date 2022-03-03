@@ -2,7 +2,7 @@
   <v-app id="app">
     <v-main class="background">
       <v-container class="container--limited my-4 my-md-12">
-        <app-heading />
+        <app-header class="mb-4 mb-md-8" />
         <v-row>
           <v-col
             cols="12"
@@ -21,6 +21,7 @@
             />
           </v-col>
         </v-row>
+        <app-footer class="mt-4 mt-md-8" />
       </v-container>
     </v-main>
   </v-app>
@@ -28,7 +29,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import AppHeading from './components/AppHeading.vue';
+import AppFooter from './components/AppFooter.vue';
+import AppHeader from './components/AppHeader.vue';
 import InputCard from './components/InputCard.vue';
 import InstallCard from './components/InstallCard.vue';
 import PropsCard from './components/PropsCard.vue';
@@ -41,7 +43,7 @@ declare global {
 
 export default Vue.extend({
   name: 'App',
-  components: { AppHeading, InputCard, InstallCard, PropsCard },
+  components: { AppFooter, AppHeader, InputCard, InstallCard, PropsCard },
   data: () => ({
     inputProps: {
       countryIconMode: 'svg',
