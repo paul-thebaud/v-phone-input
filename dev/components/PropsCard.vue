@@ -22,6 +22,7 @@
         <v-col cols="12">
           <v-text-field
             v-model="search"
+            data-cy="search-props"
             prepend-inner-icon="mdi-magnify"
             label="Search"
             hide-details
