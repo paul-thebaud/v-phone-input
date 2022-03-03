@@ -268,6 +268,28 @@ describe('InputCard.vue', () => {
       .contains('-');
   });
 
+  it('should be enable searching countries', () => {
+    cy.visitDemo();
+
+    cy.contains('Enable Searching Country')
+      .parent()
+      .click();
+
+    cyVPhoneCountry()
+      .contains('Afghanistan');
+
+    cyVPhoneCountry()
+      .find('input[type=text]')
+      .type('France');
+    cyVPhoneCountryMenu()
+      .contains('France')
+      .parents('.v-list-item')
+      .click();
+
+    cyVPhoneCountry()
+      .contains('France');
+  });
+
   it('should use default labels', () => {
     cy.visitDemo();
 
