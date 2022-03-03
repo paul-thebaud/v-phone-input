@@ -351,8 +351,9 @@ that you may use when validating user's input:
 You may provide a `enableSearchingCountry` with a `true` value to enable textual search in
 countries.
 
-> Since VPhoneInput does not import VAutocomplete to reduce its weight, you must provide this
-> component to Vue when dynamically using Vuetify components (e.g. when using `vuetify-loader`).
+> Since VPhoneInput does not import VAutocomplete to reduce its weight, you might need to provide
+> this component to Vue when dynamically using Vuetify components
+> (e.g. when using `vuetify-loader`).
 
 To enable searching countries on a per-input basis:
 
