@@ -492,4 +492,49 @@ describe('InputCard.vue', () => {
       .find('.v-list-item__icon')
       .should('not.exist');
   });
+
+  [
+    [],
+    ['Dense'],
+    ['Outlined'],
+    ['Outlined', 'Rounded'],
+    ['Outlined', 'Rounded', 'Dense'],
+    ['Outlined', 'Shaped'],
+    ['Outlined', 'Shaped', 'Dense'],
+    ['Filled'],
+    ['Filled', 'Rounded'],
+    ['Filled', 'Rounded', 'Dense'],
+    ['Filled', 'Shaped'],
+    ['Filled', 'Shaped', 'Dense'],
+    ['Solo'],
+    ['Solo', 'Rounded'],
+    ['Solo', 'Rounded', 'Dense'],
+    ['Solo', 'Shaped'],
+    ['Solo', 'Shaped', 'Dense'],
+    ['Solo Inverted'],
+    ['Solo Inverted', 'Rounded'],
+    ['Solo Inverted', 'Rounded', 'Dense'],
+    ['Solo Inverted', 'Shaped'],
+    ['Solo Inverted', 'Shaped', 'Dense'],
+  ].forEach((styles) => {
+    const stylesName = styles.length ? styles.map((s) => s.toLowerCase()).join('+') : 'default';
+    it(`should use ${stylesName} style and match snapshot`, () => {
+      cy.visitDemo();
+
+      styles.forEach((style) => {
+        cy.contains(style)
+          .parent()
+          .click();
+      });
+
+      cy.get('body').focus();
+      cy.wait(200);
+      cyVPhone().toMatchImageSnapshot({
+        imageConfig: {
+          threshold: 0.015,
+          thresholdType: 'percent',
+        },
+      });
+    });
+  });
 });
