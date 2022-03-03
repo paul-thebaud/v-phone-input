@@ -12,7 +12,12 @@ describe('App.vue', () => {
     cy.visitDemo();
     cy.get('body').focus();
     cy.wait(200);
-    cy.get('#app').toMatchImageSnapshot();
+    cy.get('#app').toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.01,
+        thresholdType: 'percent',
+      },
+    });
   });
 
   it('should toggle theme to dark and match snapshot', () => {
@@ -20,6 +25,11 @@ describe('App.vue', () => {
     cy.contains('Dark theme').parent().click();
     cy.get('body').focus();
     cy.wait(200);
-    cy.get('#app').toMatchImageSnapshot();
+    cy.get('#app').toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.011,
+        thresholdType: 'percent',
+      },
+    });
   });
 });

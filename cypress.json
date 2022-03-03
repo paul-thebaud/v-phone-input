@@ -7,11 +7,7 @@
   "video": false,
   "env": {
     "cypress-plugin-snapshots": {
-      "autoCleanUp": false,
-      "imageConfig": {
-        "threshold": 0.011,
-        "thresholdType": "percent"
-      }
+      "autoCleanUp": false
     }
   }
 }

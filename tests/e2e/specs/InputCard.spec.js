@@ -382,7 +382,12 @@ describe('InputCard.vue', () => {
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().toMatchImageSnapshot();
+    cyVPhoneCountry().toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.04,
+        thresholdType: 'percent',
+      },
+    });
 
     cyVPhoneCountry()
       .contains('Afghanistan')
@@ -419,7 +424,12 @@ describe('InputCard.vue', () => {
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().toMatchImageSnapshot();
+    cyVPhoneCountry().toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.04,
+        thresholdType: 'percent',
+      },
+    });
 
     cyVPhoneCountry()
       .contains('Afghanistan')
@@ -460,7 +470,12 @@ describe('InputCard.vue', () => {
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().toMatchImageSnapshot();
+    cyVPhoneCountry().toMatchImageSnapshot({
+      imageConfig: {
+        threshold: 0.04,
+        thresholdType: 'percent',
+      },
+    });
 
     cyVPhoneCountry()
       .contains('+93')
