@@ -44,6 +44,8 @@ jobs:
           start: yarn serve
           wait-on: http://localhost:8080
           config: pageLoadTimeout=100000,baseUrl=http://localhost:8080
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
       - uses: actions/upload-artifact@v2
         if: failure()
         with:

@@ -1,8 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { initPlugin } = require('cypress-plugin-snapshots/plugin');
+const { initPlugin: snapshotInit } = require('cypress-plugin-snapshots/plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const coverageInit = require('@cypress/code-coverage/task');
 
 module.exports = (on, config) => {
-  initPlugin(on, config);
+  snapshotInit(on, config);
+  coverageInit(on, config);
 
   return {
     ...config,

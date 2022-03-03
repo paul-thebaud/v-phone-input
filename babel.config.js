@@ -11,5 +11,9 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   presets,
-  plugins: [],
+  plugins: [
+    ['babel-plugin-istanbul', {
+      extension: ['.js', '.ts', '.vue'],
+    }],
+  ],
 };
