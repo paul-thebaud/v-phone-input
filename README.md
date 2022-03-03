@@ -2,7 +2,8 @@
 
 [![Tests](https://github.com/paul-thebaud/v-phone-input/actions/workflows/tests.yml/badge.svg)](https://github.com/paul-thebaud/v-phone-input/actions/workflows/tests.yml)
 [![Publish](https://github.com/paul-thebaud/v-phone-input/actions/workflows/publish.yml/badge.svg)](https://github.com/paul-thebaud/v-phone-input/actions/workflows/publish.yml)
-![NPM version](https://img.shields.io/npm/v/v-phone-input)
+[![codecov](https://codecov.io/gh/paul-thebaud/v-phone-input/branch/main/graph/badge.svg?token=75BHV1FRQ9)](https://codecov.io/gh/paul-thebaud/v-phone-input)
+[![NPM version](https://img.shields.io/npm/v/v-phone-input)](https://www.npmjs.com/package/v-phone-input)
 ![NPM downloads](https://img.shields.io/npm/dt/v-phone-input)
 ![MIT license](https://img.shields.io/npm/l/v-phone-input)
 
