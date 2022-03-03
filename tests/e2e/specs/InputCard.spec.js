@@ -242,6 +242,32 @@ describe('InputCard.vue', () => {
       .contains('Albania');
   });
 
+  it('should be clearable without error', () => {
+    cy.visitDemo();
+
+    cy.contains('Clearable')
+      .parent()
+      .click();
+
+    cyVPhoneInput()
+      .find('input')
+      .type('0234567890');
+
+    cy.dataCy('input-card-props')
+      .contains('Value')
+      .parent()
+      .contains('+93234567890');
+
+    cyVPhoneInput()
+      .find('.v-input__icon--clear > button')
+      .click();
+
+    cy.dataCy('input-card-props')
+      .contains('Value')
+      .parent()
+      .contains('-');
+  });
+
   it('should use default labels', () => {
     cy.visitDemo();
 

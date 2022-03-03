@@ -84,6 +84,7 @@ export default Vue.extend({
         hint: VTextField,
         persistentHint: VSwitch,
         invalidMessage: VTextField,
+        clearable: VSwitch,
         enableSearchingCountry: VSwitch,
         outlined: VSwitch,
         filled: VSwitch,

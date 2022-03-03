@@ -416,7 +416,7 @@ export default Vue.extend({
       guessingCountry: false,
       mergedRules: [] as InputValidationRules,
       lazyCountry: undefined as CountryIso2 | undefined,
-      lazyValue: this.value || '',
+      lazyValue: this.value || '' as string | null,
       lazyPhone: { number: { input: '' } } as PhoneNumberObject,
     };
   },
@@ -544,7 +544,7 @@ export default Vue.extend({
     onRulesChange() {
       const rules = this.rules.map((rule) => (
         typeof rule === 'function'
-          ? (() => rule(this.lazyValue, this.lazyPhone, this.messageOptions))
+          ? (() => rule(this.lazyValue || '', this.lazyPhone, this.messageOptions))
           : rule
       ));
       if (!this.computedInvalidMessage) {
@@ -582,7 +582,7 @@ export default Vue.extend({
       this.validate();
     },
     onLazyValueChange() {
-      const lazyCountry = this.lazyValue.startsWith('+') ? undefined : this.lazyCountry;
+      const lazyCountry = (this.lazyValue || '').startsWith('+') ? undefined : this.lazyCountry;
       const lazyPhone = this.makePhoneNumber(this.lazyValue, lazyCountry);
       const iso2 = lazyPhone.regionCode;
       if (iso2 && this.lazyCountry !== iso2) {
@@ -607,7 +607,7 @@ export default Vue.extend({
     validate() {
       return (this.$refs.phoneInput as unknown as { validate: () => void }).validate();
     },
-    makePhoneNumber(value?: string, iso2?: CountryIso2): PhoneNumberObject {
+    makePhoneNumber(value?: string | null, iso2?: CountryIso2): PhoneNumberObject {
       return PhoneNumber((value || '').trim(), iso2).toJSON();
     },
     formatPhoneNumber(phone: PhoneNumberObject): string {
