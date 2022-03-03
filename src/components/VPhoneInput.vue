@@ -31,7 +31,7 @@
       :item-text="getCountryText"
       item-value="iso2"
       class="v-phone-input__country"
-      v-bind="countryProps"
+      v-bind="computedCountryProps"
     >
       <template #selection="selectionProps">
         <slot
@@ -127,7 +127,7 @@
       :validate-on-blur="validateOnBlur"
       class="v-phone-input__phone"
       type="tel"
-      v-bind="{ ...$attrs, ...phoneProps }"
+      v-bind="computedPhoneProps"
     >
       <!-- eslint-enable vuejs-accessibility/no-autofocus -->
       <template #append>
@@ -500,6 +500,18 @@ export default Vue.extend({
     },
     computedInvalidMessage(): Message {
       return this.computeMessage(this.invalidMessage, this.messageOptions);
+    },
+    computedCountryProps() {
+      return {
+        ...this.countryProps,
+        menuProps: {
+          contentClass: 'v-phone-input__country__menu',
+          ...(this.countryProps?.menuProps || {}),
+        },
+      };
+    },
+    computedPhoneProps() {
+      return { ...this.$attrs, ...this.phoneProps };
     },
   },
   watch: {

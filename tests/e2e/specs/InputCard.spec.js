@@ -7,6 +7,10 @@ describe('InputCard.vue', () => {
     return cyVPhone().get('.v-phone-input__country');
   }
 
+  function cyVPhoneCountryMenu() {
+    return cy.get('.v-phone-input__country__menu');
+  }
+
   function cyVPhoneInput() {
     return cyVPhone().get('.v-phone-input__phone');
   }
@@ -136,7 +140,7 @@ describe('InputCard.vue', () => {
     cy.get('body')
       .type('f');
 
-    cy.get('.v-menu__content')
+    cyVPhoneCountryMenu()
       .scrollTo(0, 100)
       .contains('France')
       .click();
@@ -210,7 +214,7 @@ describe('InputCard.vue', () => {
     cy.get('body')
       .type('a');
 
-    cy.get('.v-menu__content')
+    cyVPhoneCountryMenu()
       .scrollTo(0, 100)
       .contains('Albania')
       .click();
@@ -363,5 +367,114 @@ describe('InputCard.vue', () => {
       .and('contain', 'Custom placeholder');
     cyVPhoneInput()
       .contains('Custom hint');
+  });
+
+  it('should use svg country icon and match snapshot', () => {
+    cy.visitDemo();
+
+    cy.contains('Country Icon Mode')
+      .parents('.v-select')
+      .find('[role=button]')
+      .click();
+    cy.get('.v-menu__content')
+      .contains('SVG (using flag-icons)')
+      .click();
+
+    cy.get('body').focus();
+    cy.wait(200);
+    cyVPhoneCountry().toMatchImageSnapshot();
+
+    cyVPhoneCountry()
+      .contains('Afghanistan')
+      .should('have.class', 'd-sr-only')
+      .parent()
+      .should('have.class', 'v-phone-input__country__country-icon fi fi-af');
+    cyVPhoneCountry()
+      .find('[role=button]')
+      .click();
+
+    cyVPhoneCountryMenu()
+      .contains('American Samoa +1684')
+      .parents('.v-list-item')
+      .find('.v-list-item__icon')
+      .contains('American Samoa')
+      .should('not.exist');
+    cyVPhoneCountryMenu()
+      .contains('American Samoa +1684')
+      .parents('.v-list-item')
+      .find('.v-list-item__icon > span')
+      .should('have.class', 'v-phone-input__country__country-icon fi fi-as');
+  });
+
+  it('should use sprite country icon and match snapshot', () => {
+    cy.visitDemo();
+
+    cy.contains('Country Icon Mode')
+      .parents('.v-select')
+      .find('[role=button]')
+      .click();
+    cy.get('.v-menu__content')
+      .contains('CSS sprite (using world-flags-sprite)')
+      .click();
+
+    cy.get('body').focus();
+    cy.wait(200);
+    cyVPhoneCountry().toMatchImageSnapshot();
+
+    cyVPhoneCountry()
+      .contains('Afghanistan')
+      .should('have.class', 'd-sr-only')
+      .parent()
+      .should('have.class', 'v-phone-input__country__country-icon flag af')
+      .parent()
+      .should('have.class', 'f32');
+    cyVPhoneCountry()
+      .find('[role=button]')
+      .click();
+
+    cyVPhoneCountryMenu()
+      .contains('American Samoa +1684')
+      .parents('.v-list-item')
+      .find('.v-list-item__icon')
+      .contains('American Samoa')
+      .should('not.exist');
+    cyVPhoneCountryMenu()
+      .contains('American Samoa +1684')
+      .parents('.v-list-item')
+      .find('.v-list-item__icon > span')
+      .should('have.class', 'f32')
+      .find('span')
+      .should('have.class', 'v-phone-input__country__country-icon flag as');
+  });
+
+  it('should use none country icon and match snapshot', () => {
+    cy.visitDemo();
+
+    cy.contains('Country Icon Mode')
+      .parents('.v-select')
+      .find('[role=button]')
+      .click();
+    cy.get('.v-menu__content')
+      .contains('None (default)')
+      .click();
+
+    cy.get('body').focus();
+    cy.wait(200);
+    cyVPhoneCountry().toMatchImageSnapshot();
+
+    cyVPhoneCountry()
+      .contains('+93')
+      .should('not.have.class', 'd-sr-only')
+      .parent()
+      .should('not.have.class', 'v-phone-input__country__country-icon');
+    cyVPhoneCountry()
+      .find('[role=button]')
+      .click();
+
+    cyVPhoneCountryMenu()
+      .contains('American Samoa +1684')
+      .parents('.v-list-item')
+      .find('.v-list-item__icon')
+      .should('not.exist');
   });
 });
