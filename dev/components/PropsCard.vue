@@ -60,8 +60,8 @@ export default Vue.extend({
   name: 'PropsCard',
   props: {
     value: {
+      required: true,
       type: Object as PropType<Record<string, unknown>>,
-      default: () => ({}),
     },
   },
   data() {

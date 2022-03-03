@@ -58,8 +58,8 @@ export default Vue.extend({
   components: { CodeBlock },
   props: {
     inputProps: {
+      required: true,
       type: Object as PropType<Record<string, unknown>>,
-      default: () => ({}),
     },
   },
   data: () => ({
