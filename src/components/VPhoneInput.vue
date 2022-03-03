@@ -171,6 +171,7 @@ import { VPhoneInputRules } from '@/types/components';
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
 import { CountryIconMode, Message, MessageOptions, MessageResolver } from '@/types/options';
 import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
+import normalizeCountryIso2 from '@/utils/countries/normalizeCountryIso2';
 import { getOption } from '@/utils/options';
 import PhoneNumber from 'awesome-phonenumber';
 import Vue, { PropType } from 'vue';
@@ -455,9 +456,10 @@ export default Vue.extend({
       }
 
       if (this.ignoreCountries.length) {
+        const loweredIgnoredCountries = this.ignoreCountries.map(normalizeCountryIso2);
+
         return this.allCountries.filter(
-          ({ iso2 }) => this.ignoreCountries.indexOf(iso2.toUpperCase()) === -1
-            && this.ignoreCountries.indexOf(iso2.toLowerCase()) === -1,
+          ({ iso2 }) => loweredIgnoredCountries.indexOf(iso2) === -1,
         );
       }
 
@@ -653,8 +655,8 @@ export default Vue.extend({
      *
      * @returns {Country | undefined}
      */
-    findCountry(iso2 = undefined as CountryIso2 | undefined): Country | undefined {
-      return this.allCountriesByIso2[(iso2 || '').toUpperCase()];
+    findCountry(iso2?: CountryIso2): Country | undefined {
+      return this.allCountriesByIso2[normalizeCountryIso2(iso2)];
     },
     computeMessage(message: MessageResolver, options: MessageOptions): Message {
       if (typeof message === 'function') {

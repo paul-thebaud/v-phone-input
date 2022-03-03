@@ -1684,6 +1684,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/country-telephone-data@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@types/country-telephone-data/-/country-telephone-data-0.6.1.tgz#5ee0cd98895a5cf0d9242cbdc8b9fd69da9b0d9a"
+  integrity sha512-GjrvfnS+mFyEj1wOr5L7KKWHAcFgNxilP/AnNdQj2EM0R7c9rlM8OC+Pf2H5KHiMDbH/XjApJgdnjN/WYbzWew==
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.3"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.3.tgz#125b88504b61e3c8bc6f870882003253005c3224"
@@ -4319,6 +4324,11 @@ cosmiconfig@^6.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.7.2"
+
+country-telephone-data@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/country-telephone-data/-/country-telephone-data-0.6.3.tgz#02828e76ce8c32af8dd60b8e478e5b3deaad3542"
+  integrity sha512-3tQLA0vec+NDVlcaHhXGqILq/oQRsv4fRi4EedCfJqUuJUjQGdcSPM8r2IJIT2kZ5yWbiOCkXMgy7YTo8FNS2w==
 
 create-ecdh@^4.0.0:
   version "4.0.4"

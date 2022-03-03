@@ -12,7 +12,8 @@ International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 
 - Standardized value using E164 formatted phone numbers (example: +330123456789).
 - Searchable countries, validation, automatic format when a phone number is valid, and many more.
-- Modulable with customizable country's icon component, labels, validation message, etc.
+- Relies on external packages to provide countries data and icons.
+- Modulable with customizable countries list, country's icon component, labels, validation message, etc.
 - Accessibility friendly with SR only adapted namings.
 - Tested E2E using Cypress.
 

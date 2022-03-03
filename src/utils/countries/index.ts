@@ -1,8 +1,8 @@
 import { Country } from '@/types/countries';
-import countriesData from '@/utils/countries/data';
+import normalizeCountryIso2 from '@/utils/countries/normalizeCountryIso2';
+import { allCountries } from 'country-telephone-data';
 
-export default (countriesData as string[][]).map(([name, iso2, dialCode]) => ({
-  name,
-  iso2: iso2.toUpperCase(),
-  dialCode,
+export default allCountries.map((country) => ({
+  ...country,
+  iso2: normalizeCountryIso2(country.iso2),
 })) as Country[];
