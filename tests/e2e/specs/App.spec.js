@@ -14,7 +14,7 @@ describe('App.vue', () => {
     cy.wait(200);
     cy.get('#app').toMatchImageSnapshot({
       imageConfig: {
-        threshold: 0.01,
+        threshold: 0.011,
         thresholdType: 'percent',
       },
     });
