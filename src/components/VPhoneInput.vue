@@ -539,9 +539,7 @@ export default Vue.extend({
   methods: {
     onInvalidMessageChange() {
       this.onRulesChange();
-      if (this.$refs.phoneInput) {
-        this.validate();
-      }
+      this.validate();
     },
     onRulesChange() {
       const rules = this.rules.map((rule) => (
