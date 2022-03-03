@@ -33,7 +33,7 @@
       }
     }
 
-    &.v-text-field--outlined fieldset {
+    &.v-text-field--outlined:not(.v-input--is-focused) fieldset {
       border-right-width: 0;
     }
 
@@ -57,6 +57,12 @@
           min-width: 65px;
         }
       }
+    }
+  }
+
+  &__country.v-text-field--outlined.v-input--is-focused + &__phone.v-input.v-text-field--outlined:not(.v-input--is-focused) {
+    fieldset {
+      border-left-width: 0;
     }
   }
 
