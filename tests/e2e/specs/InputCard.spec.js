@@ -520,6 +520,33 @@ describe('InputCard.vue', () => {
   });
 
   [
+    ['National', '023 456 7890'],
+    ['E164', '+93234567890'],
+    ['International', '+93 23 456 7890'],
+    ['Significant', '234567890'],
+  ].forEach(([format, expectedVal]) => {
+    it(`should use ${format.toLowerCase()} style and match snapshot`, () => {
+      cy.visitDemo();
+
+      cy.contains('Display Format')
+        .parents('.v-select')
+        .find('[role=button]')
+        .click();
+      cy.get('.v-menu__content')
+        .contains(format)
+        .click();
+
+      cyVPhoneInput()
+        .find('input')
+        .type('0234567890');
+      cyVPhoneInput()
+        .find('input')
+        .invoke('val')
+        .then((val) => assert.equal(val, expectedVal));
+    });
+  });
+
+  [
     [],
     ['Dense'],
     ['Outlined'],
