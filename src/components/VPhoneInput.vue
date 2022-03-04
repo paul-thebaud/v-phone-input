@@ -409,6 +409,10 @@ export default Vue.extend({
       type: String as PropType<PhoneNumberFormat>,
       default: () => getOption('displayFormat'),
     },
+    country: {
+      type: String,
+      default: '',
+    },
     value: {
       type: String,
       default: '',
@@ -426,7 +430,7 @@ export default Vue.extend({
     return {
       guessingCountry: false,
       mergedRules: [] as InputValidationRules,
-      lazyCountry: undefined as CountryIso2 | undefined,
+      lazyCountry: this.country as CountryIso2 | undefined,
       lazyValue: this.value || '' as string | null,
       lazyPhone: { number: { input: '' } } as PhoneNumberObject,
     };
@@ -535,6 +539,7 @@ export default Vue.extend({
     },
     displayFormat: 'onDisplayFormatChange',
     value: 'onValueChange',
+    country: 'onCountryChange',
     lazyCountry: 'onLazyCountryChange',
     lazyValue: 'onLazyValueChange',
     lazyPhone: {
@@ -573,6 +578,11 @@ export default Vue.extend({
         this.lazyValue = this.formatPhoneNumber(this.lazyPhone);
       }
     },
+    onCountryChange() {
+      if (this.country && this.country !== this.lazyCountry) {
+        this.lazyCountry = this.country;
+      }
+    },
     onValueChange() {
       if (this.value !== this.lazyPhone.number.input && this.value !== this.lazyPhone.number.e164) {
         this.lazyValue = this.value || '';
@@ -581,6 +591,7 @@ export default Vue.extend({
     onLazyCountryChange(_: CountryIso2, oldLazyCountry: CountryIso2) {
       if (this.lazyCountry) {
         this.guessingCountry = false;
+        this.$emit('update:country', this.lazyCountry);
       } else {
         this.$nextTick(() => {
           if (!this.lazyCountry) {

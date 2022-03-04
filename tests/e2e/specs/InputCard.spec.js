@@ -60,7 +60,7 @@ describe('InputCard.vue', () => {
     cy.dataCy('input-card-props')
       .contains('Country')
       .parent()
-      .contains('Unknown');
+      .contains('Afghanistan');
     cy.dataCy('input-card-props')
       .contains('Options JSON')
       .parent()
@@ -447,13 +447,15 @@ describe('InputCard.vue', () => {
       .click();
 
     cyVPhoneCountryMenu()
-      .contains('American Samoa +1684')
+      .contains('American Samoa')
+      .find('span')
+      .contains('+1684')
       .parents('.v-list-item')
       .find('.v-list-item__icon')
       .contains('American Samoa')
       .should('not.exist');
     cyVPhoneCountryMenu()
-      .contains('American Samoa +1684')
+      .contains('American Samoa')
       .parents('.v-list-item')
       .find('.v-list-item__icon > span')
       .should('have.class', 'v-phone-input__country__country-icon fi fi-as');
@@ -491,13 +493,15 @@ describe('InputCard.vue', () => {
       .click();
 
     cyVPhoneCountryMenu()
-      .contains('American Samoa +1684')
+      .contains('American Samoa')
+      .find('span')
+      .contains('+1684')
       .parents('.v-list-item')
       .find('.v-list-item__icon')
       .contains('American Samoa')
       .should('not.exist');
     cyVPhoneCountryMenu()
-      .contains('American Samoa +1684')
+      .contains('American Samoa')
       .parents('.v-list-item')
       .find('.v-list-item__icon > span')
       .should('have.class', 'f32')
@@ -535,7 +539,7 @@ describe('InputCard.vue', () => {
       .click();
 
     cyVPhoneCountryMenu()
-      .contains('American Samoa +1684')
+      .contains('American Samoa')
       .parents('.v-list-item')
       .find('.v-list-item__icon')
       .should('not.exist');

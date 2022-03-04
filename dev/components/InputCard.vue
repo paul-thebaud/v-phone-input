@@ -10,9 +10,9 @@
     </v-card-subtitle>
     <v-card-text>
       <v-phone-input
-        :value="inputValue"
+        v-model="inputValue"
+        :country.sync="inputCountry"
         v-bind="inputProps"
-        @input="onInputValue"
       />
     </v-card-text>
     <v-divider role="presentation" />
@@ -64,25 +64,22 @@ export default Vue.extend({
   },
   data: () => ({
     titleCase,
+    inputCountry: '',
     inputValue: '',
   }),
   computed: {
     inputInfo() {
-      const phone = PhoneNumber(this.inputValue);
-      const iso2 = phone.getRegionCode();
-      const country = countries.find((c) => c.iso2 === iso2)?.name || 'Unknown';
-
       return {
         value: this.inputValue || '-',
-        valid: phone.isValid(),
-        country,
+        valid: PhoneNumber(this.inputValue).isValid(),
+        country: countries.find((c) => c.iso2 === this.inputCountry)?.name || 'Unknown',
       };
     },
     customOptions(): Record<string, unknown> {
       const customOptions = {} as Record<string, unknown>;
       Object.keys(this.inputProps).forEach((prop) => {
-        if (prop in DEFAULT_OPTIONS && this.inputProps[prop]) {
-          customOptions[prop] = this.inputProps[prop];
+        if (prop in DEFAULT_OPTIONS && (this.inputProps as Record<string, unknown>)[prop]) {
+          customOptions[prop] = (this.inputProps as Record<string, unknown>)[prop];
         }
       });
 
@@ -90,11 +87,6 @@ export default Vue.extend({
     },
     customOptionsJson(): string {
       return JSON.stringify(this.customOptions, null, 2);
-    },
-  },
-  methods: {
-    onInputValue(value: string): void {
-      this.inputValue = value;
     },
   },
 });
