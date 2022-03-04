@@ -138,6 +138,18 @@
       class="v-phone-input__phone"
       type="tel"
       v-bind="computedPhoneProps"
+      @blur="$emit('blur', $event)"
+      @focus="$emit('focus', $event)"
+      @click="$emit('click', $event)"
+      @click:append="$emit('click:append', $event)"
+      @click:append-outer="$emit('click:append-outer', $event)"
+      @click:clear="$emit('click:clear', $event)"
+      @click:prepend="$emit('click:prepend', $event)"
+      @click:prepend-inner="$emit('click:prepend-inner', $event)"
+      @keydown="$emit('keydown', $event)"
+      @mousedown="$emit('mousedown', $event)"
+      @mouseup="$emit('mouseup', $event)"
+      @update:error="$emit('update:error', $event)"
     >
       <!-- eslint-enable vuejs-accessibility/no-autofocus -->
       <template #append>

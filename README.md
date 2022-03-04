@@ -79,6 +79,7 @@ export default {
 - [Installation](#installation)
 - [Usage](#usage)
 - [Props](#props)
+- [Events](#events)
 - [Slots](#slots)
 - [Examples](#examples)
     - [Country icon modes](#country-icon-modes)
@@ -206,9 +207,18 @@ Vue.use(VPhoneInputPlugin, { label: 'Your Phone number' });
 | `countryProps`           | `object`                                    | `{}`                                                                  | Props to pass to the `VSelect` or `VAutocomplete` country input component.                                                        |
 | `phoneProps`             | `object`                                    | `{}`                                                                  | Props to pass to the `VTextField` phone input component.                                                                          |
 
-> You can also pass most of the
-> [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props) props to the component
-> to customize display, errors, etc.
+> You can also pass the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props)
+> props to the component to customize display, errors, etc.
+
+### Events
+
+| Name             | Type                            | Description                                                                        |
+|------------------|---------------------------------|------------------------------------------------------------------------------------|
+| `input`          | `string`                        | Emitted when the country or phone is updated with the E164 formatted phone number. |
+| `update:country` | [`CountryIso2`](#country-iso-2) | Emitted when the country is updated with the selected country.                     |
+
+> All the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props) events
+> are also re-emitted by the input.
 
 ### Slots
 
