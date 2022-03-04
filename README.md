@@ -13,7 +13,8 @@ International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 - Standardized value using E164 formatted phone numbers (example: +330123456789).
 - Searchable countries, validation, automatic format when a phone number is valid, and many more.
 - Relies on external packages to provide countries data and icons.
-- Modulable with customizable countries list, country's icon component, labels, validation message, etc.
+- Modulable with customizable countries list, country's icon component, labels, validation message,
+  etc.
 - Accessibility friendly with SR only adapted namings.
 - Tested E2E using Cypress.
 
@@ -228,7 +229,26 @@ see [v-text-field API](https://vuetifyjs.com/en/api/v-text-field/#slots)):
 - `prepend-inner`
 - `progress`
 
-The input also provides a special `country-icon` slot for [countries' icons display](#custom-slot).
+The input also provides two special slots: the `country-icon` slot for countries' icons display
+and `country-name` slot for countries' name display.
+
+```vue
+
+<template>
+  <v-phone-input>
+    <template #country-icon="{ country, decorative }">
+      <img
+          :src="`path/to/flags/${country.iso2}.png`"
+          :alt="decorative ? '' : country.name"
+      >
+    </template>
+    <template #country-name="{ country }">
+      <strong>+{{ country.dialCode }}</strong>
+      {{ country.name }}
+    </template>
+  </v-phone-input>
+</template>
+```
 
 ### Examples
 
@@ -287,21 +307,7 @@ Vue.use(VPhoneInputPlugin, {
 
 ##### Custom slot
 
-You may also provide a custom slot for the input using the `country-icon` slot.
-
-```vue
-
-<template>
-  <v-phone-input>
-    <template #country-icon="{ country, decorative }">
-      <img
-          :src="`path/to/flags/${country.iso2}.png`"
-          :alt="decorative ? '' : country.name"
-      >
-    </template>
-  </v-phone-input>
-</template>
-```
+See the [slots section](#slots).
 
 ##### No icon
 

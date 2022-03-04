@@ -76,7 +76,17 @@
             </slot>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-text="`${itemProps.item.name} +${itemProps.item.dialCode}`" />
+            <v-list-item-title>
+              <slot
+                name="country-name"
+                :country="itemProps.item"
+              >
+                {{ itemProps.item.name }}
+                <span class="text-body-2 text--secondary">
+                  +{{ itemProps.item.dialCode }}
+                </span>
+              </slot>
+            </v-list-item-title>
           </v-list-item-content>
         </slot>
       </template>
