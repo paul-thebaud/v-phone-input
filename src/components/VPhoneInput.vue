@@ -534,7 +534,7 @@ export default Vue.extend({
         ...this.countryProps,
         menuProps: {
           contentClass: 'v-phone-input__country__menu',
-          ...(this.countryProps?.menuProps || {}),
+          ...((this.countryProps ? this.countryProps.menuProps : undefined) || {}),
         },
       };
     },

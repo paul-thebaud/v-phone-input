@@ -69,10 +69,12 @@ export default Vue.extend({
   }),
   computed: {
     inputInfo() {
+      const country = countries.find((c) => c.iso2 === this.inputCountry);
+
       return {
         value: this.inputValue || '-',
         valid: PhoneNumber(this.inputValue).isValid(),
-        country: countries.find((c) => c.iso2 === this.inputCountry)?.name || 'Unknown',
+        country: country ? country.name : 'Unknown',
       };
     },
     customOptions(): Record<string, unknown> {
