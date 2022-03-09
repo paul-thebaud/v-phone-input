@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: coverage-unit
-          path: coverage-unit
+          path: coverage-unit/clover.xml
   e2e-tests:
     name: e2e-tests
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: coverage-e2e
-          path: coverage-e2e
+          path: coverage-e2e/clover.xml
       - name: Store Cypress snapshots artifact
         uses: actions/upload-artifact@v3
         if: failure()
