@@ -3,25 +3,37 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 
 describe('VPhoneInput.vue', () => {
-  const localVue = createLocalVue();
-  let vuetify;
-  beforeEach(() => {
-    vuetify = new Vuetify();
+  const makeVPhoneInput = (options = {}) => mount(VPhoneInput, {
+    localVue: createLocalVue(),
+    vuetify: new Vuetify(),
+    ...options,
   });
 
-  const makeVPhoneInput = () => mount(VPhoneInput, {
-    localVue,
-    vuetify,
+  it('should use all countries', () => {
+    const wrapper = makeVPhoneInput();
+
+    expect(wrapper.vm.sortedCountries.length).toEqual(250);
+    expect(wrapper.vm.sortedCountries.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
+    expect(wrapper.vm.sortedCountries.find((c) => c.iso2 === 'AF')).toBeTruthy();
   });
 
   it('should filter countries using onlyCountries', () => {
-    const wrapper = makeVPhoneInput();
-    wrapper.setProps({
-      onlyCountries: ['FR', 'be'],
+    const wrapper = makeVPhoneInput({
+      propsData: { onlyCountries: ['FR', 'be'] },
     });
 
-    expect(wrapper.vm.sortedCountries.length === 2);
-    expect(wrapper.vm.sortedCountries[0].iso2 === 'FR');
-    expect(wrapper.vm.sortedCountries[1].iso2 === 'BE');
+    expect(wrapper.vm.sortedCountries.length).toEqual(2);
+    expect(wrapper.vm.sortedCountries.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
+    expect(wrapper.vm.sortedCountries.find((c) => c.iso2 === 'AF')).toBeFalsy();
+  });
+
+  it('should filter countries using ignoredCountries', () => {
+    const wrapper = makeVPhoneInput({
+      propsData: { ignoredCountries: ['FR', 'be'] },
+    });
+
+    expect(wrapper.vm.sortedCountries.length).toEqual(248);
+    expect(wrapper.vm.sortedCountries.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeFalsy();
+    expect(wrapper.vm.sortedCountries.find((c) => c.iso2 === 'AF')).toBeTruthy();
   });
 });
