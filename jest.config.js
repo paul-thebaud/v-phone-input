@@ -12,11 +12,11 @@ module.exports = {
     'vue',
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/unit/jest.setup.js'],
-  transformIgnorePatterns: ['node_modules/(?!vue-router|@babel|vuetify)'],
+  transformIgnorePatterns: ['node_modules/(?!vue-router|@babel|vuetify|flag-icons|world-flags-sprite)'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
     '^.+\\.js$': 'babel-jest',
-    '.*\\.(vue)$': 'vue-jest',
+    '^.*\\.vue$': 'vue-jest',
     '^.+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
   testEnvironment: 'jsdom',
