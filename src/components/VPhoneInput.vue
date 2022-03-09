@@ -393,9 +393,9 @@ export default Vue.extend({
       type: Array as PropType<CountryIso2[]>,
       default: () => getOption('onlyCountries'),
     },
-    ignoreCountries: {
+    ignoredCountries: {
       type: Array as PropType<CountryIso2[]>,
-      default: () => getOption('ignoreCountries'),
+      default: () => getOption('ignoredCountries'),
     },
     defaultCountry: {
       type: String as PropType<CountryIso2 | undefined>,
@@ -481,11 +481,11 @@ export default Vue.extend({
         return this.getCountries(this.onlyCountries);
       }
 
-      if (this.ignoreCountries.length) {
-        const loweredIgnoredCountries = this.ignoreCountries.map(normalizeCountryIso2);
+      if (this.ignoredCountries.length) {
+        const normalizedIgnoredCountries = this.ignoredCountries.map(normalizeCountryIso2);
 
         return this.allCountries.filter(
-          ({ iso2 }) => loweredIgnoredCountries.indexOf(iso2) === -1,
+          ({ iso2 }) => normalizedIgnoredCountries.indexOf(iso2) === -1,
         );
       }
 

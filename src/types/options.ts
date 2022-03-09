@@ -27,7 +27,7 @@ export interface PluginOptions {
   allCountries: Country[];
   preferredCountries: CountryIso2[];
   onlyCountries: CountryIso2[];
-  ignoreCountries: CountryIso2[];
+  ignoredCountries: CountryIso2[];
   defaultCountry: CountryIso2 | undefined;
   countryGuesser: CountryGuesser;
   disableGuessingCountry: boolean;

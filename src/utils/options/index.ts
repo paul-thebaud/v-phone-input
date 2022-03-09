@@ -16,7 +16,7 @@ export const DEFAULT_OPTIONS: PluginOptions = {
   allCountries: countries,
   preferredCountries: [],
   onlyCountries: [],
-  ignoreCountries: [],
+  ignoredCountries: [],
   defaultCountry: undefined,
   countryGuesser: new MemoIp2cCountryGuesser(),
   disableGuessingCountry: false,
