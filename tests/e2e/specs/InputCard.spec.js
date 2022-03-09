@@ -268,7 +268,18 @@ describe('InputCard.vue', () => {
       .contains('-');
   });
 
-  it('should be enable searching countries', () => {
+  it('should detect country from international input', () => {
+    cy.visitDemo();
+
+    cyVPhoneInput()
+      .find('input')
+      .type('+33 1 23 45');
+
+    cyVPhoneCountry()
+      .contains('France');
+  });
+
+  it('should enable searching countries and force value defined', () => {
     cy.visitDemo();
 
     cy.contains('Enable Searching Country')
@@ -285,6 +296,14 @@ describe('InputCard.vue', () => {
       .contains('France')
       .parents('.v-list-item')
       .click();
+
+    cyVPhoneCountry()
+      .contains('France');
+
+    cyVPhoneCountry()
+      .find('input[type=text]')
+      .clear()
+      .type('{backspace}{enter}');
 
     cyVPhoneCountry()
       .contains('France');
