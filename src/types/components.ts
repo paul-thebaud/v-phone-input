@@ -8,6 +8,8 @@ export interface VPhoneCountryIconProps {
   readonly decorative: boolean;
 }
 
+export type VPhoneCountriesItems = ((Country & { preferred?: boolean }) | { divider: boolean })[];
+
 export type VPhoneInputRule = ((input: string) => string | boolean)
   | ((input: string, phone: PhoneNumberObject) => string | boolean)
   | ((input: string, phone: PhoneNumberObject, messageOptions: MessageOptions) => string | boolean);

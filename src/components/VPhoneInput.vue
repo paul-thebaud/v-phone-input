@@ -6,7 +6,7 @@
       v-model="lazyCountry"
       :label="computedCountryLabel"
       :aria-label="computedCountryAriaLabel"
-      :items="sortedCountries"
+      :items="countriesItems"
       :autocomplete="enableSearchingCountry ? 'new-password' : undefined"
       :aria-autocomplete="enableSearchingCountry ? 'off' : undefined"
       :loading="loading || (!disableGuessLoading && guessingCountry)"
@@ -189,7 +189,7 @@
 <script lang="ts">
 import VPhoneCountrySprite from '@/components/VPhoneCountrySprite';
 import VPhoneCountrySvg from '@/components/VPhoneCountrySvg';
-import { VPhoneInputRules } from '@/types/components';
+import { VPhoneCountriesItems, VPhoneInputRules } from '@/types/components';
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
 import { CountryIconMode, Message, MessageOptions, MessageResolver } from '@/types/options';
 import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
@@ -491,11 +491,18 @@ export default Vue.extend({
 
       return this.allCountries;
     },
-    sortedCountries(): Country[] {
-      const preferredCountries = this.getCountries(this.preferredCountries)
-        .map((country) => ({ ...country, preferred: true }));
+    countriesItems(): VPhoneCountriesItems {
+      const countriesItems = this.getCountries(this.preferredCountries)
+        .map((country) => ({ ...country, preferred: true })) as VPhoneCountriesItems;
+      if (this.filteredCountries.length) {
+        if (countriesItems.length) {
+          countriesItems.push({ divider: true });
+        }
 
-      return [...preferredCountries, ...this.filteredCountries];
+        countriesItems.push(...this.filteredCountries);
+      }
+
+      return countriesItems;
     },
     phoneExample(): string {
       return this.formatPhoneNumber(
