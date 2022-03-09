@@ -557,7 +557,7 @@ export default Vue.extend({
     },
   },
   watch: {
-    invalidMessage: 'onInvalidMessageChange',
+    computedInvalidMessage: 'onComputedInvalidMessageChange',
     rules: {
       handler: 'onRulesChange',
       immediate: true,
@@ -580,7 +580,7 @@ export default Vue.extend({
     });
   },
   methods: {
-    onInvalidMessageChange() {
+    onComputedInvalidMessageChange() {
       this.onRulesChange();
       this.validate();
     },
