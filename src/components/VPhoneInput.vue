@@ -492,14 +492,21 @@ export default Vue.extend({
       return this.allCountries;
     },
     countriesItems(): VPhoneCountriesItems {
+      const normalizedPreferredCountries = this.preferredCountries.map(normalizeCountryIso2);
+      const filteredCountries = normalizedPreferredCountries.length
+        ? this.filteredCountries.filter(
+          ({ iso2 }) => normalizedPreferredCountries.indexOf(iso2) === -1,
+        )
+        : this.filteredCountries;
+
       const countriesItems = this.getCountries(this.preferredCountries)
         .map((country) => ({ ...country, preferred: true })) as VPhoneCountriesItems;
-      if (this.filteredCountries.length) {
+      if (filteredCountries.length) {
         if (countriesItems.length) {
           countriesItems.push({ divider: true });
         }
 
-        countriesItems.push(...this.filteredCountries);
+        countriesItems.push(...filteredCountries);
       }
 
       return countriesItems;
