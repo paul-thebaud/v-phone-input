@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -39,17 +39,17 @@ jobs:
         run: yarn install -s --no-progress --non-interactive
       - name: Unit tests
         run: yarn test:unit
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+      - name: Store unit coverage artifact
+        uses: actions/upload-artifact@v3
         with:
-          directory: coverage-unit
-          flags: unit
+          name: coverage-unit
+          path: coverage-unit
   e2e-tests:
     name: e2e-tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -62,13 +62,35 @@ jobs:
           browser: chrome
           start: yarn cross-env E2E_COVERAGE=true yarn serve
           wait-on: http://localhost:8080
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+      - name: Store e2e coverage artifact
+        uses: actions/upload-artifact@v3
         with:
-          directory: coverage-e2e
-          flags: e2e
-      - uses: actions/upload-artifact@v2
+          name: coverage-e2e
+          path: coverage-e2e
+      - name: Store Cypress snapshots artifact
+        uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-snapshots
           path: tests/e2e/specs/__image_snapshots__
+  upload-coverage:
+    name: upload-coverage
+    needs: [ unit-tests, e2e-tests ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Download unit coverage artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage-unit
+          path: coverage/coverage-unit
+      - name: Download e2e coverage artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage-e2e
+          path: coverage/coverage-e2e
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          directory: coverage
