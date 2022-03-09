@@ -683,25 +683,11 @@ export default Vue.extend({
     getCountryText(country: Country): string {
       return `${country.name} ${country.iso2} ${country.dialCode}`;
     },
-    /**
-     * Get a list of countries matching given ISO2 codes.
-     *
-     * @param {CountryIso2[]} countriesIso2
-     *
-     * @returns {Country[]}
-     */
     getCountries(countriesIso2 = [] as CountryIso2[]): Country[] {
       return countriesIso2
         .map((iso2) => this.findCountry(iso2))
         .filter((c): c is Country => !!c);
     },
-    /**
-     * Find a country using its ISO2 code.
-     *
-     * @param {CountryIso2 | undefined} iso2
-     *
-     * @returns {Country | undefined}
-     */
     findCountry(iso2?: CountryIso2): Country | undefined {
       return this.allCountriesByIso2[normalizeCountryIso2(iso2)];
     },
