@@ -60,9 +60,8 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
-          start: yarn serve
+          start: yarn cross-env E2E_COVERAGE=true yarn serve
           wait-on: http://localhost:8080
-          config: pageLoadTimeout=100000,baseUrl=http://localhost:8080
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
