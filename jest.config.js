@@ -2,7 +2,6 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{ts,js,vue}', 'dev/**/*.{ts,js,vue}'],
   coverageDirectory: './coverage-unit',
-  coverageReporters: ['json', 'text', 'lcov'],
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/src/$1',
   },
