@@ -10,13 +10,14 @@
 International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 [Vue JS 2](https://vuejs.org/).
 
-- Standardized value using E164 formatted phone numbers (example: +330123456789).
-- Searchable countries, validation, automatic format when a phone number is valid, and many more.
-- Relies on external packages to provide countries data and icons.
-- Modulable with customizable countries list, country's icon component, labels, validation message,
-  etc.
-- Accessibility friendly with SR only adapted namings.
-- Tested E2E using Cypress.
+- Simple and standardized value using E164 formatted phone numbers (example: +33123456789)
+- [Searchable countries](#enabling-searching-countries)
+- [Automatic validation](#validation)
+- [Customizable display format](#customizing-display-format)
+- [Easy localization with label functions](#localization)
+- [Customizable countries icons](#country-icon-modes)
+- [Relies on external packages](#dependencies) to provide countries data and icons
+- Full unit and end-to-end tests suite
 
 Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 
@@ -85,7 +86,9 @@ export default {
     - [Country icon modes](#country-icon-modes)
     - [Validation](#validation)
     - [Enabling searching countries](#enabling-searching-countries)
+    - [Customizing display format](#customizing-display-format)
     - [Localization](#localization)
+- [Dependencies](#dependencies)
 - [Types](#types)
     - [Country ISO-2](#country-iso-2)
     - [Country](#country)
@@ -154,7 +157,10 @@ import 'flag-icons/css/flag-icons.min.css';
 
 export default {
   components: { VPhoneInput },
-  data: () => ({ phone: '' }),
+  data: () => ({
+    // Phone value will be a E164 formatted phone number (example: +33123456789).
+    phone: '',
+  }),
 };
 </script>
 ```
@@ -403,6 +409,18 @@ Vue.component('VAutocomplete', VAutocomplete);
 Vue.use(VPhoneInputPlugin, { enableSearchingCountry: true });
 ```
 
+#### Customizing display format
+
+By default, valid phone number will be formatted using the national format. You can customize the
+display format using the `displayFormat` prop/option:
+
+```javascript
+import Vue from 'vue';
+import VPhoneInputPlugin from 'v-phone-input';
+
+Vue.use(VPhoneInputPlugin, { displayFormat: 'international' });
+```
+
 #### Localization
 
 Localizable props may be defined on a per-input basis:
@@ -451,6 +469,19 @@ Vue.use(VPhoneInputPlugin, {
 > To disable a message, you should pass `null` (instead of `undefined`). This way, you'll be able
 > to disable the country label for example (be sur to provide an explicit `countryAriaLabel`
 > when doing so).
+
+### Dependencies
+
+VPhoneInput relies on multiple dependencies to work:
+
+- [`awesome-phonenumber`](https://www.npmjs.com/package/awesome-phonenumber) for phone number
+  formats, validation, etc.
+- [`country-telephone-data`](https://www.npmjs.com/package/country-telephone-data) for phone number
+  countries ISO-2, dial code and names.
+- [`flag-icons`](https://www.npmjs.com/package/flag-icons) when using the `svg` country icon mode
+  for SVG country flags.
+- [`world-flags-sprite`](https://www.npmjs.com/package/world-flags-sprite) when using the `sprite`
+  country icon mode for CSS sprite country flags.
 
 ### Types
 
