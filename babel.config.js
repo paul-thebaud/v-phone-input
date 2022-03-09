@@ -9,11 +9,14 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
+const plugins = [];
+if (process.env.E2E_COVERAGE === 'true') {
+  plugins.push(['babel-plugin-istanbul', {
+    extension: ['ts', 'js', 'vue'],
+  }]);
+}
+
 module.exports = {
   presets,
-  plugins: [
-    ['babel-plugin-istanbul', {
-      extension: ['.js', '.ts', '.vue'],
-    }],
-  ],
+  plugins,
 };

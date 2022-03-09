@@ -1,0 +1,14 @@
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "report-dir": "coverage-e2e",
+  "report": [
+    "text",
+    "json",
+    "lcov"
+  ],
+  "all": true,
+  "include": [
+    "src/**/*.{ts,js,vue}",
+    "dev/**/*.{ts,js,vue}"
+  ]
+}

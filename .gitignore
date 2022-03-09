@@ -9,7 +9,8 @@ node_modules/
 
 # coverage
 /.nyc_output/
-/coverage/
+/coverage-e2e/
+/coverage-unit/
 
 # Log files
 npm-debug.log*

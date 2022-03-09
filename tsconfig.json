@@ -18,7 +18,8 @@
     "newLine": "lf",
     "types": [
       "node",
-      "vue"
+      "vue",
+      "vuetify"
     ],
     "paths": {
       "@/*": [

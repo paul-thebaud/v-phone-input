@@ -37,7 +37,14 @@ jobs:
           node-version: '16.x'
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
-      - name: Cypress run
+      - name: Unit tests
+        run: yarn test:unit
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          directory: coverage-unit
+          flags: unit
+      - name: E2E tests
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
@@ -46,6 +53,9 @@ jobs:
           config: pageLoadTimeout=100000,baseUrl=http://localhost:8080
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
+        with:
+          directory: coverage-e2e
+          flags: e2e
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
