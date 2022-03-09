@@ -1,6 +1,5 @@
 {
   "baseUrl": "http://localhost:8080",
-  "pageLoadTimeout": 60000,
   "pluginsFile": "tests/e2e/plugins/index.js",
   "ignoreTestFiles": [
     "**/__snapshots__/*",
