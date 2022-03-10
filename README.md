@@ -17,7 +17,7 @@ International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 - [Easy localization with label functions](#localization)
 - [Customizable countries icons](#country-icon-modes)
 - [Relies on external packages](#dependencies) to provide countries data and icons
-- Full unit and end-to-end tests suite
+- Built with Typescript, fully unit/end-to-end tested
 
 Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 
