@@ -195,7 +195,7 @@ import { CountryIconMode, Message, MessageOptions, MessageResolver } from '@/typ
 import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
 import normalizeCountryIso2 from '@/utils/countries/normalizeCountryIso2';
 import { getOption } from '@/utils/options';
-import PhoneNumber from 'awesome-phonenumber';
+import PhoneUtils from '@/utils/phone';
 import Vue, { PropType } from 'vue';
 import { InputValidationRules } from 'vuetify';
 import { VSelect, VTextField } from 'vuetify/lib';
@@ -513,7 +513,7 @@ export default Vue.extend({
     },
     phoneExample(): string {
       return this.formatPhoneNumber(
-        PhoneNumber.getExample(this.activeCountry.iso2).toJSON(),
+        PhoneUtils.makeExample(this.activeCountry.iso2),
       );
     },
     computedLabel(): Message {
@@ -657,10 +657,10 @@ export default Vue.extend({
       return (this.$refs.phoneInput as unknown as { validate: () => void }).validate();
     },
     makePhoneNumber(value?: string | null, iso2?: CountryIso2): PhoneNumberObject {
-      return PhoneNumber((value || '').trim(), iso2).toJSON();
+      return PhoneUtils.make(value, iso2);
     },
     formatPhoneNumber(phone: PhoneNumberObject): string {
-      return phone.number[this.displayFormat] || phone.number.input;
+      return PhoneUtils.format(phone, this.displayFormat);
     },
     async initializeCountry(): Promise<void> {
       if (this.lazyCountry) {

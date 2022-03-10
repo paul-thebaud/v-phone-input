@@ -7,6 +7,7 @@ import countries from '@/utils/countries';
 import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';
 import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
 import { DEFAULT_OPTIONS, getOption, mergeOptions } from '@/utils/options';
+import PhoneUtils from '@/utils/phone';
 import { PluginFunction } from 'vue';
 
 const install: PluginFunction<PluginOptions> = (Vue, options?) => {
@@ -20,6 +21,7 @@ export {
   VPhoneCountrySpan,
   VPhoneCountrySprite,
   VPhoneCountrySvg,
+  PhoneUtils,
   countries,
   Ip2cCountryGuesser,
   MemoIp2cCountryGuesser,
