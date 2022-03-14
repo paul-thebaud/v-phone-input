@@ -657,7 +657,7 @@ export default Vue.extend({
       return (this.$refs.phoneInput as unknown as { validate: () => void }).validate();
     },
     makePhoneNumber(value?: string | null, iso2?: CountryIso2): PhoneNumberObject {
-      return PhoneUtils.make(value, iso2);
+      return PhoneUtils.make(value, iso2).toJSON();
     },
     formatPhoneNumber(phone: PhoneNumberObject): string {
       return PhoneUtils.format(phone, this.displayFormat);
