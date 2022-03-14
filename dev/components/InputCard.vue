@@ -47,8 +47,7 @@
 </template>
 
 <script lang="ts">
-import { countries, DEFAULT_OPTIONS } from '@/entry.esm';
-import PhoneNumber from 'awesome-phonenumber';
+import { countries, DEFAULT_OPTIONS, PhoneUtils } from '@/entry.esm';
 import Vue, { PropType } from 'vue';
 import { titleCase } from '../utils';
 import CodeBlock from './CodeBlock.vue';
@@ -73,7 +72,7 @@ export default Vue.extend({
 
       return {
         value: this.inputValue || '-',
-        valid: PhoneNumber(this.inputValue).isValid(),
+        valid: PhoneUtils.make(this.inputValue).isValid(),
         country: country ? country.name : 'Unknown',
       };
     },

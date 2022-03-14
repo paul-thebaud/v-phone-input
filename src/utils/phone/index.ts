@@ -1,17 +1,19 @@
 import { CountryIso2 } from '@/types/countries';
-import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
+import { ExtendedPhoneNumber, PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
 import PhoneNumber from 'awesome-phonenumber';
 
 export default class PhoneUtils {
+  static AwesomePhoneNumber = PhoneNumber;
+
   static make(
     phone?: string | null,
     iso2?: CountryIso2,
-  ): PhoneNumber & { toJSON: () => PhoneNumberObject } {
-    return PhoneNumber((phone || '').trim(), iso2);
+  ): ExtendedPhoneNumber {
+    return this.AwesomePhoneNumber((phone || '').trim(), iso2);
   }
 
-  static makeExample(iso2: CountryIso2): PhoneNumberObject {
-    return PhoneNumber.getExample(iso2).toJSON();
+  static makeExample(iso2: CountryIso2): ExtendedPhoneNumber {
+    return this.AwesomePhoneNumber.getExample(iso2);
   }
 
   static format(phone: PhoneNumberObject, format: PhoneNumberFormat): string {

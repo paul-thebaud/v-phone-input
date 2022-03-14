@@ -513,7 +513,7 @@ export default Vue.extend({
     },
     phoneExample(): string {
       return this.formatPhoneNumber(
-        PhoneUtils.makeExample(this.activeCountry.iso2),
+        PhoneUtils.makeExample(this.activeCountry.iso2).toJSON(),
       );
     },
     computedLabel(): Message {
