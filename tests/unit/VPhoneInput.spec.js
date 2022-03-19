@@ -53,6 +53,18 @@ describe('VPhoneInput.vue', () => {
     expect(wrapper.vm.countriesItems.find((c) => c.divider === true)).toBeFalsy();
   });
 
+  it('should use the only one country', async () => {
+    mockFetch();
+    const wrapper = makeVPhoneInput({
+      propsData: { onlyCountries: ['AF'] },
+    });
+
+    await wait(50);
+
+    expect(wrapper.vm.countriesItems.length).toEqual(1);
+    expect(wrapper.vm.lazyCountry).toEqual('AF');
+  });
+
   it('should prepend preferred countries with divider', () => {
     mockFetch();
     const wrapper = makeVPhoneInput({

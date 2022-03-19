@@ -667,6 +667,12 @@ export default Vue.extend({
         return;
       }
 
+      if (this.filteredCountries.length === 1) {
+        this.lazyCountry = this.filteredCountries[0].iso2;
+
+        return;
+      }
+
       if (!this.disableGuessingCountry) {
         this.guessingCountry = true;
 
