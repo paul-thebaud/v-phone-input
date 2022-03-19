@@ -584,7 +584,7 @@ Please see [CONTRIBUTING file](CONTRIBUTING.md) for more details.
 
 Informal discussion regarding bugs, new features, and implementation of existing features takes
 place in the
-[GitHub issue page this repository](https://github.com/paul-thebaud/v-phone-input/issues).
+[GitHub issue page of this repository](https://github.com/paul-thebaud/v-phone-input/issues).
 
 ## Credits
 
