@@ -194,6 +194,7 @@ import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
 import { CountryIconMode, Message, MessageOptions, MessageResolver } from '@/types/options';
 import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
 import normalizeCountryIso2 from '@/utils/countries/normalizeCountryIso2';
+import mapWithKey from '@/utils/mapKeys';
 import { getOption } from '@/utils/options';
 import PhoneUtils from '@/utils/phone';
 import Vue, { PropType } from 'vue';
@@ -468,13 +469,10 @@ export default Vue.extend({
         || this.fallbackCountry;
     },
     allCountriesByIso2(): Record<CountryIso2, Country> {
-      const allCountriesByIso2 = {} as Record<CountryIso2, Country>;
-
-      this.allCountries.forEach((country) => {
-        allCountriesByIso2[country.iso2] = country;
-      });
-
-      return allCountriesByIso2;
+      return mapWithKey(this.allCountries, 'iso2');
+    },
+    filteredCountriesByIso2(): Record<CountryIso2, Country> {
+      return mapWithKey(this.filteredCountries, 'iso2');
     },
     filteredCountries(): Country[] {
       if (this.onlyCountries.length) {
@@ -634,7 +632,7 @@ export default Vue.extend({
       const lazyCountry = (this.lazyValue || '').startsWith('+') ? undefined : this.lazyCountry;
       const lazyPhone = this.makePhoneNumber(this.lazyValue, lazyCountry);
       const iso2 = lazyPhone.regionCode;
-      if (iso2 && this.lazyCountry !== iso2) {
+      if (iso2 && this.lazyCountry !== iso2 && this.filteredCountriesByIso2[iso2]) {
         this.lazyCountry = iso2;
       }
 

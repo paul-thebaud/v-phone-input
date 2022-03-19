@@ -279,6 +279,17 @@ describe('InputCard.vue', () => {
       .contains('France');
   });
 
+  it('should not detect country from invalid international input', () => {
+    cy.visitDemo();
+
+    cyVPhoneInput()
+      .find('input')
+      .type('+97812345');
+
+    cyVPhoneCountry()
+      .contains('Afghanistan');
+  });
+
   it('should enable searching countries and force value defined', () => {
     cy.visitDemo();
 
