@@ -1,7 +1,7 @@
 import { MemoIp2cCountryGuesser } from '@/entry.esm';
 
 describe('memoIp2cCountryGuesser.js', () => {
-  it('should memoize promise from ip2 country guesser when not undefined', async () => {
+  it('should memoize promise from ip2c country guesser when not undefined', async () => {
     global.fetch = jest.fn(() => Promise.resolve({
       text: () => Promise.resolve('0'),
     }));
