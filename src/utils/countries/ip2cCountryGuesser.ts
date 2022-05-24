@@ -12,7 +12,7 @@ export default class Ip2cCountryGuesser implements CountryGuesser {
       return undefined;
     }
 
-    const countryData = (await response.text() || '').toString().split(';');
+    const countryData = (await response.text()).toString().split(';');
     if (!countryData || countryData[0] !== '1') {
       return undefined;
     }
