@@ -6,6 +6,7 @@ import { PluginOptions } from '@/types/options';
 import countries from '@/utils/countries';
 import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';
 import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
+import StorageMemoIp2cCountryGuesser from '@/utils/countries/storageMemoIp2cCountryGuesser';
 import { DEFAULT_OPTIONS, getOption, mergeOptions } from '@/utils/options';
 import PhoneUtils from '@/utils/phone';
 import { PluginFunction } from 'vue';
@@ -25,6 +26,7 @@ export {
   countries,
   Ip2cCountryGuesser,
   MemoIp2cCountryGuesser,
+  StorageMemoIp2cCountryGuesser,
   DEFAULT_OPTIONS,
   mergeOptions,
   getOption,
