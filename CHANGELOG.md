@@ -1,5 +1,18 @@
 # Change log
 
+## 1.x.0
+
+**Added**
+
+- `PreferableCountryGuesser` to keep the selected country across multiple guess calls.
+- `StorageMemoIp2cCountryGuesser` to memoize guessed country inside a storage implementation (
+  defaults to `localStorage`).
+
+**Changed**
+
+- `MemoIp2cCountryGuesser` and `StorageMemoIp2cCountryGuesser` implements
+  the `PreferableCountryGuesser` interface and store the preferred country as the memoized one.
+
 ## 1.4.0
 
 **Added**
