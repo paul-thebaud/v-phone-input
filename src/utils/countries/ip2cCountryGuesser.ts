@@ -6,13 +6,15 @@ export default class Ip2cCountryGuesser implements CountryGuesser {
   // eslint-disable-next-line class-methods-use-this
   public async guess(): Promise<CountryIso2 | undefined> {
     let response;
+    let responseText;
     try {
       response = await fetch(Ip2cCountryGuesser.IP2C_URL);
+      responseText = await response.text();
     } catch (_) {
       return undefined;
     }
 
-    const countryData = (await response.text()).toString().split(';');
+    const countryData = responseText.toString().split(';');
     if (!countryData || countryData[0] !== '1') {
       return undefined;
     }
