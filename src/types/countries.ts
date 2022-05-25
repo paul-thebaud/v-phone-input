@@ -9,3 +9,7 @@ export interface Country {
 export interface CountryGuesser {
   guess: () => Promise<CountryIso2 | undefined>;
 }
+
+export interface PreferableCountryGuesser extends CountryGuesser {
+  setPreference: (country: CountryIso2) => void;
+}

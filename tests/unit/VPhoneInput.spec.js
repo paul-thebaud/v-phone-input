@@ -1,26 +1,28 @@
-import { VPhoneInput } from '@/entry.esm';
+import { Ip2cCountryGuesser, VPhoneInput } from '@/entry.esm';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuetify from 'vuetify';
+import fakeIp2cFetch from './utils/fakeIp2cFetch';
 
 describe('VPhoneInput.vue', () => {
   const wait = (delay) => new Promise((r) => {
     setTimeout(r, delay);
   });
 
-  const mockFetch = () => {
-    global.fetch = jest.fn(() => Promise.resolve({
-      text: () => Promise.resolve('1;FR'),
-    }));
-  };
-
   const makeVPhoneInput = (options = {}) => mount(VPhoneInput, {
     localVue: createLocalVue(),
     vuetify: new Vuetify(),
     ...options,
+    propsData: {
+      countryGuesser: new Ip2cCountryGuesser(),
+      ...(options.propsData || {}),
+    },
+  });
+
+  beforeAll(() => {
+    fakeIp2cFetch();
   });
 
   it('should use all countries', () => {
-    mockFetch();
     const wrapper = makeVPhoneInput();
 
     expect(wrapper.vm.countriesItems.length).toEqual(250);
@@ -30,7 +32,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should filter countries using onlyCountries', () => {
-    mockFetch();
     const wrapper = makeVPhoneInput({
       propsData: { onlyCountries: ['FR', 'be'] },
     });
@@ -42,7 +43,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should filter countries using ignoredCountries', () => {
-    mockFetch();
     const wrapper = makeVPhoneInput({
       propsData: { ignoredCountries: ['FR', 'be'] },
     });
@@ -54,7 +54,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should use the only one country', async () => {
-    mockFetch();
     const wrapper = makeVPhoneInput({
       propsData: { onlyCountries: ['AF'] },
     });
@@ -66,7 +65,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should prepend preferred countries with divider', () => {
-    mockFetch();
     const wrapper = makeVPhoneInput({
       propsData: { preferredCountries: ['FR', 'be'] },
     });
@@ -78,7 +76,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should prepend preferred countries without divider', () => {
-    mockFetch();
     const wrapper = makeVPhoneInput({
       propsData: { preferredCountries: ['FR', 'be'], onlyCountries: ['FR', 'BE'] },
     });
@@ -90,7 +87,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should only use custom rules', async () => {
-    mockFetch();
     let functionRuleParams;
     const wrapper = makeVPhoneInput({
       propsData: {
@@ -127,7 +123,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should use country prop for lazy country init', async () => {
-    mockFetch();
     const wrapper = makeVPhoneInput({ propsData: { country: 'AF' } });
 
     expect(wrapper.vm.lazyCountry).toEqual('AF');
@@ -138,7 +133,6 @@ describe('VPhoneInput.vue', () => {
   });
 
   it('should use country prop for lazy country update', async () => {
-    mockFetch();
     const wrapper = makeVPhoneInput();
 
     await wait(50);
