@@ -1,4 +1,4 @@
-import { VPhoneInput } from '@/entry.esm';
+import { Ip2cCountryGuesser, VPhoneInput } from '@/entry.esm';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 
@@ -17,6 +17,10 @@ describe('VPhoneInput.vue', () => {
     localVue: createLocalVue(),
     vuetify: new Vuetify(),
     ...options,
+    propsData: {
+      countryGuesser: new Ip2cCountryGuesser(),
+      ...(options.propsData || {}),
+    },
   });
 
   it('should use all countries', () => {
