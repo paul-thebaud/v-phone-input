@@ -1,4 +1,5 @@
 import { StorageMemoIp2cCountryGuesser } from '@/entry.esm';
+import fakeIp2cFetch from './utils/fakeIp2cFetch';
 import makeFakeStorage from './utils/makeFakeStorage';
 
 describe('storageMemoIp2cCountryGuesser.js', () => {
@@ -22,9 +23,7 @@ describe('storageMemoIp2cCountryGuesser.js', () => {
   });
 
   it('should memoize promise from ip2c country guesser when not undefined', async () => {
-    global.fetch = jest.fn(() => Promise.resolve({
-      text: () => Promise.resolve('0'),
-    }));
+    fakeIp2cFetch(Promise.resolve('0'));
 
     const storageMemoIp2cCountryGuesser = new StorageMemoIp2cCountryGuesser({
       storage, key: 'dummyKey',
@@ -42,9 +41,7 @@ describe('storageMemoIp2cCountryGuesser.js', () => {
     expect(storage.setItem.mock.calls.length).toBe(0);
     expect(global.fetch.mock.calls.length).toBe(2);
 
-    global.fetch = jest.fn(() => Promise.resolve({
-      text: () => Promise.resolve('1;FR'),
-    }));
+    fakeIp2cFetch();
 
     expect(await storageMemoIp2cCountryGuesser.guess()).toBe('FR');
     expect(storage.getItem.mock.calls[0][0]).toBe('dummyKey');
@@ -62,9 +59,7 @@ describe('storageMemoIp2cCountryGuesser.js', () => {
   });
 
   it('should use preference when defined', async () => {
-    global.fetch = jest.fn(() => Promise.resolve({
-      text: () => Promise.resolve('1;FR'),
-    }));
+    fakeIp2cFetch();
 
     const storageMemoIp2cCountryGuesser = new StorageMemoIp2cCountryGuesser({
       storage,

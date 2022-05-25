@@ -1,10 +1,9 @@
 import { MemoIp2cCountryGuesser } from '@/entry.esm';
+import fakeIp2cFetch from './utils/fakeIp2cFetch';
 
 describe('memoIp2cCountryGuesser.js', () => {
   it('should memoize promise from ip2c country guesser when not undefined', async () => {
-    global.fetch = jest.fn(() => Promise.resolve({
-      text: () => Promise.resolve('0'),
-    }));
+    fakeIp2cFetch(Promise.resolve('0'));
 
     const memoIp2cCountryGuesser = new MemoIp2cCountryGuesser();
 
@@ -14,9 +13,7 @@ describe('memoIp2cCountryGuesser.js', () => {
     expect(await memoIp2cCountryGuesser.guess()).toBeUndefined();
     expect(global.fetch.mock.calls.length).toBe(2);
 
-    global.fetch = jest.fn(() => Promise.resolve({
-      text: () => Promise.resolve('1;FR'),
-    }));
+    fakeIp2cFetch();
 
     expect(await memoIp2cCountryGuesser.guess()).toBe('FR');
     expect(global.fetch.mock.calls.length).toBe(1);
@@ -26,9 +23,7 @@ describe('memoIp2cCountryGuesser.js', () => {
   });
 
   it('should use default storage and key', async () => {
-    global.fetch = jest.fn(() => Promise.resolve({
-      text: () => Promise.resolve('1;FR'),
-    }));
+    fakeIp2cFetch();
 
     const memoIp2cCountryGuesser = new MemoIp2cCountryGuesser();
 
