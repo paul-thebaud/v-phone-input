@@ -193,6 +193,7 @@ import { VPhoneCountriesItems, VPhoneInputRules } from '@/types/components';
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
 import { CountryIconMode, Message, MessageOptions, MessageResolver } from '@/types/options';
 import { PhoneNumberFormat, PhoneNumberObject } from '@/types/phone';
+import isPreferableCountryGuesser from '@/utils/countries/isPreferableCountryGuesser';
 import normalizeCountryIso2 from '@/utils/countries/normalizeCountryIso2';
 import mapWithKey from '@/utils/mapKeys';
 import { getOption } from '@/utils/options';
@@ -616,6 +617,10 @@ export default Vue.extend({
       if (this.lazyCountry) {
         this.guessingCountry = false;
         this.$emit('update:country', this.lazyCountry);
+
+        if (isPreferableCountryGuesser(this.countryGuesser)) {
+          this.countryGuesser.setPreference(this.lazyCountry);
+        }
       } else {
         this.$nextTick(() => {
           if (!this.lazyCountry) {
