@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
   }
 }
 
-const plugins = [];
+const plugins = ['@babel/plugin-proposal-class-static-block'];
 if (process.env.E2E_COVERAGE === 'true') {
   plugins.push(['babel-plugin-istanbul', {
     extension: ['ts', 'js', 'vue'],
