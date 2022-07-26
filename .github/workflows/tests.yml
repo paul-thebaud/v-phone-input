@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
       - name: Unit tests
-        run: yarn test:unit
+        run: yarn test:unit:coverage
       - name: Store unit coverage artifact
         uses: actions/upload-artifact@v3
         with:
