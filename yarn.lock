@@ -550,7 +550,7 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@istanbuljs/load-nyc-config@^1.0.0":
+"@istanbuljs/load-nyc-config@^1.0.0", "@istanbuljs/load-nyc-config@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
   integrity sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==
@@ -4602,7 +4602,7 @@ istanbul-lib-instrument@^4.0.0, istanbul-lib-instrument@^4.0.3:
     istanbul-lib-coverage "^3.0.0"
     semver "^6.3.0"
 
-istanbul-lib-instrument@^5.0.4:
+istanbul-lib-instrument@^5.0.4, istanbul-lib-instrument@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/istanbul-lib-instrument/-/istanbul-lib-instrument-5.2.0.tgz#31d18bdd127f825dd02ea7bfdfd906f8ab840e9f"
   integrity sha512-6Lthe1hqXHBNsqvgDzGO6l03XNeu3CrG4RqQ1KM9+l5+jNGpEJfIELx1NS3SEHmJQA8np/u+E4EPRKRiu6m19A==
@@ -7584,6 +7584,16 @@ vite-plugin-dts@^1.4.0:
     fast-glob "^3.2.11"
     fs-extra "^10.0.1"
     ts-morph "^14.0.0"
+
+vite-plugin-istanbul@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-istanbul/-/vite-plugin-istanbul-2.9.0.tgz#25d34b71b03d6d51e9c01d6392d70addc713452d"
+  integrity sha512-b5h1C/rqnpAairKnu1feHHynZLbWpllxig349/BdN6Y5g9Cac+6o9Gz0FU0dtyEygGLJ8sjVhInx2U6NzrKmDA==
+  dependencies:
+    "@istanbuljs/load-nyc-config" "^1.1.0"
+    istanbul-lib-instrument "^5.1.0"
+    picocolors "^1.0.0"
+    test-exclude "^6.0.0"
 
 vite-plugin-vue2@^2.0.2:
   version "2.0.2"

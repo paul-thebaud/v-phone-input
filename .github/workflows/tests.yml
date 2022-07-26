@@ -58,7 +58,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           browser: chrome
-          build: yarn demo:build
+          build: yarn demo:build --config vite.e2e.config.ts
           start: yarn demo:preview
           wait-on: http://localhost:4173
       - name: Store e2e coverage artifact
