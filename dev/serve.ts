@@ -6,19 +6,20 @@ import VueClipboard from 'vue-clipboard2';
 import { VAutocomplete } from 'vuetify/lib';
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
-import VPhoneInputPlugin from '@/entry.esm';
+import { createVPhoneInput } from '@/index';
+
+Vue.config.devtools = false;
+Vue.config.productionTip = false;
 
 // Trick to import input SCSS because it won't be available when using
 // vue-cli-service build if not dynamically imported.
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import('@/scss/v-phone-input.scss');
-Vue.use(VPhoneInputPlugin);
+// import('@/scss/v-phone-input.scss');
+Vue.use(createVPhoneInput());
 
 Vue.component('VAutocomplete', VAutocomplete);
 Vue.use(VueClipboard);
-
-Vue.config.productionTip = false;
 
 new Vue({
   vuetify,

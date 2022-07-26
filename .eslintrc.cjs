@@ -1,12 +1,12 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    es2021: true,
     jest: true,
   },
   extends: [
     'plugin:vue/recommended',
-    '@vue/airbnb',
+    'airbnb-base',
     '@vue/typescript/recommended',
   ],
   parser: 'vue-eslint-parser',
@@ -18,5 +18,20 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'import/order': ['off'], // See https://youtrack.jetbrains.com/issue/WEB-21182
     'object-curly-newline': ['off'],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        'js': 'never',
+        'jsx': 'never',
+        'ts': 'never',
+        'tsx': 'never',
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
   },
 };

@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { countries, DEFAULT_OPTIONS, PhoneUtils } from '@/entry.esm';
+import { countries, DEFAULT_OPTIONS, PhoneUtils } from '@/index';
 import Vue, { PropType } from 'vue';
 import { titleCase } from '../utils';
 import CodeBlock from './CodeBlock.vue';

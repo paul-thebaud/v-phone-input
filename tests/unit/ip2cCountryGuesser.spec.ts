@@ -1,4 +1,5 @@
-import { Ip2cCountryGuesser } from '@/entry.esm';
+import { Ip2cCountryGuesser } from '@/index';
+import { describe, expect, it } from 'vitest';
 import fakeIp2cFetch from './utils/fakeIp2cFetch';
 
 describe('ip2cCountryGuesser.js', () => {

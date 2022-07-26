@@ -2,8 +2,9 @@ import {
   Ip2cCountryGuesser,
   MemoIp2cCountryGuesser,
   StorageMemoIp2cCountryGuesser,
-} from '@/entry.esm';
+} from '@/index';
 import isPreferableCountryGuesser from '@/utils/countries/isPreferableCountryGuesser';
+import { describe, expect, it } from 'vitest';
 
 describe('isPreferableCountryGuesser.js', () => {
   it('should differentiate preferable from classic country guessers', () => {
