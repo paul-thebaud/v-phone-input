@@ -1,5 +1,9 @@
 # Change log
 
+## 2.0.0
+
+Migration to ViteJS bundler and dependencies upgrade.
+
 ## 1.5.0
 
 **Added**
