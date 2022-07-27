@@ -45,4 +45,12 @@ export default class StorageMemoIp2cCountryGuesser
   private saveStoredCountry(country: CountryIso2): void {
     this.storage.setItem(this.key, country);
   }
+
+  public getStorage() {
+    return this.storage;
+  }
+
+  public getKey() {
+    return this.key;
+  }
 }

@@ -34,10 +34,22 @@ place in the
 
 > Notice that we use Yarn as our package manager.
 
-### Running the dev app
+### Running dev app
 
 ```shell
-yarn serve
+yarn dev
+```
+
+### Building dev app for publish
+
+``` shell
+yarn demo:build
+```
+
+### Previewing built dev app
+
+``` shell
+yarn demo:preview
 ```
 
 ### Linting code
@@ -52,8 +64,14 @@ yarn lint
 yarn test:e2e
 ```
 
-### Building for publish
+### Running Unit Tests
 
 ``` shell
-yarn build
+yarn test:unit
+```
+
+### Building library for publish
+
+``` shell
+yarn lib:build
 ```

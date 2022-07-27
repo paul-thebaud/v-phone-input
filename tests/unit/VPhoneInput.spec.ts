@@ -1,14 +1,15 @@
-import { Ip2cCountryGuesser, VPhoneInput } from '@/entry.esm';
+import { Ip2cCountryGuesser, VPhoneInput } from '@/index';
 import { createLocalVue, mount } from '@vue/test-utils';
+import { beforeAll, describe, expect, it } from 'vitest';
 import Vuetify from 'vuetify';
 import fakeIp2cFetch from './utils/fakeIp2cFetch';
 
 describe('VPhoneInput.vue', () => {
-  const wait = (delay) => new Promise((r) => {
+  const wait = (delay: number) => new Promise((r) => {
     setTimeout(r, delay);
   });
 
-  const makeVPhoneInput = (options = {}) => mount(VPhoneInput, {
+  const makeVPhoneInput = (options: any = {}) => mount(VPhoneInput, {
     localVue: createLocalVue(),
     vuetify: new Vuetify(),
     ...options,
@@ -26,9 +27,9 @@ describe('VPhoneInput.vue', () => {
     const wrapper = makeVPhoneInput();
 
     expect(wrapper.vm.countriesItems.length).toEqual(250);
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'AF')).toBeTruthy();
-    expect(wrapper.vm.countriesItems.find((c) => c.divider === true)).toBeFalsy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'AF')).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.divider === true)).toBeFalsy();
   });
 
   it('should filter countries using onlyCountries', () => {
@@ -37,9 +38,9 @@ describe('VPhoneInput.vue', () => {
     });
 
     expect(wrapper.vm.countriesItems.length).toEqual(2);
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'AF')).toBeFalsy();
-    expect(wrapper.vm.countriesItems.find((c) => c.divider === true)).toBeFalsy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'AF')).toBeFalsy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.divider === true)).toBeFalsy();
   });
 
   it('should filter countries using ignoredCountries', () => {
@@ -48,9 +49,9 @@ describe('VPhoneInput.vue', () => {
     });
 
     expect(wrapper.vm.countriesItems.length).toEqual(248);
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeFalsy();
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'AF')).toBeTruthy();
-    expect(wrapper.vm.countriesItems.find((c) => c.divider === true)).toBeFalsy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeFalsy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'AF')).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.divider === true)).toBeFalsy();
   });
 
   it('should use the only one country', async () => {
@@ -70,9 +71,9 @@ describe('VPhoneInput.vue', () => {
     });
 
     expect(wrapper.vm.countriesItems.length).toEqual(251);
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'AF')).toBeTruthy();
-    expect(wrapper.vm.countriesItems.find((c) => c.divider === true)).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'AF')).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.divider === true)).toBeTruthy();
   });
 
   it('should prepend preferred countries without divider', () => {
@@ -81,19 +82,19 @@ describe('VPhoneInput.vue', () => {
     });
 
     expect(wrapper.vm.countriesItems.length).toEqual(2);
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
-    expect(wrapper.vm.countriesItems.find((c) => c.iso2 === 'AF')).toBeFalsy();
-    expect(wrapper.vm.countriesItems.find((c) => c.divider === true)).toBeFalsy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'FR' || c.iso2 === 'BE')).toBeTruthy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.iso2 === 'AF')).toBeFalsy();
+    expect(wrapper.vm.countriesItems.find((c: any) => c.divider === true)).toBeFalsy();
   });
 
   it('should only use custom rules', async () => {
-    let functionRuleParams;
+    let functionRuleParams = [] as unknown[];
     const wrapper = makeVPhoneInput({
       propsData: {
         invalidMessage: null,
         rules: [
           'foo',
-          (...args) => {
+          (...args: unknown[]) => {
             functionRuleParams = args;
             return true;
           },

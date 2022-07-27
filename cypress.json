@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:8080",
+  "baseUrl": "http://localhost:4173",
   "pluginsFile": "tests/e2e/plugins/index.js",
   "ignoreTestFiles": [
     "**/__snapshots__/*",
