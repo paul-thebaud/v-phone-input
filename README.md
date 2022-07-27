@@ -19,6 +19,9 @@ International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 - [Relies on external packages](#dependencies) to provide countries data and icons
 - Built with Typescript, fully unit/end-to-end tested
 
+Version 2 with better support for ES Modules, provided by Vite, is now released. Check
+out [the migration guide](#migrate-from-1xx-to-2xx).
+
 Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 
 **Motivation:** There are already multiple libraries to provide phone number input on Vuetify. But
@@ -51,10 +54,14 @@ Plugin installation:
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin from 'v-phone-input';
+import { createVPhoneInput } from 'v-phone-input';
 import 'flag-icons/css/flag-icons.min.css';
 
-Vue.use(VPhoneInputPlugin, { countryIconMode: 'svg' });
+const vPhoneInput = createVPhoneInput({
+  countryIconMode: 'svg',
+});
+
+Vue.use(vPhoneInput);
 ```
 
 Component usage:
@@ -78,6 +85,7 @@ export default {
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Migration](#migration)
 - [Usage](#usage)
 - [Props](#props)
 - [Events](#events)
@@ -126,17 +134,20 @@ npm install v-phone-input flag-icons
 
 ### Usage
 
-You can globally define the input using the provided plugin. This will register the `v-phone-input`
-component globally.
+You can globally define the input using the provided plugin factory. This will register
+the `v-phone-input` component globally. You must also import the package additional CSS.
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin from 'v-phone-input';
+import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 import 'flag-icons/css/flag-icons.min.css';
 
-const options = { countryIconMode: 'svg' };
+const vPhoneInput = createVPhoneInput({
+  countryIconMode: 'svg',
+});
 
-Vue.use(VPhoneInputPlugin, options);
+Vue.use(vPhoneInput);
 ```
 
 You may also only define the field on a per-file basis. Notice that with this method, you won't be
@@ -153,6 +164,7 @@ able to define props' default values for the input.
 
 <script>
 import { VPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 import 'flag-icons/css/flag-icons.min.css';
 
 export default {
@@ -164,6 +176,35 @@ export default {
 };
 </script>
 ```
+
+### Migration
+
+#### Migrate from 1.x.x to 2.x.x
+
+Upgrade the package version with Yarn:
+
+```shell
+yarn upgrade v-phone-input@^2.0.0
+```
+
+If you are using the plugin the global plugin registration method, you need to update the file where
+you are defining it:
+
+```diff
+  import Vue from 'vue';
+- import VPhoneInputPlugin from 'v-phone-input';
++ import { createVPhoneInput } from 'v-phone-input';
++ import 'v-phone-input/dist/v-phone-input.css';
+  import 'flag-icons/css/flag-icons.min.css';
+
+- Vue.use(VPhoneInputPlugin, { countryIconMode: 'svg' });
++ const vPhoneInput = createVPhoneInput({ countryIconMode: 'svg' });
++ Vue.use(vPhoneInput);
+```
+
+> CSS have been extracted to a file, so you'll also need to
+> import `v-phone-input/dist/v-phone-input.css` (even if you are using the per-file registration),
+> like in the example above.
 
 ### Props
 
@@ -178,13 +219,18 @@ You may pass those props directly the input:
 </template>
 ```
 
-Or define them as default values when registering the plugin:
+Or define them as default values when creating the plugin:
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin from 'v-phone-input';
+import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 
-Vue.use(VPhoneInputPlugin, { label: 'Your Phone number' });
+const vPhoneInput = createVPhoneInput({
+  label: 'Your phone number',
+});
+
+Vue.use(vPhoneInput);
 ```
 
 | Name                     | Type                                                               | Default                                                               | Description                                                                                                                       |
@@ -281,10 +327,15 @@ install [`flag-icons`](https://www.npmjs.com/package/flag-icons) package to use 
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin from 'v-phone-input';
+import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 import 'flag-icons/css/flag-icons.min.css';
 
-Vue.use(VPhoneInputPlugin, { countryIconMode: 'svg' });
+const vPhoneInput = createVPhoneInput({
+  countryIconMode: 'svg',
+});
+
+Vue.use(vPhoneInput);
 ```
 
 ##### Sprite
@@ -294,10 +345,15 @@ install [`world-flags-sprite`](https://www.npmjs.com/package/world-flags-sprite)
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin from 'v-phone-input';
+import { vPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 import 'world-flags-sprite/stylesheets/flags32.css';
 
-Vue.use(VPhoneInputPlugin, { countryIconMode: 'sprite' });
+const vPhoneInput = createVPhoneInput({
+  countryIconMode: 'sprite',
+});
+
+Vue.use(vPhoneInput);
 ```
 
 ##### Custom component
@@ -308,10 +364,11 @@ simplify using a CSS class image based icon system (such as another CSS sprite f
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin, { VPhoneCountrySpan } from 'v-phone-input';
+import { createVPhoneInput, VPhoneCountrySpan } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 import 'your/awesome/flag-sprite.css';
 
-Vue.use(VPhoneInputPlugin, {
+const vPhoneInput = createVPhoneInput({
   countryIconMode: {
     functional: true,
     render: (h, { props }) => h(VPhoneCountrySpan, {
@@ -320,6 +377,8 @@ Vue.use(VPhoneInputPlugin, {
     }),
   },
 });
+
+Vue.use(vPhoneInput);
 ```
 
 ##### Custom slot
@@ -401,12 +460,17 @@ To enable searching countries for all inputs as a default behavior:
 ```javascript
 import Vue from 'vue';
 import { VAutocomplete } from 'vuetify/lib';
-import VPhoneInputPlugin from 'v-phone-input';
+import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 
 // Required when dynamically using Vuetify components.
 Vue.component('VAutocomplete', VAutocomplete);
 
-Vue.use(VPhoneInputPlugin, { enableSearchingCountry: true });
+const vPhoneInput = createVPhoneInput({
+  enableSearchingCountry: true,
+});
+
+Vue.use(vPhoneInput);
 ```
 
 #### Customizing display format
@@ -416,9 +480,14 @@ display format using the `displayFormat` prop/option:
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin from 'v-phone-input';
+import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 
-Vue.use(VPhoneInputPlugin, { displayFormat: 'international' });
+const vPhoneInput = createVPhoneInput({
+  displayFormat: 'international',
+});
+
+Vue.use(vPhoneInput);
 ```
 
 #### Localization
@@ -441,10 +510,11 @@ Localizable props can also be defined for all inputs as a default behavior:
 
 ```javascript
 import Vue from 'vue';
-import VPhoneInputPlugin from 'v-phone-input';
+import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 
 // Example without any localization library.
-Vue.use(VPhoneInputPlugin, {
+const vPhoneInput = createVPhoneInput({
   label: 'Phone number',
   countryLabel: 'Country',
   countryAriaLabel: ({ label }) => `Country for ${label}`,
@@ -455,7 +525,7 @@ Vue.use(VPhoneInputPlugin, {
 // Example with Vue-I18N localization library.
 import i18n from './path/to/i18n-plugin';
 
-Vue.use(VPhoneInputPlugin, {
+const vPhoneInput = createVPhoneInput({
   label: i18n.t('phone.phoneLabel'),
   countryLabel: i18n.t('phone.phoneCountry'),
   countryAriaLabel: (options) => i18n.t('phone.phoneCountryFor', options),
