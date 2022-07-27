@@ -3,12 +3,12 @@ import path from 'path';
 import { ComponentResolverObject } from 'unplugin-vue-components';
 import { VuetifyResolver } from 'unplugin-vue-components/resolvers';
 import components from 'unplugin-vue-components/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, UserConfig } from 'vite';
 import rootConfig from './vite.root.config';
 
 const vuetifyResolver = VuetifyResolver() as ComponentResolverObject;
 
-export default defineConfig(deepmerge(rootConfig, {
+export default defineConfig(deepmerge(rootConfig as UserConfig, {
   root: path.join(__dirname, 'dev'),
   plugins: [
     components({

@@ -1,10 +1,10 @@
 import deepmerge from 'deepmerge';
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, UserConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import rootConfig from './vite.root.config';
 
-export default defineConfig(deepmerge(rootConfig, {
+export default defineConfig(deepmerge(rootConfig as UserConfig, {
   plugins: [
     dts({
       include: [path.resolve(__dirname, 'src')],
