@@ -28,16 +28,16 @@
   ],
   "main": "dist/v-phone-input.umd.cjs",
   "module": "dist/v-phone-input.js",
-  "style": "./dist/index.css",
-  "types": "dist/entry.d.ts",
+  "style": "dist/v-phone-input.css",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/v-phone-input.js",
       "require": "./dist/v-phone-input.umd.cjs"
     },
-    "./style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+    "./dist/v-phone-input.css": {
+      "import": "./dist/v-phone-input.css",
+      "require": "./dist/v-phone-input.css"
     }
   },
   "sideEffects": [
