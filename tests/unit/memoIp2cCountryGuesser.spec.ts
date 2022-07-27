@@ -2,7 +2,7 @@ import { MemoIp2cCountryGuesser } from '@/index';
 import { describe, expect, it } from 'vitest';
 import fakeIp2cFetch from './utils/fakeIp2cFetch';
 
-describe('memoIp2cCountryGuesser.js', () => {
+describe('memoIp2cCountryGuesser.ts', () => {
   it('should memoize promise from ip2c country guesser when not undefined', async () => {
     let fetchMock = fakeIp2cFetch(Promise.resolve('0'));
 

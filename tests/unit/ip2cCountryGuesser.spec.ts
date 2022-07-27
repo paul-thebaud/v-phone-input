@@ -2,7 +2,7 @@ import { Ip2cCountryGuesser } from '@/index';
 import { describe, expect, it } from 'vitest';
 import fakeIp2cFetch from './utils/fakeIp2cFetch';
 
-describe('ip2cCountryGuesser.js', () => {
+describe('ip2cCountryGuesser.ts', () => {
   it('should return undefined when fetch fails', async () => {
     fakeIp2cFetch(Promise.reject());
 

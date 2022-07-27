@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import fakeIp2cFetch from './utils/fakeIp2cFetch';
 import makeFakeStorage from './utils/makeFakeStorage';
 
-describe('storageMemoIp2cCountryGuesser.js', () => {
+describe('storageMemoIp2cCountryGuesser.ts', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let storage: any;
 
