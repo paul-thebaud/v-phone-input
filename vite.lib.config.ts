@@ -25,6 +25,9 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
         'country-telephone-data',
       ],
       output: {
+        assetFileNames: (assetInfo) => (
+          assetInfo.name == 'style.css' ? 'v-phone-input.css' : assetInfo.name
+        ),
         globals: {
           vue: 'Vue',
         },
