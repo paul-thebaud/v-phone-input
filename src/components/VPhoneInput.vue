@@ -200,11 +200,17 @@ import { getOption } from '@/utils/options';
 import PhoneUtils from '@/utils/phone';
 import Vue, { PropType } from 'vue';
 import { InputValidationRules } from 'vuetify';
-import { VSelect, VTextField } from 'vuetify/lib';
+import { VListItemContent, VListItemIcon, VListItemTitle, VSelect, VTextField } from 'vuetify/lib';
 
 export default Vue.extend({
   name: 'VPhoneInput',
-  components: { VSelect, VTextField },
+  components: {
+    VSelect,
+    VTextField,
+    VListItemIcon,
+    VListItemTitle,
+    VListItemContent,
+  },
   inheritAttrs: false,
   props: {
     label: {
