@@ -434,8 +434,26 @@ You may provide a `enableSearchingCountry` with a `true` value to enable textual
 countries.
 
 > Since VPhoneInput does not import VAutocomplete to reduce its weight, you might need to provide
-> this component to Vue when dynamically using Vuetify components
+> this component to Vue when treeshaking Vuetify components
 > (e.g. when using `vuetify-loader`).
+
+To enable searching countries for all inputs as a default behavior:
+
+```javascript
+import Vue from 'vue';
+import { VAutocomplete } from 'vuetify/lib';
+import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
+
+// IMPORTANT: required when treeshaking Vuetify components.
+Vue.component('VAutocomplete', VAutocomplete);
+
+const vPhoneInput = createVPhoneInput({
+  enableSearchingCountry: true,
+});
+
+Vue.use(vPhoneInput);
+```
 
 To enable searching countries on a per-input basis:
 
@@ -449,28 +467,10 @@ To enable searching countries on a per-input basis:
 import { VAutocomplete } from 'vuetify/lib';
 
 export default {
-  // Required when dynamically using Vuetify components.
+  // IMPORTANT: required when treeshaking Vuetify components.
   components: { VAutocomplete },
 };
 </script>
-```
-
-To enable searching countries for all inputs as a default behavior:
-
-```javascript
-import Vue from 'vue';
-import { VAutocomplete } from 'vuetify/lib';
-import { createVPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
-
-// Required when dynamically using Vuetify components.
-Vue.component('VAutocomplete', VAutocomplete);
-
-const vPhoneInput = createVPhoneInput({
-  enableSearchingCountry: true,
-});
-
-Vue.use(vPhoneInput);
 ```
 
 #### Customizing display format
