@@ -2,7 +2,16 @@
 
 ## 2.0.0
 
-Migration to ViteJS bundler and dependencies upgrade.
+Migration to Vite bundler, plugin registration changes and dependencies upgrade.
+
+**BREAKING**
+
+Check the [migration guide](README.md#migrate-from-1xx-to-2xx) inside the documentation.
+
+- Plugin is now created using a factory exported as a named
+  member `createVPhoneInput`. Options need to be passed to this factory instead of
+  the `Vue.use` registration.
+- CSS styles have been extracted into a dedicated `dist/v-phone-input.css`.
 
 ## 1.5.0
 

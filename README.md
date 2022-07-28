@@ -55,6 +55,7 @@ Plugin installation:
 ```javascript
 import Vue from 'vue';
 import { createVPhoneInput } from 'v-phone-input';
+import 'v-phone-input/dist/v-phone-input.css';
 import 'flag-icons/css/flag-icons.min.css';
 
 const vPhoneInput = createVPhoneInput({
