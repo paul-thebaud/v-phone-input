@@ -1,5 +1,115 @@
+<script lang="ts">
+import { computed, defineComponent, PropType, ref, toRef, watch } from 'vue';
+import { useTheme } from 'vuetify';
+import { VSelect, VSwitch, VTextField } from 'vuetify/components';
+import { titleCase } from '../utils';
+import filterObject from '../utils/filterObject';
+
+export default defineComponent({
+  components: {
+    VSelect,
+    VSwitch,
+    VTextField,
+  },
+  props: {
+    modelValue: {
+      required: true,
+      type: Object as PropType<Record<string, unknown>>,
+    },
+  },
+  emits: {
+    'update:modelValue': (_value: Record<string, unknown>) => true,
+  },
+  setup(props, { emit }) {
+    const theme = useTheme();
+    const themeValue = toRef(theme.global, 'name');
+
+    const createInput = (
+      component: string,
+      inputProps: Record<string, unknown> = {},
+      colProps: Record<string, unknown> = {},
+    ) => ({ type: component, inputProps, colProps });
+    const createSwitch = (colProps?: Record<string, unknown>) => createInput('v-switch', {}, colProps);
+    const createTextField = (colProps?: Record<string, unknown>) => createInput('v-text-field', {}, colProps);
+    const createSelect = (
+      items: Record<string, unknown>[],
+      colProps?: Record<string, unknown>,
+    ) => createInput('v-select', { items }, colProps);
+    const toItems = (values: (string | null)[]) => values.map((value) => ({
+      value, title: value ? titleCase(value) : 'Default',
+    }));
+
+    const search = ref('');
+    const lazyValue = ref(props.modelValue);
+    const inputs = ref({
+      enableSearchingCountry: createSwitch({ sm: 12 }),
+      countryIconMode: createSelect([
+        { value: 'text', title: 'Text (default)' },
+        { value: 'svg', title: 'SVG (using flag-icons)' },
+        { value: 'sprite', title: 'CSS sprite (using world-flags-sprite)' },
+      ]),
+      displayFormat: createSelect([
+        { value: 'national', title: 'National (default)' },
+        { value: 'e164', title: 'E164' },
+        { value: 'international', title: 'International' },
+        { value: 'significant', title: 'Significant' },
+      ]),
+      variant: createSelect(toItems(['filled', 'solo', 'outlined', 'plain', 'underlined'])),
+      density: createSelect(toItems(['default', 'comfortable', 'compact'])),
+      singleLine: createSwitch(),
+      hideDetails: createSwitch(),
+      label: createTextField(),
+      ariaLabel: createTextField(),
+      countryLabel: createTextField(),
+      countryAriaLabel: createTextField(),
+      placeholder: createTextField(),
+      persistentPlaceholder: createSwitch(),
+      hint: createTextField(),
+      persistentHint: createSwitch(),
+      invalidMessage: createTextField(),
+      error: createSwitch(),
+      clearable: createSwitch(),
+      readonly: createSwitch(),
+      disabled: createSwitch(),
+      loading: createSwitch(),
+      shaped: createSwitch(),
+    });
+    const themeItems = [{ value: 'light', title: 'Light' }, { value: 'dark', title: 'Dark' }];
+
+    const filteredInputs = computed(() => (
+      search.value
+        ? filterObject(inputs.value, (_, prop) => prop.indexOf(search.value) !== -1)
+        : inputs.value
+    ));
+
+    const onValueChange = (value: Record<string, unknown>) => {
+      lazyValue.value = value;
+    };
+
+    const onLazyValueChange = (value: Record<string, unknown>) => {
+      emit('update:modelValue', value);
+    };
+
+    watch(props.modelValue, onValueChange);
+    watch(lazyValue, onLazyValueChange);
+
+    return {
+      titleCase,
+      themeValue,
+      themeItems,
+      search,
+      lazyValue,
+      filteredInputs,
+    };
+  },
+});
+</script>
+
 <template>
-  <v-card data-cy="props-card">
+  <v-card
+    id="props-card"
+    data-cy="props-card"
+  >
     <v-card-title>
       <h2 class="text-h5">
         Configuration
@@ -9,11 +119,12 @@
       You can customize the input options here.
     </v-card-subtitle>
     <v-card-text>
-      <v-switch
-        v-model="$vuetify.theme.dark"
-        label="Dark theme"
+      <v-select
+        v-model="themeValue"
+        :prepend-inner-icon="themeValue === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+        label="Theme"
+        :items="themeItems"
         hide-details
-        inset
       />
     </v-card-text>
     <v-divider role="presentation" />
@@ -31,122 +142,23 @@
       </v-row>
       <v-row role="list">
         <v-col
-          v-for="(fieldComponent, prop) in filteredInputPropsFields"
+          v-for="(input, prop) in filteredInputs"
           :key="`inputs-${prop}`"
           role="listitem"
           cols="12"
           sm="6"
+          v-bind="input.colProps"
         >
           <component
-            :is="fieldComponent"
-            v-model="inputPropsSynced[prop]"
+            :is="input.type"
+            v-model="lazyValue[prop]"
             :data-cy="`prop-input-${prop}`"
             :label="titleCase(prop)"
-            :inset="fieldComponent === VSwitch ? true : undefined"
             hide-details
-            v-bind="inputPropsFieldsAttrs[prop] || {}"
+            v-bind="input.inputProps"
           />
         </v-col>
       </v-row>
     </v-card-text>
   </v-card>
 </template>
-
-<script lang="ts">
-import Vue, { PropType } from 'vue';
-import { VSelect, VSwitch, VTextField } from 'vuetify/lib';
-import { titleCase } from '../utils';
-
-export default Vue.extend({
-  name: 'PropsCard',
-  props: {
-    value: {
-      required: true,
-      type: Object as PropType<Record<string, unknown>>,
-    },
-  },
-  data() {
-    return {
-      VSelect,
-      VSwitch,
-      VTextField,
-      titleCase,
-      search: '',
-      inputPropsSynced: this.value,
-      inputPropsFields: {
-        countryIconMode: VSelect,
-        displayFormat: VSelect,
-        label: VTextField,
-        ariaLabel: VTextField,
-        countryLabel: VTextField,
-        countryAriaLabel: VTextField,
-        placeholder: VTextField,
-        persistentPlaceholder: VSwitch,
-        hint: VTextField,
-        persistentHint: VSwitch,
-        invalidMessage: VTextField,
-        clearable: VSwitch,
-        enableSearchingCountry: VSwitch,
-        outlined: VSwitch,
-        filled: VSwitch,
-        shaped: VSwitch,
-        flat: VSwitch,
-        rounded: VSwitch,
-        dense: VSwitch,
-        solo: VSwitch,
-        soloInverted: VSwitch,
-        loading: VSwitch,
-        disabled: VSwitch,
-        readonly: VSwitch,
-        error: VSwitch,
-        success: VSwitch,
-      } as Record<string, unknown>,
-      inputPropsFieldsAttrs: {
-        countryIconMode: {
-          items: [
-            { value: null, text: 'None (default)' },
-            { value: 'svg', text: 'SVG (using flag-icons)' },
-            { value: 'sprite', text: 'CSS sprite (using world-flags-sprite)' },
-          ],
-        },
-        displayFormat: {
-          items: [
-            { value: null, text: 'National (default)' },
-            { value: 'e164', text: 'E164' },
-            { value: 'international', text: 'International' },
-            { value: 'significant', text: 'Significant' },
-          ],
-        },
-      } as Record<string, unknown>,
-    };
-  },
-  computed: {
-    filteredInputPropsFields(): Record<string, unknown> {
-      if (!this.search) {
-        return this.inputPropsFields;
-      }
-
-      const inputPropsFields = {} as Record<string, unknown>;
-      Object.keys(this.inputPropsFields).forEach((prop) => {
-        if (prop.indexOf(this.search) !== -1) {
-          inputPropsFields[prop] = this.inputPropsFields[prop];
-        }
-      });
-
-      return inputPropsFields;
-    },
-  },
-  watch: {
-    value: 'onValueChange',
-    inputPropsSynced: 'onInputPropsSyncedChange',
-  },
-  methods: {
-    onValueChange(value: Record<string, unknown>): void {
-      this.inputPropsSynced = value;
-    },
-    onInputPropsSyncedChange(inputProps: Record<string, unknown>): void {
-      this.$emit('input', inputProps);
-    },
-  },
-});
-</script>

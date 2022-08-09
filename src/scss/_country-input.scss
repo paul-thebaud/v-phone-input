@@ -1,0 +1,80 @@
+@use "variables" as *;
+@use "country-icon";
+@use "country-menu";
+
+.v-phone-input__country__input.v-input {
+  flex-grow: 0;
+
+  &.v-input--density-compact {
+    --v-phone-input-country-icon-height: $v-phone-input-country-icon-compact-height;
+  }
+
+  &.v-input--density-comfortable {
+    .v-field--variant-underlined, .v-field--variant-plain {
+      --v-phone-input-country-icon-height: $v-phone-input-country-icon-compact-height;
+    }
+  }
+
+  .v-field {
+    min-width: 0;
+    max-width: var(--v-phone-input-country-max-width, $v-phone-input-country-input-compact-max-width);
+
+    &.v-field--variant-outlined, &.v-field--variant-filled, &.v-field--variant-solo {
+      --v-phone-input-country-max-width: #{$v-phone-input-country-input-default-max-width};
+    }
+
+    &.v-field--variant-outlined .v-field__outline .v-field__outline__end {
+      border-radius: 0;
+    }
+
+    &.v-field--variant-outlined:not(.v-field--focused) .v-field__outline .v-field__outline__end {
+      border-inline-end-width: 0;
+    }
+
+    &.v-field--variant-filled, &.v-field--variant-solo {
+      border-start-end-radius: 0;
+    }
+
+    .v-field__input input {
+      height: 1px;
+    }
+  }
+
+  &.v-input--density-compact {
+    .v-field--variant-plain, .v-field--variant-underlined {
+      .v-field__append-inner .v-icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  &.v-autocomplete {
+    transition: min-width .25s, max-width .25s;
+
+    .v-select__selections {
+      flex-wrap: nowrap;
+
+      input {
+        min-width: 0;
+        transition: min-width .25s;
+      }
+    }
+
+    .v-field__input input {
+      height: auto;
+    }
+
+    &.v-phone-input--focused {
+      min-width: 70%;
+      max-width: 70%;
+
+      .v-field {
+        --v-phone-input-country-max-width: 100%;
+      }
+
+      .v-field__input input {
+        min-width: 65px;
+      }
+    }
+  }
+}

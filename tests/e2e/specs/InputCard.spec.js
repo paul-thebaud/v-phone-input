@@ -1,18 +1,34 @@
 describe('InputCard.vue', () => {
+  function cyVPhoneWrapper() {
+    return cy.dataCy('input-wrapper');
+  }
+
   function cyVPhone() {
-    return cy.dataCy('input-card').get('.v-phone-input');
+    return cyVPhoneWrapper().get('.v-phone-input');
   }
 
   function cyVPhoneCountry() {
-    return cyVPhone().get('.v-phone-input__country');
+    return cyVPhone().get('.v-phone-input__country__input');
   }
 
   function cyVPhoneCountryMenu() {
-    return cy.get('.v-phone-input__country__menu');
+    return cy.get('.v-phone-input__country__menu .v-list', { timeout: 10000 })
+      .should('be.visible');
+  }
+
+  function cySelectMenu(menuName, optionName) {
+    cy.contains(menuName)
+      .parents('.v-select')
+      .find('[role=textbox]')
+      .click();
+    cy.get('.v-menu .v-list', { timeout: 10000 })
+      .should('be.visible')
+      .contains(optionName)
+      .click();
   }
 
   function cyVPhoneInput() {
-    return cyVPhone().get('.v-phone-input__phone');
+    return cyVPhone().get('.v-phone-input__phone__input');
   }
 
   it('should display title and description', () => {
@@ -24,26 +40,87 @@ describe('InputCard.vue', () => {
       .contains('You can try the input and copy plugin options here.');
   });
 
-  it('should copy json options and show alert', () => {
+  it('should display and copy plugin creation and show alert', () => {
     cy.visitDemo();
 
     cy.dataCy('input-card')
-      .contains('Options JSON copied to clipboard.')
+      .contains('Plugin initialization code copied to clipboard.')
       .should('not.exist');
 
     cy.dataCy('input-card')
-      .find('button[title="Copy Options JSON to clipboard"]')
+      .find('button[title="Copy Plugin initialization code to clipboard"]')
       .click();
 
     cy.dataCy('input-card')
-      .contains('Options JSON copied to clipboard.');
+      .contains('Plugin initialization code copied to clipboard.');
+
+    cy.dataCy('input-card-props')
+      .contains('Plugin initialization code copied to clipboard.');
+
+    const codeElement = () => cy.dataCy('input-card-props').get('.card--code');
+    codeElement()
+      .contains('import \'flag-icons/css/flag-icons.min.css\';')
+      .contains('import \'v-phone-input/dist/v-phone-input.css\';')
+      .contains('import { createVPhoneInput } from \'v-phone-input\';')
+      .contains('const vPhoneInput = createVPhoneInput(')
+      .contains('countryIconMode: \'svg\'')
+      .contains('app.use(vPhoneInput);');
+
+    codeElement()
+      .contains('import \'world-flags-sprite/stylesheets/flags32.css\';')
+      .should('not.exist');
+    codeElement()
+      .contains('import { VAutocomplete } from \'vuetify/components\';')
+      .should('not.exist');
+    codeElement()
+      .contains('app.component(\'VAutocomplete\', VAutocomplete);')
+      .should('not.exist');
+    codeElement()
+      .contains('countryIconMode: \'sprite\'')
+      .should('not.exist');
+    codeElement()
+      .contains('enableSearchingCountry: true')
+      .should('not.exist');
+
+    cySelectMenu('Country Icon Mode', 'CSS sprite');
+
+    codeElement()
+      .contains('import \'world-flags-sprite/stylesheets/flags32.css\';')
+      .contains('countryIconMode: \'sprite\'');
+    codeElement()
+      .contains('import \'flag-icons/css/flag-icons.min.css\';')
+      .should('not.exist');
+    codeElement()
+      .contains('countryIconMode: \'svg\'')
+      .should('not.exist');
+
+    cySelectMenu('Country Icon Mode', 'Text');
+
+    codeElement()
+      .contains('countryIconMode')
+      .should('not.exist');
+    codeElement()
+      .contains('import \'flag-icons/css/flag-icons.min.css\';')
+      .should('not.exist');
+    codeElement()
+      .contains('import \'world-flags-sprite/stylesheets/flags32.css\';')
+      .should('not.exist');
+
+    cy.contains('Enable Searching Country')
+      .parent()
+      .click();
+
+    codeElement()
+      .contains('import { VAutocomplete } from \'vuetify/components\';')
+      .contains('app.component(\'VAutocomplete\', VAutocomplete);')
+      .contains('enableSearchingCountry: true');
   });
 
-  it('should init with first country and default props', () => {
+  it('should init with first country', () => {
     cy.visitDemo();
 
     cyVPhoneCountry()
-      .contains('Afghanistan');
+      .containsCountryTitle('Afghanistan');
     cyVPhoneInput()
       .find('input')
       .invoke('val')
@@ -61,30 +138,13 @@ describe('InputCard.vue', () => {
       .contains('Country')
       .parent()
       .contains('Afghanistan');
-    cy.dataCy('input-card-props')
-      .contains('Options JSON')
-      .parent()
-      .contains(JSON.stringify({ countryIconMode: 'svg' }, null, 2));
   });
 
   it('should init with IP country', () => {
     cy.visitDemo('FR');
 
     cyVPhoneCountry()
-      .contains('France');
-  });
-
-  it('should update options json object', () => {
-    cy.visitDemo();
-
-    cy.contains('Enable Searching Country')
-      .parent()
-      .click();
-
-    cy.dataCy('input-card-props')
-      .contains('Options JSON')
-      .parent()
-      .contains(JSON.stringify({ countryIconMode: 'svg', enableSearchingCountry: true }, null, 2));
+      .containsCountryTitle('France');
   });
 
   it('should use emit value on input or country and re-format input', () => {
@@ -134,7 +194,7 @@ describe('InputCard.vue', () => {
       .contains('Afghanistan');
 
     cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=textbox]')
       .click();
 
     cy.get('body')
@@ -143,10 +203,10 @@ describe('InputCard.vue', () => {
     cyVPhoneCountryMenu()
       .scrollTo(0, 100)
       .contains('France')
-      .click();
+      .click({ force: true });
 
     cyVPhoneCountry()
-      .contains('France');
+      .containsCountryTitle('France');
     cyVPhoneInput()
       .find('input')
       .invoke('val')
@@ -208,7 +268,7 @@ describe('InputCard.vue', () => {
       .contains('France');
 
     cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=textbox]')
       .click();
 
     cy.get('body')
@@ -217,14 +277,14 @@ describe('InputCard.vue', () => {
     cyVPhoneCountryMenu()
       .scrollTo(0, 100)
       .contains('Albania')
-      .click();
+      .click({ force: true });
 
     cyVPhoneCountry()
-      .contains('Albania');
+      .containsCountryTitle('Albania');
     cyVPhoneInput()
       .find('input')
       .invoke('val')
-      .then((val) => assert.equal(val, '023 456 7890'));
+      .then((val) => assert.equal(val, '02 34 56 78 90'));
 
     cyVPhoneInput()
       .contains('The "Phone" field is not a valid phone number (example: 022 345 678).');
@@ -259,7 +319,11 @@ describe('InputCard.vue', () => {
       .contains('+93234567890');
 
     cyVPhoneInput()
-      .find('.v-input__icon--clear > button')
+      .find('input')
+      .focus();
+
+    cyVPhoneInput()
+      .find('.v-field__clearable')
       .click();
 
     cy.dataCy('input-card-props')
@@ -276,7 +340,7 @@ describe('InputCard.vue', () => {
       .type('+33 1 23 45');
 
     cyVPhoneCountry()
-      .contains('France');
+      .containsCountryTitle('France');
   });
 
   it('should not detect country from invalid international input', () => {
@@ -287,7 +351,7 @@ describe('InputCard.vue', () => {
       .type('+97812345');
 
     cyVPhoneCountry()
-      .contains('Afghanistan');
+      .containsCountryTitle('Afghanistan');
   });
 
   it('should enable searching countries and force value defined', () => {
@@ -298,10 +362,11 @@ describe('InputCard.vue', () => {
       .click();
 
     cyVPhoneCountry()
-      .contains('Afghanistan');
+      .containsCountryTitle('Afghanistan');
 
     cyVPhoneCountry()
       .find('input[type=text]')
+      .clear()
       .type('France');
     cyVPhoneCountryMenu()
       .contains('France')
@@ -309,7 +374,7 @@ describe('InputCard.vue', () => {
       .click();
 
     cyVPhoneCountry()
-      .contains('France');
+      .containsCountryTitle('France');
 
     cyVPhoneCountry()
       .find('input[type=text]')
@@ -317,7 +382,7 @@ describe('InputCard.vue', () => {
       .type('{backspace}{enter}');
 
     cyVPhoneCountry()
-      .contains('France');
+      .containsCountryTitle('France');
   });
 
   it('should use default labels', () => {
@@ -390,7 +455,9 @@ describe('InputCard.vue', () => {
       .and('contain', 'Custom aria label');
     cyVPhoneInput()
       .find('input')
-      .should('not.have.attr', 'placeholder');
+      .should('have.attr', 'placeholder')
+      .should('not.be.empty')
+      .and('contain', 'Custom placeholder');
 
     cyVPhoneInput()
       .contains('Custom hint')
@@ -404,6 +471,11 @@ describe('InputCard.vue', () => {
       .focus();
 
     cyVPhoneInput()
+      .contains('Custom hint');
+    cyVPhoneInput()
+      .contains('Custom invalid message')
+      .should('not.exist');
+    cyVPhoneInput()
       .find('input')
       .should('have.attr', 'placeholder')
       .should('not.be.empty')
@@ -413,6 +485,9 @@ describe('InputCard.vue', () => {
       .find('input')
       .type('023');
 
+    cyVPhoneInput()
+      .contains('Custom hint')
+      .should('not.exist');
     cyVPhoneInput()
       .contains('Custom invalid message');
 
@@ -450,129 +525,78 @@ describe('InputCard.vue', () => {
   it('should use svg country icon and match snapshot', () => {
     cy.visitDemo();
 
-    cy.contains('Country Icon Mode')
-      .parents('.v-select')
-      .find('[role=button]')
-      .click();
-    cy.get('.v-menu__content')
-      .contains('SVG (using flag-icons)')
-      .click();
-
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().toMatchImageSnapshot({
-      imageConfig: {
-        threshold: 0.04,
-        thresholdType: 'percent',
-      },
-    });
+    cyVPhoneCountry().compareSnapshot('input-country-svg', 0.04);
 
     cyVPhoneCountry()
-      .contains('Afghanistan')
-      .should('have.class', 'd-sr-only')
-      .parent()
-      .should('have.class', 'v-phone-input__country__country-icon fi fi-af');
+      .containsCountryTitle('Afghanistan')
+      .should('have.class', 'fi fi-af');
     cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=textbox]')
       .click();
 
     cyVPhoneCountryMenu()
       .contains('American Samoa')
-      .find('span')
-      .contains('+1684')
       .parents('.v-list-item')
-      .find('.v-list-item__icon')
-      .contains('American Samoa')
-      .should('not.exist');
-    cyVPhoneCountryMenu()
-      .contains('American Samoa')
-      .parents('.v-list-item')
-      .find('.v-list-item__icon > span')
-      .should('have.class', 'v-phone-input__country__country-icon fi fi-as');
+      .find('.v-list-item__prepend')
+      .find('.v-phone-input__country__icon.fi.fi-as')
+      .should((el) => {
+        expect(el).to.not.have.attr('role');
+        expect(el).to.not.have.attr('title');
+      });
   });
 
   it('should use sprite country icon and match snapshot', () => {
     cy.visitDemo();
 
-    cy.contains('Country Icon Mode')
-      .parents('.v-select')
-      .find('[role=button]')
-      .click();
-    cy.get('.v-menu__content')
-      .contains('CSS sprite (using world-flags-sprite)')
-      .click();
+    cySelectMenu('Country Icon Mode', 'CSS sprite (using world-flags-sprite)');
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().toMatchImageSnapshot({
-      imageConfig: {
-        threshold: 0.04,
-        thresholdType: 'percent',
-      },
-    });
+    cyVPhoneCountry().compareSnapshot('input-country-sprite', 0.04);
 
     cyVPhoneCountry()
-      .contains('Afghanistan')
-      .should('have.class', 'd-sr-only')
-      .parent()
-      .should('have.class', 'v-phone-input__country__country-icon flag af')
-      .parent()
-      .should('have.class', 'f32');
+      .containsCountryTitle('Afghanistan')
+      .should('have.class', 'f32')
+      .find('.flag.af')
+      .should('exist');
     cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=textbox]')
       .click();
 
     cyVPhoneCountryMenu()
       .contains('American Samoa')
-      .find('span')
-      .contains('+1684')
       .parents('.v-list-item')
-      .find('.v-list-item__icon')
-      .contains('American Samoa')
-      .should('not.exist');
-    cyVPhoneCountryMenu()
-      .contains('American Samoa')
-      .parents('.v-list-item')
-      .find('.v-list-item__icon > span')
-      .should('have.class', 'f32')
-      .find('span')
-      .should('have.class', 'v-phone-input__country__country-icon flag as');
+      .find('.v-list-item__prepend')
+      .find('.v-phone-input__country__icon.f32')
+      .should((el) => {
+        expect(el).to.not.have.attr('role');
+        expect(el).to.not.have.attr('title');
+      })
+      .find('.flag.as')
+      .should('be.visible');
   });
 
-  it('should use none country icon and match snapshot', () => {
+  it('should use text country icon and match snapshot', () => {
     cy.visitDemo();
 
-    cy.contains('Country Icon Mode')
-      .parents('.v-select')
-      .find('[role=button]')
-      .click();
-    cy.get('.v-menu__content')
-      .contains('None (default)')
-      .click();
+    cySelectMenu('Country Icon Mode', 'Text (default)');
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().toMatchImageSnapshot({
-      imageConfig: {
-        threshold: 0.04,
-        thresholdType: 'percent',
-      },
-    });
+    cyVPhoneCountry().compareSnapshot('input-country-text', 0.04);
 
+    cyVPhoneCountry().contains('+93');
     cyVPhoneCountry()
-      .contains('+93')
-      .should('not.have.class', 'd-sr-only')
-      .parent()
-      .should('not.have.class', 'v-phone-input__country__country-icon');
-    cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=textbox]')
       .click();
 
     cyVPhoneCountryMenu()
       .contains('American Samoa')
       .parents('.v-list-item')
-      .find('.v-list-item__icon')
-      .should('not.exist');
+      .children('.v-list-item__prepend, .v-phone-input__country__icon')
+      .should('be.empty');
   });
 
   it('should use format style', () => {
@@ -588,13 +612,7 @@ describe('InputCard.vue', () => {
       ['International', '+93 23 456 7890'],
       ['Significant', '234567890'],
     ].forEach(([format, expectedVal]) => {
-      cy.contains('Display Format')
-        .parents('.v-select')
-        .find('[role=button]')
-        .click();
-      cy.get('.v-menu__content')
-        .contains(format)
-        .click();
+      cySelectMenu('Display Format', format);
       cyVPhoneInput()
         .find('input')
         .invoke('val')
@@ -603,47 +621,31 @@ describe('InputCard.vue', () => {
   });
 
   [
-    [],
-    ['Dense'],
-    ['Outlined'],
-    ['Outlined', 'Rounded'],
-    ['Outlined', 'Rounded', 'Dense'],
-    ['Outlined', 'Shaped'],
-    ['Outlined', 'Shaped', 'Dense'],
-    ['Filled'],
-    ['Filled', 'Rounded'],
-    ['Filled', 'Rounded', 'Dense'],
-    ['Filled', 'Shaped'],
-    ['Filled', 'Shaped', 'Dense'],
-    ['Solo'],
-    ['Solo', 'Rounded'],
-    ['Solo', 'Rounded', 'Dense'],
-    ['Solo', 'Shaped'],
-    ['Solo', 'Shaped', 'Dense'],
-    ['Solo Inverted'],
-    ['Solo Inverted', 'Rounded'],
-    ['Solo Inverted', 'Rounded', 'Dense'],
-    ['Solo Inverted', 'Shaped'],
-    ['Solo Inverted', 'Shaped', 'Dense'],
-  ].forEach((styles) => {
-    const stylesName = styles.length ? styles.map((s) => s.toLowerCase()).join('+') : 'default';
-    it(`should use ${stylesName} style and match snapshot`, () => {
+    ['Filled', 'Default'],
+    ['Filled', 'Comfortable'],
+    ['Filled', 'Compact'],
+    ['Solo', 'Default'],
+    ['Solo', 'Comfortable'],
+    ['Solo', 'Compact'],
+    ['Outline', 'Default'],
+    ['Outline', 'Comfortable'],
+    ['Outline', 'Compact'],
+    ['Plain', 'Default'],
+    ['Plain', 'Comfortable'],
+    ['Plain', 'Compact'],
+    ['Underline', 'Default'],
+    ['Underline', 'Comfortable'],
+    ['Underline', 'Compact'],
+  ].forEach(([variant, density]) => {
+    it(`should use ${variant} variant with ${density} density style and match snapshot`, () => {
       cy.visitDemo();
 
-      styles.forEach((style) => {
-        cy.contains(style)
-          .parent()
-          .click();
-      });
+      cySelectMenu('Variant', variant);
+      cySelectMenu('Density', density);
 
       cy.get('body').focus();
       cy.wait(200);
-      cyVPhone().toMatchImageSnapshot({
-        imageConfig: {
-          threshold: 0.015,
-          thresholdType: 'percent',
-        },
-      });
+      cyVPhoneWrapper().compareSnapshot(`input-${variant.toLowerCase()}-${density.toLowerCase()}`, 0.015);
     });
   });
 });

@@ -1,3 +1,46 @@
+<script lang="ts">
+import { computed, defineComponent, ref } from 'vue';
+import AppFooter from './components/AppFooter.vue';
+import AppHeader from './components/AppHeader.vue';
+import InputCard from './components/InputCard.vue';
+import InstallCard from './components/InstallCard.vue';
+import PropsCard from './components/PropsCard.vue';
+import filterObject from './utils/filterObject';
+
+export default defineComponent({
+  components: {
+    AppFooter,
+    AppHeader,
+    InputCard,
+    InstallCard,
+    PropsCard,
+  },
+  setup() {
+    const stickyInputCard = !(window as any as { Cypress: boolean }).Cypress;
+
+    const guess = !!new URL(window.location.href).searchParams.get('guess');
+
+    const inputProps = ref({
+      guessCountry: guess ? true : undefined,
+      countryIconMode: 'svg',
+      displayFormat: 'national',
+      variant: 'filled',
+      density: 'default',
+    } as Record<string, unknown>);
+
+    const nonEmptyInputProps = computed(() => filterObject(inputProps.value, (value) => (
+      value !== undefined && value !== null && value !== ''
+    )));
+
+    return {
+      stickyInputCard,
+      inputProps,
+      nonEmptyInputProps,
+    };
+  },
+});
+</script>
+
 <template>
   <v-app id="app">
     <v-main class="background">
@@ -12,12 +55,13 @@
             <props-card v-model="inputProps" />
           </v-col>
           <v-col
+            class="position-relative"
             cols="12"
             md="6"
           >
             <input-card
-              :input-props="cleanedInputProps"
-              :class="{ 'input-card--sticky': hasStickyInputCard }"
+              :input-props="nonEmptyInputProps"
+              :class="{ 'card--sticky': stickyInputCard }"
             />
           </v-col>
         </v-row>
@@ -27,61 +71,20 @@
   </v-app>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import AppFooter from './components/AppFooter.vue';
-import AppHeader from './components/AppHeader.vue';
-import InputCard from './components/InputCard.vue';
-import InstallCard from './components/InstallCard.vue';
-import PropsCard from './components/PropsCard.vue';
-
-declare global {
-  interface Window {
-    Cypress: boolean;
-  }
-}
-
-export default Vue.extend({
-  name: 'App',
-  components: { AppFooter, AppHeader, InputCard, InstallCard, PropsCard },
-  data: () => ({
-    inputProps: {
-      countryIconMode: 'svg',
-      displayFormat: null,
-    } as Record<string, unknown>,
-  }),
-  computed: {
-    hasStickyInputCard(): boolean {
-      return !window.Cypress;
-    },
-    cleanedInputProps(): Record<string, unknown> {
-      const cleanedInputProps = {} as Record<string, unknown>;
-
-      Object.keys(this.inputProps).forEach((prop) => {
-        if (this.inputProps[prop] !== undefined
-          && this.inputProps[prop] !== null
-          && this.inputProps[prop] !== ''
-        ) {
-          cleanedInputProps[prop] = this.inputProps[prop];
-        }
-      });
-
-      return cleanedInputProps;
-    },
-  },
-});
-</script>
-
 <style
   lang="scss"
   scoped
 >
-  .container--limited {
-    max-width: 1185px !important;
-  }
+  #app {
+    overflow: inherit !important;
 
-  .input-card--sticky {
-    position: sticky;
-    top: 24px;
+    .container--limited {
+      max-width: 1185px !important;
+    }
+
+    .card--sticky {
+      position: sticky;
+      top: 24px;
+    }
   }
 </style>

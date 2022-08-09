@@ -1,3 +1,22 @@
+<script lang="ts">
+import { computed, defineComponent } from 'vue';
+import { useTheme } from 'vuetify';
+import logoCoWorkHitDark from '../assets/logo-coworkhit-dark.png';
+import logoCoWorkHitLight from '../assets/logo-coworkhit-light.png';
+
+export default defineComponent({
+  setup() {
+    const theme = useTheme();
+
+    const logoCoWorkHit = computed(() => (
+      theme.global.current.value.dark ? logoCoWorkHitDark : logoCoWorkHitLight
+    ));
+
+    return { logoCoWorkHit };
+  },
+});
+</script>
+
 <template>
   <footer data-cy="app-header">
     <p class="text-body-1 text-center mb-0">
@@ -34,18 +53,3 @@
     </div>
   </footer>
 </template>
-
-<script lang="ts">
-import Vue from 'vue';
-import logoCoWorkHitDark from '../assets/logo-coworkhit-dark.png';
-import logoCoWorkHitLight from '../assets/logo-coworkhit-light.png';
-
-export default Vue.extend({
-  name: 'AppFooter',
-  computed: {
-    logoCoWorkHit(): string {
-      return this.$vuetify.theme.dark ? logoCoWorkHitDark : logoCoWorkHitLight;
-    },
-  },
-});
-</script>

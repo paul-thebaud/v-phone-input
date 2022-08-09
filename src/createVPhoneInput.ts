@@ -1,16 +1,16 @@
 import VPhoneInput from '@/components/VPhoneInput.vue';
 import { PluginOptions } from '@/types/options';
 import { mergeOptions } from '@/utils/options';
-import { PluginFunction } from 'vue';
+import { Plugin } from 'vue';
 
-export default function createVPhoneInput(options?: Partial<PluginOptions>): PluginFunction<never> {
-  return (Vue, VueOptions) => {
-    if (VueOptions) {
-      throw new Error('options must be passed when calling createVPhoneInput');
+export default function createVPhoneInput(options?: Partial<PluginOptions>): Plugin {
+  return (app, pluginOptions) => {
+    if (pluginOptions) {
+      console.warn('[v-phone-input] options must be passed as first argument of createVPhoneInput()');
     }
 
     mergeOptions(options || {});
 
-    Vue.component('VPhoneInput', VPhoneInput);
+    app.component('VPhoneInput', VPhoneInput);
   };
 }

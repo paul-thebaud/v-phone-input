@@ -1,13 +1,14 @@
 import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
-import { PhoneNumberFormat } from '@/types/phone';
-import { VueConstructor } from 'vue';
+import { PhoneNumberFormat } from 'awesome-phonenumber';
+import { DefineComponent } from 'vue';
 
-export type CountryIconMode = 'svg' | 'sprite' | VueConstructor | undefined;
+export type CountryIconMode = 'svg' | 'sprite' | DefineComponent | undefined;
 
 export type Message = string | undefined | null;
 
 export interface MessageOptions {
   label?: Message;
+  country: Country;
   example: string;
 }
 
@@ -25,12 +26,12 @@ export interface PluginOptions {
   persistentHint: boolean | undefined;
   countryIconMode: CountryIconMode;
   allCountries: Country[];
-  preferredCountries: CountryIso2[];
-  onlyCountries: CountryIso2[];
-  ignoredCountries: CountryIso2[];
+  preferCountries: CountryIso2[];
+  includeCountries: CountryIso2[];
+  excludeCountries: CountryIso2[];
   defaultCountry: CountryIso2 | undefined;
   countryGuesser: CountryGuesser;
-  disableGuessingCountry: boolean;
+  guessCountry: boolean;
   disableGuessLoading: boolean;
   enableSearchingCountry: boolean;
   displayFormat: PhoneNumberFormat;

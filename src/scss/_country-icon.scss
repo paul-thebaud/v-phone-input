@@ -1,0 +1,19 @@
+@use "variables" as *;
+
+.v-phone-input__country__icon {
+  margin-inline: $v-phone-input-country-icon-margin;
+
+  &.f32 {
+    height: var(--v-phone-input-country-icon-height, $v-phone-input-country-icon-default-height);
+
+    .flag {
+      transform: scale(.75);
+      transform-origin: 0 top;
+    }
+  }
+
+  &.fi {
+    width: $v-phone-input-country-icon-default-height;
+    line-height: var(--v-phone-input-country-icon-height, $v-phone-input-country-icon-default-height);
+  }
+}

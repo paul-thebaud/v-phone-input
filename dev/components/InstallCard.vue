@@ -1,5 +1,17 @@
+<script lang="ts">
+import { defineComponent } from 'vue';
+import CodeBlock from './CodeBlock.vue';
+
+export default defineComponent({
+  components: { CodeBlock },
+});
+</script>
+
 <template>
-  <v-card data-cy="install-card">
+  <v-card
+    id="install-card"
+    data-cy="install-card"
+  >
     <v-card-title>
       <h2 class="text-h5">
         Installation
@@ -21,13 +33,3 @@
     </v-card-text>
   </v-card>
 </template>
-
-<script lang="ts">
-import Vue from 'vue';
-import CodeBlock from './CodeBlock.vue';
-
-export default Vue.extend({
-  name: 'InstallCard',
-  components: { CodeBlock },
-});
-</script>

@@ -1,14 +1,17 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
-import colors from 'vuetify/lib/util/colors';
+import { createVuetify } from 'vuetify';
+import 'vuetify/styles';
+import dark from './themes/dark';
+import light from './themes/light';
 
-Vue.use(Vuetify);
-
-export default new Vuetify({
+export default createVuetify({
   theme: {
     themes: {
-      light: { background: { base: colors.teal.lighten5 } },
-      dark: { background: { base: colors.blueGrey.darken4 } },
+      light,
+      dark,
     },
+  },
+  defaults: {
+    VTextField: { color: 'primary' },
+    VSwitch: { color: 'primary', inset: true },
   },
 });

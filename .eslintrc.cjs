@@ -3,11 +3,12 @@ module.exports = {
   env: {
     es2021: true,
     jest: true,
+    'vue/setup-compiler-macros': true,
   },
   extends: [
-    'plugin:vue/recommended',
     'airbnb-base',
-    '@vue/typescript/recommended',
+    'plugin:vue/vue3-recommended',
+    '@vue/eslint-config-typescript',
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
@@ -16,7 +17,10 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'import/order': ['off'], // See https://youtrack.jetbrains.com/issue/WEB-21182
+    // See https://stackoverflow.com/a/63767419
+    'no-unused-vars': ['off'],
+    // See https://youtrack.jetbrains.com/issue/WEB-21182
+    'import/order': ['off'],
     'object-curly-newline': ['off'],
     'import/extensions': [
       'error',
@@ -26,6 +30,13 @@ module.exports = {
         'jsx': 'never',
         'ts': 'never',
         'tsx': 'never',
+      },
+    ],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        'devDependencies': ['dev/**', 'tests/**', '*.config.ts'],
+        'optionalDependencies': ['dev/**', 'src/**', 'tests/**'],
       },
     ],
   },

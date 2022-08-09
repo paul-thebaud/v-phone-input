@@ -5,7 +5,7 @@ describe('AppHeader.vue', () => {
     cy.dataCy('app-header')
       .contains('h1', 'VPhoneInput');
     cy.dataCy('app-header')
-      .contains('p', 'International phone field for Vuetify 2.0 and Vue JS 2.');
+      .contains('p', 'International phone field for Vuetify 3 and Vue 3.');
   });
 
   it('should display package links', () => {

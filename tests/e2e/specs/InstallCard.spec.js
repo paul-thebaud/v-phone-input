@@ -23,7 +23,7 @@ describe('InstallCard.vue', () => {
       .contains('Yarn add copied to clipboard.');
 
     cy.dataCy('install-card')
-      .find('button[aria-label="Close"]')
+      .find('button[title="Close this alert"]')
       .click();
 
     cy.dataCy('install-card')
@@ -46,7 +46,7 @@ describe('InstallCard.vue', () => {
       .contains('NPM install copied to clipboard.');
 
     cy.dataCy('install-card')
-      .find('button[aria-label="Close"]')
+      .find('button[title="Close this alert"]')
       .click();
 
     cy.dataCy('install-card')

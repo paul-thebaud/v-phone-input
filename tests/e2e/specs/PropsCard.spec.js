@@ -22,7 +22,7 @@ describe('PropsCard.vue', () => {
     cy.dataCy('props-card')
       .find('[role=list]')
       .find('[role=listitem]')
-      .should('have.length', 26);
+      .should('have.length', 22);
 
     cy.dataCy('search-props').type('laceholde');
 

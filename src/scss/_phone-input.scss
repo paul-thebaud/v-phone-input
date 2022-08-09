@@ -1,0 +1,13 @@
+.v-phone-input__phone__input.v-input {
+  flex-grow: 1;
+
+  .v-field {
+    &.v-field--variant-outlined .v-field__outline > .v-field__outline__start {
+      border-radius: 0;
+    }
+
+    &.v-field--variant-filled, &.v-field--variant-solo {
+      border-start-start-radius: 0;
+    }
+  }
+}

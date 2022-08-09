@@ -1,0 +1,13 @@
+@use "variables" as *;
+
+.v-phone-input__country__menu {
+  .v-list-item {
+    .v-phone-input__country__icon {
+      margin-inline-end: $v-phone-input-country-list-item-margin;
+    }
+
+    .v-phone-input__country__append {
+      margin-inline-start: $v-phone-input-country-list-item-margin;
+    }
+  }
+}

@@ -12,24 +12,20 @@ describe('App.vue', () => {
     cy.visitDemo();
     cy.get('body').focus();
     cy.wait(200);
-    cy.get('#app').toMatchImageSnapshot({
-      imageConfig: {
-        threshold: 0.013,
-        thresholdType: 'percent',
-      },
-    });
+    cy.get('#app').compareSnapshot('home-light', 0.015);
   });
 
   it('should toggle theme to dark and match snapshot', () => {
     cy.visitDemo();
-    cy.contains('Dark theme').parent().click();
+    cy.contains('Theme')
+      .parents('.v-select')
+      .find('[role=textbox]')
+      .click();
+    cy.get('.v-menu')
+      .contains('Dark')
+      .click();
     cy.get('body').focus();
     cy.wait(200);
-    cy.get('#app').toMatchImageSnapshot({
-      imageConfig: {
-        threshold: 0.013,
-        thresholdType: 'percent',
-      },
-    });
+    cy.get('#app').compareSnapshot('home-dark', 0.015);
   });
 });

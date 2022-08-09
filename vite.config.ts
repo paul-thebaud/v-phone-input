@@ -1,35 +1,24 @@
 import deepmerge from 'deepmerge';
 import path from 'path';
-import { ComponentResolverObject } from 'unplugin-vue-components';
-import { VuetifyResolver } from 'unplugin-vue-components/resolvers';
-import components from 'unplugin-vue-components/vite';
 import { defineConfig, UserConfig } from 'vite';
+import vuetify from 'vite-plugin-vuetify';
 import rootConfig from './vite.root.config';
-
-const vuetifyResolver = VuetifyResolver() as ComponentResolverObject;
 
 export default defineConfig(deepmerge(rootConfig as UserConfig, {
   root: path.join(__dirname, 'dev'),
   plugins: [
-    components({
-      resolvers: [
-        (name) => {
-          if (!name.startsWith('VPhone')) {
-            return vuetifyResolver.resolve(name);
-          }
-        },
-      ],
-      dts: false,
-    }),
+    vuetify(),
   ],
   build: {
+    emptyOutDir: true,
     outDir: path.join(__dirname, 'dist_demo'),
   },
   test: {
+    globals: true,
     environment: 'jsdom',
     include: ['../tests/unit/**/*.spec.ts'],
+    deps: { inline: ['vuetify'] },
     setupFiles: [
-      '../tests/unit/setup/vitest.vue.setup.ts',
       '../tests/unit/setup/vitest.vuetify.setup.ts',
     ],
     coverage: {
