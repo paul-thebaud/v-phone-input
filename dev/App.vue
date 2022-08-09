@@ -79,7 +79,7 @@ export default defineComponent({
     overflow: inherit !important;
 
     .container--limited {
-      max-width: 1185px !important;
+      max-width: 1256px !important;
     }
 
     .card--sticky {
