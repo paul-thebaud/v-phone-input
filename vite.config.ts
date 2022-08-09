@@ -10,6 +10,7 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
     vuetify(),
   ],
   build: {
+    sourcemap: true,
     emptyOutDir: true,
     outDir: path.join(__dirname, 'dist_demo'),
   },
