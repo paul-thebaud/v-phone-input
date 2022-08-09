@@ -37,6 +37,7 @@
 
     &.v-field--variant-filled, &.v-field--variant-solo {
       border-start-end-radius: 0;
+      border-end-end-radius: 0;
     }
 
     .v-field__input input {
