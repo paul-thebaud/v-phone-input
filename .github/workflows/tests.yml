@@ -70,8 +70,8 @@ jobs:
         uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-snapshots
-          path: tests/e2e/specs/__image_snapshots__
+          name: snapshots-e2e
+          path: cypress-visual-screenshots
   upload-coverage:
     name: upload-coverage
     needs: [ unit-tests, e2e-tests ]
