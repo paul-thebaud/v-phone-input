@@ -25,7 +25,7 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
     coverage: {
       reportsDirectory: '../coverage-unit',
       reporter: ['text', 'json', 'html', 'lcov'],
-      include: ['src/**/*.{ts,vue}'],
+      include: ['dev/**/*.{ts,vue}', 'src/**/*.{ts,vue}'],
       exclude: [
         '**/*.setup.ts',
         '**/*.d.ts',
