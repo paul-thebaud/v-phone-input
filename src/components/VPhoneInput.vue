@@ -28,6 +28,19 @@ export type VPhoneInputValidationRule =
   | ((input: string, phone: PhoneNumberObject) => ValidationResult)
   | ((input: string, phone: PhoneNumberObject, messageOptions: MessageOptions) => ValidationResult);
 
+const INPUTS_COMMON_ATTRS = [
+  'variant',
+  'density',
+  'singleLine',
+  'direction',
+  'reverse',
+  'color',
+  'bgColor',
+  'theme',
+  'disabled',
+  'readonly',
+];
+
 export default defineComponent({
   components: {
     VListItem,
@@ -62,10 +75,6 @@ export default defineComponent({
       type: [String, Function] as PropType<MessageResolver>,
       default: () => getOption('invalidMessage'),
     },
-    hideDetails: {
-      type: [Boolean, String],
-      default: undefined,
-    },
     appendIcon: {
       type: String,
       default: undefined,
@@ -80,46 +89,6 @@ export default defineComponent({
     },
     prependInnerIcon: {
       type: String,
-      default: undefined,
-    },
-    variant: {
-      type: String,
-      default: undefined,
-    },
-    density: {
-      type: String,
-      default: undefined,
-    },
-    singleLine: {
-      type: Boolean,
-      default: undefined,
-    },
-    direction: {
-      type: String,
-      default: undefined,
-    },
-    reverse: {
-      type: Boolean,
-      default: undefined,
-    },
-    bgColor: {
-      type: String,
-      default: undefined,
-    },
-    color: {
-      type: String,
-      default: undefined,
-    },
-    theme: {
-      type: String,
-      default: undefined,
-    },
-    readonly: {
-      type: Boolean,
-      default: undefined,
-    },
-    disabled: {
-      type: Boolean,
       default: undefined,
     },
     rules: {
@@ -182,12 +151,16 @@ export default defineComponent({
       type: Object,
       default: () => ({}),
     },
+    phoneProps: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   emits: {
     'update:modelValue': (_value: string) => true,
     'update:country': (_country: CountryIso2) => true,
   },
-  setup(props, { emit, slots }) {
+  setup(props, { attrs, emit, slots }) {
     const {
       countriesCount,
       preferredCountries,
@@ -215,12 +188,23 @@ export default defineComponent({
 
     const countryAttrs = computed(() => ({
       ...countrySelectComponent.value.props,
+      ...Object.keys(attrs).reduce((filteredAttrs, attrKey) => {
+        if (INPUTS_COMMON_ATTRS.indexOf(attrKey) !== -1) {
+          return { ...filteredAttrs, [attrKey]: attrs[attrKey] };
+        }
+
+        return filteredAttrs;
+      }, {}),
       ...props.countryProps,
       menuProps: {
         maxHeight: 300,
         contentClass: 'v-phone-input__country__menu',
         ...((props.countryProps ? props.countryProps.menuProps : undefined) || {}),
       },
+    }));
+    const phoneAttrs = computed(() => ({
+      ...attrs,
+      ...props.phoneProps,
     }));
 
     const fallbackCountry = computed(() => findCountry(props.defaultCountry) || firstCountry.value);
@@ -388,6 +372,7 @@ export default defineComponent({
       countrySelectComponent,
       countryIconComponent,
       countryAttrs,
+      phoneAttrs,
       countryFocused,
       guessingCountry,
       mergeRules,
@@ -416,19 +401,8 @@ export default defineComponent({
       item-title="name"
       item-value="iso2"
       :loading="guessingCountry"
-      :hide-details="hideDetails"
       :prepend-icon="prependIcon"
       :prepend-inner-icon="prependInnerIcon"
-      :variant="variant"
-      :density="density"
-      :single-line="singleLine"
-      :direction="direction"
-      :reverse="reverse"
-      :color="color"
-      :bg-color="bgColor"
-      :theme="theme"
-      :disabled="disabled"
-      :readonly="readonly"
       :class="{ 'v-phone-input--focused': countryFocused }"
       class="v-phone-input__country__input"
       v-bind="countryAttrs"
@@ -508,22 +482,11 @@ export default defineComponent({
       :placeholder="labels.placeholder.value"
       :hint="labels.hint.value"
       :rules="mergedRules"
-      :hide-details="hideDetails"
       :append-icon="appendIcon"
       :append-inner-icon="appendInnerIcon"
-      :variant="variant"
-      :density="density"
-      :single-line="singleLine"
-      :direction="direction"
-      :reverse="reverse"
-      :color="color"
-      :bg-color="bgColor"
-      :theme="theme"
-      :disabled="disabled"
-      :readonly="readonly"
       class="v-phone-input__phone__input"
       type="tel"
-      v-bind="$attrs"
+      v-bind="phoneAttrs"
     >
       <template
         v-for="(_, name) in namespacedSlots.default"
