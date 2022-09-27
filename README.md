@@ -7,8 +7,7 @@
 ![NPM downloads](https://img.shields.io/npm/dt/v-phone-input)
 ![MIT license](https://img.shields.io/npm/l/v-phone-input)
 
-International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
-[Vue JS 2](https://vuejs.org/).
+International phone field for [Vuetify 3](http://vuetifyjs.com) and [Vue 3](https://vuejs.org/).
 
 - Simple and standardized value using E164 formatted phone numbers (example: +33123456789)
 - [Searchable countries](#enabling-searching-countries)
@@ -17,10 +16,14 @@ International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 - [Easy localization with label functions](#localization)
 - [Customizable countries icons](#country-icon-modes)
 - [Relies on external packages](#dependencies) to provide countries data and icons
-- Built with Typescript, fully unit/end-to-end tested
+- Built-in types definitions with Typescript
+- Fully unit/end-to-end tested
 
-Version 2 with better support for ES Modules, provided by Vite, is now released. Check
-out [the migration guide](#migrate-from-1xx-to-2xx).
+Coming from 2.x.x and upgrading to Vuetify 3? Checkout [the migration guide](MIGRATION.md).
+
+Wish to use this package with Vuetify
+2? [Old version 2.x.x](https://github.com/paul-thebaud/v-phone-input/tree/2.x.x) provides with
+Vuetify 2 and Vue 2.
 
 Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 
@@ -30,11 +33,8 @@ accessibility. This new library aims to provide those two.
 
 ## Demo
 
-You can try the VPhoneInput with major options configuration on
+You can try the VPhoneInput with many options and plugin registration code generation on
 the [GitHub pages demo](https://paul-thebaud.github.io/v-phone-input/).
-
-On the demo, you'll be able to try out the field option and generate your plugin registration
-options.
 
 ## TL;DR
 
@@ -53,31 +53,30 @@ npm install v-phone-input flag-icons
 Plugin installation:
 
 ```javascript
-import Vue from 'vue';
-import { createVPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
 import 'flag-icons/css/flag-icons.min.css';
+import 'v-phone-input/dist/v-phone-input.css';
+import { createVPhoneInput } from 'v-phone-input';
 
 const vPhoneInput = createVPhoneInput({
   countryIconMode: 'svg',
 });
 
-Vue.use(vPhoneInput);
+app.use(vPhoneInput);
 ```
 
 Component usage:
 
 ```vue
 
+<script setup>
+import { ref } from 'vue';
+
+const phone = ref('');
+</script>
+
 <template>
   <v-phone-input v-model="phone" />
 </template>
-
-<script>
-export default {
-  data: () => ({ phone: '' }),
-};
-</script>
 ```
 
 ## Documentation
@@ -99,7 +98,6 @@ export default {
     - [Localization](#localization)
 - [Dependencies](#dependencies)
 - [Types](#types)
-    - [Country ISO-2](#country-iso-2)
     - [Country](#country)
     - [Country guesser](#country-guesser)
     - [Phone number formats](#phone-number-formats)
@@ -110,10 +108,10 @@ export default {
 
 ### Requirements
 
-VPhoneInput requires `Vue@2` and `Vuetify@2` to be installed and working in your project.
+VPhoneInput requires `Vue@3` and `Vuetify@3` to be installed and working in your project.
 
-> VPhoneInput utilizes features of ES2015/2017 that require the need to use polyfills for
-> Internet Explorer 11 and Safari 9/10.
+> VPhoneInput utilizes recent ES features that may require polyfills for older browser like
+> Internet Explorer.
 
 > [Available country guessers](#country-guesser) requires fetch.
 
@@ -139,16 +137,18 @@ You can globally define the input using the provided plugin factory. This will r
 the `v-phone-input` component globally. You must also import the package additional CSS.
 
 ```javascript
-import Vue from 'vue';
-import { createVPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
 import 'flag-icons/css/flag-icons.min.css';
+import 'v-phone-input/dist/v-phone-input.css';
+import { createVPhoneInput } from 'v-phone-input';
+import { createApp } from 'vue';
+
+const app = createApp(App);
 
 const vPhoneInput = createVPhoneInput({
   countryIconMode: 'svg',
 });
 
-Vue.use(vPhoneInput);
+app.use(vPhoneInput);
 ```
 
 You may also only define the field on a per-file basis. Notice that with this method, you won't be
@@ -156,56 +156,26 @@ able to define props' default values for the input.
 
 ```vue
 
+<script setup>
+import 'flag-icons/css/flag-icons.min.css';
+import 'v-phone-input/dist/v-phone-input.css';
+import { VPhoneInput } from 'v-phone-input';
+import { ref } from 'vue';
+
+const phone = ref('');
+</script>
+
 <template>
   <v-phone-input
       v-model="phone"
       country-icon-mode="svg"
   />
 </template>
-
-<script>
-import { VPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
-import 'flag-icons/css/flag-icons.min.css';
-
-export default {
-  components: { VPhoneInput },
-  data: () => ({
-    // Phone value will be a E164 formatted phone number (example: +33123456789).
-    phone: '',
-  }),
-};
-</script>
 ```
 
 ### Migration
 
-#### Migrate from 1.x.x to 2.x.x
-
-Upgrade the package version with Yarn:
-
-```shell
-yarn upgrade v-phone-input@^2.0.0
-```
-
-If you are using the plugin the global plugin registration method, you need to update the file where
-you are defining it:
-
-```diff
-  import Vue from 'vue';
-- import VPhoneInputPlugin from 'v-phone-input';
-+ import { createVPhoneInput } from 'v-phone-input';
-+ import 'v-phone-input/dist/v-phone-input.css';
-  import 'flag-icons/css/flag-icons.min.css';
-
-- Vue.use(VPhoneInputPlugin, { countryIconMode: 'svg' });
-+ const vPhoneInput = createVPhoneInput({ countryIconMode: 'svg' });
-+ Vue.use(vPhoneInput);
-```
-
-> CSS have been extracted to a file, so you'll also need to
-> import `v-phone-input/dist/v-phone-input.css` (even if you are using the per-file registration),
-> like in the example above.
+Please follow the [migration guide](MIGRATION.md) if you need to migrate from version 1 or 2.
 
 ### Props
 
@@ -223,15 +193,17 @@ You may pass those props directly the input:
 Or define them as default values when creating the plugin:
 
 ```javascript
-import Vue from 'vue';
-import { createVPhoneInput } from 'v-phone-input';
 import 'v-phone-input/dist/v-phone-input.css';
+import { createVPhoneInput } from 'v-phone-input';
+import { createApp } from 'vue';
+
+const app = createApp(App);
 
 const vPhoneInput = createVPhoneInput({
   label: 'Your phone number',
 });
 
-Vue.use(vPhoneInput);
+app.use(vPhoneInput);
 ```
 
 | Name                     | Type                                                               | Default                                                               | Description                                                                                                                       |
@@ -245,12 +217,12 @@ Vue.use(vPhoneInput);
 | `invalidMessage`         | [`MessageResolver`](#message-resolver)                             | The "{label}" field is not a valid phone number (example: {example}). | The phone input message when number is invalid (see [Localization](#localization)).                                               |
 | `countryIconMode`        | `string` or `VueConstructor` or `undefined`                        | `undefined`                                                           | The country icon display mode (see [Country icon modes](#country-icon-modes)).                                                    |
 | `allCountries`           | [`Country[]`](#country)                                            | An array of all possible countries                                    | Array of countries to use.                                                                                                        |
-| `preferredCountries`     | [`CountryIso2[]`](#country-iso-2)                                  | `[]`                                                                  | Array of countries' codes to propose as first option of country input.                                                            |
-| `onlyCountries`          | [`CountryIso2[]`](#country-iso-2)                                  | `[]`                                                                  | Array of countries' codes to display as options of country input (will hide others).                                              |
-| `ignoredCountries`       | [`CountryIso2[]`](#country-iso-2)                                  | `[]`                                                                  | Array of countries' codes to hide from country input.                                                                             |
-| `defaultCountry`         | [`CountryIso2`](#country-iso-2)                                    | `undefined`                                                           | Default country to select when not guessing nor detecting from current value.                                                     |
+| `preferCountries`        | [`CountryOrIso2[]`](#country)                                      | `[]`                                                                  | Array of countries' codes to propose as first option of country input.                                                            |
+| `includeCountries`       | [`CountryOrIso2[]`](#country)                                      | `[]`                                                                  | Array of countries' codes to include as options of country input.                                                                 |
+| `excludeCountries`       | [`CountryOrIso2[]`](#country)                                      | `[]`                                                                  | Array of countries' codes to exclude from options of country input.                                                               |
+| `defaultCountry`         | [`CountryOrIso2`](#country)                                        | `undefined`                                                           | Default country to select when not guessing nor detecting from current value.                                                     |
 | `countryGuesser`         | [`CountryGuesser` or `PreferableCountryGuesser`](#country-guesser) | `new MemoIp2cCountryGuesser()`                                        | Country guesser implementation to use when guessing country (see [Country guesser](#country-guesser)).                            |
-| `disableGuessingCountry` | `boolean`                                                          | `false`                                                               | Disable guessing country.                                                                                                         |
+| `guessCountry`           | `boolean`                                                          | `false`                                                               | Enable guessing country using default or provided country guesser.                                                                |
 | `disableGuessLoading`    | `boolean`                                                          | `false`                                                               | Disable passing the country input in a loading state when guessing country.                                                       |
 | `enableSearchingCountry` | `boolean`                                                          | `false`                                                               | Turns the country input into a `VAutocomplete` input (see [Enabling searching countries example](#enabling-searching-countries)). |
 | `rules`                  | `Function[]` or `string[]`                                         | `[]`                                                                  | Additional rules to pass to phone input (see [Validation example](#validation)).                                                  |
@@ -261,40 +233,43 @@ Vue.use(vPhoneInput);
 | `phoneProps`             | `object`                                                           | `{}`                                                                  | Props to pass to the `VTextField` phone input component.                                                                          |
 
 > You can also pass the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props)
-> props to the component to customize display, errors, etc.
+> and [Vuetify `VSelect`](https://vuetifyjs.com/en/api/v-select/#props)
+> props to the component to customize variant, icons, errors, etc. using the `v-bind` directive or
+> the `countryProps` and `phoneProps` props.
 
 ### Events
 
-| Name             | Type                            | Description                                                                        |
-|------------------|---------------------------------|------------------------------------------------------------------------------------|
-| `input`          | `string`                        | Emitted when the country or phone is updated with the E164 formatted phone number. |
-| `update:country` | [`CountryIso2`](#country-iso-2) | Emitted when the country is updated with the selected country.                     |
+| Name                | Type                      | Description                                                                        |
+|---------------------|---------------------------|------------------------------------------------------------------------------------|
+| `update:modelValue` | `string`                  | Emitted when the country or phone is updated with the E164 formatted phone number. |
+| `update:country`    | [`CountryIso2`](#country) | Emitted when the country is updated with the selected country.                     |
 
-> All the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props) events
-> are also re-emitted by the input.
+> You can also bind to the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props)
+> and [Vuetify `VSelect`](https://vuetifyjs.com/en/api/v-select/#props) events
+> using the `v-bind` directive or the `countryProps` and `phoneProps` props.
 
 ### Slots
 
-The following slots are passed to the country select input (
-see [v-select API](https://vuetifyjs.com/en/api/v-select/#slots)):
+Each slots with a `country:` prefix are passed to the country input, other slots are passed to the
+phone input.
 
-- `selection`
-- `item`
+```vue
 
-The following slots are passed to the phone text input (
-see [v-text-field API](https://vuetifyjs.com/en/api/v-text-field/#slots)):
+<template>
+  <v-phone-input>
+    <template #country:label>
+      Label for country
+    </template>
+    <template #label>
+      Label for phone
+    </template>
+  </v-phone-input>
+</template>
+```
 
-- `append`
-- `append-outer`
-- `counter`
-- `label`
-- `message`
-- `prepend`
-- `prepend-inner`
-- `progress`
-
-The input also provides two special slots: the `country-icon` slot for countries' icons display
-and `country-name` slot for countries' name display.
+The input also provides two special slots: the `country-icon` slot for countries' icons
+display, `country-name` slot for countries' name display and `country-append` slot for countries'
+list items appended info display.
 
 ```vue
 
@@ -307,8 +282,10 @@ and `country-name` slot for countries' name display.
       >
     </template>
     <template #country-name="{ country }">
-      <strong>+{{ country.dialCode }}</strong>
       {{ country.name }}
+    </template>
+    <template #country-append="{ country }">
+      <strong>+{{ country.dialCode }}</strong>
     </template>
   </v-phone-input>
 </template>
@@ -327,16 +304,11 @@ This is the proposed way to use the input. Rely on an SVG flag icons package. Yo
 install [`flag-icons`](https://www.npmjs.com/package/flag-icons) package to use it.
 
 ```javascript
-import Vue from 'vue';
-import { createVPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
 import 'flag-icons/css/flag-icons.min.css';
 
 const vPhoneInput = createVPhoneInput({
   countryIconMode: 'svg',
 });
-
-Vue.use(vPhoneInput);
 ```
 
 ##### Sprite
@@ -345,16 +317,11 @@ Rely on a CSS sprite flag icons package. You must
 install [`world-flags-sprite`](https://www.npmjs.com/package/world-flags-sprite) package to use it.
 
 ```javascript
-import Vue from 'vue';
-import { vPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
 import 'world-flags-sprite/stylesheets/flags32.css';
 
 const vPhoneInput = createVPhoneInput({
   countryIconMode: 'sprite',
 });
-
-Vue.use(vPhoneInput);
 ```
 
 ##### Custom component
@@ -364,22 +331,15 @@ receive `country` and `decorative` props. We provide a simple `VPhoneCountrySpan
 simplify using a CSS class image based icon system (such as another CSS sprite file).
 
 ```javascript
-import Vue from 'vue';
-import { createVPhoneInput, VPhoneCountrySpan } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
-import 'your/awesome/flag-sprite.css';
+import { defineComponent, h } from 'vue';
 
 const vPhoneInput = createVPhoneInput({
-  countryIconMode: {
-    functional: true,
-    render: (h, { props }) => h(VPhoneCountrySpan, {
-      staticClass: `awesome-flag awesome-flag-${props.country.iso2.toLowerCase()}`,
-      props,
-    }),
-  },
+  countryIconMode: defineComponent({
+    setup(props) {
+      return () => h('span', {}, [props.country.name]);
+    },
+  }),
 });
-
-Vue.use(vPhoneInput);
 ```
 
 ##### Custom slot
@@ -389,33 +349,25 @@ See the [slots section](#slots).
 ##### No icon
 
 This is the default behavior when not overriding options or props default values. This will not
-display an icon inside the list, but will show the ISO-2 code inside the selection for screen
-readers users.
+display an icon inside the list, but will show the ISO-2 code inside the selection slot of country input.
 
 #### Validation
 
-By default , the input will validate that the phone number is a valid one by injecting a rules to
+By default, the input will validate that the phone number is a valid one by injecting a rules to
 the phone text input.
 
 You may add any additional rules by providing a `rules` prop to the input:
 
 ```vue
+<script setup>
+const rules = [
+  (value, phone, { label, country, example }) => !!value || `The "${label}" field is required.`,
+];
+</script>
 
 <template>
   <v-phone-input :rules="rules" />
 </template>
-
-<script>
-export default {
-  computed: {
-    rules() {
-      return [
-        (value, phone, { label, example }) => !!value || `The "${label}" field is required.`,
-      ];
-    },
-  },
-};
-</script>
 ```
 
 Any rule you pass as a function will receive 3 arguments (instead of one for default Vuetify rules)
@@ -424,7 +376,7 @@ that you may use when validating user's input:
 - `value`: the value contained in the phone text input.
 - `phone`: the [phone number object](#phone-number).
 - `messageOptions`: the [message options](#message-options) which you may use to inject the input
-  label or a phone example inside the message.
+  label, current country or a phone example inside the message.
 
 > If you don't want the automatic validation to run, you can pass a `null` value to the
 > `invalid-message` prop.
@@ -436,42 +388,36 @@ countries.
 
 > Since VPhoneInput does not import VAutocomplete to reduce its weight, you might need to provide
 > this component to Vue when treeshaking Vuetify components
-> (e.g. when using `vuetify-loader`).
+> (e.g. when using `vite-plugin-vuetify`).
 
 To enable searching countries for all inputs as a default behavior:
 
 ```javascript
-import Vue from 'vue';
-import { VAutocomplete } from 'vuetify/lib';
-import { createVPhoneInput } from 'v-phone-input';
 import 'v-phone-input/dist/v-phone-input.css';
+import { createVPhoneInput } from 'v-phone-input';
+import { createApp } from 'vue';
+import { VAutocomplete } from 'vuetify/components';
 
 // IMPORTANT: required when treeshaking Vuetify components.
-Vue.component('VAutocomplete', VAutocomplete);
+app.component('VAutocomplete', VAutocomplete);
 
 const vPhoneInput = createVPhoneInput({
   enableSearchingCountry: true,
 });
 
-Vue.use(vPhoneInput);
+app.use(vPhoneInput);
 ```
 
 To enable searching countries on a per-input basis:
 
 ```vue
+<script setup>
+import { VAutocomplete } from 'vuetify/components';
+</script>
 
 <template>
   <v-phone-input enable-searching-country />
 </template>
-
-<script>
-import { VAutocomplete } from 'vuetify/lib';
-
-export default {
-  // IMPORTANT: required when treeshaking Vuetify components.
-  components: { VAutocomplete },
-};
-</script>
 ```
 
 #### Customizing display format
@@ -480,15 +426,9 @@ By default, valid phone number will be formatted using the national format. You 
 display format using the `displayFormat` prop/option:
 
 ```javascript
-import Vue from 'vue';
-import { createVPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
-
 const vPhoneInput = createVPhoneInput({
   displayFormat: 'international',
 });
-
-Vue.use(vPhoneInput);
 ```
 
 #### Localization
@@ -510,10 +450,6 @@ Localizable props may be defined on a per-input basis:
 Localizable props can also be defined for all inputs as a default behavior:
 
 ```javascript
-import Vue from 'vue';
-import { createVPhoneInput } from 'v-phone-input';
-import 'v-phone-input/dist/v-phone-input.css';
-
 // Example without any localization library.
 const vPhoneInput = createVPhoneInput({
   label: 'Phone number',
@@ -527,10 +463,10 @@ const vPhoneInput = createVPhoneInput({
 import i18n from './path/to/i18n-plugin';
 
 const vPhoneInput = createVPhoneInput({
-  label: i18n.t('phone.phoneLabel'),
-  countryLabel: i18n.t('phone.phoneCountry'),
-  countryAriaLabel: (options) => i18n.t('phone.phoneCountryFor', options),
-  invalidMessage: (options) => i18n.t('phone.invalidPhoneGiven', options),
+  label: i18n.global.t('phone.phoneLabel'),
+  countryLabel: i18n.global.t('phone.phoneCountry'),
+  countryAriaLabel: (options) => i18n.global.t('phone.phoneCountryFor', options),
+  invalidMessage: (options) => i18n.global.t('phone.invalidPhoneGiven', options),
 });
 ```
 
@@ -538,7 +474,7 @@ const vPhoneInput = createVPhoneInput({
 > and `ariaLabel` props, no label will be defined for the message resolver's options.
 
 > To disable a message, you should pass `null` (instead of `undefined`). This way, you'll be able
-> to disable the country label for example (be sur to provide an explicit `countryAriaLabel`
+> to disable the country label for example (be sure to provide an explicit `countryAriaLabel`
 > when doing so).
 
 ### Dependencies
@@ -556,24 +492,22 @@ VPhoneInput relies on multiple dependencies to work:
 
 ### Types
 
-#### Country ISO-2
-
-A country ISO-2 code is a string containing 2 uppercase characters.
-
-```typescript
-type CountryIso2 = string;
-```
-
 #### Country
+
+A country ISO-2 code is a string containing 2 uppercase characters representing a country (e.g. `FR` for France).
 
 A country object contains information about a country.
 
 ```typescript
+type CountryIso2 = string;
+
 interface Country {
   name: string;       // Example: "France".
   iso2: CountryIso2;  // Example: "FR".
   dialCode: string;   // Example: "33".
 }
+
+export type CountryOrIso2 = Country | CountryIso2;
 ```
 
 #### Country Guesser
@@ -597,7 +531,7 @@ This package ships with two `CountryGuesser` implementations:
   storage implementation (defaults to `localStorage`).
 
 A preferable country guesser is a country guesser with the capability to use the user preference
-instead of the memoized guessed country.
+instead of the guessed country on future calls.
 
 ```typescript
 interface PreferableCountryGuesser extends CountryGuesser {
@@ -644,6 +578,7 @@ number for active country.
 ```typescript
 type MessageOptions = {
   label?: Message;
+  country: Country;
   example: string;
 }
 ```

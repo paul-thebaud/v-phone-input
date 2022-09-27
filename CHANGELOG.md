@@ -1,12 +1,27 @@
 # Change log
 
+## 3.0.0
+
+Migration to Vuetify 3 and Vue 3, props and exported modules changes, dependencies upgrade.
+
+**BREAKING**
+
+Check the [migration guide](MIGRATION.md#migrate-from-2xx-to-3xx).
+
+Summary:
+
+- Vuetify 3 and Vue 3 required instead of Vuetify 2 and Vue 2.
+- Some props and exported modules names and behavior changes.
+
 ## 2.0.0
 
 Migration to Vite bundler, plugin registration changes and dependencies upgrade.
 
 **BREAKING**
 
-Check the [migration guide](README.md#migrate-from-1xx-to-2xx) inside the documentation.
+Check the [migration guide](MIGRATION.md#migrate-from-1xx-to-2xx).
+
+Summary:
 
 - Plugin is now created using a factory exported as a named
   member `createVPhoneInput`. Options need to be passed to this factory instead of

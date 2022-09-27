@@ -32,6 +32,7 @@ const INPUTS_COMMON_ATTRS = [
   'variant',
   'density',
   'singleLine',
+  'hideDetails',
   'direction',
   'reverse',
   'color',

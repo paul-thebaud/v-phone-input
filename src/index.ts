@@ -1,5 +1,5 @@
-import VPhoneCountrySprite from '@/components/VCountryIconSprite';
-import VPhoneCountrySvg from '@/components/VCountryIconSvg';
+import VCountryIconSprite from '@/components/VCountryIconSprite';
+import VCountryIconSvg from '@/components/VCountryIconSvg';
 import VPhoneInput from '@/components/VPhoneInput.vue';
 import createVPhoneInput from '@/createVPhoneInput';
 import countries from '@/utils/countries';
@@ -14,8 +14,8 @@ import makePhone from '@/utils/phone/makePhone';
 export {
   createVPhoneInput,
   VPhoneInput,
-  VPhoneCountrySprite,
-  VPhoneCountrySvg,
+  VCountryIconSprite,
+  VCountryIconSvg,
   countries,
   Ip2cCountryGuesser,
   MemoIp2cCountryGuesser,

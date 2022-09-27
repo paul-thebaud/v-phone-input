@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.0.0",
   "license": "MIT",
-  "description": "International phone field for Vuetify 2.0 and Vue JS 2.",
+  "description": "International phone field for Vuetify 3 and Vue 3.",
   "homepage": "https://paul-thebaud.github.io/v-phone-input/",
   "repository": {
     "type": "git",
@@ -20,7 +20,9 @@
     "phone input",
     "telephone input",
     "input",
-    "international phone"
+    "international phone",
+    "vue 3",
+    "vuetify 3"
   ],
   "files": [
     "dist/*",
@@ -47,7 +49,7 @@
     "lint": "eslint --ext .js,.ts,.vue src dev",
     "test:e2e": "cypress run --headed --browser chrome",
     "test:unit": "vitest",
-    "test:unit:coverage": "c8 vitest",
+    "test:unit:coverage": "vitest --coverage",
     "dev": "vite",
     "demo:build": "vue-tsc --noEmit && vite build",
     "demo:build:watch": "vue-tsc --noEmit && vite build --watch",
@@ -93,11 +95,11 @@
     "vue": "^3.0.0",
     "vue-clipboard3": "^2.0.0",
     "vue-tsc": "^0.39.4",
-    "vuetify": "^3.0.0-beta.6"
+    "vuetify": "^3.0.0-beta.11"
   },
   "peerDependencies": {
     "vue": "^3.0.0",
-    "vuetify": "^3.0.0-beta.6"
+    "vuetify": "^3.0.0-beta.11"
   },
   "optionalDependencies": {
     "flag-icons": "^6.1.1",
