@@ -21,6 +21,7 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
         'vue',
         'vuetify',
         'vuetify/lib',
+        'vuetify/components',
         'awesome-phonenumber',
         'country-telephone-data',
       ],

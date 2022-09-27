@@ -2,6 +2,7 @@ import VCountryIconSprite from '@/components/VCountryIconSprite';
 import VCountryIconSvg from '@/components/VCountryIconSvg';
 import VPhoneInput from '@/components/VPhoneInput.vue';
 import createVPhoneInput from '@/createVPhoneInput';
+import '@/scss/v-phone-input.scss';
 import countries from '@/utils/countries';
 import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';
 import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
