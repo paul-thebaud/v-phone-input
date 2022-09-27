@@ -19,10 +19,6 @@
     min-width: 0;
     max-width: var(--v-phone-input-country-max-width, $v-phone-input-country-input-compact-max-width);
 
-    &.v-field--variant-outlined, &.v-field--variant-filled, &.v-field--variant-solo {
-      --v-phone-input-country-max-width: #{$v-phone-input-country-input-default-max-width};
-    }
-
     &.v-field--variant-plain, &.v-field--variant-underlined {
       --v-phone-input-country-icon-height: $v-phone-input-country-icon-compact-height;
     }

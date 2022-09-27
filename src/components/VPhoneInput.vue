@@ -392,7 +392,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="v-phone-input">
+  <div
+    :class="{ 'v-phone-input--prepend-inner-icon': prependInnerIcon }"
+    class="v-phone-input"
+  >
     <component
       :is="countrySelectComponent.type"
       ref="countryInput"

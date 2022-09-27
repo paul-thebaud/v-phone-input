@@ -8,4 +8,20 @@
 
   display: flex;
   align-items: flex-start;
+
+  .v-phone-input__country__input.v-input .v-field {
+    &.v-field--variant-outlined, &.v-field--variant-filled, &.v-field--variant-solo {
+      --v-phone-input-country-max-width: #{$v-phone-input-country-input-default-max-width};
+    }
+  }
+
+  &.v-phone-input--prepend-inner-icon {
+    --v-phone-input-country-max-width: #{$v-phone-input-country-input-compact-max-width + $v-phone-input-country-input-prepend-inner-icon-width};
+
+    .v-phone-input__country__input.v-input .v-field {
+      &.v-field--variant-outlined, &.v-field--variant-filled, &.v-field--variant-solo {
+        --v-phone-input-country-max-width: #{$v-phone-input-country-input-default-max-width + $v-phone-input-country-input-prepend-inner-icon-width};
+      }
+    }
+  }
 }
