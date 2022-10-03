@@ -227,15 +227,7 @@ export default defineComponent({
 
     const labels = useLabels({ props, country: activeCountry, example });
 
-    const validate = () => {
-      // FIXME There is currently a bug with vuetify making the validate
-      // FIXME method unavailable in production build.
-      // FIXME Reproduce and create issue.
-      const vuetifyValidate = phoneInput.value?.validate
-        || (phoneInput.value as any)?._?.setupState?.validate;
-
-      return vuetifyValidate();
-    };
+    const validate = () => phoneInput.value?.validate();
     const mergeRules = () => {
       const rules = props.rules.map((rule) => (
         typeof rule === 'function'
