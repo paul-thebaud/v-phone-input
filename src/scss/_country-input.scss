@@ -2,7 +2,7 @@
 @use "country-icon";
 @use "country-menu";
 
-.v-phone-input__country__input.v-input {
+.v-phone-input .v-phone-input__country__input.v-input {
   flex-grow: 0;
 
   &.v-input--density-compact {
