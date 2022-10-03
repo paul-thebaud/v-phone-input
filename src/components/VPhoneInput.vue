@@ -201,6 +201,7 @@ export default defineComponent({
       menuProps: {
         maxHeight: 300,
         contentClass: 'v-phone-input__country__menu',
+        closeOnContentClick: true,
         ...((props.countryProps ? props.countryProps.menuProps : undefined) || {}),
       },
     }));
