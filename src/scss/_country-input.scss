@@ -16,8 +16,8 @@
   }
 
   .v-field {
-    min-width: 0;
-    max-width: var(--v-phone-input-country-max-width, $v-phone-input-country-input-compact-max-width);
+    min-width: var(--v-phone-input-country-width, $v-phone-input-country-input-compact-width);
+    max-width: var(--v-phone-input-country-width, $v-phone-input-country-input-compact-width);
 
     &.v-field--variant-plain, &.v-field--variant-underlined {
       --v-phone-input-country-icon-height: $v-phone-input-country-icon-compact-height;
@@ -50,14 +50,11 @@
   }
 
   &.v-autocomplete {
-    transition: min-width .25s, max-width .25s;
-
     .v-select__selections {
       flex-wrap: nowrap;
 
       input {
         min-width: 0;
-        transition: min-width .25s;
       }
     }
 
@@ -70,7 +67,7 @@
       max-width: 70%;
 
       .v-field {
-        --v-phone-input-country-max-width: 100%;
+        --v-phone-input-country-width: 100%;
       }
 
       .v-field__input input {
