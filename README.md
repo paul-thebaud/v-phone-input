@@ -21,9 +21,9 @@ International phone field for [Vuetify 3](http://vuetifyjs.com) and [Vue 3](http
 
 Coming from 2.x.x and upgrading to Vuetify 3? Checkout [the migration guide](MIGRATION.md).
 
-Wish to use this package with Vuetify
-2? [Old version 2.x.x](https://github.com/paul-thebaud/v-phone-input/tree/2.x.x) provides with
-Vuetify 2 and Vue 2.
+Wish to use this package with Vuetify 2?
+[Old version 2.x.x](https://github.com/paul-thebaud/v-phone-input/tree/2.x.x)
+is compatible with Vuetify 2 and Vue 2.
 
 Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 
