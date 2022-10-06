@@ -31,6 +31,12 @@ Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 for those already published are not actively maintained or does not put focus on providing great
 accessibility. This new library aims to provide those two.
 
+> This package is currently in alpha stage because Vuetify 3 stable is not released yet.
+> It is not ready for production environment and should be used with caution.
+> One known issue is the performance issue of the country select input, because
+> the [virtual scroller is not yet implemented](https://github.com/vuetifyjs/vuetify/issues/15572)
+> by Vuetify on `VSelect`.
+
 ## Demo
 
 You can try the VPhoneInput with many options and plugin registration code generation on
@@ -349,7 +355,8 @@ See the [slots section](#slots).
 ##### No icon
 
 This is the default behavior when not overriding options or props default values. This will not
-display an icon inside the list, but will show the ISO-2 code inside the selection slot of country input.
+display an icon inside the list, but will show the ISO-2 code inside the selection slot of country
+input.
 
 #### Validation
 
@@ -494,7 +501,8 @@ VPhoneInput relies on multiple dependencies to work:
 
 #### Country
 
-A country ISO-2 code is a string containing 2 uppercase characters representing a country (e.g. `FR` for France).
+A country ISO-2 code is a string containing 2 uppercase characters representing a country (e.g. `FR`
+for France).
 
 A country object contains information about a country.
 
