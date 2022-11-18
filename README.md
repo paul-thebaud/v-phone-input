@@ -33,8 +33,9 @@ accessibility. This new library aims to provide those two.
 
 > This package is currently in alpha stage because Vuetify 3 stable is not released yet.
 > It is not ready for production environment and should be used with caution.
-> One known issue is the performance issue of the country select input, because
-> the [virtual scroller is not yet implemented](https://github.com/vuetifyjs/vuetify/issues/15572)
+> One known issue is the performance issue of the country select input (when displaying a lot
+> of countries), because the
+> [virtual scroller is not yet implemented](https://github.com/vuetifyjs/vuetify/issues/15572)
 > by Vuetify on `VSelect`.
 
 ## Demo
@@ -47,13 +48,13 @@ the [GitHub pages demo](https://paul-thebaud.github.io/v-phone-input/).
 Installation though Yarn:
 
 ```shell
-yarn add v-phone-input flag-icons
+yarn add v-phone-input@next flag-icons
 ```
 
 Installation though NPM:
 
 ```shell
-npm install v-phone-input flag-icons
+npm install v-phone-input@next flag-icons
 ```
 
 Plugin installation:
@@ -126,13 +127,13 @@ VPhoneInput requires `Vue@3` and `Vuetify@3` to be installed and working in your
 You can install this package though Yarn:
 
 ```shell
-yarn add v-phone-input flag-icons
+yarn add v-phone-input@next flag-icons
 ```
 
 Or NPM:
 
 ```shell
-npm install v-phone-input flag-icons
+npm install v-phone-input@next flag-icons
 ```
 
 > `flag-icons` package is required if you want the input to display countries' flags.
@@ -366,6 +367,7 @@ the phone text input.
 You may add any additional rules by providing a `rules` prop to the input:
 
 ```vue
+
 <script setup>
 const rules = [
   (value, phone, { label, country, example }) => !!value || `The "${label}" field is required.`,
@@ -418,6 +420,7 @@ app.use(vPhoneInput);
 To enable searching countries on a per-input basis:
 
 ```vue
+
 <script setup>
 import { VAutocomplete } from 'vuetify/components';
 </script>
