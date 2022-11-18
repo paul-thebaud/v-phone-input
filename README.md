@@ -7,6 +7,8 @@
 ![NPM downloads](https://img.shields.io/npm/dt/v-phone-input)
 ![MIT license](https://img.shields.io/npm/l/v-phone-input)
 
+> [Check out the next version with Vue 3 and Vuetify 3 compatibility](https://github.com/paul-thebaud/v-phone-input/tree/next)
+
 International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 [Vue JS 2](https://vuejs.org/).
 
@@ -41,13 +43,13 @@ options.
 Installation though Yarn:
 
 ```shell
-yarn add v-phone-input flag-icons
+yarn add v-phone-input@latest flag-icons
 ```
 
 Installation though NPM:
 
 ```shell
-npm install v-phone-input flag-icons
+npm install v-phone-input@latest flag-icons
 ```
 
 Plugin installation:
@@ -122,13 +124,13 @@ VPhoneInput requires `Vue@2` and `Vuetify@2` to be installed and working in your
 You can install this package though Yarn:
 
 ```shell
-yarn add v-phone-input flag-icons
+yarn add v-phone-input@latest flag-icons
 ```
 
 Or NPM:
 
 ```shell
-npm install v-phone-input flag-icons
+npm install v-phone-input@latest flag-icons
 ```
 
 > `flag-icons` package is required if you want the input to display countries' flags.
