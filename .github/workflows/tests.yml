@@ -14,9 +14,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
       - name: Lint
@@ -30,9 +30,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
       - name: Unit tests
@@ -49,13 +49,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
       - name: E2E tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           browser: chrome
           build: yarn demo:build --config vite.e2e.config.ts
@@ -66,12 +66,6 @@ jobs:
         with:
           name: coverage-e2e
           path: coverage-e2e
-      - name: Store Cypress snapshots artifact
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: snapshots-e2e
-          path: cypress-visual-screenshots
   upload-coverage:
     name: upload-coverage
     needs: [ unit-tests, e2e-tests ]
@@ -90,6 +84,6 @@ jobs:
           name: coverage-e2e
           path: coverage/coverage-e2e
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           directory: coverage
