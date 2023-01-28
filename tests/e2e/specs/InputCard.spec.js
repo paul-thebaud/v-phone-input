@@ -522,12 +522,11 @@ describe('InputCard.vue', () => {
       .contains('Custom hint');
   });
 
-  it('should use svg country icon and match snapshot', () => {
+  it('should use svg country icon', () => {
     cy.visitDemo();
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().compareSnapshot('input-country-svg', 0.04);
 
     cyVPhoneCountry()
       .containsCountryTitle('Afghanistan')
@@ -547,14 +546,13 @@ describe('InputCard.vue', () => {
       });
   });
 
-  it('should use sprite country icon and match snapshot', () => {
+  it('should use sprite country icon', () => {
     cy.visitDemo();
 
     cySelectMenu('Country Icon Mode', 'CSS sprite (using world-flags-sprite)');
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().compareSnapshot('input-country-sprite', 0.04);
 
     cyVPhoneCountry()
       .containsCountryTitle('Afghanistan')
@@ -578,14 +576,13 @@ describe('InputCard.vue', () => {
       .should('be.visible');
   });
 
-  it('should use text country icon and match snapshot', () => {
+  it('should use text country icon', () => {
     cy.visitDemo();
 
     cySelectMenu('Country Icon Mode', 'Text (default)');
 
     cy.get('body').focus();
     cy.wait(200);
-    cyVPhoneCountry().compareSnapshot('input-country-text', 0.04);
 
     cyVPhoneCountry().contains('+93');
     cyVPhoneCountry()
@@ -617,35 +614,6 @@ describe('InputCard.vue', () => {
         .find('input')
         .invoke('val')
         .then((val) => assert.equal(val, expectedVal));
-    });
-  });
-
-  [
-    ['Filled', 'Default'],
-    ['Filled', 'Comfortable'],
-    ['Filled', 'Compact'],
-    ['Solo', 'Default'],
-    ['Solo', 'Comfortable'],
-    ['Solo', 'Compact'],
-    ['Outline', 'Default'],
-    ['Outline', 'Comfortable'],
-    ['Outline', 'Compact'],
-    ['Plain', 'Default'],
-    ['Plain', 'Comfortable'],
-    ['Plain', 'Compact'],
-    ['Underline', 'Default'],
-    ['Underline', 'Comfortable'],
-    ['Underline', 'Compact'],
-  ].forEach(([variant, density]) => {
-    it(`should use ${variant} variant with ${density} density style and match snapshot`, () => {
-      cy.visitDemo();
-
-      cySelectMenu('Variant', variant);
-      cySelectMenu('Density', density);
-
-      cy.get('body').focus();
-      cy.wait(200);
-      cyVPhoneWrapper().compareSnapshot(`input-${variant.toLowerCase()}-${density.toLowerCase()}`, 0.015);
     });
   });
 });

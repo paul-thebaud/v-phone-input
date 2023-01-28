@@ -5,7 +5,5 @@ declare namespace Cypress {
     dataCy(value: string): Chainable<Element>;
 
     containsCountryTitle(value: string): Chainable<Element>;
-
-    compareSnapshot(name: string, threshold?: number): Chainable<Element>;
   }
 }

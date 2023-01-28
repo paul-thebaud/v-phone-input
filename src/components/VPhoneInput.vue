@@ -13,20 +13,27 @@ import makeExample from '@/utils/phone/makeExample';
 import makePhone from '@/utils/phone/makePhone';
 import { PhoneNumberFormat } from 'awesome-phonenumber';
 import { computed, defineComponent, nextTick, onMounted, PropType, ref, watch } from 'vue';
-import { VListItem, VSelect, VTextField } from 'vuetify/components';
+import { VListItem } from 'vuetify/components/VList';
+import { VSelect } from 'vuetify/components/VSelect';
+import { VTextField } from 'vuetify/components/VTextField';
 
 export type VPhoneCountriesItems = ((Country & { preferred?: boolean }) | { divider: boolean })[];
 
-export type ValidationResult = string | boolean | PromiseLike<string> | PromiseLike<boolean>;
+export type ValidationResult = string | boolean;
 
 export type ValidationRule =
   | ValidationResult
+  | PromiseLike<ValidationResult>
   | ((value: any) => ValidationResult)
+  | ((value: any) => PromiseLike<ValidationResult>);
 
-export type VPhoneInputValidationRule =
-  | ValidationRule
-  | ((input: string, phone: PhoneNumberObject) => ValidationResult)
-  | ((input: string, phone: PhoneNumberObject, messageOptions: MessageOptions) => ValidationResult);
+export type VPhoneInputValidationResult = string | boolean | PromiseLike<string | boolean>;
+
+export type VPhoneInputValidationRule = VPhoneInputValidationResult | ((
+  input: string,
+  phone: PhoneNumberObject,
+  messageOptions: MessageOptions,
+) => VPhoneInputValidationResult);
 
 const INPUTS_COMMON_ATTRS = [
   'variant',
@@ -233,7 +240,7 @@ export default defineComponent({
         typeof rule === 'function'
           ? (() => rule(lazyValue.value || '', lazyPhone.value, labels.messageOptions.value))
           : rule
-      ));
+      )) as ValidationRule[];
       if (!labels.invalidMessage.value) {
         mergedRules.value = rules;
       } else {
@@ -463,8 +470,8 @@ export default defineComponent({
         </v-list-item>
       </template>
       <template
-        v-for="(parentName, name) in namespacedSlots.country"
-        #[name]="data"
+        v-for="(parentName, _name) in namespacedSlots.country"
+        #[_name]="data"
       >
         <slot
           :name="parentName"

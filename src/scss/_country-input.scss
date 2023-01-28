@@ -50,16 +50,13 @@
   }
 
   &.v-autocomplete {
-    .v-select__selections {
+    .v-field__input {
       flex-wrap: nowrap;
 
       input {
         min-width: 0;
+        height: auto;
       }
-    }
-
-    .v-field__input input {
-      height: auto;
     }
 
     &.v-phone-input--focused {

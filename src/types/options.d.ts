@@ -4,7 +4,7 @@ import { DefineComponent } from 'vue';
 
 export type CountryIconMode = 'svg' | 'sprite' | DefineComponent | undefined;
 
-export type Message = string | undefined | null;
+export type Message = string | undefined;
 
 export interface MessageOptions {
   label?: Message;

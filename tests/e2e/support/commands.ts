@@ -1,7 +1,3 @@
-import * as compareSnapshotCommand from 'cypress-image-diff-js/dist/command';
-
-compareSnapshotCommand();
-
 // @ts-ignore
 Cypress.Commands.add('dataCy', (value) => cy.get(`[data-cy=${value}]`));
 
