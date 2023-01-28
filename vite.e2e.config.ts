@@ -6,7 +6,7 @@ import rootConfig from './vite.config';
 export default defineConfig(deepmerge(rootConfig as UserConfig, {
   plugins: [
     istanbul({
-      include: ['src/**/*', 'dev/**/*'],
+      include: ['../src/**/*', 'dev/**/*'],
       exclude: ['node_modules', 'tests/'],
       extension: ['.ts', '.vue'],
       forceBuildInstrument: true,

@@ -14,23 +14,4 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
     emptyOutDir: true,
     outDir: path.join(__dirname, 'dist_demo'),
   },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    include: ['../tests/unit/**/*.spec.ts'],
-    deps: { inline: ['vuetify'] },
-    setupFiles: [
-      '../tests/unit/setup/vitest.vuetify.setup.ts',
-    ],
-    coverage: {
-      reportsDirectory: '../coverage-unit',
-      reporter: ['text', 'json', 'html', 'lcov', 'clover'],
-      include: ['dev/**/*.{ts,vue}', 'src/**/*.{ts,vue}'],
-      exclude: [
-        '**/*.setup.ts',
-        '**/*.d.ts',
-      ],
-      all: true,
-    },
-  },
 }));
