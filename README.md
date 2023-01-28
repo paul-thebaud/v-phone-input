@@ -600,7 +600,7 @@ type MessageOptions = {
 A type representing a localized message for the input which will be used as the label, hint, etc.
 
 ```typescript
-export type Message = string | undefined | null;
+export type Message = string | undefined;
 ```
 
 #### Message resolver
