@@ -53,7 +53,7 @@
     "dev": "vite",
     "demo:build": "vue-tsc --noEmit && vite build",
     "demo:build:watch": "vue-tsc --noEmit && vite build --watch",
-    "demo:preview": "vite preview",
+    "demo:preview": "vite preview --host 127.0.0.1",
     "lib:build": "vue-tsc --noEmit && vite build --config vite.lib.config.ts",
     "prepublishOnly": "yarn lib:build"
   },

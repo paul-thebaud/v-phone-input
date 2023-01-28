@@ -60,7 +60,7 @@ jobs:
           browser: chrome
           build: yarn demo:build --config vite.e2e.config.ts
           start: yarn demo:preview
-          wait-on: http://localhost:4173
+          wait-on: http://127.0.0.1:4173
       - name: Store e2e coverage artifact
         uses: actions/upload-artifact@v3
         with:
