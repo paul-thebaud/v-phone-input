@@ -1,5 +1,6 @@
 .v-phone-input__phone__input.v-input {
   flex-grow: 1;
+  flex-shrink: 1;
 
   .v-field {
     &.v-field--variant-outlined .v-field__outline > .v-field__outline__start {
