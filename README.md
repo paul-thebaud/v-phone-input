@@ -7,7 +7,7 @@
 ![NPM downloads](https://img.shields.io/npm/dt/v-phone-input)
 ![MIT license](https://img.shields.io/npm/l/v-phone-input)
 
-> [Check out the next version with Vue 3 and Vuetify 3 compatibility](https://github.com/paul-thebaud/v-phone-input/tree/next)
+> [Check out the next version with Vue 3 and Vuetify 3 compatibility](https://github.com/paul-thebaud/v-phone-input/tree/main)
 
 International phone field for [Vuetify 2.0](http://vuetifyjs.com) and
 [Vue JS 2](https://vuejs.org/).
