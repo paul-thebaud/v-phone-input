@@ -1,5 +1,13 @@
 # Change log
 
+## 3.0.2
+
+Publish v3 as latest version on NPM.
+
+## 3.0.1
+
+Fix phone input width when having long messages.
+
 ## 3.0.0
 
 Migration to Vuetify 3 and Vue 3, props and exported modules changes, dependencies upgrade.

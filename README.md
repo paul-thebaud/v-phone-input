@@ -49,13 +49,13 @@ the [GitHub pages demo](https://paul-thebaud.github.io/v-phone-input/).
 Installation though Yarn:
 
 ```shell
-yarn add v-phone-input@next flag-icons
+yarn add v-phone-input flag-icons
 ```
 
 Installation though NPM:
 
 ```shell
-npm install v-phone-input@next flag-icons
+npm install v-phone-input flag-icons
 ```
 
 Plugin installation:
@@ -128,13 +128,13 @@ VPhoneInput requires `Vue@3` and `Vuetify@3` to be installed and working in your
 You can install this package though Yarn:
 
 ```shell
-yarn add v-phone-input@next flag-icons
+yarn add v-phone-input flag-icons
 ```
 
 Or NPM:
 
 ```shell
-npm install v-phone-input@next flag-icons
+npm install v-phone-input flag-icons
 ```
 
 > `flag-icons` package is required if you want the input to display countries' flags.

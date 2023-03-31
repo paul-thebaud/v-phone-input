@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
       - name: Publish to NPM
-        run: yarn publish --tag next
+        run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build demo
