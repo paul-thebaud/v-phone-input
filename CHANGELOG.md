@@ -1,5 +1,10 @@
 # Change log
 
+## 2.0.1
+
+Change V2 tag on NPM to be `v2`. Installation of the package for Vue 2 should
+now use `v-phone-input@v2`.
+
 ## 2.0.0
 
 Migration to Vite bundler, plugin registration changes and dependencies upgrade.

@@ -43,13 +43,13 @@ options.
 Installation though Yarn:
 
 ```shell
-yarn add v-phone-input@latest flag-icons
+yarn add v-phone-input@v2 flag-icons
 ```
 
 Installation though NPM:
 
 ```shell
-npm install v-phone-input@latest flag-icons
+npm install v-phone-input@v2 flag-icons
 ```
 
 Plugin installation:
@@ -124,13 +124,13 @@ VPhoneInput requires `Vue@2` and `Vuetify@2` to be installed and working in your
 You can install this package though Yarn:
 
 ```shell
-yarn add v-phone-input@latest flag-icons
+yarn add v-phone-input@v2 flag-icons
 ```
 
 Or NPM:
 
 ```shell
-npm install v-phone-input@latest flag-icons
+npm install v-phone-input@v2 flag-icons
 ```
 
 > `flag-icons` package is required if you want the input to display countries' flags.
@@ -187,7 +187,7 @@ export default {
 Upgrade the package version with Yarn:
 
 ```shell
-yarn upgrade v-phone-input@^2.0.0
+yarn upgrade v-phone-input@v2
 ```
 
 If you are using the plugin the global plugin registration method, you need to update the file where
