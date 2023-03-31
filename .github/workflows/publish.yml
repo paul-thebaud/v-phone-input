@@ -18,13 +18,6 @@ jobs:
       - name: Install dependencies
         run: yarn install -s --no-progress --non-interactive
       - name: Publish to NPM
-        run: yarn publish
+        run: yarn publish --tag v2
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Build demo
-        run: yarn demo:build --base=/v-phone-input/
-      - name: Publish to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
-        with:
-          branch: gh-pages
-          folder: dist_demo/
