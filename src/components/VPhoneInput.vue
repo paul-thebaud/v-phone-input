@@ -27,6 +27,8 @@ export type ValidationRule =
   | ((value: any) => ValidationResult)
   | ((value: any) => PromiseLike<ValidationResult>);
 
+export type ValidateOnValue = 'blur' | 'input' | 'submit';
+
 export type VPhoneInputValidationResult = string | boolean | PromiseLike<string | boolean>;
 
 export type VPhoneInputValidationRule = VPhoneInputValidationResult | ((
@@ -103,6 +105,10 @@ export default defineComponent({
     rules: {
       type: Array as PropType<VPhoneInputValidationRule[]>,
       default: () => [],
+    },
+    validateOn: {
+      type: String as PropType<ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'>,
+      default: undefined,
     },
     countryIconMode: {
       type: [String, Object] as PropType<CountryIconMode>,
@@ -231,10 +237,19 @@ export default defineComponent({
 
     const format = (phone: PhoneNumberObject) => formatPhone(phone, props.displayFormat);
     const example = computed(() => format(makeExample(activeCountry.value.iso2).toJSON()));
+    const immediateValidation = computed(() => {
+      const validateOn = new Set(props.validateOn?.split('') || []);
+
+      return validateOn.size === 0 || validateOn.has('input');
+    });
 
     const labels = useLabels({ props, country: activeCountry, example });
 
-    const validate = () => phoneInput.value?.validate();
+    const validate = () => {
+      if (immediateValidation.value) {
+        phoneInput.value?.validate();
+      }
+    };
     const mergeRules = () => {
       const rules = props.rules.map((rule) => (
         typeof rule === 'function'
@@ -489,6 +504,7 @@ export default defineComponent({
       :rules="mergedRules"
       :append-icon="appendIcon"
       :append-inner-icon="appendInnerIcon"
+      :validate-on="validateOn"
       class="v-phone-input__phone__input"
       type="tel"
       v-bind="phoneAttrs"
