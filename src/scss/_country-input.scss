@@ -37,9 +37,22 @@
       border-end-end-radius: 0;
     }
 
+    .v-field__input {
+      min-height: var(--v-field-input-min-height);
+
+      input {
+        height: 1px;
+      }
+    }
+
     .v-field__input input {
       height: 1px;
     }
+  }
+
+  &.v-select--chips .v-select__selection, &.v-select--selection-slot .v-select__selection {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   &.v-input--density-compact {
