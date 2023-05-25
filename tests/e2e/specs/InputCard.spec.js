@@ -284,7 +284,7 @@ describe('InputCard.vue', () => {
     cyVPhoneInput()
       .find('input')
       .invoke('val')
-      .then((val) => assert.equal(val, '02 34 56 78 90'));
+      .then((val) => assert.equal(val, '023 456 7890'));
 
     cyVPhoneInput()
       .contains('The "Phone" field is not a valid phone number (example: 022 345 678).');
