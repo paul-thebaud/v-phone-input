@@ -383,6 +383,7 @@ export default defineComponent({
     });
 
     return {
+      VTextField: VTextField as any,
       countryInput,
       phoneInput,
       namespacedSlots,
@@ -412,7 +413,7 @@ export default defineComponent({
     class="v-phone-input"
   >
     <component
-      :is="countrySelectComponent.type"
+      :is="countrySelectComponent.type as any"
       ref="countryInput"
       v-model="lazyCountry"
       :label="labels.countryLabel.value"
@@ -485,16 +486,17 @@ export default defineComponent({
         </v-list-item>
       </template>
       <template
-        v-for="(parentName, _name) in namespacedSlots.country"
-        #[_name]="data"
+        v-for="(slotName, name) in namespacedSlots.country"
+        #[name]="data"
       >
         <slot
-          :name="parentName"
+          :name="slotName"
           v-bind="data"
         />
       </template>
     </component>
-    <v-text-field
+    <component
+      :is="VTextField"
       ref="phoneInput"
       v-model="lazyValue"
       :label="labels.label.value"
@@ -518,6 +520,6 @@ export default defineComponent({
           v-bind="data"
         />
       </template>
-    </v-text-field>
+    </component>
   </div>
 </template>
