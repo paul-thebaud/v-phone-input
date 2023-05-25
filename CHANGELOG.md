@@ -1,5 +1,15 @@
 # Change log
 
+## 3.0.3
+
+### Features
+
+- support for `validate-on` property (closes #10)
+
+### Bug fixes
+
+- improve country input height to always match text field height
+
 ## 3.0.2
 
 Publish v3 as latest version on NPM.
