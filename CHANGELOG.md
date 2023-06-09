@@ -2,6 +2,12 @@
 
 ## 3.0.3
 
+### Bug fixes
+
+- externalize vuetify imports from production build
+
+## 3.0.3
+
 ### Features
 
 - support for `validate-on` property (closes #10)
