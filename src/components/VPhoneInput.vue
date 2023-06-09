@@ -13,9 +13,7 @@ import makeExample from '@/utils/phone/makeExample';
 import makePhone from '@/utils/phone/makePhone';
 import { PhoneNumberFormat } from 'awesome-phonenumber';
 import { computed, defineComponent, nextTick, onMounted, PropType, ref, watch } from 'vue';
-import { VListItem } from 'vuetify/components/VList';
-import { VSelect } from 'vuetify/components/VSelect';
-import { VTextField } from 'vuetify/components/VTextField';
+import { VListItem, VSelect, VTextField } from 'vuetify/components';
 
 export type VPhoneCountriesItems = ((Country & { preferred?: boolean }) | { divider: boolean })[];
 
