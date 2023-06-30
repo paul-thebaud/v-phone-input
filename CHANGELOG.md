@@ -1,5 +1,11 @@
 # Change log
 
+## 3.0.5
+
+### Bug fixes
+
+- fix: more consistent country input height (closes #12)
+
 ## 3.0.4
 
 ### Bug fixes
