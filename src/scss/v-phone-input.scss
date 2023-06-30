@@ -5,6 +5,7 @@
 .v-phone-input {
   --v-phone-input-country-icon-height: #{$v-phone-input-country-icon-default-height};
   --v-phone-input-country-width: #{$v-phone-input-country-input-compact-width};
+  --v-phone-input-country-autocomplete-width: #{$v-phone-input-country-input-autocomplete-width};
 
   display: flex;
   align-items: flex-start;
