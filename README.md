@@ -400,13 +400,18 @@ countries.
 > this component to Vue when treeshaking Vuetify components
 > (e.g. when using `vite-plugin-vuetify`).
 
-To enable searching countries for all inputs as a default behavior:
+##### When using plugin registration
+
+To enable searching countries for all inputs as a default behavior, you must
+register the `VAutocomplete` component globally inside your plugin definition.
 
 ```javascript
+import 'flag-icons/css/flag-icons.min.css';
 import 'v-phone-input/dist/v-phone-input.css';
 import { createVPhoneInput } from 'v-phone-input';
-import { createApp } from 'vue';
 import { VAutocomplete } from 'vuetify/components';
+
+// ...your Vue app creation.
 
 // IMPORTANT: required when treeshaking Vuetify components.
 app.component('VAutocomplete', VAutocomplete);
@@ -418,12 +423,30 @@ const vPhoneInput = createVPhoneInput({
 app.use(vPhoneInput);
 ```
 
-To enable searching countries on a per-input basis:
+After this setup, all `v-phone-input` will be using an autocomplete input
+for country by default.
+
+##### When using per-file registration
+
+To enable searching countries on a per-file basis, you must register the
+`VAutocomplete` component inside your app definition.
+
+```javascript
+import { VAutocomplete } from 'vuetify/components';
+
+// ...your Vue app creation.
+
+// IMPORTANT: required when treeshaking Vuetify components.
+app.component('VAutocomplete', VAutocomplete);
+```
+
+After this setup, you can safely enable the `enable-searching-country` property.
 
 ```vue
-
 <script setup>
-import { VAutocomplete } from 'vuetify/components';
+import 'flag-icons/css/flag-icons.min.css';
+import 'v-phone-input/dist/v-phone-input.css';
+import { VPhoneInput } from 'v-phone-input';
 </script>
 
 <template>
