@@ -43,7 +43,7 @@
     }
 
     .v-field__input {
-      min-height: var(--v-field-input-min-height);
+      min-height: var(--v-input-control-height, 56px);
 
       input {
         height: 1px;
