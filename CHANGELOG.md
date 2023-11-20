@@ -1,5 +1,11 @@
 # Change log
 
+## 3.0.6
+
+### Bug fixes
+
+- fix: height of country input on latest vuetify versions
+
 ## 3.0.5
 
 ### Bug fixes
