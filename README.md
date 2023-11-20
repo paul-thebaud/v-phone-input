@@ -77,9 +77,9 @@ Component usage:
 ```vue
 
 <script setup>
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
-const phone = ref('');
+  const phone = ref('');
 </script>
 
 <template>
@@ -165,12 +165,12 @@ able to define props' default values for the input.
 ```vue
 
 <script setup>
-import 'flag-icons/css/flag-icons.min.css';
-import 'v-phone-input/dist/v-phone-input.css';
-import { VPhoneInput } from 'v-phone-input';
-import { ref } from 'vue';
+  import 'flag-icons/css/flag-icons.min.css';
+  import 'v-phone-input/dist/v-phone-input.css';
+  import { VPhoneInput } from 'v-phone-input';
+  import { ref } from 'vue';
 
-const phone = ref('');
+  const phone = ref('');
 </script>
 
 <template>
@@ -370,9 +370,9 @@ You may add any additional rules by providing a `rules` prop to the input:
 ```vue
 
 <script setup>
-const rules = [
-  (value, phone, { label, country, example }) => !!value || `The "${label}" field is required.`,
-];
+  const rules = [
+    (value, phone, { label, country, example }) => !!value || `The "${label}" field is required.`,
+  ];
 </script>
 
 <template>
@@ -443,10 +443,11 @@ app.component('VAutocomplete', VAutocomplete);
 After this setup, you can safely enable the `enable-searching-country` property.
 
 ```vue
+
 <script setup>
-import 'flag-icons/css/flag-icons.min.css';
-import 'v-phone-input/dist/v-phone-input.css';
-import { VPhoneInput } from 'v-phone-input';
+  import 'flag-icons/css/flag-icons.min.css';
+  import 'v-phone-input/dist/v-phone-input.css';
+  import { VPhoneInput } from 'v-phone-input';
 </script>
 
 <template>
