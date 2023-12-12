@@ -32,13 +32,6 @@ Proudly supported by the [CoWork'HIT](https://coworkhit.com).
 for those already published are not actively maintained or does not put focus on providing great
 accessibility. This new library aims to provide those two.
 
-> This package is currently in alpha stage because Vuetify 3 stable is not released yet.
-> It is not ready for production environment and should be used with caution.
-> One known issue is the performance issue of the country select input (when displaying a lot
-> of countries), because the
-> [virtual scroller is not yet implemented](https://github.com/vuetifyjs/vuetify/issues/15572)
-> by Vuetify on `VSelect`.
-
 ## Demo
 
 You can try the VPhoneInput with many options and plugin registration code generation on
@@ -183,7 +176,7 @@ able to define props' default values for the input.
 
 ### Migration
 
-Please follow the [migration guide](MIGRATION.md) if you need to migrate from version 1 or 2.
+Please follow the [migration guide](MIGRATION.md) if you need to migrate from version 1, 2 or 3.
 
 ### Props
 
@@ -384,7 +377,7 @@ Any rule you pass as a function will receive 3 arguments (instead of one for def
 that you may use when validating user's input:
 
 - `value`: the value contained in the phone text input.
-- `phone`: the [phone number object](#phone-number).
+- `phone`: the [parsed phone number object created by awesome-phonenumber](https://github.com/grantila/awesome-phonenumber#basic-usage).
 - `messageOptions`: the [message options](#message-options) which you may use to inject the input
   label, current country or a phone example inside the message.
 
@@ -590,21 +583,6 @@ by [awesome-phonenumber](https://www.npmjs.com/package/awesome-phonenumber)):
 - `national`: `070-712 34 56`
 - `rfc3966`: `tel:+46-70-712-34-56`
 - `significant`: `707123456`
-
-#### Phone Number
-
-A phone number is a simple object describing the VPhoneInput current value. The `number` key will
-contain an `input` string and may contain each formatted value if the phone number is valid.
-
-```typescript
-type PhoneNumberObject = {
-  number: { input: string } & Partial<Record<PhoneNumberFormat, string>>;
-  possibility: string;
-  possible: boolean;
-  valid: boolean;
-  regionCode: CountryIso2 | undefined;
-}
-```
 
 #### Message options
 

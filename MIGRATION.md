@@ -1,5 +1,28 @@
 # Migration
 
+## Migrate from 3.x.x to 4.x.x
+
+If you are coming from `2.x.x`, you should also follow
+the ["Migrate from 2.x.x to 3.x.x" guide](#migrate-from-2xx-to-3xx).
+
+Upgrade the package version with Yarn:
+
+```shell
+yarn upgrade v-phone-input@^4.0.0
+```
+
+From version `4.0.0`, `v-phone-input` is using awesome-phonenumber v6.
+All functions and types have been updated to use awesome-phonenumber's
+`ParsedPhoneNumber` type, instead of a library internal type. As a consequence:
+
+- `PhoneNumberObject` and `ExtendedPhoneNumber` types have been removed, and
+  a awesome-phonenumber's `ParsedPhoneNumber` object is used instead.
+  `ParsedPhoneNumber` does not provide methods anymore (such as `isValid()`),
+  you should now use the properties instead (such as `valid`).
+- `makePhone` will now return a `ParsedPhoneNumber` object.
+- `makeExample` will now return a `ParsedPhoneNumber` object.
+- `formatPhone` will now take a `ParsedPhoneNumber` object as its first argument.
+
 ## Migrate from 2.x.x to 3.x.x
 
 If you are coming from `1.x.x`, you should also follow

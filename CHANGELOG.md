@@ -1,5 +1,21 @@
 # Change log
 
+## 4.0.0
+
+Migration to `awesome-phonenumber` V6.
+
+**BREAKING**
+
+Check the [migration guide](MIGRATION.md#migrate-from-3xx-to-4xx).
+
+Summary:
+
+- Phone number object and helpers have changed to use `awesome-phonenumber` V6
+  objects.
+- If you are only using string phone values without any helper functions
+  (`makePhone`, `makeExample` or `formatPhone`), no change should be required
+  by this new version.
+
 ## 3.0.6
 
 ### Bug fixes
