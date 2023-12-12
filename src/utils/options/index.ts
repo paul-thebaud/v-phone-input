@@ -25,7 +25,7 @@ export const DEFAULT_OPTIONS: PluginOptions = {
   displayFormat: 'national',
 };
 
-export const options = { ...DEFAULT_OPTIONS };
+export const options = { ...DEFAULT_OPTIONS } as PluginOptions;
 
 export function mergeOptions(newOptions: Partial<PluginOptions>) {
   Object.assign(options, newOptions);

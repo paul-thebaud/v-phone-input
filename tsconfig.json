@@ -18,7 +18,6 @@
     "baseUrl": ".",
     "newLine": "lf",
     "types": [
-      "node",
       "vue",
       "vuetify"
     ],

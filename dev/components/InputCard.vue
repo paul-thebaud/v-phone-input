@@ -17,7 +17,7 @@ export default defineComponent({
     const inputValue = ref('');
 
     const value = computed(() => inputValue.value || '-');
-    const valid = computed(() => makePhone(inputValue.value).isValid());
+    const valid = computed(() => makePhone(inputValue.value).valid);
     const country = computed(() => (
       countries.find((c) => c.iso2 === inputCountry.value)?.name || 'Unknown'
     ));

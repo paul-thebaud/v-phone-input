@@ -6,12 +6,11 @@ import useLabels from '@/composables/useLabels';
 import useNamespacedSlots from '@/composables/useNamespacedSlots';
 import { Country, CountryGuesser, CountryIso2, CountryOrIso2 } from '@/types/countries';
 import { CountryIconMode, MessageOptions, MessageResolver } from '@/types/options';
-import { PhoneNumberObject } from '@/types/phone';
 import { getOption } from '@/utils/options';
 import formatPhone from '@/utils/phone/formatPhone';
 import makeExample from '@/utils/phone/makeExample';
 import makePhone from '@/utils/phone/makePhone';
-import { PhoneNumberFormat } from 'awesome-phonenumber';
+import { ParsedPhoneNumber, PhoneNumberFormat } from 'awesome-phonenumber';
 import { computed, defineComponent, nextTick, onMounted, PropType, ref, watch } from 'vue';
 import { VListItem, VSelect, VTextField } from 'vuetify/components';
 
@@ -31,7 +30,7 @@ export type VPhoneInputValidationResult = string | boolean | PromiseLike<string 
 
 export type VPhoneInputValidationRule = VPhoneInputValidationResult | ((
   input: string,
-  phone: PhoneNumberObject,
+  phone: ParsedPhoneNumber,
   messageOptions: MessageOptions,
 ) => VPhoneInputValidationResult);
 
@@ -197,7 +196,7 @@ export default defineComponent({
     const mergedRules = ref([] as ValidationRule[]);
     const lazyCountry = ref(props.country as CountryIso2 | undefined);
     const lazyValue = ref(props.modelValue || '' as string | null);
-    const lazyPhone = ref({ number: { input: '' } } as PhoneNumberObject);
+    const lazyPhone = ref({ number: { input: '' } } as ParsedPhoneNumber);
 
     const countryAttrs = computed(() => ({
       ...countrySelectComponent.value.props,
@@ -233,8 +232,8 @@ export default defineComponent({
       return [...preferredItems, ...otherCountries.value];
     });
 
-    const format = (phone: PhoneNumberObject) => formatPhone(phone, props.displayFormat);
-    const example = computed(() => format(makeExample(activeCountry.value.iso2).toJSON()));
+    const format = (phone: ParsedPhoneNumber) => formatPhone(phone, props.displayFormat);
+    const example = computed(() => format(makeExample(activeCountry.value.iso2)));
     const immediateValidation = computed(() => {
       const validateOn = new Set(props.validateOn?.split('') || []);
 
@@ -272,8 +271,8 @@ export default defineComponent({
       }
     };
     const onModelValueChange = () => {
-      if (props.modelValue !== lazyPhone.value.number.input
-        && props.modelValue !== lazyPhone.value.number.e164
+      if (props.modelValue !== (lazyPhone.value.number?.input ?? '')
+        && props.modelValue !== (lazyPhone.value.number?.e164 ?? '')
       ) {
         lazyValue.value = props.modelValue || '';
       }
@@ -303,7 +302,7 @@ export default defineComponent({
       countryFocused.value = false;
     };
     const onLazyCountryOrValueChange = () => {
-      lazyPhone.value = makePhone(lazyValue.value, lazyCountry.value).toJSON();
+      lazyPhone.value = makePhone(lazyValue.value, lazyCountry.value);
 
       if (lazyPhone.value.valid) {
         lazyValue.value = format(lazyPhone.value);
@@ -332,7 +331,7 @@ export default defineComponent({
     const onLazyValueChange = () => {
       const countryInLazyValue = (lazyValue.value || '').startsWith('+');
       if (countryInLazyValue) {
-        const detectedIso2 = makePhone(lazyValue.value).getRegionCode();
+        const detectedIso2 = makePhone(lazyValue.value).regionCode;
         if (detectedIso2
           && lazyCountry.value !== detectedIso2
           && findCountry(detectedIso2)
@@ -344,7 +343,7 @@ export default defineComponent({
       onLazyCountryOrValueChange();
     };
     const onLazyPhoneChange = () => {
-      const newValue = lazyPhone.value.number.e164 || lazyPhone.value.number.input;
+      const newValue = lazyPhone.value.number?.e164 || lazyPhone.value.number?.input || '';
       if (newValue !== props.modelValue) {
         emit('update:modelValue', newValue);
       }
