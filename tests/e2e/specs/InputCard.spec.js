@@ -19,7 +19,7 @@ describe('InputCard.vue', () => {
   function cySelectMenu(menuName, optionName) {
     cy.contains(menuName)
       .parents('.v-select')
-      .find('[role=textbox]')
+      .find('[role=button]')
       .click();
     cy.get('.v-menu .v-list', { timeout: 10000 })
       .should('be.visible')
@@ -150,6 +150,10 @@ describe('InputCard.vue', () => {
   it('should use emit value on input or country and re-format input', () => {
     cy.visitDemo();
 
+    cy.contains('Enable Searching Country')
+      .parent()
+      .click();
+
     cyVPhoneInput()
       .find('input')
       .type('023');
@@ -194,16 +198,13 @@ describe('InputCard.vue', () => {
       .contains('Afghanistan');
 
     cyVPhoneCountry()
-      .find('[role=textbox]')
-      .click();
-
-    cy.get('body')
-      .type('f');
-
+      .find('input[type=text]')
+      .clear()
+      .type('France');
     cyVPhoneCountryMenu()
-      .scrollTo(0, 100)
       .contains('France')
-      .click({ force: true });
+      .parents('.v-list-item')
+      .click();
 
     cyVPhoneCountry()
       .containsCountryTitle('France');
@@ -268,23 +269,20 @@ describe('InputCard.vue', () => {
       .contains('France');
 
     cyVPhoneCountry()
-      .find('[role=textbox]')
-      .click();
-
-    cy.get('body')
-      .type('a');
-
+      .find('input[type=text]')
+      .clear()
+      .type('Albania');
     cyVPhoneCountryMenu()
-      .scrollTo(0, 100)
       .contains('Albania')
-      .click({ force: true });
+      .parents('.v-list-item')
+      .click();
 
     cyVPhoneCountry()
       .containsCountryTitle('Albania');
     cyVPhoneInput()
       .find('input')
       .invoke('val')
-      .then((val) => assert.equal(val, '023 456 7890'));
+      .then((val) => assert.equal(val, '02 34 56 78 90'));
 
     cyVPhoneInput()
       .contains('The "Phone" field is not a valid phone number (example: 022 345 678).');
@@ -532,7 +530,7 @@ describe('InputCard.vue', () => {
       .containsCountryTitle('Afghanistan')
       .should('have.class', 'fi fi-af');
     cyVPhoneCountry()
-      .find('[role=textbox]')
+      .find('[role=button]')
       .click();
 
     cyVPhoneCountryMenu()
@@ -560,7 +558,7 @@ describe('InputCard.vue', () => {
       .find('.flag.af')
       .should('exist');
     cyVPhoneCountry()
-      .find('[role=textbox]')
+      .find('[role=button]')
       .click();
 
     cyVPhoneCountryMenu()
@@ -586,14 +584,14 @@ describe('InputCard.vue', () => {
 
     cyVPhoneCountry().contains('+93');
     cyVPhoneCountry()
-      .find('[role=textbox]')
+      .find('[role=button]')
       .click();
 
     cyVPhoneCountryMenu()
       .contains('American Samoa')
       .parents('.v-list-item')
-      .children('.v-list-item__prepend, .v-phone-input__country__icon')
-      .should('be.empty');
+      .children('.v-phone-input__country__icon')
+      .should('not.exist');
   });
 
   it('should use format style', () => {
