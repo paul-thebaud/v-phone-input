@@ -1,5 +1,11 @@
 # Change log
 
+## 4.0.1
+
+### Bug fixes
+
+- fix: show preferred countries first in country selection list (closes #17)
+
 ## 4.0.0
 
 Migration to `awesome-phonenumber` V6.
