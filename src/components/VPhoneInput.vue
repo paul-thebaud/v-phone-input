@@ -225,9 +225,6 @@ export default defineComponent({
     const countriesItems = computed(() => {
       const preferredItems: VPhoneCountriesItems = preferredCountries.value
         .map((c) => ({ ...c, preferred: true }));
-      if (preferredItems.length && otherCountries.value.length) {
-        preferredItems.push({ divider: true });
-      }
 
       return [...preferredItems, ...otherCountries.value];
     });

@@ -21,7 +21,7 @@ export default function useCountries({ props }: UseCountriesParams) {
   const preferredCountries = ref([] as Country[]);
   const otherCountries = ref([] as Country[]);
 
-  const normalizedPrefer = computed(() => props.includeCountries.map(normalizeCountryIso2));
+  const normalizedPrefer = computed(() => props.preferCountries.map(normalizeCountryIso2));
   const normalizedInclude = computed(() => props.includeCountries.map(normalizeCountryIso2));
   const normalizedExclude = computed(() => props.excludeCountries.map(normalizeCountryIso2));
 
@@ -63,9 +63,11 @@ export default function useCountries({ props }: UseCountriesParams) {
     }
   });
 
-  const firstCountry = computed(
-    (): Country | undefined => countriesByIso2.value[Object.keys(countriesByIso2.value)[0]],
-  );
+  const firstCountry = computed(() => {
+    const country = preferredCountries.value[0] ?? otherCountries.value[0];
+
+    return country ? countriesByIso2.value[country.iso2] : undefined;
+  });
 
   const findCountry = (iso2?: CountryOrIso2): Country | undefined => (
     countriesByIso2.value[normalizeCountryIso2(iso2)]
