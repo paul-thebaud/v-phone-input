@@ -51,7 +51,10 @@ export default defineComponent({
             cols="12"
             md="6"
           >
-            <install-card class="mb-6" />
+            <install-card
+              :input-props="nonEmptyInputProps"
+              class="mb-6"
+            />
             <props-card v-model="inputProps" />
           </v-col>
           <v-col

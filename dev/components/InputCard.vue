@@ -1,7 +1,7 @@
 <script lang="ts">
-import { countries, DEFAULT_OPTIONS, makePhone } from '@/index';
-import { computed, defineComponent, PropType, ref } from 'vue';
-import filterObject from '../utils/filterObject';
+import { countries, makePhone } from '@/index';
+import { computed, defineComponent, PropType, ref, toRef } from 'vue';
+import useOptions from '../composables/useOptions';
 import CodeBlock from './CodeBlock.vue';
 
 export default defineComponent({
@@ -16,18 +16,13 @@ export default defineComponent({
     const inputCountry = ref('');
     const inputValue = ref('');
 
+    const options = useOptions(toRef(props, 'inputProps'));
+
     const value = computed(() => inputValue.value || '-');
     const valid = computed(() => makePhone(inputValue.value).valid);
     const country = computed(() => (
       countries.find((c) => c.iso2 === inputCountry.value)?.name || 'Unknown'
     ));
-
-    const options = computed(() => filterObject(props.inputProps, (item, prop) => (
-      prop in DEFAULT_OPTIONS
-      && !!item
-      && (prop !== 'countryIconMode' || item !== 'text')
-      && (prop !== 'displayFormat' || item !== 'national')
-    )));
 
     const createPluginCode = computed(() => {
       const imports = [

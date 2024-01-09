@@ -1,9 +1,35 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent, PropType, toRef } from 'vue';
+import useOptions from '../composables/useOptions';
 import CodeBlock from './CodeBlock.vue';
 
 export default defineComponent({
   components: { CodeBlock },
+  props: {
+    inputProps: {
+      required: true,
+      type: Object as PropType<Record<string, unknown>>,
+    },
+  },
+  setup(props) {
+    const options = useOptions(toRef(props, 'inputProps'));
+
+    const packagesToInstall = computed(() => {
+      const packages = ['v-phone-input'];
+
+      if (options.value.countryIconMode === 'svg') {
+        packages.push('flag-icons');
+      }
+
+      if (options.value.countryIconMode === 'sprite') {
+        packages.push('world-flags-sprite');
+      }
+
+      return packages.join(' ');
+    });
+
+    return { packagesToInstall };
+  },
 });
 </script>
 
@@ -22,13 +48,18 @@ export default defineComponent({
     </v-card-subtitle>
     <v-card-text>
       <code-block
-        name="Yarn add"
-        code="yarn add v-phone-input"
+        :code="`npm install ${packagesToInstall}`"
+        name="NPM install"
         class="mb-5"
       />
       <code-block
-        name="NPM install"
-        code="npm install v-phone-input"
+        :code="`yarn add ${packagesToInstall}`"
+        name="Yarn add"
+        class="mb-5"
+      />
+      <code-block
+        :code="`pnpm add ${packagesToInstall}`"
+        name="PNPM add"
       />
     </v-card-text>
   </v-card>
