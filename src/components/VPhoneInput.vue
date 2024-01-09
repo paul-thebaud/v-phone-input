@@ -5,7 +5,7 @@ import useCountrySelectComponent from '@/composables/useCountrySelectComponent';
 import useLabels from '@/composables/useLabels';
 import useNamespacedSlots from '@/composables/useNamespacedSlots';
 import { Country, CountryGuesser, CountryIso2, CountryOrIso2 } from '@/types/countries';
-import { CountryIconMode, MessageOptions, MessageResolver } from '@/types/options';
+import { CountryIconMode, CountryPhoneExample, MessageOptions, MessageResolver } from '@/types/options';
 import { getOption } from '@/utils/options';
 import formatPhone from '@/utils/phone/formatPhone';
 import makeExample from '@/utils/phone/makeExample';
@@ -82,6 +82,10 @@ export default defineComponent({
     invalidMessage: {
       type: [String, Function] as PropType<MessageResolver>,
       default: () => getOption('invalidMessage'),
+    },
+    example: {
+      type: [String, Function] as PropType<CountryPhoneExample | undefined>,
+      default: () => getOption('example'),
     },
     appendIcon: {
       type: String,
@@ -230,7 +234,15 @@ export default defineComponent({
     });
 
     const format = (phone: ParsedPhoneNumber) => formatPhone(phone, props.displayFormat);
-    const example = computed(() => format(makeExample(activeCountry.value.iso2)));
+    const example = computed(() => {
+      if (props.example !== undefined) {
+        return typeof props.example === 'function'
+          ? props.example(activeCountry.value)
+          : props.example;
+      }
+
+      return format(makeExample(activeCountry.value.iso2));
+    });
     const immediateValidation = computed(() => {
       const validateOn = new Set(props.validateOn?.split('') || []);
 

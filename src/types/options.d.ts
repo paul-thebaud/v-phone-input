@@ -4,6 +4,8 @@ import { DefineComponent } from 'vue';
 
 export type CountryIconMode = 'svg' | 'sprite' | DefineComponent | undefined;
 
+export type CountryPhoneExample = string | ((country: Country) => string);
+
 export type Message = string | undefined;
 
 export interface MessageOptions {
@@ -22,6 +24,7 @@ export interface PluginOptions {
   placeholder: MessageResolver;
   hint: MessageResolver;
   invalidMessage: MessageResolver;
+  example: CountryPhoneExample | undefined;
   persistentPlaceholder: boolean | undefined;
   persistentHint: boolean | undefined;
   countryIconMode: CountryIconMode;

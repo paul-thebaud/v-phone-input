@@ -10,6 +10,7 @@ export const DEFAULT_OPTIONS: PluginOptions = {
   placeholder: undefined,
   hint: undefined,
   invalidMessage: (options: MessageOptions) => `The "${options.label}" field is not a valid phone number (example: ${options.example}).`,
+  example: undefined,
   persistentPlaceholder: undefined,
   persistentHint: undefined,
   countryIconMode: undefined,
