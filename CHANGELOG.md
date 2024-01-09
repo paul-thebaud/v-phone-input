@@ -1,5 +1,17 @@
 # Change log
 
+## 4.1.0
+
+### Features
+
+- feat: order preferred countries using passed `preferCountries` prop (closes #19)
+- feat: add an `example` property to customize shown example (closes #20)
+
+### Demo app
+
+- feat: add flag icon package to installation code blocks in demo app
+- feat: add pnpm installation code block in demo app
+
 ## 4.0.1
 
 ### Bug fixes
