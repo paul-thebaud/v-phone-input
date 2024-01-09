@@ -53,6 +53,10 @@ export default function useCountries({ props }: UseCountriesParams) {
       }
     });
 
+    newPreferredCountries.sort((ca, cb) => (
+      normalizedPrefer.value.indexOf(ca.iso2) - normalizedPrefer.value.indexOf(cb.iso2)
+    ));
+
     countriesByIso2.value = newCountriesByIso2;
     preferredCountries.value = newPreferredCountries;
     otherCountries.value = newOtherCountries;
