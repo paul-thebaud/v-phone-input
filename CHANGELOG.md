@@ -1,5 +1,11 @@
 # Change log
 
+## 4.1.1
+
+### Bug fixes
+
+- fix: exclude unsupported countries from countries list to avoid unexpected errors
+
 ## 4.1.0
 
 ### Features

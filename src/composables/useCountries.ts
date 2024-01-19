@@ -1,6 +1,7 @@
 import { Country, CountryGuesser, CountryIso2, CountryMap, CountryOrIso2 } from '@/types/countries';
 import isPreferableCountryGuesser from '@/utils/countries/isPreferableCountryGuesser';
 import normalizeCountryIso2 from '@/utils/countries/normalizeCountryIso2';
+import { getSupportedRegionCodes } from 'awesome-phonenumber';
 import { computed, ComputedRef, ref, watchEffect } from 'vue';
 
 interface UseCountriesParams {
@@ -16,6 +17,8 @@ interface UseCountriesParams {
 }
 
 export default function useCountries({ props }: UseCountriesParams) {
+  const supportedCountries = getSupportedRegionCodes();
+
   const countriesByIso2 = ref({} as CountryMap);
   const countriesCount = ref(0);
   const preferredCountries = ref([] as Country[]);
@@ -32,6 +35,9 @@ export default function useCountries({ props }: UseCountriesParams) {
 
     props.allCountries.forEach((country) => {
       const normalizedIso2 = normalizeCountryIso2(country.iso2);
+      if (supportedCountries.indexOf(normalizedIso2) === -1) {
+        return;
+      }
 
       if (normalizedInclude.value.length
         && normalizedInclude.value.indexOf(normalizedIso2) === -1
