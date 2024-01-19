@@ -5,6 +5,7 @@
 ### Bug fixes
 
 - fix: exclude unsupported countries from countries list to avoid unexpected errors
+- fix: only run validation trigger when phone number input is filled with a value (closes #21)
 
 ## 4.1.0
 

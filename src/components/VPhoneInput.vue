@@ -259,7 +259,7 @@ export default defineComponent({
     const mergeRules = () => {
       const rules = props.rules.map((rule) => (
         typeof rule === 'function'
-          ? (() => rule(lazyValue.value || '', lazyPhone.value, labels.messageOptions.value))
+          ? (() => rule(lazyValue.value ?? '', lazyPhone.value, labels.messageOptions.value))
           : rule
       )) as ValidationRule[];
       if (!labels.invalidMessage.value) {
@@ -299,7 +299,9 @@ export default defineComponent({
 
     const onInvalidMessageChange = () => {
       mergeRules();
-      validate();
+      if ((lazyValue.value ?? '') !== '') {
+        validate();
+      }
     };
 
     watch(labels.invalidMessage, onInvalidMessageChange);
@@ -335,7 +337,9 @@ export default defineComponent({
 
       onLazyCountryOrValueChange();
 
-      validate();
+      if ((lazyValue.value ?? '') !== '') {
+        validate();
+      }
     };
     const onLazyValueChange = () => {
       const countryInLazyValue = (lazyValue.value || '').startsWith('+');
