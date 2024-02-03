@@ -34,6 +34,7 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/v-phone-input.js",
       "require": "./dist/v-phone-input.umd.cjs"
     },
