@@ -19,7 +19,7 @@ describe('InputCard.vue', () => {
   function cySelectMenu(menuName, optionName) {
     cy.contains(menuName)
       .parents('.v-select')
-      .find('[role=button]')
+      .find('[role=combobox]')
       .click();
     cy.get('.v-menu .v-list', { timeout: 10000 })
       .should('be.visible')
@@ -199,7 +199,7 @@ describe('InputCard.vue', () => {
 
     cyVPhoneCountry()
       .find('input[type=text]')
-      .clear()
+      .clear({ force: true })
       .type('France');
     cyVPhoneCountryMenu()
       .contains('France')
@@ -270,7 +270,7 @@ describe('InputCard.vue', () => {
 
     cyVPhoneCountry()
       .find('input[type=text]')
-      .clear()
+      .clear({ force: true })
       .type('Albania');
     cyVPhoneCountryMenu()
       .contains('Albania')
@@ -364,7 +364,7 @@ describe('InputCard.vue', () => {
 
     cyVPhoneCountry()
       .find('input[type=text]')
-      .clear()
+      .clear({ force: true })
       .type('France');
     cyVPhoneCountryMenu()
       .contains('France')
@@ -376,7 +376,7 @@ describe('InputCard.vue', () => {
 
     cyVPhoneCountry()
       .find('input[type=text]')
-      .clear()
+      .clear({ force: true })
       .type('{backspace}{enter}');
 
     cyVPhoneCountry()
@@ -530,7 +530,7 @@ describe('InputCard.vue', () => {
       .containsCountryTitle('Afghanistan')
       .should('have.class', 'fi fi-af');
     cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=combobox]')
       .click();
 
     cyVPhoneCountryMenu()
@@ -558,7 +558,7 @@ describe('InputCard.vue', () => {
       .find('.flag.af')
       .should('exist');
     cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=combobox]')
       .click();
 
     cyVPhoneCountryMenu()
@@ -584,7 +584,7 @@ describe('InputCard.vue', () => {
 
     cyVPhoneCountry().contains('+93');
     cyVPhoneCountry()
-      .find('[role=button]')
+      .find('[role=combobox]')
       .click();
 
     cyVPhoneCountryMenu()
