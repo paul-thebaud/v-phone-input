@@ -11,34 +11,38 @@ jobs:
   lint-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2.4.0
         with:
-          node-version: '18.x'
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: yarn install -s --no-progress --non-interactive
+        run: pnpm install
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
       - name: Build package
-        run: yarn lib:build
+        run: pnpm lib:build
   unit-tests:
     name: unit-tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2.4.0
         with:
-          node-version: '18.x'
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: yarn install -s --no-progress --non-interactive
+        run: pnpm install
       - name: Unit tests
-        run: yarn test:unit:coverage
+        run: pnpm test:unit:coverage
       - name: Store unit coverage artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-unit
           path: coverage-unit
@@ -46,20 +50,22 @@ jobs:
     name: e2e-tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2.4.0
         with:
-          node-version: '18.x'
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: yarn install -s --no-progress --non-interactive
+        run: pnpm install
       - name: E2E tests
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          build: yarn demo:build --config vite.e2e.config.ts
-          start: yarn demo:preview
+          build: pnpm demo:build --config vite.e2e.config.ts
+          start: pnpm demo:preview
           wait-on: http://127.0.0.1:4173
       - name: Store e2e coverage artifact
         uses: actions/upload-artifact@v3
@@ -71,15 +77,14 @@ jobs:
     needs: [ unit-tests, e2e-tests ]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download unit coverage artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: coverage-unit
           path: coverage/coverage-unit
       - name: Download e2e coverage artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: coverage-e2e
           path: coverage/coverage-e2e

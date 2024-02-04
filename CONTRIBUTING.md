@@ -11,7 +11,7 @@ place in the
 
 ## Pull Requests
 
-- **Lint your code.** Make sure your code follows our coding standards by running `yarn lint` on the
+- **Lint your code.** Make sure your code follows our coding standards by running `pnpm lint` on the
   CLI.
 
 - **Add tests!** Your patch won't be accepted if it does not have tests.
@@ -32,46 +32,46 @@ place in the
 
 ## Useful commands
 
-> Notice that we use Yarn as our package manager.
+> Notice that we use PNPM as our package manager.
 
 ### Running dev app
 
 ```shell
-yarn dev
+pnpm dev
 ```
 
 ### Building dev app for publish
 
 ``` shell
-yarn demo:build
+pnpm demo:build
 ```
 
 ### Previewing built dev app
 
 ``` shell
-yarn demo:preview
+pnpm demo:preview
 ```
 
 ### Linting code
 
 ``` shell
-yarn lint
+pnpm lint
 ```
 
 ### Running E2E Tests
 
 ``` shell
-yarn test:e2e
+pnpm test:e2e
 ```
 
 ### Running Unit Tests
 
 ``` shell
-yarn test:unit
+pnpm test:unit
 ```
 
 ### Building library for publish
 
 ``` shell
-yarn lib:build
+pnpm lib:build
 ```
