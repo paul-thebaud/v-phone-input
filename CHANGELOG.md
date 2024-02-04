@@ -1,5 +1,11 @@
 # Change log
 
+## 4.1.2
+
+### Bug fixes
+
+- fix: types definition references inside `package.json` (closes #26)
+
 ## 4.1.1
 
 ### Bug fixes
