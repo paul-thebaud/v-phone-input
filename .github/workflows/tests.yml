@@ -68,7 +68,7 @@ jobs:
           start: pnpm demo:preview
           wait-on: http://127.0.0.1:4173
       - name: Store e2e coverage artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-e2e
           path: coverage-e2e
