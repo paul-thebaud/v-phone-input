@@ -215,7 +215,7 @@ app.use(vPhoneInput);
 | `countryAriaLabel`       | [`MessageResolver`](#message-resolver)                             | Country for {label}                                                   | The phone input `aria-label` (see [Localization](#localization)).                                                                                 |
 | `placeholder`            | [`MessageResolver`](#message-resolver)                             | `undefined`                                                           | The phone input placeholder (see [Localization](#localization)).                                                                                  |
 | `hint`                   | [`MessageResolver`](#message-resolver)                             | `undefined`                                                           | The phone input hint (see [Localization](#localization)).                                                                                         |
-| `invalidMessage`         | [`MessageResolver`](#message-resolver)                             | The "{label}" field is not a valid phone number (example: {example}). | The phone input message when number is invalid (see [Localization](#localization)).                                                               |
+| `invalidMessage`         | [`MessageResolver`](#message-resolver) or `null`                   | The "{label}" field is not a valid phone number (example: {example}). | The phone input message when number is invalid (see [Localization](#localization)). You can pass `null` to disable default validation.            |
 | `example`                | `string` or `Function` or `undefined`                              | `undefined`                                                           | Example of a valid phone number (or factory function which takes a [`Country[]`](#country) object) to customize phone number example for message. |
 | `countryIconMode`        | `string` or `VueConstructor` or `undefined`                        | `undefined`                                                           | The country icon display mode (see [Country icon modes](#country-icon-modes)).                                                                    |
 | `allCountries`           | [`Country[]`](#country)                                            | An array of all possible countries                                    | Array of countries to use.                                                                                                                        |
@@ -382,8 +382,16 @@ that you may use when validating user's input:
 - `messageOptions`: the [message options](#message-options) which you may use to inject the input
   label, current country or a phone example inside the message.
 
-> If you don't want the automatic validation to run, you can pass a `null` value to the
-> `invalid-message` prop.
+##### Disabling default validation
+
+If you don't want the automatic validation to run, you can pass a `null` value to the
+`invalid-message` prop:
+
+```vue
+<template>
+  <v-phone-input :invalid-message="null" />
+</template>
+```
 
 #### Enabling searching countries
 
