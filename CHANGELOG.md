@@ -1,5 +1,14 @@
 # Change log
 
+## 4.2.0-alpha.0
+
+### Features
+
+- feat: rely on [`countries-list`](https://www.npmjs.com/package/countries-list)
+  instead of [`country-telephone-data`](https://www.npmjs.com/package/country-telephone-data)
+  for countries names and includes it in build.
+- feat: display native name of the country first (instead of showing `EN` name)
+
 ## 4.1.2
 
 ### Bug fixes
