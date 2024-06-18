@@ -60,12 +60,12 @@
   },
   "dependencies": {
     "awesome-phonenumber": "^6.4.0",
-    "country-telephone-data": "^0.6.3"
+    "countries-list": "^3.1.0",
+    "country-flag-icons": "^1.5.12"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.12.19",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "@types/country-telephone-data": "^0.6.3",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-vue": "^4.6.2",

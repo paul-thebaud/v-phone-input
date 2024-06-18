@@ -23,7 +23,6 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
         'vuetify/lib',
         'vuetify/components',
         'awesome-phonenumber',
-        'country-telephone-data',
       ],
       output: {
         assetFileNames: (assetInfo) => (
@@ -32,7 +31,6 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
         globals: {
           vue: 'Vue',
           'awesome-phonenumber': 'PhoneNumber',
-          'country-telephone-data': 'CountryTelephoneData',
         },
       },
     },

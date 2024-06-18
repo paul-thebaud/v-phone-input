@@ -520,6 +520,8 @@ VPhoneInput relies on multiple dependencies to work:
 
 - [`awesome-phonenumber`](https://www.npmjs.com/package/awesome-phonenumber) for phone number
   formats, validation, etc.
+- [`countries-list`](https://www.npmjs.com/package/countries-list) for phone number
+  countries' names.
 - [`country-telephone-data`](https://www.npmjs.com/package/country-telephone-data) for phone number
   countries ISO-2, dial code and names.
 - [`flag-icons`](https://www.npmjs.com/package/flag-icons) when using the `svg` country icon mode
