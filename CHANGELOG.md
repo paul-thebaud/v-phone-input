@@ -1,5 +1,11 @@
 # Change log
 
+## 4.2.1
+
+### Bug fixes
+
+- fix: publish package under `latest` npm tag
+
 ## 4.2.0
 
 ### Features

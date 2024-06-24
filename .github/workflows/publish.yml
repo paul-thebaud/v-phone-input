@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Publish to NPM
-        run: pnpm publish --tag next --no-git-checks
+        run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build demo
