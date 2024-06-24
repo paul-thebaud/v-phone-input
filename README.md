@@ -65,6 +65,8 @@ const vPhoneInput = createVPhoneInput({
 app.use(vPhoneInput);
 ```
 
+> If you are using Nuxt, check out the [Nuxt setup guide](#nuxt-setup).
+
 Component usage:
 
 ```vue
@@ -88,6 +90,7 @@ Component usage:
 - [Installation](#installation)
 - [Migration](#migration)
 - [Usage](#usage)
+- [Nuxt setup](#nuxt-setup)
 - [Props](#props)
 - [Events](#events)
 - [Slots](#slots)
@@ -177,6 +180,35 @@ able to define props' default values for the input.
 ### Migration
 
 Please follow the [migration guide](MIGRATION.md) if you need to migrate from version 1, 2 or 3.
+
+### Nuxt setup
+
+If you are using Nuxt, you must mark `v-phone-input` as a transpiled package in
+your Nuxt configuration:
+
+```typescript
+export default defineNuxtConfig({
+  build: {
+    transpile: ['v-phone-input'],
+  },
+});
+```
+
+Instead of defining a Vue plugin, you must define a Nuxt plugin as follows:
+
+```typescript
+import 'flag-icons/css/flag-icons.min.css';
+import 'v-phone-input/dist/v-phone-input.css';
+import { createVPhoneInput } from 'v-phone-input';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  const vPhoneInput = createVPhoneInput({
+    countryIconMode: 'svg',
+  });
+
+  nuxtApp.vueApp.use(vPhoneInput);
+});
+```
 
 ### Props
 
@@ -520,8 +552,8 @@ VPhoneInput relies on multiple dependencies to work:
 
 - [`awesome-phonenumber`](https://www.npmjs.com/package/awesome-phonenumber) for phone number
   formats, validation, etc.
-- [`country-telephone-data`](https://www.npmjs.com/package/country-telephone-data) for phone number
-  countries ISO-2, dial code and names.
+- [`countries-list`](https://www.npmjs.com/package/countries-list) for phone number
+  countries' names.
 - [`flag-icons`](https://www.npmjs.com/package/flag-icons) when using the `svg` country icon mode
   for SVG country flags.
 - [`world-flags-sprite`](https://www.npmjs.com/package/world-flags-sprite) when using the `sprite`

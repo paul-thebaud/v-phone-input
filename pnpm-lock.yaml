@@ -8,9 +8,12 @@ dependencies:
   awesome-phonenumber:
     specifier: ^6.4.0
     version: 6.4.0
-  country-telephone-data:
-    specifier: ^0.6.3
-    version: 0.6.3
+  countries-list:
+    specifier: ^3.1.0
+    version: 3.1.0
+  country-flag-icons:
+    specifier: ^1.5.12
+    version: 1.5.12
 
 optionalDependencies:
   flag-icons:
@@ -27,9 +30,6 @@ devDependencies:
   '@istanbuljs/nyc-config-typescript':
     specifier: ^1.0.2
     version: 1.0.2(nyc@15.1.0)
-  '@types/country-telephone-data':
-    specifier: ^0.6.3
-    version: 0.6.3
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.62.0
     version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(typescript@4.9.5)
@@ -1905,10 +1905,6 @@ packages:
     resolution: {integrity: sha512-qQR1dr2rGIHYlJulmr8Ioq3De0Le9E4MJ5AiaeAETJJpndT1uUNHsGFK3L/UIu+rbkQSdj8J/w2bCsBZc/Y5fQ==}
     dev: true
 
-  /@types/country-telephone-data@0.6.3:
-    resolution: {integrity: sha512-XRooLIe/i42PGpW/dP8hyEP8oFHkCJCe7wYQcl28BaC4fmUCYdyK8adVlepnAH9aRlIqr0mW/c6KRIBj78kgeg==}
-    dev: true
-
   /@types/eslint-scope@3.7.7:
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
     dependencies:
@@ -3211,8 +3207,12 @@ packages:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
     dev: true
 
-  /country-telephone-data@0.6.3:
-    resolution: {integrity: sha512-3tQLA0vec+NDVlcaHhXGqILq/oQRsv4fRi4EedCfJqUuJUjQGdcSPM8r2IJIT2kZ5yWbiOCkXMgy7YTo8FNS2w==}
+  /countries-list@3.1.0:
+    resolution: {integrity: sha512-HpTBLZba1VPTZSjUnUwR7SykxV7Z/7/+ZM5x5wi5tO99Qvom6bE2SC+AQ18016ujg3jSlYBbMITrHNnPAHSM9Q==}
+    dev: false
+
+  /country-flag-icons@1.5.12:
+    resolution: {integrity: sha512-ksBaQqQEFSvSFg1NV8tlAk4IjgDRNMu5ImjnCac0C409CiN6ObTI0vCFaNfaPusxLrr5O9pueT1R3G4XMMwErg==}
     dev: false
 
   /create-require@1.1.1:
