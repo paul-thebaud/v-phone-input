@@ -1,6 +1,6 @@
 # Change log
 
-## 4.2.0-alpha.0
+## 4.2.0
 
 ### Features
 
