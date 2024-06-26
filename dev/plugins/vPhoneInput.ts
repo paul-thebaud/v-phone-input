@@ -7,5 +7,7 @@ import 'world-flags-sprite/stylesheets/flags32.css';
 declare const __E2E_TEST__: boolean | undefined;
 
 export default createVPhoneInput({
-  includeCountries: __E2E_TEST__ ? ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'FR'] : [],
+  includeCountries: typeof __E2E_TEST__ === 'boolean' && __E2E_TEST__
+    ? ['AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'FR']
+    : [],
 });
