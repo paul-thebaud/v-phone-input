@@ -263,13 +263,23 @@ app.use(vPhoneInput);
 | `displayFormat`          | `PhoneNumberFormat`                                                | `'national'`                                                          | Format to use when displaying valid phone numbers in phone text input (see [Phone number formats](#phone-number-formats)).                        |
 | `country`                | `string`                                                           | `''`                                                                  | Country of the country input. Can be used with `.sync` modifier. Will be superseded by value's country if defined on mounting.                    |
 | `value`                  | `string`                                                           | `''`                                                                  | Value of the phone input. You may use it using `v-model` or `@input`.                                                                             |
+| `wrapperProps`           | `object`                                                           | `{}`                                                                  | Props to pass to the inputs wrapper `div` element.                                                                                                |
 | `countryProps`           | `object`                                                           | `{}`                                                                  | Props to pass to the `VSelect` or `VAutocomplete` country input component.                                                                        |
 | `phoneProps`             | `object`                                                           | `{}`                                                                  | Props to pass to the `VTextField` phone input component.                                                                                          |
 
-> You can also pass the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props)
-> and [Vuetify `VSelect`](https://vuetifyjs.com/en/api/v-select/#props)
-> props to the component to customize variant, icons, errors, etc. using the `v-bind` directive or
-> the `countryProps` and `phoneProps` props.
+#### Props inheritance
+
+You can also pass the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props)
+and [Vuetify `VSelect`](https://vuetifyjs.com/en/api/v-select/#props)
+props to the component to customize variant, icons, errors, etc. using the `v-bind` directive or
+the `countryProps` and `phoneProps` props.
+
+Most props will only apply to the phone input component (not wrapper `div` or country select),
+but be aware that:
+
+- Some props will only apply to the inputs wrapper `div` element: `id`, `class` and `style`.
+- Some props are applied to both inputs: `variant`, `flat`, `tile`, `density`, `singleLine`,
+  `hideDetails`, `direction`, `reverse`, `color`, `bgColor`, `theme`, `disabled` and `readonly`.
 
 ### Events
 

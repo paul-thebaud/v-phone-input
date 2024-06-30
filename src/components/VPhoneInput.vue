@@ -5,7 +5,12 @@ import useCountrySelectComponent from '@/composables/useCountrySelectComponent';
 import useLabels from '@/composables/useLabels';
 import useNamespacedSlots from '@/composables/useNamespacedSlots';
 import { Country, CountryGuesser, CountryIso2, CountryOrIso2 } from '@/types/countries';
-import { CountryIconMode, CountryPhoneExample, MessageOptions, MessageResolver } from '@/types/options';
+import {
+  CountryIconMode,
+  CountryPhoneExample,
+  MessageOptions,
+  MessageResolver,
+} from '@/types/options';
 import { getOption } from '@/utils/options';
 import formatPhone from '@/utils/phone/formatPhone';
 import makeExample from '@/utils/phone/makeExample';
@@ -34,8 +39,16 @@ export type VPhoneInputValidationRule = VPhoneInputValidationResult | ((
   messageOptions: MessageOptions,
 ) => VPhoneInputValidationResult);
 
+const WRAPPER_ATTRS = [
+  'id',
+  'class',
+  'style',
+];
+
 const INPUTS_COMMON_ATTRS = [
   'variant',
+  'flat',
+  'tile',
   'density',
   'singleLine',
   'hideDetails',
@@ -49,6 +62,7 @@ const INPUTS_COMMON_ATTRS = [
 ];
 
 export default defineComponent({
+  inheritAttrs: false,
   components: {
     VListItem,
     VSelect,
@@ -163,6 +177,10 @@ export default defineComponent({
       type: String as PropType<string | null>,
       default: '',
     },
+    wrapperProps: {
+      type: Object,
+      default: () => ({}),
+    },
     countryProps: {
       type: Object,
       default: () => ({}),
@@ -202,15 +220,22 @@ export default defineComponent({
     const lazyValue = ref(props.modelValue || '' as string | null);
     const lazyPhone = ref({ number: { input: '' } } as ParsedPhoneNumber);
 
+    const onlyAttrs = (matcher: (key: string) => boolean) => Object.keys(attrs)
+      .reduce((filteredAttrs, attrKey) => (
+        matcher(attrKey)
+          ? { ...filteredAttrs, [attrKey]: attrs[attrKey] }
+          : filteredAttrs
+      ), {});
+
+    const wrapperAttrs = computed(() => ({
+      ...onlyAttrs((attr) => WRAPPER_ATTRS.indexOf(attr) !== -1),
+      ...props.wrapperProps,
+    }));
     const countryAttrs = computed(() => ({
       ...countrySelectComponent.value.props,
-      ...Object.keys(attrs).reduce((filteredAttrs, attrKey) => {
-        if (INPUTS_COMMON_ATTRS.indexOf(attrKey) !== -1) {
-          return { ...filteredAttrs, [attrKey]: attrs[attrKey] };
-        }
-
-        return filteredAttrs;
-      }, {}),
+      ...onlyAttrs((attr) => (
+        WRAPPER_ATTRS.indexOf(attr) === -1 && INPUTS_COMMON_ATTRS.indexOf(attr) !== -1
+      )),
       ...props.countryProps,
       menuProps: {
         maxHeight: 300,
@@ -220,7 +245,7 @@ export default defineComponent({
       },
     }));
     const phoneAttrs = computed(() => ({
-      ...attrs,
+      ...onlyAttrs((attr) => WRAPPER_ATTRS.indexOf(attr) === -1),
       ...props.phoneProps,
     }));
 
@@ -393,6 +418,7 @@ export default defineComponent({
     });
 
     return {
+      wrapperAttrs,
       VTextField: VTextField as any,
       countryInput,
       phoneInput,
@@ -421,6 +447,7 @@ export default defineComponent({
   <div
     :class="{ 'v-phone-input--prepend-inner-icon': prependInnerIcon }"
     class="v-phone-input"
+    v-bind="wrapperAttrs"
   >
     <component
       :is="countrySelectComponent.type as any"
