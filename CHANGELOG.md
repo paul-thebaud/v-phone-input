@@ -1,5 +1,11 @@
 # Change log
 
+## 4.2.2
+
+### Bug fixes
+
+- fix: attributes inheritance and documentation on behavior (closes #37)
+
 ## 4.2.1
 
 ### Bug fixes
