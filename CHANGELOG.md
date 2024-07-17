@@ -1,5 +1,11 @@
 # Change log
 
+## 4.3.1
+
+### Bug fixes
+
+- fix: remove unused dependency
+
 ## 4.3.0
 
 ### Features
