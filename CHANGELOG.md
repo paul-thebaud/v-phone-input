@@ -1,5 +1,12 @@
 # Change log
 
+## 4.3.0
+
+### Features
+
+- feat: add `country-selection` slot (closes #39)
+- feat: add default value to `decorative` prop of icon components
+
 ## 4.2.2
 
 ### Bug fixes
