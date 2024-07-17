@@ -1,11 +1,11 @@
-import makeVCountryProps, { VCountryProps } from '@/composables/makeVCountryProps';
+import makeVCountryProps from '@/composables/makeVCountryProps';
 import useCountryIconAttrs from '@/composables/useCountryIconAttrs';
 import { defineComponent, h } from 'vue';
 
 export default defineComponent({
   props: makeVCountryProps(),
   setup(props) {
-    const { role, title } = useCountryIconAttrs({ props: props as VCountryProps });
+    const { role, title } = useCountryIconAttrs({ props });
 
     return () => h('span', {
       role: role.value,

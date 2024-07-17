@@ -3,7 +3,7 @@ import { PropType } from 'vue';
 
 export interface VCountryProps {
   country: Country;
-  decorative: boolean;
+  decorative?: boolean;
 }
 
 export default function makeVCountryProps() {
@@ -13,8 +13,8 @@ export default function makeVCountryProps() {
       type: Object as PropType<Country>,
     },
     decorative: {
-      required: true,
       type: Boolean,
+      default: false,
     },
-  };
+  } as const;
 }
