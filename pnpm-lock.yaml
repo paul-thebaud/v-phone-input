@@ -11,9 +11,6 @@ dependencies:
   countries-list:
     specifier: ^3.1.0
     version: 3.1.0
-  country-flag-icons:
-    specifier: ^1.5.12
-    version: 1.5.12
 
 optionalDependencies:
   flag-icons:
@@ -3209,10 +3206,6 @@ packages:
 
   /countries-list@3.1.0:
     resolution: {integrity: sha512-HpTBLZba1VPTZSjUnUwR7SykxV7Z/7/+ZM5x5wi5tO99Qvom6bE2SC+AQ18016ujg3jSlYBbMITrHNnPAHSM9Q==}
-    dev: false
-
-  /country-flag-icons@1.5.12:
-    resolution: {integrity: sha512-ksBaQqQEFSvSFg1NV8tlAk4IjgDRNMu5ImjnCac0C409CiN6ObTI0vCFaNfaPusxLrr5O9pueT1R3G4XMMwErg==}
     dev: false
 
   /create-require@1.1.1:

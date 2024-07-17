@@ -60,8 +60,7 @@
   },
   "dependencies": {
     "awesome-phonenumber": "^6.4.0",
-    "countries-list": "^3.1.0",
-    "country-flag-icons": "^1.5.12"
+    "countries-list": "^3.1.0"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.12.19",
