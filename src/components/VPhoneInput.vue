@@ -62,12 +62,12 @@ const INPUTS_COMMON_ATTRS = [
 ];
 
 export default defineComponent({
-  inheritAttrs: false,
   components: {
     VListItem,
     VSelect,
     VTextField,
   },
+  inheritAttrs: false,
   props: {
     label: {
       type: [String, Function] as PropType<MessageResolver>,
@@ -469,19 +469,24 @@ export default defineComponent({
     >
       <template #selection>
         <slot
-          name="country-icon"
+          name="country-selection"
           :country="activeCountry"
-          :decorative="false"
         >
-          <component
-            :is="countryIconComponent"
-            v-if="countryIconComponent"
+          <slot
+            name="country-icon"
             :country="activeCountry"
             :decorative="false"
-          />
-          <span v-else>
-            {{ `+${activeCountry.dialCode}` }}
-          </span>
+          >
+            <component
+              :is="countryIconComponent"
+              v-if="countryIconComponent"
+              :country="activeCountry"
+              :decorative="false"
+            />
+            <span v-else>
+              {{ `+${activeCountry.dialCode}` }}
+            </span>
+          </slot>
         </slot>
       </template>
       <template #item="itemProps">

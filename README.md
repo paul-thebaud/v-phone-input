@@ -311,9 +311,16 @@ phone input.
 </template>
 ```
 
-The input also provides two special slots: the `country-icon` slot for countries' icons
-display, `country-name` slot for countries' name display and `country-append` slot for countries'
-list items appended info display.
+The input also provides 4 special slots:
+
+- `country-selection` for countries' display in selection.
+- `country-icon` for countries' icons display in selection and select items.
+- `country-name` for countries' name display in select items.
+- `country-append` for countries' appended info display in select items.
+
+Each of those slots will receive a [`country`](#country) object property.
+`country-icon` slot will also receive a `decorative` boolean property,
+which will be `false` inside selection, and `true` inside select item.
 
 ```vue
 
