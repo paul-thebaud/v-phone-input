@@ -12,6 +12,24 @@ import formatPhone from '@/utils/phone/formatPhone';
 import makeExample from '@/utils/phone/makeExample';
 import makePhone from '@/utils/phone/makePhone';
 
+import type {
+  CountryIconMode,
+  CountryPhoneExample,
+  Message,
+  MessageOptions,
+  MessageResolver,
+  PluginOptions,
+} from './types/options';
+
+import type {
+  Country,
+  CountryGuesser,
+  CountryIso2,
+  CountryMap,
+  CountryOrIso2,
+  PreferableCountryGuesser,
+} from './types/countries';
+
 export {
   createVPhoneInput,
   VPhoneInput,
@@ -27,4 +45,16 @@ export {
   DEFAULT_OPTIONS,
   mergeOptions,
   getOption,
+  Country,
+  CountryGuesser,
+  CountryIso2,
+  CountryMap,
+  CountryOrIso2,
+  PreferableCountryGuesser,
+  CountryIconMode,
+  CountryPhoneExample,
+  Message,
+  MessageOptions,
+  MessageResolver,
+  PluginOptions,
 };
