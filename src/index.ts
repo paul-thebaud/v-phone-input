@@ -12,6 +12,9 @@ import formatPhone from '@/utils/phone/formatPhone';
 import makeExample from '@/utils/phone/makeExample';
 import makePhone from '@/utils/phone/makePhone';
 
+export * from '@/types/countries';
+export * from '@/types/options';
+
 export {
   createVPhoneInput,
   VPhoneInput,
