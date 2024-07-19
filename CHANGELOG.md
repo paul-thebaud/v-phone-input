@@ -1,5 +1,11 @@
 # Change log
 
+## 4.3.2
+
+### Bug fixes
+
+- fix: export missing types (see #40)
+
 ## 4.3.1
 
 ### Bug fixes
