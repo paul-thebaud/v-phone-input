@@ -73,6 +73,7 @@ export default defineComponent({
       disabled: createSwitch(),
       loading: createSwitch(),
       shaped: createSwitch(),
+      rounded: createSwitch(toItems(['sm', 'md', 'lg', 'xl', 'pill'])),
     });
     const themeItems = [{ value: 'light', title: 'Light' }, { value: 'dark', title: 'Dark' }];
 

@@ -86,29 +86,45 @@ Component usage:
 
 ### Table of contents
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Migration](#migration)
-- [Usage](#usage)
-- [Nuxt setup](#nuxt-setup)
-- [Props](#props)
-- [Events](#events)
-- [Slots](#slots)
-- [Examples](#examples)
-    - [Country icon modes](#country-icon-modes)
-    - [Validation](#validation)
-    - [Enabling searching countries](#enabling-searching-countries)
-    - [Customizing display format](#customizing-display-format)
-    - [Localization](#localization)
-- [Dependencies](#dependencies)
-- [Types](#types)
-    - [Country](#country)
-    - [Country guesser](#country-guesser)
-    - [Phone number formats](#phone-number-formats)
-    - [Phone number](#phone-number)
-    - [Message options](#message-options)
-    - [Message](#message)
-    - [Message resolver](#message-resolver)
+- [VPhoneInput](#vphoneinput)
+  - [Demo](#demo)
+  - [TL;DR](#tldr)
+  - [Documentation](#documentation)
+    - [Table of contents](#table-of-contents)
+    - [Requirements](#requirements)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Migration](#migration)
+    - [Nuxt setup](#nuxt-setup)
+    - [Props](#props)
+      - [Props inheritance](#props-inheritance)
+    - [Events](#events)
+    - [Slots](#slots)
+    - [Examples](#examples)
+      - [Country icon modes](#country-icon-modes)
+        - [SVG](#svg)
+        - [Sprite](#sprite)
+        - [Custom component](#custom-component)
+        - [Custom slot](#custom-slot)
+        - [No icon](#no-icon)
+      - [Validation](#validation)
+        - [Disabling default validation](#disabling-default-validation)
+      - [Enabling searching countries](#enabling-searching-countries)
+        - [When using plugin registration](#when-using-plugin-registration)
+        - [When using per-file registration](#when-using-per-file-registration)
+      - [Customizing display format](#customizing-display-format)
+      - [Localization](#localization)
+    - [Dependencies](#dependencies)
+    - [Types](#types)
+      - [Country](#country)
+      - [Country Guesser](#country-guesser)
+      - [Phone Number Formats](#phone-number-formats)
+      - [Message options](#message-options)
+      - [Message](#message)
+      - [Message resolver](#message-resolver)
+  - [Contributing](#contributing)
+  - [Credits](#credits)
+  - [License](#license)
 
 ### Requirements
 
@@ -279,7 +295,7 @@ but be aware that:
 
 - Some props will only apply to the inputs wrapper `div` element: `id`, `class` and `style`.
 - Some props are applied to both inputs: `variant`, `flat`, `tile`, `density`, `singleLine`,
-  `hideDetails`, `direction`, `reverse`, `color`, `bgColor`, `theme`, `disabled` and `readonly`.
+  `hideDetails`, `direction`, `reverse`, `color`, `bgColor`, `theme`, `disabled`,`readonly`, and `rounded`.
 
 ### Events
 

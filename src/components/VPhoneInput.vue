@@ -59,6 +59,7 @@ const INPUTS_COMMON_ATTRS = [
   'theme',
   'disabled',
   'readonly',
+  'rounded',
 ];
 
 export default defineComponent({
