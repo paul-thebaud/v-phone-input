@@ -189,7 +189,12 @@ your Nuxt configuration:
 ```typescript
 export default defineNuxtConfig({
   build: {
-    transpile: ['v-phone-input'],
+    transpile: [
+      // Keep other transpile configuration, such as:
+      'vuetify',
+      // Add transpile for the package:
+      'v-phone-input',
+    ],
   },
 });
 ```
