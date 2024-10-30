@@ -3,13 +3,11 @@
   flex-shrink: 1;
 
   .v-field {
+    border-start-start-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+
     &.v-field--variant-outlined .v-field__outline > .v-field__outline__start {
       border-radius: 0;
-    }
-
-    &.v-field--variant-filled, &.v-field--variant-solo {
-      border-start-start-radius: 0;
-      border-end-start-radius: 0;
     }
   }
 }
