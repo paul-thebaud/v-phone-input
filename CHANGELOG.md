@@ -1,5 +1,11 @@
 # Change log
 
+## 4.4.0
+
+### Features
+
+- feat: add `rounded` property (thanks to #42)
+
 ## 4.3.2
 
 ### Bug fixes
