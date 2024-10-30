@@ -279,7 +279,7 @@ but be aware that:
 
 - Some props will only apply to the inputs wrapper `div` element: `id`, `class` and `style`.
 - Some props are applied to both inputs: `variant`, `flat`, `tile`, `density`, `singleLine`,
-  `hideDetails`, `direction`, `reverse`, `color`, `bgColor`, `theme`, `disabled` and `readonly`.
+  `hideDetails`, `direction`, `reverse`, `color`, `bgColor`, `theme`, `disabled`, `readonly`, and `rounded`.
 
 ### Events
 
