@@ -288,10 +288,10 @@ but be aware that:
 
 ### Events
 
-| Name                | Type                      | Description                                                                        |
-|---------------------|---------------------------|------------------------------------------------------------------------------------|
-| `update:modelValue` | `string`                  | Emitted when the country or phone is updated with the E164 formatted phone number. |
-| `update:country`    | [`CountryIso2`](#country) | Emitted when the country is updated with the selected country.                     |
+| Name                | Type     | Description                                                                        |
+|---------------------|----------|------------------------------------------------------------------------------------|
+| `update:modelValue` | `string` | Emitted when the country or phone is updated with the E164 formatted phone number. |
+| `update:country`    | `string` | Emitted when the country is updated with the selected country.                     |
 
 > You can also bind to the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props)
 > and [Vuetify `VSelect`](https://vuetifyjs.com/en/api/v-select/#props) events
@@ -585,21 +585,16 @@ VPhoneInput relies on multiple dependencies to work:
 
 #### Country
 
-A country ISO-2 code is a string containing 2 uppercase characters representing a country (e.g. `FR`
-for France).
-
 A country object contains information about a country.
 
 ```typescript
-type CountryIso2 = string;
-
 interface Country {
   name: string;       // Example: "France".
-  iso2: CountryIso2;  // Example: "FR".
+  iso2: string;  // Example: "FR".
   dialCode: string;   // Example: "33".
 }
 
-export type CountryOrIso2 = Country | CountryIso2;
+export type CountryOrIso2 = Country | string;
 ```
 
 #### Country Guesser
@@ -609,7 +604,7 @@ to detect the default country to use.
 
 ```typescript
 interface CountryGuesser {
-  guess: () => Promise<CountryIso2 | undefined>;
+  guess: () => Promise<string | undefined>;
 }
 ```
 
@@ -627,7 +622,7 @@ instead of the guessed country on future calls.
 
 ```typescript
 interface PreferableCountryGuesser extends CountryGuesser {
-  setPreference: (country: CountryIso2) => void;
+  setPreference: (country: string) => void;
 }
 ```
 

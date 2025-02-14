@@ -1,4 +1,4 @@
-import { CountryIso2, PreferableCountryGuesser } from '@/types/countries';
+import { PreferableCountryGuesser } from '@/types/countries';
 import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';
 
 interface StorageMemoIp2cCountryGuesserOptions {
@@ -20,7 +20,7 @@ export default class StorageMemoIp2cCountryGuesser
     this.key = options.key || 'v_phone_input_country';
   }
 
-  public async guess(): Promise<CountryIso2 | undefined> {
+  public async guess(): Promise<string | undefined> {
     const storageCountry = this.retrieveStoredCountry();
     if (storageCountry) {
       return storageCountry;
@@ -34,15 +34,15 @@ export default class StorageMemoIp2cCountryGuesser
     return country;
   }
 
-  public setPreference(country: CountryIso2): void {
+  public setPreference(country: string): void {
     this.saveStoredCountry(country);
   }
 
-  private retrieveStoredCountry(): CountryIso2 | undefined {
+  private retrieveStoredCountry(): string | undefined {
     return this.storage.getItem(this.key) || undefined;
   }
 
-  private saveStoredCountry(country: CountryIso2): void {
+  private saveStoredCountry(country: string): void {
     this.storage.setItem(this.key, country);
   }
 

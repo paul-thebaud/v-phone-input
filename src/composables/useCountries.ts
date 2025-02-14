@@ -1,4 +1,4 @@
-import { Country, CountryGuesser, CountryIso2, CountryMap, CountryOrIso2 } from '@/types/countries';
+import { Country, CountryGuesser, CountryMap, CountryOrIso2 } from '@/types/countries';
 import isPreferableCountryGuesser from '@/utils/countries/isPreferableCountryGuesser';
 import normalizeCountryIso2 from '@/utils/countries/normalizeCountryIso2';
 import { getSupportedRegionCodes } from 'awesome-phonenumber';
@@ -87,7 +87,7 @@ export default function useCountries({ props }: UseCountriesParams) {
 
   const guessingCountry = computed(() => !props.disableGuessLoading && lazyGuessingCountry.value);
 
-  const setCountryPreference = (country: CountryIso2) => {
+  const setCountryPreference = (country: string) => {
     lazyGuessingCountry.value = false;
 
     if (isPreferableCountryGuesser(props.countryGuesser)) {

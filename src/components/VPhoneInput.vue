@@ -4,7 +4,7 @@ import useCountryIconComponent from '@/composables/useCountryIconComponent';
 import useCountrySelectComponent from '@/composables/useCountrySelectComponent';
 import useLabels from '@/composables/useLabels';
 import useNamespacedSlots from '@/composables/useNamespacedSlots';
-import { Country, CountryGuesser, CountryIso2, CountryOrIso2 } from '@/types/countries';
+import { Country, CountryGuesser, CountryOrIso2 } from '@/types/countries';
 import {
   CountryIconMode,
   CountryPhoneExample,
@@ -193,7 +193,7 @@ export default defineComponent({
   },
   emits: {
     'update:modelValue': (_value: string) => true,
-    'update:country': (_country: CountryIso2) => true,
+    'update:country': (_country: string) => true,
   },
   setup(props, { attrs, emit, slots }) {
     const {
@@ -217,7 +217,7 @@ export default defineComponent({
 
     const countryFocused = ref(false);
     const mergedRules = ref([] as ValidationRule[]);
-    const lazyCountry = ref(props.country as CountryIso2 | undefined);
+    const lazyCountry = ref(props.country as string | undefined);
     const lazyValue = ref(props.modelValue || '' as string | null);
     const lazyPhone = ref({ number: { input: '' } } as ParsedPhoneNumber);
 
@@ -346,8 +346,8 @@ export default defineComponent({
       }
     };
     const onLazyCountryChange = (
-      _: CountryIso2 | undefined,
-      oldLazyCountry: CountryIso2 | undefined,
+      _: string | undefined,
+      oldLazyCountry: string | undefined,
     ) => {
       if (lazyCountry.value) {
         emit('update:country', lazyCountry.value);

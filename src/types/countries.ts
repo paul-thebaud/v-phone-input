@@ -1,19 +1,40 @@
+/**
+ * Country ISO2 code string.
+ *
+ * @deprecated Use `string` instead.
+ */
 export type CountryIso2 = string;
 
+/**
+ * Country object.
+ */
 export interface Country {
   name: string;
-  iso2: CountryIso2;
+  iso2: string;
   dialCode: string;
 }
 
-export type CountryMap = Record<CountryIso2, Country>;
+/**
+ * Dictionary of country objects mapped by ISO2 code.
+ */
+export type CountryMap = Record<string, Country>;
 
-export type CountryOrIso2 = Country | CountryIso2;
+/**
+ * Country object or ISO2 code.
+ */
+export type CountryOrIso2 = Country | string;
 
+/**
+ * Object to guess a country to use inside the input.
+ */
 export interface CountryGuesser {
-  guess: () => Promise<CountryIso2 | undefined>;
+  guess: () => Promise<string | undefined>;
 }
 
+/**
+ * Extended implementation of a country guesser which can store the
+ * user's preference.
+ */
 export interface PreferableCountryGuesser extends CountryGuesser {
-  setPreference: (country: CountryIso2) => void;
+  setPreference: (country: string) => void;
 }

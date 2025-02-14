@@ -1,4 +1,4 @@
-import { Country, CountryGuesser, CountryIso2 } from '@/types/countries';
+import { Country, CountryGuesser } from '@/types/countries';
 import { PhoneNumberFormat } from 'awesome-phonenumber';
 import { DefineComponent } from 'vue';
 
@@ -29,10 +29,10 @@ export interface PluginOptions {
   persistentHint: boolean | undefined;
   countryIconMode: CountryIconMode;
   allCountries: Country[];
-  preferCountries: CountryIso2[];
-  includeCountries: CountryIso2[];
-  excludeCountries: CountryIso2[];
-  defaultCountry: CountryIso2 | undefined;
+  preferCountries: string[];
+  includeCountries: string[];
+  excludeCountries: string[];
+  defaultCountry: string | undefined;
   countryGuesser: CountryGuesser;
   guessCountry: boolean;
   disableGuessLoading: boolean;
