@@ -1,5 +1,15 @@
 # Change log
 
+## 4.4.1
+
+### Features
+
+- feat: use `string` instead of `CountryIso2` type (closes #47)
+
+### Deprecations
+
+- `CountryIso2` type alias has been deprecated, use `string` instead.
+
 ## 4.4.0
 
 ### Features
