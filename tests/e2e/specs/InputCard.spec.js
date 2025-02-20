@@ -163,7 +163,7 @@ describe('InputCard.vue', () => {
     cy.dataCy('input-card-props')
       .contains('Value')
       .parent()
-      .contains('+93023');
+      .contains('023');
     cy.dataCy('input-card-props')
       .contains('Valid')
       .parent()
@@ -238,7 +238,7 @@ describe('InputCard.vue', () => {
     cy.dataCy('input-card-props')
       .contains('Value')
       .parent()
-      .contains('+33023456789');
+      .contains('02 34 56 78 9');
     cy.dataCy('input-card-props')
       .contains('Valid')
       .parent()
@@ -289,7 +289,7 @@ describe('InputCard.vue', () => {
     cy.dataCy('input-card-props')
       .contains('Value')
       .parent()
-      .contains('+355234567890');
+      .contains('02 34 56 78 90');
     cy.dataCy('input-card-props')
       .contains('Valid')
       .parent()

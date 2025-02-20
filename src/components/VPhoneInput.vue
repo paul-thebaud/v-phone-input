@@ -382,9 +382,14 @@ export default defineComponent({
       onLazyCountryOrValueChange();
     };
     const onLazyPhoneChange = () => {
-      const newValue = lazyPhone.value.number?.e164 || lazyPhone.value.number?.input || '';
-      if (newValue !== props.modelValue) {
-        emit('update:modelValue', newValue);
+      const newValueRaw = lazyPhone.value.number?.input || '';
+      const newValueE164 = lazyPhone.value.number?.e164 || newValueRaw;
+      const newValueValid = lazyPhone.value.valid;
+      if (
+        props.modelValue !== newValueRaw
+        || (props.modelValue !== newValueE164 && newValueValid)
+      ) {
+        emit('update:modelValue', (newValueValid ? newValueE164 : newValueRaw));
       }
     };
 
