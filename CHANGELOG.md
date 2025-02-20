@@ -1,5 +1,11 @@
 # Change log
 
+## 4.4.2
+
+### Bug fixes
+
+- fix: emit E164 formatted number only when it is valid (closes #48)
+
 ## 4.4.1
 
 ### Features
