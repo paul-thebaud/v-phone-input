@@ -288,10 +288,10 @@ but be aware that:
 
 ### Events
 
-| Name                | Type     | Description                                                                        |
-|---------------------|----------|------------------------------------------------------------------------------------|
-| `update:modelValue` | `string` | Emitted when the country or phone is updated with the E164 formatted phone number. |
-| `update:country`    | `string` | Emitted when the country is updated with the selected country.                     |
+| Name                | Type     | Description                                                                                                                                        |
+|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `update:modelValue` | `string` | Emitted when the country or phone is updated with the E164 formatted phone number. If the input is not valid, the raw input value will be emitted. |
+| `update:country`    | `string` | Emitted when the country is updated with the selected country.                                                                                     |
 
 > You can also bind to the [Vuetify `VTextField`](https://vuetifyjs.com/en/api/v-text-field/#props)
 > and [Vuetify `VSelect`](https://vuetifyjs.com/en/api/v-select/#props) events
