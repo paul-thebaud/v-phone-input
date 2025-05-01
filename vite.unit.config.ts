@@ -13,7 +13,7 @@ export default defineConfig(deepmerge(rootConfig as UserConfig, {
     globals: true,
     environment: 'jsdom',
     include: ['../tests/unit/**/*.spec.ts'],
-    deps: { inline: ['vuetify'] },
+    server: { deps: { inline: ['vuetify'] } },
     setupFiles: [
       '../tests/unit/setup/vitest.vuetify.setup.ts',
     ],

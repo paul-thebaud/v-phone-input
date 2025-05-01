@@ -2,7 +2,7 @@ import { Country, CountryGuesser } from '@/types/countries';
 import { PhoneNumberFormat } from 'awesome-phonenumber';
 import { DefineComponent } from 'vue';
 
-export type CountryIconMode = 'svg' | 'sprite' | DefineComponent | undefined;
+export type CountryIconMode = 'svg' | 'sprite' | 'text' | DefineComponent | undefined;
 
 export type CountryPhoneExample = string | ((country: Country) => string);
 
