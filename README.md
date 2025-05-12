@@ -271,6 +271,7 @@ app.use(vPhoneInput);
 | `wrapperProps`           | `object`                                                           | `{}`                                                                  | Props to pass to the inputs wrapper `div` element.                                                                                                |
 | `countryProps`           | `object`                                                           | `{}`                                                                  | Props to pass to the `VSelect` or `VAutocomplete` country input component.                                                                        |
 | `phoneProps`             | `object`                                                           | `{}`                                                                  | Props to pass to the `VTextField` phone input component.                                                                                          |
+| `showDialCode`           | `boolean`                                                          | `false`                                                               | Displays the country dial code (e.g., +1) next to the country selection and increases the country input width when set to true.                   |
 
 #### Props inheritance
 

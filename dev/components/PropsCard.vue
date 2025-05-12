@@ -74,6 +74,7 @@ export default defineComponent({
       loading: createSwitch(),
       shaped: createSwitch(),
       rounded: createSelect(toItems(['default', 'sm', 'md', 'lg', 'xl', 'pill'])),
+      showDialCode: createSwitch()
     });
     const themeItems = [{ value: 'light', title: 'Light' }, { value: 'dark', title: 'Dark' }];
 

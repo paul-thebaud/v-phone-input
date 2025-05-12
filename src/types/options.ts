@@ -38,4 +38,5 @@ export interface PluginOptions {
   disableGuessLoading: boolean;
   enableSearchingCountry: boolean;
   displayFormat: PhoneNumberFormat;
+  showDialCode: boolean;
 }

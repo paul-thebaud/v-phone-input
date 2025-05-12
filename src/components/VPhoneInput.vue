@@ -190,6 +190,10 @@ export default defineComponent({
       type: Object,
       default: () => ({}),
     },
+    showDialCode: {
+      type: Boolean,
+      default: () => getOption('showDialCode'),
+    }
   },
   emits: {
     'update:modelValue': (_value: string) => true,
@@ -451,7 +455,10 @@ export default defineComponent({
 
 <template>
   <div
-    :class="{ 'v-phone-input--prepend-inner-icon': prependInnerIcon }"
+    :class="{
+      'v-phone-input--prepend-inner-icon': prependInnerIcon,
+      'v-phone-input--show-dial': showDialCode
+    }"
     class="v-phone-input"
     v-bind="wrapperAttrs"
   >
@@ -490,6 +497,9 @@ export default defineComponent({
               :decorative="false"
             />
             <span v-else>
+              {{ `+${activeCountry.dialCode}` }}
+            </span>
+            <span v-if="countryIconComponent && showDialCode" class="ml-1">
               {{ `+${activeCountry.dialCode}` }}
             </span>
           </slot>
