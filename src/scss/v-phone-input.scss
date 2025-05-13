@@ -24,11 +24,11 @@
     }
   }
 
-  &.v-phone-input--show-dial .v-phone-input__country__input.v-input:not(.v-autocomplete.v-phone-input--focused) .v-field {
+  /*&.v-phone-input--show-dial .v-phone-input__country__input.v-input:not(.v-autocomplete.v-phone-input--focused) .v-field {
     --v-phone-input-country-width: #{$v-phone-input-country-input-show-dial-width};
 
     &.v-field--variant-outlined, &.v-field--variant-filled, &.v-field--variant-solo {
       --v-phone-input-country-width: #{$v-phone-input-country-input-show-dial-width};
     }
-  }
+  }*/
 }

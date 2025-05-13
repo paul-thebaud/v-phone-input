@@ -297,9 +297,14 @@ export default defineComponent({
       } else {
         mergedRules.value = [
           ...rules,
-          () => !lazyValue.value
-            || lazyPhone.value.valid
-            || (labels.invalidMessage.value as string),
+          () => {
+            // Skip validation if input is empty or (when showDialCode is true) only contains the dial code
+            if (!lazyValue.value || (props.showDialCode && lazyValue.value === `+${activeCountry.value.dialCode}`)) {
+              return true;
+            }
+
+            return lazyPhone.value.valid || (labels.invalidMessage.value as string);
+          },
         ];
       }
     };
@@ -357,6 +362,13 @@ export default defineComponent({
         emit('update:country', lazyCountry.value);
 
         setCountryPreference(lazyCountry.value);
+
+        // Clear input and set new dial code if showDialCode is true
+        if (props.showDialCode) {
+          lazyValue.value = `+${activeCountry.value.dialCode}`;
+        } else {
+          lazyValue.value = '';
+        }
       } else {
         nextTick(() => {
           if (!lazyCountry.value) {
@@ -409,15 +421,27 @@ export default defineComponent({
       if (countriesCount.value === 1) {
         lazyCountry.value = firstCountry.value.iso2;
 
+        if (props.showDialCode) {
+          lazyValue.value = `+${firstCountry.value.dialCode}`;
+        }
+
         return;
       }
 
       const guessedCountry = await guessCountry();
       if (!lazyCountry.value && guessedCountry) {
         lazyCountry.value = guessedCountry;
+
+        if (props.showDialCode) {
+          lazyValue.value = `+${findCountry(guessedCountry)?.dialCode || ''}`;
+        }
       }
 
       lazyCountry.value = lazyCountry.value || activeCountry.value.iso2;
+
+      if (props.showDialCode && !lazyValue.value) {
+        lazyValue.value = `+${activeCountry.value.dialCode}`;
+      }
     };
 
     onMounted(() => {
@@ -457,7 +481,7 @@ export default defineComponent({
   <div
     :class="{
       'v-phone-input--prepend-inner-icon': prependInnerIcon,
-      'v-phone-input--show-dial': showDialCode
+      // 'v-phone-input--show-dial': showDialCode
     }"
     class="v-phone-input"
     v-bind="wrapperAttrs"
@@ -499,9 +523,9 @@ export default defineComponent({
             <span v-else>
               {{ `+${activeCountry.dialCode}` }}
             </span>
-            <span v-if="countryIconComponent && showDialCode" class="ml-1">
+<!--            <span v-if="countryIconComponent && showDialCode" class="ml-1">
               {{ `+${activeCountry.dialCode}` }}
-            </span>
+            </span>-->
           </slot>
         </slot>
       </template>
