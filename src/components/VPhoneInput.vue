@@ -459,6 +459,7 @@ export default defineComponent({
       :is="countrySelectComponent.type as any"
       ref="countryInput"
       v-model="lazyCountry"
+      :label="labels.countryLabel.value"
       :aria-label="labels.countryAriaLabel.value"
       :items="countriesItems"
       item-title="name"

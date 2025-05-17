@@ -1,5 +1,11 @@
 # Change log
 
+## 4.5.0
+
+### Features
+
+- feat: remove label in favor of only aria-label on country input
+
 ## 4.4.2
 
 ### Bug fixes

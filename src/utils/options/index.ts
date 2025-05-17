@@ -5,7 +5,7 @@ import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
 export const DEFAULT_OPTIONS: PluginOptions = {
   label: 'Phone',
   ariaLabel: undefined,
-  countryLabel: 'Country',
+  countryLabel: undefined,
   countryAriaLabel: (options: MessageOptions) => `Country for ${options.label}`,
   placeholder: undefined,
   hint: undefined,

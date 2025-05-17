@@ -386,7 +386,9 @@ describe('InputCard.vue', () => {
   it('should use default labels', () => {
     cy.visitDemo();
 
-    cyVPhoneCountry().contains('Country');
+    cyVPhoneCountry()
+      .find('label')
+      .should('not.exist');
     cyVPhoneCountry()
       .find('input')
       .should('have.attr', 'aria-label')
