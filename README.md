@@ -34,8 +34,11 @@ accessibility. This new library aims to provide those two.
 
 ## Demo
 
-You can try the VPhoneInput with many options and plugin registration code generation on
+You can try VPhoneInput with many options and plugin registration code generation on
 the [GitHub pages demo](https://paul-thebaud.github.io/v-phone-input/).
+
+You can also use the [Stackblitz playground](https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev)
+to try the package or prepare bug reproductions.
 
 ## TL;DR
 
