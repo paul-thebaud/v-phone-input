@@ -1,0 +1,57 @@
+services:
+  dependencies:
+    container_name: dependencies
+    build:
+      dockerfile: Dockerfile
+      target: dependencies
+    working_dir: /home/lib
+    volumes:
+      - ./:/home/lib:consistent
+  node:
+    container_name: node
+    depends_on:
+      dependencies:
+        condition: service_completed_successfully
+    build:
+      dockerfile: Dockerfile
+      target: node
+    working_dir: /home/lib
+    volumes:
+      - ./:/home/lib:consistent
+    tty: true
+  dev:
+    container_name: dev
+    depends_on:
+      dependencies:
+        condition: service_completed_successfully
+    build:
+      dockerfile: Dockerfile
+      target: dev
+    working_dir: /home/lib
+    volumes:
+      - ./:/home/lib:consistent
+    ports:
+      - 5173:5173
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.docs.rule=Host(`vphoneinput.localhost`)
+      - traefik.http.routers.docs.entryPoints=web
+      - traefik.http.services.docs.loadbalancer.server.port=5173
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: traefik:latest
+    restart: unless-stopped
+    depends_on:
+      dev:
+        condition: service_healthy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml
+    ports:
+      - 80:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.reverse-proxy-dashboard.rule=Host(`proxy.vphoneinput.localhost`)
+      - traefik.http.routers.reverse-proxy-dashboard.service=api@internal
+      - traefik.http.routers.reverse-proxy-dashboard.entrypoints=web
+      - traefik.http.services.reverse-proxy-dashboard.loadbalancer.server.port=80

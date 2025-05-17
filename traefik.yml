@@ -1,0 +1,12 @@
+global:
+  sendAnonymousUsage: false
+api:
+  dashboard: true
+  insecure: true
+entryPoints:
+  web:
+    address: ":80"
+providers:
+  docker:
+    watch: true
+    exposedByDefault: false

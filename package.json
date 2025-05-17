@@ -51,7 +51,7 @@
     "test:e2e": "cypress run --headed --browser chrome",
     "test:unit": "vitest --config vite.unit.config.ts",
     "test:unit:coverage": "vitest run --config vite.unit.config.ts --coverage",
-    "dev": "vite",
+    "dev": "vite --host",
     "demo:build": "vue-tsc --noEmit && vite build",
     "demo:build:watch": "vue-tsc --noEmit && vite build --watch",
     "demo:preview": "vite preview --host 127.0.0.1",
