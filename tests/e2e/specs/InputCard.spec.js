@@ -352,6 +352,34 @@ describe('InputCard.vue', () => {
       .containsCountryTitle('Afghanistan');
   });
 
+  it('should be searchable by dial code', () => {
+    cy.visitDemo();
+
+    cy.contains('Enable Searching Country')
+      .parent()
+      .click();
+
+    cyVPhoneCountry()
+      .find('input[type=text]')
+      .clear({ force: true })
+      .type('93');
+    cyVPhoneCountryMenu()
+      .contains('Afghanistan');
+    cyVPhoneCountryMenu()
+      .contains('France')
+      .should('not.exist');
+
+    cyVPhoneCountry()
+      .find('input[type=text]')
+      .clear({ force: true })
+      .type('33');
+    cyVPhoneCountryMenu()
+      .contains('Afghanistan')
+      .should('not.exist');
+    cyVPhoneCountryMenu()
+      .contains('France');
+  });
+
   it('should enable searching countries and force value defined', () => {
     cy.visitDemo();
 

@@ -12,6 +12,7 @@ export default function useCountrySelectComponent({ props }: UseCountrySelectCom
         props: {
           autocomplete: 'new-password',
           'aria-autocomplete': 'off',
+          filterKeys: ['raw.name', 'raw.iso2', 'raw.dialCode'],
         },
       } : {
         type: 'VSelect',
