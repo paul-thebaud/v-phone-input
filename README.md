@@ -468,7 +468,7 @@ If you don't want the automatic validation to run, you can pass a `null` value t
 </template>
 ```
 
-#### Custom phone number validator
+##### Custom phone number validator
 
 By default, VPhoneInput will only consider "classic" phone numbers to be valid.
 
