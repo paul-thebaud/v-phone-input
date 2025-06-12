@@ -2,9 +2,11 @@
 
 ## 5.0.0
 
+Check the [migration guide](MIGRATION.md#migrate-from-4xx-to-5xx).
+
 ### Features
 
-- feat: forward exposed vuetify properties (#55)
+- **BREAKING** feat: forward exposed vuetify properties (#55)
 - feat: search country by dial code (#54)
 - feat: add `phoneValidator` property (#31)
 - feat: remove label in favor of aria-label on country input
