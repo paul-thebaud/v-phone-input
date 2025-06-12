@@ -10,13 +10,14 @@ import {
   CountryPhoneExample,
   MessageOptions,
   MessageResolver,
+  PhoneValidator,
 } from '@/types/options';
 import { getOption } from '@/utils/options';
 import formatPhone from '@/utils/phone/formatPhone';
 import makeExample from '@/utils/phone/makeExample';
 import makePhone from '@/utils/phone/makePhone';
 import { ParsedPhoneNumber, PhoneNumberFormat } from 'awesome-phonenumber';
-import { computed, defineComponent, nextTick, onMounted, PropType, ref, watch } from 'vue';
+import { computed, defineComponent, markRaw, nextTick, onMounted, PropType, ref, watch } from 'vue';
 import { VListItem, VSelect, VTextField } from 'vuetify/components';
 
 export type VPhoneCountriesItems = ((Country & { preferred?: boolean }) | { divider: boolean })[];
@@ -126,6 +127,10 @@ export default defineComponent({
       type: String as PropType<ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'>,
       default: undefined,
     },
+    phoneValidator: {
+      type: Function as PropType<PhoneValidator>,
+      default: getOption('phoneValidator'),
+    },
     countryIconMode: {
       type: [String, Object] as PropType<CountryIconMode>,
       default: () => getOption('countryIconMode'),
@@ -219,7 +224,7 @@ export default defineComponent({
     const mergedRules = ref([] as ValidationRule[]);
     const lazyCountry = ref(props.country as string | undefined);
     const lazyValue = ref(props.modelValue || '' as string | null);
-    const lazyPhone = ref({ number: { input: '' } } as ParsedPhoneNumber);
+    const lazyPhone = ref(markRaw(makePhone('')));
 
     const onlyAttrs = (matcher: (key: string) => boolean) => Object.keys(attrs)
       .reduce((filteredAttrs, attrKey) => (
@@ -294,14 +299,14 @@ export default defineComponent({
         mergedRules.value = [
           ...rules,
           () => !lazyValue.value
-            || lazyPhone.value.valid
+            || props.phoneValidator(lazyPhone.value)
             || (labels.invalidMessage.value as string),
         ];
       }
     };
 
     const onDisplayFormatChange = () => {
-      if (lazyPhone.value.valid) {
+      if (props.phoneValidator(lazyPhone.value)) {
         lazyValue.value = format(lazyPhone.value);
       }
     };
@@ -339,9 +344,9 @@ export default defineComponent({
       countryFocused.value = false;
     };
     const onLazyCountryOrValueChange = () => {
-      lazyPhone.value = makePhone(lazyValue.value, lazyCountry.value);
+      lazyPhone.value = markRaw(makePhone(lazyValue.value, lazyCountry.value));
 
-      if (lazyPhone.value.valid) {
+      if (props.phoneValidator(lazyPhone.value)) {
         lazyValue.value = format(lazyPhone.value);
       }
     };
@@ -384,7 +389,7 @@ export default defineComponent({
     const onLazyPhoneChange = () => {
       const newValueRaw = lazyPhone.value.number?.input || '';
       const newValueE164 = lazyPhone.value.number?.e164 || newValueRaw;
-      const newValueValid = lazyPhone.value.valid;
+      const newValueValid = props.phoneValidator(lazyPhone.value);
       if (
         props.modelValue !== newValueRaw
         || (props.modelValue !== newValueE164 && newValueValid)

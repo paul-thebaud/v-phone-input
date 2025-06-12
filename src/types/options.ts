@@ -1,5 +1,5 @@
 import { Country, CountryGuesser } from '@/types/countries';
-import { PhoneNumberFormat } from 'awesome-phonenumber';
+import { ParsedPhoneNumber, PhoneNumberFormat } from 'awesome-phonenumber';
 import { DefineComponent } from 'vue';
 
 export type CountryIconMode = 'svg' | 'sprite' | 'text' | DefineComponent | undefined;
@@ -15,6 +15,8 @@ export interface MessageOptions {
 }
 
 export type MessageResolver = ((options: MessageOptions) => Message) | Message;
+
+export type PhoneValidator = (phone: ParsedPhoneNumber) => boolean;
 
 export interface PluginOptions {
   label: MessageResolver;
@@ -38,4 +40,5 @@ export interface PluginOptions {
   disableGuessLoading: boolean;
   enableSearchingCountry: boolean;
   displayFormat: PhoneNumberFormat;
+  phoneValidator: PhoneValidator;
 }

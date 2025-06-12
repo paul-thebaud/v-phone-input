@@ -24,6 +24,7 @@ export const DEFAULT_OPTIONS: PluginOptions = {
   disableGuessLoading: false,
   enableSearchingCountry: false,
   displayFormat: 'national',
+  phoneValidator: (phone) => phone.valid,
 };
 
 export const options = { ...DEFAULT_OPTIONS } as PluginOptions;
