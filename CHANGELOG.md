@@ -1,5 +1,15 @@
 # Change log
 
+## 5.0.0
+
+### Features
+
+- feat: forward exposed vuetify properties (#55)
+- feat: search country by dial code (#54)
+- feat: add `phoneValidator` property (#31)
+- feat: remove label in favor of aria-label on country input
+- feat: upgrade to `awesome-phonenumber` v7
+
 ## 4.5.0
 
 ### Features

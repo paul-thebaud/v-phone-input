@@ -1,5 +1,20 @@
 # Migration
 
+## Migrate from 4.x.x to 5.x.x
+
+Upgrade the package version with Yarn:
+
+```shell
+yarn upgrade v-phone-input@^5.0.0
+```
+
+From version `5.0.0`, `v-phone-input` is using awesome-phonenumber v7.
+
+If you are using exposed data from the component, you must ensure these are
+still available, because exposed variables have been strictly defined.
+You can check available exposed data on
+[the exposed properties documentation](README.md#exposed).
+
 ## Migrate from 3.x.x to 4.x.x
 
 If you are coming from `2.x.x`, you should also follow
