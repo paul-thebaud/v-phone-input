@@ -350,6 +350,18 @@ which will be `false` inside selection, and `true` inside select item.
 </template>
 ```
 
+### Exposed
+
+| Name              | Type                                   | Description                                                       |
+|-------------------|----------------------------------------|-------------------------------------------------------------------|
+| `countryInputRef` | `Ref<VSelect>` or `Ref<VAutocomplete>` | Reference to the country input.                                   |
+| `phoneInputRef`   | `Ref<VTextField>`                      | Reference to the phone input.                                     |
+| `errorMessages`   | `string[]`                             | An array of error messages that were set by the setErrors method. |
+| `isValid`         | `boolean`                              | Boolean indicating if the input is valid.                         |
+| `reset`           | `() => Promise<void>`                  | Resets the phone input value.                                     |
+| `resetValidation` | `() => Promise<void>`                  | Resets validation of the phone input without modifying its value. |
+| `validate`        | `(silent: boolean) => Promise<void>`   | Validates the phone input’s value.                                |
+
 ### Examples
 
 #### Country icon modes

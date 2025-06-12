@@ -133,7 +133,7 @@ describe('InputCard.vue', () => {
     cy.dataCy('input-card-props')
       .contains('Valid')
       .parent()
-      .contains('false');
+      .contains('true');
     cy.dataCy('input-card-props')
       .contains('Country')
       .parent()

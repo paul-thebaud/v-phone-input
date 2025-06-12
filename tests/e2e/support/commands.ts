@@ -6,7 +6,6 @@ Cypress.Commands.add('containsCountryTitle', { prevSubject: true }, (subject: JQ
   const icon = cy.wrap(subject.find('.v-phone-input__country__icon'));
 
   icon.should((i) => {
-    console.log(i.attr('title'));
     expect(i).to.have.attr('role', 'img');
     expect(i).to.have.attr('title').contains(value);
   });

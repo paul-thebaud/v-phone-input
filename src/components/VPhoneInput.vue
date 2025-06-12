@@ -195,7 +195,7 @@ export default defineComponent({
     'update:modelValue': (_value: string) => true,
     'update:country': (_country: string) => true,
   },
-  setup(props, { attrs, emit, slots }) {
+  setup(props, { attrs, emit, slots, expose }) {
     const {
       countriesCount,
       preferredCountries,
@@ -208,7 +208,7 @@ export default defineComponent({
     } = useCountries({ props });
 
     const countryInput = ref(null);
-    const phoneInput = ref(null as ({ validate: () => void } | null));
+    const phoneInput = ref(null as (VTextField | null));
 
     const { namespacedSlots } = useNamespacedSlots(slots, ['country']);
 
@@ -423,6 +423,22 @@ export default defineComponent({
       });
     });
 
+    const exposedData = {
+      countryInputRef: countryInput,
+      phoneInputRef: phoneInput,
+      isValid: computed(() => phoneInput.value?.isValid ?? true),
+      errorMessages: computed(() => phoneInput.value?.errorMessages ?? []),
+      reset: async () => {
+        await phoneInput.value?.reset();
+      },
+      resetValidation: async () => {
+        await phoneInput.value?.resetValidation();
+      },
+      validate: async (silent: boolean) => (await phoneInput.value?.validate(silent)) ?? [],
+    };
+
+    expose(exposedData);
+
     return {
       wrapperAttrs,
       VTextField: VTextField as any,
@@ -444,6 +460,7 @@ export default defineComponent({
       countriesItems,
       onCountryFocus,
       onCountryBlur,
+      ...exposedData,
     };
   },
 });

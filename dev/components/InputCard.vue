@@ -1,5 +1,5 @@
 <script lang="ts">
-import { countries, makePhone } from '@/index';
+import { countries } from '@/index';
 import { computed, defineComponent, PropType, ref, toRef } from 'vue';
 import useOptions from '../composables/useOptions';
 import CodeBlock from './CodeBlock.vue';
@@ -13,13 +13,14 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const inputRef = ref(null as any | null);
     const inputCountry = ref('');
     const inputValue = ref('');
 
     const options = useOptions(toRef(props, 'inputProps'));
 
     const value = computed(() => inputValue.value || '-');
-    const valid = computed(() => makePhone(inputValue.value).valid);
+    const valid = computed(() => inputRef.value?.isValid ?? false);
     const country = computed(() => (
       countries.find((c) => c.iso2 === inputCountry.value)?.name || 'Unknown'
     ));
@@ -53,6 +54,7 @@ export default defineComponent({
     });
 
     return {
+      inputRef,
       inputValue,
       inputCountry,
       value,
@@ -79,6 +81,7 @@ export default defineComponent({
     </v-card-subtitle>
     <v-card-text data-cy="input-wrapper">
       <v-phone-input
+        ref="inputRef"
         v-model="inputValue"
         v-model:country="inputCountry"
         v-bind="inputProps"
