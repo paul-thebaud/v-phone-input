@@ -50,6 +50,10 @@ jobs:
     name: e2e-tests
     runs-on: ubuntu-latest
     steps:
+      - name: Install `Xvfb` and others to run browsers for end-to-end testing in local CI/CD simulations
+        if: ${{ env.ACT }}
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3.0.0
         with:
@@ -63,7 +67,6 @@ jobs:
       - name: E2E tests
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
           build: pnpm demo:build --config vite.e2e.config.ts
           start: pnpm demo:preview
           wait-on: http://127.0.0.1:4173

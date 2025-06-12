@@ -9,6 +9,7 @@
 .env.*.local
 
 # coverage
+/.artifacts/
 /.nyc_output/
 /coverage-e2e/
 /coverage-unit/
