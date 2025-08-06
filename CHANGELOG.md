@@ -1,5 +1,13 @@
 # Change log
 
+## unreleased
+
+### Features
+
+- feat: add `country-input` slot
+- feat: add `phone-input` slot
+- chore: use script setup for `VPhoneInput`
+
 ## 5.0.0
 
 Check the [migration guide](MIGRATION.md#migrate-from-4xx-to-5xx).

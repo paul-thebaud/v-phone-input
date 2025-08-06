@@ -1,13 +1,13 @@
 import { onBeforeMount, onBeforeUpdate, ref } from 'vue';
 
 export default function useNamespacedSlots(
-  slots: Record<string, unknown>,
+  slots: Record<string, any>,
   namespaces: string[],
 ) {
-  const namespacedSlots = ref({} as Record<string, Record<string, unknown>>);
+  const namespacedSlots = ref({} as Record<string, Record<string, string>>);
 
   const namespaceSlots = () => {
-    const newNamespacedSlots = {} as Record<string, Record<string, unknown>>;
+    const newNamespacedSlots = {} as Record<string, Record<string, string>>;
 
     Object.keys(slots).forEach((name) => {
       const [detectedNamespace, ...names] = name.split(':');

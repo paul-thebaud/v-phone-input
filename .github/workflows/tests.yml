@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Install `Xvfb` and others to run browsers for end-to-end testing in local CI/CD simulations
         if: ${{ env.ACT }}
-        run: sudo apt-get update && sudo apt-get install -y xvfb
+        run: apt-get -yq update && apt-get install -yq libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3.0.0

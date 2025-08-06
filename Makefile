@@ -38,7 +38,7 @@ pnpm: ## Run a PNPM command (e.g. make pnpm c="update").
 
 .PHONY: build
 build: ## Build.
-	@$(PNPM) build
+	@$(PNPM) lib:build
 
 .PHONY: lint
 lint: ## Lint.

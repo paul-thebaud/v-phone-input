@@ -32,6 +32,8 @@ module.exports = {
         'tsx': 'never',
       },
     ],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'error',
     'import/no-extraneous-dependencies': [
       'error',
       {

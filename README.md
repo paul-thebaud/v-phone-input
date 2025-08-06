@@ -323,14 +323,17 @@ phone input.
 </template>
 ```
 
-The input also provides 4 special slots:
+The input also provides 5 special slots:
 
 - `country-selection` for countries' display in selection.
 - `country-icon` for countries' icons display in selection and select items.
 - `country-name` for countries' name display in select items.
 - `country-append` for countries' appended info display in select items.
+- `country-input` to override the country input.
+- `phone-input` to override the country input.
 
-Each of those slots will receive a [`country`](#country) object property.
+Appart from `country-input` and `phone-input`, each of those slots will receive
+a [`country`](#country) object property.
 `country-icon` slot will also receive a `decorative` boolean property,
 which will be `false` inside selection, and `true` inside select item.
 
