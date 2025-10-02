@@ -16,34 +16,36 @@ import {
   PhoneValidator,
 } from '@/types/options';
 import { getOption } from '@/utils/options';
-import formatPhone from '@/utils/phone/formatPhone';
-import makeExample from '@/utils/phone/makeExample';
-import makePhone from '@/utils/phone/makePhone';
-import { ParsedPhoneNumber, PhoneNumberFormat } from 'awesome-phonenumber';
+import {
+  getExample,
+  ParsedPhoneNumber,
+  parsePhoneNumber,
+  PhoneNumberFormat,
+} from 'awesome-phonenumber';
 import { computed, markRaw, nextTick, onMounted, ref, useAttrs, watch } from 'vue';
 import { VListItem, VSelect, VTextField } from 'vuetify/components';
 
-export type VPhoneCountriesItems = ((Country & { preferred?: boolean }) | { divider: boolean })[];
+type VPhoneCountriesItems = ((Country & { preferred?: boolean }) | { divider: boolean })[];
 
-export type ValidationResult = string | boolean;
+type ValidationResult = string | boolean;
 
-export type ValidationRule =
+type ValidationRule =
   | ValidationResult
   | PromiseLike<ValidationResult>
   | ((value: any) => ValidationResult)
   | ((value: any) => PromiseLike<ValidationResult>);
 
-export type ValidateOnValue = 'blur' | 'input' | 'submit';
+type ValidateOnValue = 'blur' | 'input' | 'submit';
 
-export type VPhoneInputValidationResult = string | boolean | PromiseLike<string | boolean>;
+type VPhoneInputValidationResult = string | boolean | PromiseLike<string | boolean>;
 
-export type VPhoneInputValidationRule = VPhoneInputValidationResult | ((
+type VPhoneInputValidationRule = VPhoneInputValidationResult | ((
   input: string,
   phone: ParsedPhoneNumber,
   messageOptions: MessageOptions,
 ) => VPhoneInputValidationResult);
 
-export type VPhoneInputProps = {
+type VPhoneInputProps = {
   label?: MessageResolver;
   ariaLabel?: MessageResolver;
   countryLabel?: MessageResolver;
@@ -65,9 +67,6 @@ export type VPhoneInputProps = {
   includeCountries?: CountryOrIso2[];
   excludeCountries?: CountryOrIso2[];
   defaultCountry?: CountryOrIso2 | undefined;
-  countryGuesser?: CountryGuesser;
-  guessCountry?: boolean;
-  disableGuessLoading?: boolean;
   enableSearchingCountry?: boolean;
   displayFormat?: PhoneNumberFormat;
   country?: string;
@@ -75,14 +74,27 @@ export type VPhoneInputProps = {
   wrapperProps?: Record<string, any>;
   countryProps?: Record<string, any>;
   phoneProps?: Record<string, any>;
+  /**
+   * @deprecated
+   * This public API will be removed in a next major release.
+   * Use your own country detection mechanism.
+   */
+  countryGuesser?: CountryGuesser;
+  /**
+   * @deprecated
+   * This public API will be removed in a next major release.
+   * Use your own country detection mechanism.
+   */
+  guessCountry?: boolean;
+  disableGuessLoading?: boolean;
 };
 
-export type VPhoneInputEmits = {
+type VPhoneInputEmits = {
   (e: 'update:modelValue', value: string): void;
   (e: 'update:country', country: string): true;
 };
 
-export type VPhoneInputSlots = {
+type VPhoneInputSlots = {
   'country-input'(props: { props: (typeof countryInputProps)['value']; }): any;
   'country-selection'(props: { country: Country; }): any;
   'country-icon'(props: { country: Country; decorative: boolean; }): any;
@@ -178,7 +190,7 @@ const countryFocused = ref(false);
 const mergedRules = ref([] as ValidationRule[]);
 const lazyCountry = ref(props.country as string | undefined);
 const lazyValue = ref(props.modelValue || '' as string | null);
-const lazyPhone = ref(markRaw(makePhone('')));
+const lazyPhone = ref(markRaw(parsePhoneNumber('')));
 
 const onlyAttrs = (matcher: (key: string) => boolean) => Object.keys(attrs)
   .reduce((filteredAttrs, attrKey) => (
@@ -201,7 +213,11 @@ const countriesItems = computed(() => {
   return [...preferredItems, ...otherCountries.value];
 });
 
-const format = (phone: ParsedPhoneNumber) => formatPhone(phone, props.displayFormat);
+const format = (phone: ParsedPhoneNumber) => (
+  phone.number?.[props.displayFormat]
+  || phone.number?.input
+  || ''
+);
 const example = computed(() => {
   if (props.example !== undefined) {
     return typeof props.example === 'function'
@@ -209,7 +225,7 @@ const example = computed(() => {
       : props.example;
   }
 
-  return format(makeExample(activeCountry.value.iso2));
+  return format(getExample(activeCountry.value.iso2));
 });
 const immediateValidation = computed(() => {
   const validateOn = new Set(props.validateOn?.split('') || []);
@@ -281,7 +297,9 @@ const onCountryBlur = () => {
   countryFocused.value = false;
 };
 const onLazyCountryOrValueChange = () => {
-  lazyPhone.value = markRaw(makePhone(lazyValue.value, lazyCountry.value));
+  lazyPhone.value = markRaw(parsePhoneNumber((lazyValue.value ?? '').trim(), {
+    regionCode: lazyCountry.value,
+  }));
 
   if (props.phoneValidator(lazyPhone.value)) {
     lazyValue.value = format(lazyPhone.value);
@@ -312,7 +330,7 @@ const onLazyCountryChange = (
 const onLazyValueChange = () => {
   const countryInLazyValue = (lazyValue.value || '').startsWith('+');
   if (countryInLazyValue) {
-    const detectedIso2 = makePhone(lazyValue.value).regionCode;
+    const detectedIso2 = parsePhoneNumber((lazyValue.value ?? '').trim()).regionCode;
     if (detectedIso2
       && lazyCountry.value !== detectedIso2
       && findCountry(detectedIso2)

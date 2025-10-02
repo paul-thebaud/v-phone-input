@@ -4,8 +4,15 @@ import { getCountryCodeForRegionCode } from 'awesome-phonenumber';
 import countriesEnNames from 'countries-list/minimal/countries.en.min.json';
 import countriesNativeNames from 'countries-list/minimal/countries.native.min.json';
 
-export default Object.entries(countriesEnNames)
-  .sort(([_a, a], [_b, b]) => a.localeCompare(b))
+/**
+ * Default countries list for VPhoneInput.
+ *
+ * @deprecated
+ * This public API will be removed in a next major release.
+ * Define your own custom country list.
+ */
+const countries = Object.entries(countriesEnNames)
+  .sort(([, a], [, b]) => a.localeCompare(b))
   .map(([code, enName]) => ({
     name: enName !== countriesNativeNames[code as keyof typeof countriesNativeNames]
       ? `${countriesNativeNames[code as keyof typeof countriesNativeNames]} (${enName})`
@@ -13,3 +20,5 @@ export default Object.entries(countriesEnNames)
     iso2: normalizeCountryIso2(code),
     dialCode: `${getCountryCodeForRegionCode(code)}`,
   } as Country));
+
+export default countries;

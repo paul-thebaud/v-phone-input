@@ -1,5 +1,10 @@
 import { CountryGuesser } from '@/types/countries';
 
+/**
+ * @deprecated
+ * This public API will be removed in a next major release.
+ * Use your own country detection mechanism.
+ */
 export default class Ip2cCountryGuesser implements CountryGuesser {
   public static readonly IP2C_URL = 'https://ip2c.org/s';
 

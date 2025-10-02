@@ -10,8 +10,23 @@ interface UseCountriesParams {
     preferCountries: CountryOrIso2[];
     includeCountries: CountryOrIso2[];
     excludeCountries: CountryOrIso2[];
+    /**
+     * @deprecated
+     * This public API will be removed in a next major release.
+     * Use your own country detection mechanism.
+     */
     guessCountry: boolean;
+    /**
+     * @deprecated
+     * This public API will be removed in a next major release.
+     * Use your own country detection mechanism.
+     */
     countryGuesser: CountryGuesser;
+    /**
+     * @deprecated
+     * This public API will be removed in a next major release.
+     * Use your own country detection mechanism.
+     */
     disableGuessLoading: boolean;
   };
 }
