@@ -1,5 +1,31 @@
 # Change log
 
+## 5.1.1
+
+### Deprecations
+
+- Country guessing mechanisms have been deprecated (guesser classes, types and props).
+  This will improve maintainability for the package, since the feature was disabled by default.
+  You should implement your own country guessing mechanism.
+- `makePhone` have been deprecated because it was just forwarding arguments
+  to `awesome-phonenumber` package's `parsePhoneNumber` function.
+  Use `parsePhoneNumber` instead.
+- `makeExample` have been deprecated because it was just forwarding arguments
+  to `awesome-phonenumber` package's `getExample` function.
+  Use `getExample` instead.
+- `formatPhone` have been deprecated because it was just a shortcut for an
+  `awesome-phonenumber` package's `ParsedPhoneNumber` object's properties.
+  Use the needed properties instead.
+- `countries` have been deprecated because it is supposed to be internal.
+  Use your own custom countries list instead (internally, VPhoneInput is using
+  `countries-list` package).
+- `DEFAULT_OPTIONS`, `mergeOptions` and `getOption` have been deprecated because options are not
+  supposed to changes after the plugin creation.
+  Use your own intermediary variables or component properties if needed.
+- Every typing which are exported by the package have been deprecated.
+  This will help to clean the public API with new prefixed public typing for public APIs.
+  Some of the new types (probably most) will be marked as internal, so use your own types if needed.
+
 ## 5.1.0
 
 ### Features
