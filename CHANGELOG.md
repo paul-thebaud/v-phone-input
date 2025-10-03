@@ -5,6 +5,7 @@
 ### Bug fixes
 
 - fix: support "0" input (those won't be emitted before)
+- fix: support removing spaces in phone number
 
 ### Deprecations
 

@@ -341,10 +341,19 @@ const onLazyCountryChange = (
     validate();
   }
 };
-const onLazyValueChange = () => {
-  const countryInLazyValue = (lazyValue.value ?? '').startsWith('+');
+const onLazyValueChange = (nextValue: string | null, prevValue: string | null | undefined) => {
+  const stringNextValue = nextValue ?? '';
+  const stringPrevValue = prevValue ?? '';
+  if (
+    stringNextValue.length < stringPrevValue.length
+    && stringNextValue.replace(/\s+/g, '') === stringPrevValue.replace(/\s+/g, '')
+  ) {
+    return;
+  }
+
+  const countryInLazyValue = stringNextValue.startsWith('+');
   if (countryInLazyValue) {
-    const detectedIso2 = parsePhoneNumber((lazyValue.value ?? '').trim()).regionCode;
+    const detectedIso2 = parsePhoneNumber(stringNextValue.trim()).regionCode;
     if (detectedIso2
       && lazyCountry.value !== detectedIso2
       && findCountry(detectedIso2)
@@ -434,7 +443,7 @@ const phoneInputProps = computed(() => ({
 }));
 
 onMounted(() => {
-  onLazyValueChange();
+  onLazyValueChange(lazyValue.value, undefined);
   nextTick(() => {
     initializeCountry();
   });
