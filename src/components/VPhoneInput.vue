@@ -203,7 +203,7 @@ const { countrySelectComponent } = useCountrySelectComponent({ props });
 const countryFocused = ref(false);
 const mergedRules = ref([] as ValidationRule[]);
 const lazyCountry = ref(props.country as string | undefined);
-const lazyValue = ref(props.modelValue || '' as string | null);
+const lazyValue = ref(props.modelValue ?? '' as string | null);
 const lazyPhone = ref(markRaw(parsePhoneNumber('')));
 
 const onlyAttrs = (matcher: (key: string) => boolean) => Object.keys(attrs)
@@ -229,8 +229,8 @@ const countriesItems = computed(() => {
 
 const format = (phone: ParsedPhoneNumber) => (
   phone.number?.[props.displayFormat]
-  || phone.number?.input
-  || ''
+  ?? phone.number?.input
+  ?? ''
 );
 const example = computed(() => {
   if (props.example !== undefined) {
@@ -281,7 +281,7 @@ const onModelValueChange = () => {
   if (props.modelValue !== (lazyPhone.value.number?.input ?? '')
     && props.modelValue !== (lazyPhone.value.number?.e164 ?? '')
   ) {
-    lazyValue.value = props.modelValue || '';
+    lazyValue.value = props.modelValue ?? '';
   }
 };
 const onCountryChange = () => {
@@ -342,7 +342,7 @@ const onLazyCountryChange = (
   }
 };
 const onLazyValueChange = () => {
-  const countryInLazyValue = (lazyValue.value || '').startsWith('+');
+  const countryInLazyValue = (lazyValue.value ?? '').startsWith('+');
   if (countryInLazyValue) {
     const detectedIso2 = parsePhoneNumber((lazyValue.value ?? '').trim()).regionCode;
     if (detectedIso2
@@ -356,14 +356,14 @@ const onLazyValueChange = () => {
   onLazyCountryOrValueChange();
 };
 const onLazyPhoneChange = () => {
-  const newValueRaw = lazyPhone.value.number?.input || '';
-  const newValueE164 = lazyPhone.value.number?.e164 || newValueRaw;
+  const newValueRaw = lazyPhone.value.number?.input ?? lazyValue.value;
+  const newValueE164 = lazyPhone.value.number?.e164 ?? newValueRaw;
   const newValueValid = props.phoneValidator(lazyPhone.value);
   if (
     props.modelValue !== newValueRaw
     || (props.modelValue !== newValueE164 && newValueValid)
   ) {
-    emit('update:modelValue', (newValueValid ? newValueE164 : newValueRaw));
+    emit('update:modelValue', (newValueValid ? newValueE164 : newValueRaw) ?? '');
   }
 };
 

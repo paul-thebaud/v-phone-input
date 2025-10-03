@@ -2,6 +2,10 @@
 
 ## 5.1.1
 
+### Bug fixes
+
+- fix: support "0" input (those won't be emitted before)
+
 ### Deprecations
 
 - Country guessing mechanisms have been deprecated (guesser classes, types and props).
