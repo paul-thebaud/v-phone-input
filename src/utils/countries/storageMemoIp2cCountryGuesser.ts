@@ -8,8 +8,7 @@ interface StorageMemoIp2cCountryGuesserOptions {
 
 /**
  * @deprecated
- * This public API will be removed in a next major release.
- * Use your own country detection mechanism.
+ * This public API will be replaced in a next major release.
  */
 export default class StorageMemoIp2cCountryGuesser
   extends Ip2cCountryGuesser

@@ -60,15 +60,12 @@ type VPhoneInputProps = {
   prependInnerIcon?: string | undefined;
   rules?: VPhoneInputValidationRule[];
   validateOn?: ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy';
-  phoneValidator?: PhoneValidator;
   countryIconMode?: CountryIconMode;
   allCountries?: Country[];
   preferCountries?: CountryOrIso2[];
   includeCountries?: CountryOrIso2[];
   excludeCountries?: CountryOrIso2[];
   defaultCountry?: CountryOrIso2 | undefined;
-  enableSearchingCountry?: boolean;
-  displayFormat?: PhoneNumberFormat;
   country?: string;
   modelValue?: string | null;
   wrapperProps?: Record<string, any>;
@@ -76,16 +73,33 @@ type VPhoneInputProps = {
   phoneProps?: Record<string, any>;
   /**
    * @deprecated
-   * This public API will be removed in a next major release.
-   * Use your own country detection mechanism.
+   * This public API will be replaced in a next major release.
+   */
+  displayFormat?: PhoneNumberFormat;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
+   */
+  enableSearchingCountry?: boolean;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
+   */
+  phoneValidator?: PhoneValidator;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
    */
   countryGuesser?: CountryGuesser;
   /**
    * @deprecated
-   * This public API will be removed in a next major release.
-   * Use your own country detection mechanism.
+   * This public API will be replaced in a next major release.
    */
   guessCountry?: boolean;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
+   */
   disableGuessLoading?: boolean;
 };
 

@@ -63,20 +63,34 @@ export interface PluginOptions {
   includeCountries: string[];
   excludeCountries: string[];
   defaultCountry: string | undefined;
-  disableGuessLoading: boolean;
-  enableSearchingCountry: boolean;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
+   */
   displayFormat: PhoneNumberFormat;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
+   */
+  enableSearchingCountry: boolean;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
+   */
   phoneValidator: PhoneValidator;
   /**
    * @deprecated
-   * This public API will be removed in a next major release.
-   * Use your own country detection mechanism.
+   * This public API will be replaced in a next major release.
    */
   countryGuesser: CountryGuesser;
   /**
    * @deprecated
-   * This public API will be removed in a next major release.
-   * Use your own country detection mechanism.
+   * This public API will be replaced in a next major release.
    */
   guessCountry: boolean;
+  /**
+   * @deprecated
+   * This public API will be replaced in a next major release.
+   */
+  disableGuessLoading: boolean;
 }
