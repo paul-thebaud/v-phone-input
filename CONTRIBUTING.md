@@ -11,7 +11,7 @@ place in the
 
 ## Pull Requests
 
-- **Lint your code.** Make sure your code follows our coding standards by running `pnpm lint` on the
+- **Lint your code.** Make sure your code follows our coding standards by running `make lint` on the
   CLI.
 
 - **Add tests!** Your patch won't be accepted if it does not have tests.
@@ -32,46 +32,48 @@ place in the
 
 ## Useful commands
 
-> Notice that we use PNPM as our package manager.
+Development environment requires docker.
 
-### Running dev app
+### Starting containers
 
 ```shell
-pnpm dev
+make up
 ```
 
-### Building dev app for publish
+### Packaging lib
 
-``` shell
-pnpm demo:build
+```shell
+make package
 ```
 
-### Previewing built dev app
+### Generate lib API reference
 
-``` shell
-pnpm demo:preview
+```shell
+make typedoc
 ```
+
+### Starting docs website
+
+```shell
+make dev
+```
+
+Docs website is available on [vphoneinput.localhost](http://vphoneinput.localhost).
 
 ### Linting code
 
-``` shell
+```shell
 pnpm lint
 ```
 
-### Running E2E Tests
+### Running unit tests
 
-``` shell
-pnpm test:e2e
+```shell
+make test-unit
 ```
 
-### Running Unit Tests
+### Running E2E tests
 
-``` shell
-pnpm test:unit
-```
-
-### Building library for publish
-
-``` shell
-pnpm lib:build
+```shell
+make test-e2e
 ```

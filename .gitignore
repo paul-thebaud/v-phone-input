@@ -1,22 +1,18 @@
 .DS_Store
 /node_modules/
 /.pnpm-store/
+
+# build
 /dist/
-/dist_demo/
-
-# local env files
-.env.local
-.env.*.local
-
-# coverage
-/.artifacts/
-/.nyc_output/
-/coverage-e2e/
-/coverage-unit/
 
 # tests
-cypress-visual-screenshots/comparison/
-cypress-visual-screenshots/diff/
+/.nyc_output/
+/coverage/
+/cypress/screenshots
+
+# vitepress
+/docs/.vitepress/dist
+/docs/.vitepress/cache
 
 # log files
 npm-debug.log*

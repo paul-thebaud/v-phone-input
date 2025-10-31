@@ -1,16 +1,27 @@
-import VPhoneInput from '@/components/VPhoneInput.vue';
-import { PluginOptions } from '@/types/options';
-import { mergeOptions } from '@/utils/options';
-import { Plugin } from 'vue';
+import type { Plugin } from "vue";
+import VPhoneInput from "./components/VPhoneInput.vue";
+import { V_PHONE_INPUT_INJECTION_KEY } from "./internals/injectPhoneInputPluginOptions";
+import type {
+  VPhoneCountryInputComponent,
+  VPhoneInputCountryObject,
+  VPhoneInputPluginOptions,
+} from "./types";
 
-export default function createVPhoneInput(options?: Partial<PluginOptions>): Plugin {
+/**
+ * Provide given options to app and register `VPhoneInput` component.
+ *
+ * @param options
+ */
+export default function createVPhoneInput<
+  Country extends VPhoneInputCountryObject = VPhoneInputCountryObject,
+  CountryInputComponent extends
+    VPhoneCountryInputComponent = VPhoneCountryInputComponent,
+>(
+  options?: VPhoneInputPluginOptions<Country, CountryInputComponent>,
+): Plugin<[] | [VPhoneInputPluginOptions<Country, CountryInputComponent>]> {
   return (app, pluginOptions) => {
-    if (pluginOptions) {
-      console.warn('[v-phone-input] options must be passed as first argument of createVPhoneInput()');
-    }
+    app.provide(V_PHONE_INPUT_INJECTION_KEY, { ...options, ...pluginOptions });
 
-    mergeOptions(options || {});
-
-    app.component('VPhoneInput', VPhoneInput);
+    app.component("VPhoneInput", VPhoneInput);
   };
 }
