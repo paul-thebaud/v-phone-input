@@ -1,6 +1,14 @@
 # Change log
 
+## 5.1.3
+
+### Bug fixes
+
+- fix: default object props values from plugin options (see #57)
+
 ## 5.1.2
+
+### Bug fixes
 
 - fix: default object props values from plugin options (see #57)
 
