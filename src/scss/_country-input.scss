@@ -7,8 +7,6 @@
   flex-shrink: 0;
 
   &.v-input--density-compact {
-    --v-phone-input-country-icon-height: $v-phone-input-country-icon-compact-height;
-
     .v-field--variant-plain, .v-field--variant-underlined {
       .v-field__append-inner .v-icon {
         font-size: $v-phone-input-country-icon-compact-height;
@@ -22,10 +20,6 @@
 
     border-start-end-radius: 0 !important;
     border-end-end-radius: 0 !important;
-
-    &.v-field--variant-plain, &.v-field--variant-underlined {
-      --v-phone-input-country-icon-height: $v-phone-input-country-icon-compact-height;
-    }
 
     &.v-field--variant-outlined {
       --v-input-chips-margin-top: 3px;
@@ -41,8 +35,6 @@
     }
 
     .v-field__input {
-      min-height: var(--v-input-control-height, 56px);
-
       input {
         height: 1px;
       }
