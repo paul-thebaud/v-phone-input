@@ -23,8 +23,8 @@ import makePhoneInputProps
 import type {
   VPhoneCountryInputComponent,
   VPhoneInputCountryObject,
-  VPhoneInputNonModelEmits,
   VPhoneInputExposed,
+  VPhoneInputNonModelEmits,
   VPhoneInputSlots,
 } from "../types";
 

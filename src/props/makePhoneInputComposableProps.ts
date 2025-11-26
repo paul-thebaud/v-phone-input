@@ -1,7 +1,10 @@
 import type { ParsedPhoneNumber, PhoneNumberFormat } from "awesome-phonenumber";
 import type { PropType } from "vue";
 import undefinedBoolean from "../internals/undefinedBoolean.ts";
-import type { VPhoneInputCountryGuesser, VPhoneInputCountryObject } from "../types.ts";
+import type {
+  VPhoneInputCountryGuesser,
+  VPhoneInputCountryObject,
+} from "../types.ts";
 import makePhoneInputCountryProps from "./makePhoneInputCountryProps.ts";
 import makePhoneInputMessagesProps from "./makePhoneInputMessagesProps.ts";
 

@@ -20,7 +20,7 @@ If you would like to try VPhoneInput, you can check out:
 - [the Vuetify component StackBlitz project](https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev)
 - [the Vue composable StackBlitz project](https://stackblitz.com/edit/v-phone-input-composable?file=src%2FApp.vue&terminal=dev)
 
-## Migration from v5
+## Migration to v6
 
 If you are using VPhoneInput v5 and would you like to migrate to v6, you
 should follow the [v6 migration guide](/guide/migration).

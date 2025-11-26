@@ -1,7 +1,10 @@
-import { computed, unref, type UnwrapRef } from "vue";
+import { computed, type UnwrapRef, unref } from "vue";
 import injectPhoneInputPluginOptions from "../internals/injectPhoneInputPluginOptions.ts";
 import undefinedBoolean from "../internals/undefinedBoolean.ts";
-import type { VPhoneCountryInputComponent, VPhoneInputCountryObject } from "../types.ts";
+import type {
+  VPhoneCountryInputComponent,
+  VPhoneInputCountryObject,
+} from "../types.ts";
 
 /**
  * Composable to use injected options with currently passed properties or options.
