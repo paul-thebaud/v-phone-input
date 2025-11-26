@@ -267,5 +267,8 @@ In addition to other changes specified in this guide, multiple properties change
 
 - `example` is now receiving an object with a country property instead of a country object;
 - `disableGuessLoading` has been replaced by `guessLoading`, which does the opposite;
+- `invalidMessage` with `null` will no longer disable validation, but instead will
+  make the validation rule returns `false` instead of a message. If you want to disable 
+  validation, use `validate` with `null` instead.
 - `phoneValidator` has been renamed to `validate`;
 - `wrapperProps` has been renamed to `wrapperAttrs`;
