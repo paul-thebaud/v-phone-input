@@ -1,5 +1,11 @@
 # Change log
 
+## 5.1.4
+
+### Bug fixes
+
+- fix: country input height (see #59)
+
 ## 5.1.3
 
 ### Bug fixes
