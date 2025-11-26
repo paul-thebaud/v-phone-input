@@ -8,7 +8,7 @@ import "virtual:group-icons.css";
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 import "./style.css";
-import { mdi } from "vuetify/iconsets/mdi-svg";
+import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
 import Banner from "../../components/Banner.vue";
 import ComponentFeatureTag from "../../components/docs/ComponentFeatureTag.vue";
 import ComposableFeatureTag from "../../components/docs/ComposableFeatureTag.vue";
@@ -37,6 +37,7 @@ const vuetify = createVuetify({
   },
   icons: {
     defaultSet: "mdi",
+    aliases,
     sets: {
       mdi,
     },
