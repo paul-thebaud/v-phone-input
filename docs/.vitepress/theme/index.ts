@@ -8,7 +8,8 @@ import "virtual:group-icons.css";
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 import "./style.css";
-import { mdi } from 'vuetify/iconsets/mdi-svg'
+import { mdi } from "vuetify/iconsets/mdi-svg";
+import Banner from "../../components/Banner.vue";
 import ComponentFeatureTag from "../../components/docs/ComponentFeatureTag.vue";
 import ComposableFeatureTag from "../../components/docs/ComposableFeatureTag.vue";
 import FeatureTags from "../../components/docs/FeatureTags.vue";
@@ -49,7 +50,7 @@ export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      "layout-top": () => h(Banner),
     });
   },
   enhanceApp({ app }) {
