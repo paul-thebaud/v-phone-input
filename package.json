@@ -45,8 +45,7 @@
   ],
   "scripts": {
     "lint": "biome check src docs/components",
-    "test:unit": "vitest run --coverage --typecheck",
-    "test:e2e": "cypress run",
+    "test": "vitest run --coverage --typecheck",
     "build": "vue-tsc --noEmit && vite build",
     "docs:typedoc": "typedoc && rimraf docs/api/_media docs/api/index.md && cp -RT docs/api-handwritten docs/api",
     "docs:dev": "vitepress dev docs",

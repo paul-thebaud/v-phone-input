@@ -8,4 +8,4 @@ Defined in: dist/internals/vPhoneInputSharedProperties.d.ts:6
 
 **`Internal`**
 
-VPhoneInput properties list which are forwarded to both country and phone input.
+VPhoneInput properties which are forwarded to both country and phone input.

@@ -63,7 +63,7 @@ lint-write: ## Lint and autofix.
 
 .PHONY: test-unit
 test-unit: ## Run unit tests.
-	@$(PNPM) test:unit
+	@$(PNPM) test
 
 .PHONY: test-e2e
 test-e2e: ## Run E2E tests.
