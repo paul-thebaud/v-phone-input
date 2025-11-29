@@ -1,20 +1,20 @@
 /**
- * Omit keys from object.
+ * Omit keys from object by predicate.
  *
  * @param object
- * @param keys
+ * @param predicate
  *
  * @internal
  */
-export default function omit<T extends {}, K extends string & keyof T>(
+export default function omitBy<T extends {}, K extends keyof T>(
   object: T,
-  keys: readonly K[],
+  predicate: (key: K) => boolean,
 ) {
   return Object.fromEntries(
     Object.keys(object)
       .filter(
         (key): key is string & keyof T =>
-          key in object && (keys as readonly string[]).indexOf(key) === -1,
+          key in object && predicate(key as K),
       )
       .map((key) => [key, object[key]]),
   ) as Omit<T, K>;

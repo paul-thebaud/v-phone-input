@@ -9,12 +9,16 @@
 import { computed, ref, shallowRef, toRef, watch } from "vue";
 import type { VSelect } from "vuetify/components";
 import { VListItem, VTextField } from "vuetify/components";
-import type { makeVTextFieldProps } from "vuetify/lib/components/VTextField/VTextField.js";
+import type {
+  makeVTextFieldProps,
+} from "vuetify/lib/components/VTextField/VTextField.js";
 import usePhoneInput from "../composables/usePhoneInput";
-import usePhoneInputPluginOptions from "../composables/usePhoneInputPluginOptions.ts";
-import omit from "../internals/omit.ts";
+import usePhoneInputPluginOptions
+  from "../composables/usePhoneInputPluginOptions.ts";
+import omitBy from "../internals/omitBy.ts";
 import pick from "../internals/pick";
-import vPhoneInputSharedProperties from "../internals/vPhoneInputSharedProperties";
+import vPhoneInputSharedProperties
+  from "../internals/vPhoneInputSharedProperties";
 import makePhoneInputProps from "../props/makePhoneInputProps.ts";
 import type {
   VPhoneCountryInputComponent,
@@ -168,16 +172,19 @@ const countryInputProps = computed(() => ({
   },
 }));
 
-const phoneInputNonForwardedProps = makePhoneInputProps<
-  Country,
-  CountryInputComponent
->();
+const nonForwardedPropsKeys = [
+  ...Object.keys(makePhoneInputProps<Country, CountryInputComponent>()),
+  "modelValue",
+  "country",
+];
+
 const forwardedProps = computed(() =>
-  omit(props, [
-    ...Object.keys(phoneInputNonForwardedProps),
-    "modelValue",
-    "country",
-  ] as readonly (keyof typeof props)[]),
+  omitBy(
+    props,
+    (key) =>
+      nonForwardedPropsKeys.indexOf(key) === -1 &&
+      props[key] !== VTextField.props[key]?.default,
+  ),
 );
 
 const phoneInputProps = computed(() => ({
