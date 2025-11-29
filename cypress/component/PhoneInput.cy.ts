@@ -308,6 +308,17 @@ describe("PhoneInput", () => {
         );
       });
 
+      it("disables validation", () => {
+        tools.mount({
+          validate: null,
+        });
+
+        tools.typePhone("+33712345678");
+        tools.expectCountry("FR");
+        tools.expectPhone("+33712345678");
+        tools.expectError(null);
+      });
+
       it("excludes countries", () => {
         tools.mount({
           excludeCountries: ["FR", "BE"],
