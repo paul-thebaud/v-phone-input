@@ -9,16 +9,12 @@
 import { computed, ref, shallowRef, toRef, watch } from "vue";
 import type { VSelect } from "vuetify/components";
 import { VListItem, VTextField } from "vuetify/components";
-import type {
-  makeVTextFieldProps,
-} from "vuetify/lib/components/VTextField/VTextField.js";
+import type { makeVTextFieldProps } from "vuetify/lib/components/VTextField/VTextField.js";
 import usePhoneInput from "../composables/usePhoneInput";
-import usePhoneInputPluginOptions
-  from "../composables/usePhoneInputPluginOptions.ts";
+import usePhoneInputPluginOptions from "../composables/usePhoneInputPluginOptions.ts";
 import omitBy from "../internals/omitBy.ts";
 import pick from "../internals/pick";
-import vPhoneInputSharedProperties
-  from "../internals/vPhoneInputSharedProperties";
+import vPhoneInputSharedProperties from "../internals/vPhoneInputSharedProperties";
 import makePhoneInputProps from "../props/makePhoneInputProps.ts";
 import type {
   VPhoneCountryInputComponent,

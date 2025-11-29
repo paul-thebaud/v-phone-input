@@ -13,8 +13,7 @@ export default function omitBy<T extends {}, K extends keyof T>(
   return Object.fromEntries(
     Object.keys(object)
       .filter(
-        (key): key is string & keyof T =>
-          key in object && predicate(key as K),
+        (key): key is string & keyof T => key in object && predicate(key as K),
       )
       .map((key) => [key, object[key]]),
   ) as Omit<T, K>;
