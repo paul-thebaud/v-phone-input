@@ -6,7 +6,7 @@ hero:
   name: "VPhoneInput"
   text: "International phone number tools for Vuetify and Vue."
   image:
-    src: /assets/icon.svg
+    src: /icon.svg
   actions:
     - theme: brand
       text: Getting started
