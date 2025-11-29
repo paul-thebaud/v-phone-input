@@ -4,6 +4,14 @@ import type {
   VPhoneInputMessageFactoryContext,
 } from "../types";
 
+/**
+ * Resolve a message string or factory function.
+ *
+ * @param message
+ * @param context
+ *
+ * @internal
+ */
 export default function resolveMessage<
   Country extends VPhoneInputCountryObject,
   Label extends string | undefined,

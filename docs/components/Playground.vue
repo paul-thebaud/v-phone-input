@@ -26,6 +26,27 @@ import {
 } from "../../src";
 import PlaygroundPhoneInfo from "./playground/PlaygroundPhoneInfo.vue";
 
+type PlaygroundConfig = {
+  countryInputMode: "select" | "autocomplete";
+  countryDisplayMode: "svg" | "sprite" | "text";
+  displayFormat: PhoneNumberFormat;
+  modelFormat: PhoneNumberFormat;
+};
+
+const defaultPlaygroundConfig: PlaygroundConfig = {
+  countryInputMode: "select",
+  countryDisplayMode: "svg",
+  displayFormat: "national",
+  modelFormat: "e164",
+};
+
+const emit = defineEmits<{
+  "update:config": [
+    Pick<PlaygroundConfig, "countryInputMode"> &
+      Partial<Omit<PlaygroundConfig, "countryInputMode">>,
+  ];
+}>();
+
 const { isDark } = useData();
 const theme = useTheme();
 
@@ -33,7 +54,7 @@ const phoneInputRef = useTemplateRef("phoneInputRef");
 
 const phone = ref("");
 
-const countryInputMode = ref<"select" | "autocomplete">("select");
+const countryInputMode = ref(defaultPlaygroundConfig.countryInputMode);
 
 const countryInputProps = computed(
   () =>
@@ -43,7 +64,7 @@ const countryInputProps = computed(
     })[countryInputMode.value],
 );
 
-const countryDisplayMode = ref<"svg" | "sprite" | "text">("svg");
+const countryDisplayMode = ref(defaultPlaygroundConfig.countryDisplayMode);
 
 const countryDisplayComponent = computed(
   () =>
@@ -57,8 +78,8 @@ const countryDisplayComponent = computed(
 const phoneInputProps = reactive({
   variant: "filled" as ComponentProps<typeof VTextField>["variant"],
   density: "default" as ComponentProps<typeof VTextField>["density"],
-  displayFormat: "national" as PhoneNumberFormat,
-  modelFormat: "e164" as PhoneNumberFormat,
+  displayFormat: defaultPlaygroundConfig.displayFormat,
+  modelFormat: defaultPlaygroundConfig.modelFormat,
 });
 
 const allPhoneInputProps = computed(
@@ -72,6 +93,18 @@ const allPhoneInputProps = computed(
 
 watchEffect(() => {
   theme.change(isDark.value ? "dark" : "light");
+});
+
+watchEffect(() => {
+  const undefinedIf = <V>(value: V, undefinedIfValue: V) =>
+    value === undefinedIfValue ? undefined : value;
+
+  emit("update:config", {
+    countryInputMode: countryInputMode.value,
+    countryDisplayMode: undefinedIf(countryDisplayMode.value, "text"),
+    displayFormat: undefinedIf(phoneInputProps.displayFormat, "national"),
+    modelFormat: undefinedIf(phoneInputProps.modelFormat, "e164"),
+  });
 });
 </script>
 
@@ -98,8 +131,8 @@ watchEffect(() => {
               v-model="countryInputMode"
               label="Country input"
               :items="[
-                { value: 'select', title: 'Select (default)' },
-                { value: 'autocomplete', title: 'Autocomplete' },
+                'select',
+                'autocomplete',
               ]"
             />
             <v-select
@@ -109,31 +142,6 @@ watchEffect(() => {
                 { value: 'svg', title: 'SVG' },
                 { value: 'sprite', title: 'CSS sprite' },
                 { value: 'text', title: 'Text (default)' },
-              ]"
-            />
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
-          >
-            <v-select
-              v-model="phoneInputProps.variant"
-              label="Variant"
-              :items="[
-                'filled',
-                'outlined',
-                'solo',
-                'plain',
-                'underlined',
-              ]"
-            />
-            <v-select
-              v-model="phoneInputProps.density"
-              label="Density"
-              :items="[
-                'default',
-                'comfortable',
-                'compact',
               ]"
             />
           </v-col>
@@ -159,6 +167,31 @@ watchEffect(() => {
                 'international',
                 'e164',
                 'rfc3966',
+              ]"
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
+          >
+            <v-select
+              v-model="phoneInputProps.variant"
+              label="Variant"
+              :items="[
+                'filled',
+                'outlined',
+                'solo',
+                'plain',
+                'underlined',
+              ]"
+            />
+            <v-select
+              v-model="phoneInputProps.density"
+              label="Density"
+              :items="[
+                'default',
+                'comfortable',
+                'compact',
               ]"
             />
           </v-col>

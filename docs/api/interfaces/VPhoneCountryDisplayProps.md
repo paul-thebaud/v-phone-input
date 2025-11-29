@@ -24,7 +24,7 @@ Component properties for country display components.
 
 > `readonly` **country**: \[\{ `required`: `true`; `type`: `PropType`\<`Country`\>; \}\] *extends* \[`Prop`\<`V`, `D`\>\] ? `unknown` *extends* `V` ? keyof `V` *extends* `never` ? `IfAny`\<`V`, `V`, `D`\> : `V` : `V` : `object`
 
-Defined in: dist/props/makePhoneInputCountryDisplayProps.d.ts:7
+Defined in: dist/props/makePhoneInputCountryDisplayProps.d.ts:12
 
 Country to display.
 
@@ -38,7 +38,7 @@ Country to display.
 
 > `readonly` `optional` **decorative**: `boolean`
 
-Defined in: dist/props/makePhoneInputCountryDisplayProps.d.ts:15
+Defined in: dist/props/makePhoneInputCountryDisplayProps.d.ts:20
 
 Tells if the icon should be ignored by screen readers or if it must have
 an accessible name (e.g. through `title` attribute).

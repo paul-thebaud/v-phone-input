@@ -42,20 +42,23 @@ To disable on `blur` formatting, you can pass `false` to the
 When disabling on `blur` formatting, the phone number will be formatted after a fixed delay
 without any user input, which can be customized using
 [`displayFormatDelay`](/api/interfaces/VPhoneInputProps#displayFormatDelay)
-(by default, `500ms`). You can also let `displayFormatOnBlur` enabled to combine both behaviors.
+(by default, `1000ms`). You can also let `displayFormatOnBlur` enabled to combine both behaviors.
 
 ```ts [app.ts]
 const vPhoneInput = createVPhoneInput({
   // [!code ++:2]
   displayFormatOnBlur: false,
-  displayFormatDelay: 500, // Default behavior when disabling on-blur formatting.
+  displayFormatDelay: 1000, // Default behavior when disabling on-blur formatting.
 });
 ```
 
 ::: info
 Passing a `0` delay will trigger phone number formatting on each input.
-This is usually a bad idea since the phone number might be formatted while the user
-is typing.
+:::
+
+::: danger
+Prefer using on `blur` phone formatting, because delayed formatting might format
+the phone while the user is still typing a phone number.
 :::
 
 ## Disabling formatting

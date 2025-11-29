@@ -1,4 +1,4 @@
-import { computed, type UnwrapRef, unref } from "vue";
+import { computed, type MaybeRef, type UnwrapRef, unref } from "vue";
 import injectPhoneInputPluginOptions from "../internals/injectPhoneInputPluginOptions.ts";
 import undefinedBoolean from "../internals/undefinedBoolean.ts";
 import type {
@@ -50,7 +50,7 @@ export default function usePhoneInputPluginOptions<
     useOption: <K extends keyof T & keyof typeof injected, T, D = undefined>(
       key: K,
       options: T,
-      defaultValue?: D,
-    ) => computed(() => getOption(key, options, defaultValue)),
+      defaultValue?: MaybeRef<D>,
+    ) => computed(() => getOption(key, options, unref(defaultValue))),
   };
 }

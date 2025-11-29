@@ -8,7 +8,9 @@ import type {
 import makePhoneInputCountryProps from "./makePhoneInputCountryProps.ts";
 import makePhoneInputMessagesProps from "./makePhoneInputMessagesProps.ts";
 
-function makePhoneInputComposableSpecificProps() {
+function makePhoneInputComposableSpecificProps<
+  Country extends VPhoneInputCountryObject,
+>() {
   return {
     /**
      * Guess the country of the user.
@@ -81,24 +83,30 @@ function makePhoneInputComposableSpecificProps() {
      * Using `null` will disable the validation.
      *
      * @defaultValue
-     * `valid` property value of the given `ParsedPhoneNumber` object.
+     * Ensure `ParsedPhoneNumber.valid` is true and `ParsedPhoneNumber.regionCode` is a selectable
+     * country (not excluded from the countries list).
      */
     validate: {
       type: [Function, null] as PropType<
-        ((phone: ParsedPhoneNumber | null) => boolean) | null
+        ((phone: ParsedPhoneNumber | null, country: Country) => boolean) | null
       >,
     },
   };
 }
 
+/**
+ * Make phone input composable properties definition.
+ *
+ * @internal
+ */
 export default function makePhoneInputComposableProps<
   Country extends VPhoneInputCountryObject,
 >(): ReturnType<typeof makePhoneInputCountryProps<Country>> &
   ReturnType<typeof makePhoneInputMessagesProps<Country>> &
-  ReturnType<typeof makePhoneInputComposableSpecificProps> {
+  ReturnType<typeof makePhoneInputComposableSpecificProps<Country>> {
   return {
     ...makePhoneInputCountryProps<Country>(),
     ...makePhoneInputMessagesProps<Country>(),
-    ...makePhoneInputComposableSpecificProps(),
+    ...makePhoneInputComposableSpecificProps<Country>(),
   } as const;
 }

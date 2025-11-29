@@ -22,9 +22,9 @@ Options for `usePhoneInputMessages` composable.
 
 ### ariaLabel?
 
-> `readonly` `optional` **ariaLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\> \| `undefined`\>
+> `readonly` `optional` **ariaLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:38
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:43
 
 Customize the phone input `aria-label`.
 
@@ -46,9 +46,9 @@ Country to resolve messages with.
 
 ### countryAriaLabel?
 
-> `readonly` `optional` **countryAriaLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `undefined`\>
+> `readonly` `optional` **countryAriaLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:53
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:58
 
 Customize the country input `aria-label`.
 
@@ -64,9 +64,9 @@ Customize the country input `aria-label`.
 
 ### countryLabel?
 
-> `readonly` `optional` **countryLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `undefined`\>
+> `readonly` `optional` **countryLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:44
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:49
 
 Customize the country input label.
 
@@ -80,7 +80,7 @@ Customize the country input label.
 
 > `readonly` `optional` **example**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`, `undefined`\> \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:23
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:28
 
 Customize the phone input example.
 
@@ -98,7 +98,7 @@ Use `awesome-phonenumber` package's `getExample` function with current country.
 
 > `readonly` `optional` **exampleFormat**: `MaybeRef`\<[`PhoneNumberFormat`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#phone-number-formats) \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:14
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:19
 
 Format example phone.
 
@@ -118,9 +118,9 @@ Using `null` will disable formating example phone numbers.
 
 ### invalidMessage?
 
-> `readonly` `optional` **invalidMessage**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `undefined`\>
+> `readonly` `optional` **invalidMessage**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:69
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:74
 
 Customize the phone input invalid message returned by the
 `validate` function generated rule.
@@ -139,7 +139,7 @@ Customize the phone input invalid message returned by the
 
 > `readonly` `optional` **label**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\> \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:32
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:37
 
 Customize the phone input label.
 
@@ -155,9 +155,9 @@ Customize the phone input label.
 
 ### placeholder?
 
-> `readonly` `optional` **placeholder**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `undefined`\>
+> `readonly` `optional` **placeholder**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:59
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:64
 
 Customize the phone input placeholder.
 

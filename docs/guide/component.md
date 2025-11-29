@@ -28,6 +28,11 @@ $ bun add v-phone-input flag-icons
 :::
 
 ::: tip
+You can generate your VPhoneInput dependencies install command and
+plugin creation code [on the playground](/playground).
+:::
+
+::: tip
 In this guide, we suggest you to install `flag-icons` and use
 [`VPhoneCountryFlagSvg`](/api/functions/VPhoneCountryFlagSvg)
 for the phone input
@@ -67,7 +72,7 @@ it every, like in the sign-in form of the following example.
 ```ts [app.ts]
 // [!code ++:3]
 import 'flag-icons/css/flag-icons.min.css';
-import 'v-phone-input/dist/v-phone-input.css';
+import 'v-phone-input/styles';
 import { createVPhoneInput, selectPhoneCountryInput, VPhoneCountryFlagSvg } from 'v-phone-input';
 import { createApp } from 'vue';
 import App from './App.vue';
@@ -96,42 +101,6 @@ Do not forget to:
 - import VPhoneInput css file, and appropriate flags files if needed;
 - use either `selectPhoneCountryInput` or `autocompletePhoneCountryInput`, otherwise
   phone country input would not display.
-
-:::
-
-### Nuxt setup
-
-Inside a Nuxt application, you must mark `v-phone-input` as a transpiled package and define
-a Nuxt plugin instead of a simple Vue plugin.
-
-::: code-group
-
-```ts [nuxt.config.ts]
-export default defineNuxtConfig({
-  build: {
-    transpile: [
-      'vuetify',
-      // [!code ++]
-      'v-phone-input',
-    ],
-  },
-});
-```
-
-```ts [app/plugins/vPhoneInputPlugin.ts]
-import 'flag-icons/css/flag-icons.min.css';
-import 'v-phone-input/dist/v-phone-input.css';
-import { createVPhoneInput, selectPhoneCountryInput, VPhoneCountryFlagSvg } from 'v-phone-input';
-
-export default defineNuxtPlugin((nuxtApp) => {
-  const vPhoneInput = createVPhoneInput({
-    ...selectPhoneCountryInput,
-    countryDisplayComponent: VPhoneCountryFlagSvg,
-  });
-
-  nuxtApp.vueApp.use(vPhoneInput);
-});
-```
 
 :::
 
@@ -222,3 +191,90 @@ Those are documented inside [`VPhoneInputEmits`](/api/interfaces/VPhoneInputEmit
 
 `VPhoneInput` exposes multiple values for advanced customization, which are documented inside
 [`VPhoneInputExposed`](/api/interfaces/VPhoneInputExposed).
+
+## Additional information
+
+### Generic type parameters
+
+Please note that `VPhoneInput` is a
+[generic Vue component](https://vuejs.org/guide/typescript/overview#generic-components).
+It has two type parameters:
+
+- `Country` which represent a country object extending
+  [`VPhoneInputCountryObject`](/api/interfaces/VPhoneInputCountryObject)
+- `CountryInputComponent` which represent the country input component in use. It is either
+  a `VSelect` or a `VAutocomplete`.
+
+If you are using render functions, please
+[read the dedicated render functions usage section](#render-functions).
+
+### Usage in Nuxt
+
+Inside a Nuxt application, you must mark `v-phone-input` as a transpiled package and define
+a Nuxt plugin instead of a simple Vue plugin.
+
+::: code-group
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  build: {
+    transpile: [
+      'vuetify',
+      // [!code ++]
+      'v-phone-input',
+    ],
+  },
+});
+```
+
+```ts [app/plugins/vPhoneInputPlugin.ts]
+import 'flag-icons/css/flag-icons.min.css';
+import 'v-phone-input/styles';
+import { createVPhoneInput, selectPhoneCountryInput, VPhoneCountryFlagSvg } from 'v-phone-input';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  const vPhoneInput = createVPhoneInput({
+    ...selectPhoneCountryInput,
+    countryDisplayComponent: VPhoneCountryFlagSvg,
+  });
+
+  nuxtApp.vueApp.use(vPhoneInput);
+});
+```
+
+:::
+
+### Usage in render functions
+
+Since [VPhoneInput is a generic component](#generic-type-parameters),
+you will need to manually specify its type parameters when using render functions:
+
+::: code-group
+
+```ts [select]
+import { defineComponent, h } from 'vue';
+import type { VSelect } from 'vuetify/components';
+import { VPhoneInput, selectPhoneCountryInput, type VPhoneInputCountryObject } from 'v-phone-input';
+
+export default defineComponent({
+  render: () => h(
+    VPhoneInput<VPhoneInputCountryObject, typeof VSelect>,
+    { ...selectPhoneCountryInput },
+  ),
+});
+```
+
+```ts [autocomplete]
+import { defineComponent, h } from 'vue';
+import type { VAutocomplete } from 'vuetify/components';
+import { VPhoneInput, autocompletePhoneCountryInput, type VPhoneInputCountryObject } from 'v-phone-input';
+
+export default defineComponent({
+  render: () => h(
+    VPhoneInput<VPhoneInputCountryObject, typeof VAutocomplete>,
+    { ...autocompletePhoneCountryInput },
+  ),
+});
+```
+
+:::

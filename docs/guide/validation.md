@@ -2,12 +2,15 @@
 
 <feature-tags component composable />
 
-By default, VPhoneInput will validate phone number using `awesome-phonenumber`'s
-[
-`ParsedPhoneNumber.valid`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage)
-property. It will also append an additional rule when using the Vuetify component, which will print
-[`invalidMessage`](/api/interfaces/VPhoneInputProps#invalidMessage) when facing an invalid
-phone number.
+By default, VPhoneInput will ensure that
+[`ParsedPhoneNumber.valid`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage)
+is `true`, and that
+[`ParsedPhoneNumber.regionCode`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage)
+is a selectable country.
+
+Additionally, it will append an additional rule when using the Vuetify component,
+which will print [`invalidMessage`](/api/interfaces/VPhoneInputProps#invalidMessage)
+when facing an invalid phone number.
 
 ::: info
 Please note that empty phone number is considered valid. If you need to ensure that phone number

@@ -2,6 +2,11 @@ import type { PhoneNumberFormat } from "awesome-phonenumber";
 import type { PropType } from "vue";
 import type { VPhoneInputCountryObject, VPhoneInputMessage } from "../types.ts";
 
+/**
+ * Make phone input messages composable properties definition.
+ *
+ * @internal
+ */
 export default function makePhoneInputMessagesProps<
   Country extends VPhoneInputCountryObject,
 >() {
@@ -44,15 +49,20 @@ export default function makePhoneInputMessagesProps<
      * Customize the phone input `aria-label`.
      */
     ariaLabel: {
-      type: [String, Function] as PropType<
-        VPhoneInputMessage<Country, undefined>
-      >,
+      type: [String, Function, null] as PropType<VPhoneInputMessage<
+        Country,
+        undefined
+      > | null>,
     },
     /**
      * Customize the country input label.
      */
     countryLabel: {
-      type: [String, Function] as PropType<VPhoneInputMessage<Country>>,
+      type: [
+        String,
+        Function,
+        null,
+      ] as PropType<VPhoneInputMessage<Country> | null>,
     },
     /**
      * Customize the country input `aria-label`.
@@ -61,13 +71,21 @@ export default function makePhoneInputMessagesProps<
      * `'Country for <label>'`
      */
     countryAriaLabel: {
-      type: [String, Function] as PropType<VPhoneInputMessage<Country>>,
+      type: [
+        String,
+        Function,
+        null,
+      ] as PropType<VPhoneInputMessage<Country> | null>,
     },
     /**
      * Customize the phone input placeholder.
      */
     placeholder: {
-      type: [String, Function] as PropType<VPhoneInputMessage<Country>>,
+      type: [
+        String,
+        Function,
+        null,
+      ] as PropType<VPhoneInputMessage<Country> | null>,
     },
     /**
      * Customize the phone input invalid message returned by the
@@ -77,7 +95,11 @@ export default function makePhoneInputMessagesProps<
      * `'The "<label>" field is not a valid phone number (example: <example>).'`
      */
     invalidMessage: {
-      type: [String, Function] as PropType<VPhoneInputMessage<Country>>,
+      type: [
+        String,
+        Function,
+        null,
+      ] as PropType<VPhoneInputMessage<Country> | null>,
     },
   } as const;
 }

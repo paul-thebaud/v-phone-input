@@ -76,6 +76,7 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    search: { provider: 'local' },
     nav: [
       {
         text: "Guide",
@@ -161,8 +162,8 @@ export default defineConfig({
                 link: "/guide/country-autocomplete",
               },
               {
-                text: "Country list",
-                link: "/guide/country-list",
+                text: "Countries list",
+                link: "/guide/countries-list",
               },
             ],
           },

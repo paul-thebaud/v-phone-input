@@ -1,6 +1,11 @@
 import type { PropType } from "vue";
 import type { VPhoneInputCountryObject } from "../types.ts";
 
+/**
+ * Make phone input country display properties definition.
+ *
+ * @internal
+ */
 export default function makePhoneInputCountryDisplayProps<
   Country extends VPhoneInputCountryObject,
 >() {

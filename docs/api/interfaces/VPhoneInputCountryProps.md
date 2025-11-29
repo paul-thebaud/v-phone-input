@@ -24,7 +24,7 @@ Props to customize country related features.
 
 > `readonly` `optional` **countries**: `Country`[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:30
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:35
 
 List of available countries.
 
@@ -44,7 +44,7 @@ given locale (or `en`) translated names using `Intl.DisplayNames`.
 
 > `readonly` `optional` **countryLocale**: `string`
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:10
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:15
 
 Locale to use when localizing country names.
 
@@ -62,7 +62,7 @@ Locale to use when localizing country names.
 
 > `readonly` `optional` **countryName**: (`iso2`) => `string`
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:19
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:24
 
 Resolve a country name from its ISO-2 code.
 
@@ -90,7 +90,7 @@ Uses `Intl.DisplayNames` to localize the country name in defined `countryLocale`
 
 > `readonly` `optional` **defaultCountry**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:69
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:74
 
 Default country to use.
 
@@ -110,7 +110,7 @@ First country from the available countries list.
 
 > `readonly` `optional` **excludeCountries**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:60
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:65
 
 List of countries to exclude.
 
@@ -129,7 +129,7 @@ from available countries.
 
 > `readonly` `optional` **includeCountries**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:50
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:55
 
 List of countries to include.
 
@@ -148,7 +148,7 @@ from available countries.
 
 > `readonly` `optional` **preferCountries**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:40
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:45
 
 List of countries to prefer.
 

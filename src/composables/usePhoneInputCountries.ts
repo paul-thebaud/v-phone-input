@@ -4,7 +4,6 @@ import {
 } from "awesome-phonenumber";
 import countriesJson from "countries-list/minimal/countries.2to3.min.json";
 import { computed, type MaybeRef, unref } from "vue";
-import normalizeCountry from "../internals/normalizeCountry";
 import type {
   VPhoneInputCountryComposable,
   VPhoneInputCountryComposableOptions,
@@ -12,6 +11,14 @@ import type {
   VPhoneInputCountryObjectOrIso2,
 } from "../types";
 import usePhoneInputPluginOptions from "./usePhoneInputPluginOptions.ts";
+
+const normalizeCountryIso2 = (country: string | null | undefined) =>
+  (country ?? "").toUpperCase();
+
+const normalizeCountry = (
+  country: VPhoneInputCountryObjectOrIso2 | null | undefined,
+) =>
+  normalizeCountryIso2(typeof country === "string" ? country : country?.iso2);
 
 const normalizeCountriesSet = (
   countries: MaybeRef<VPhoneInputCountryObjectOrIso2[] | undefined>,
@@ -86,7 +93,7 @@ export default function usePhoneInputCountries<
         (!excludeCountriesOption.value.size ||
           !excludeCountriesOption.value.has(iso2))
       ) {
-        map.set(iso2, { ...country, iso2 });
+        map.set(iso2, country);
       }
 
       return map;

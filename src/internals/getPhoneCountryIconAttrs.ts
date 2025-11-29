@@ -3,6 +3,13 @@ import type {
   VPhoneInputCountryObject,
 } from "../types";
 
+/**
+ * Get country icon attributes.
+ *
+ * @param props
+ *
+ * @internal
+ */
 export default function getPhoneCountryIconAttrs(
   props: VPhoneCountryDisplayProps<VPhoneInputCountryObject>,
 ) {

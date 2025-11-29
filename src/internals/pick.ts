@@ -1,4 +1,12 @@
-export default function pick<T extends {}, K extends keyof T>(
+/**
+ * Pick keys from object.
+ *
+ * @param object
+ * @param keys
+ *
+ * @internal
+ */
+export default function pick<T extends {}, K extends string & keyof T>(
   object: T,
   keys: readonly K[],
 ) {

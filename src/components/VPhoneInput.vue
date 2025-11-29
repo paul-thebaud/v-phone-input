@@ -9,17 +9,13 @@
 import { computed, ref, shallowRef, toRef, watch } from "vue";
 import type { VSelect } from "vuetify/components";
 import { VListItem, VTextField } from "vuetify/components";
-import type {
-  makeVTextFieldProps,
-} from "vuetify/lib/components/VTextField/VTextField.js";
+import type { makeVTextFieldProps } from "vuetify/lib/components/VTextField/VTextField.js";
 import usePhoneInput from "../composables/usePhoneInput";
-import usePhoneInputPluginOptions
-  from "../composables/usePhoneInputPluginOptions.ts";
+import usePhoneInputPluginOptions from "../composables/usePhoneInputPluginOptions.ts";
+import omit from "../internals/omit.ts";
 import pick from "../internals/pick";
-import vPhoneInputSharedProperties
-  from "../internals/vPhoneInputSharedProperties";
-import makePhoneInputProps
-  from "../props/makePhoneInputProps.ts";
+import vPhoneInputSharedProperties from "../internals/vPhoneInputSharedProperties";
+import makePhoneInputProps from "../props/makePhoneInputProps.ts";
 import type {
   VPhoneCountryInputComponent,
   VPhoneInputCountryObject,
@@ -46,16 +42,25 @@ const props = defineProps({
 const modelValue = defineModel<string>({ default: "" });
 const country = defineModel<string>("country", { default: "" });
 
-const { useOption } = usePhoneInputPluginOptions<Country, CountryInputComponent>();
+const { useOption } = usePhoneInputPluginOptions<
+  Country,
+  CountryInputComponent
+>();
 
-const countryInputComponentOption = useOption('countryInputComponent', props);
-const countryInputComponentPropsOption = useOption('countryInputComponentProps', props);
-const countryDisplayComponentOption = useOption('countryDisplayComponent', props);
-const guessLoadingOption = useOption('guessLoading', props, true);
-const wrapperAttrsOption = useOption('wrapperAttrs', props);
-const countryPropsOption = useOption('countryProps', props);
-const phonePropsOption = useOption('phoneProps', props);
-const hintOption = useOption('hint', props);
+const countryInputComponentOption = useOption("countryInputComponent", props);
+const countryInputComponentPropsOption = useOption(
+  "countryInputComponentProps",
+  props,
+);
+const countryDisplayComponentOption = useOption(
+  "countryDisplayComponent",
+  props,
+);
+const guessLoadingOption = useOption("guessLoading", props, true);
+const wrapperAttrsOption = useOption("wrapperAttrs", props);
+const countryPropsOption = useOption("countryProps", props);
+const phonePropsOption = useOption("phoneProps", props);
+const hintOption = useOption("hint", props);
 
 const countryInputRef = shallowRef<CountryInputComponent>();
 const phoneInputRef = shallowRef<VTextField>();
@@ -114,12 +119,11 @@ const phoneInputRules = computed(() => [
     }
 
     return true;
-  }
+  },
 ]);
 
-const extractMenuProps = (from: { menuProps?: object } | null | undefined) => (
-  from && 'menuProps' in from ? from.menuProps : {}
-);
+const extractMenuProps = (from: { menuProps?: object } | null | undefined) =>
+  from && "menuProps" in from ? from.menuProps : {};
 
 const countryInputProps = computed(() => ({
   ...pick(props, vPhoneInputSharedProperties),
@@ -140,9 +144,11 @@ const countryInputProps = computed(() => ({
   menuProps: {
     width: 300,
     maxHeight: 300,
-    contentClass: 'v-phone-input__country__menu',
+    contentClass: "v-phone-input__country__menu",
     closeOnContentClick: true,
-    ...extractMenuProps(countryInputComponentPropsOption.value as Record<string, unknown>),
+    ...extractMenuProps(
+      countryInputComponentPropsOption.value as Record<string, unknown>,
+    ),
     ...extractMenuProps(countryPropsOption.value as Record<string, unknown>),
   },
   class: [
@@ -162,8 +168,20 @@ const countryInputProps = computed(() => ({
   },
 }));
 
+const phoneInputNonForwardedProps = makePhoneInputProps<
+  Country,
+  CountryInputComponent
+>();
+const forwardedProps = computed(() =>
+  omit(props, [
+    ...Object.keys(phoneInputNonForwardedProps),
+    "modelValue",
+    "country",
+  ] as readonly (keyof typeof props)[]),
+);
+
 const phoneInputProps = computed(() => ({
-  ...props,
+  ...forwardedProps.value,
   ref: phoneInputRef,
   modelValue: phone.value,
   label: label.value,
@@ -208,8 +226,8 @@ const parsedSlots = computed(() =>
   ),
 );
 
-watch(countryObject, (next) => emit('update:country-object', next));
-watch(phoneObject, (next) => emit('update:phone-object', next));
+watch(countryObject, (next) => emit("update:country-object", next));
+watch(phoneObject, (next) => emit("update:phone-object", next));
 
 defineExpose<VPhoneInputExposed<Country, CountryInputComponent>>({
   countryInputRef,
@@ -234,7 +252,6 @@ defineExpose<VPhoneInputExposed<Country, CountryInputComponent>>({
     v-bind="wrapperAttrsOption as Record<string, unknown>"
   >
     <component
-      data-test="country-input"
       :is="countryInputComponentOption"
       v-bind="countryInputProps"
     >
@@ -315,7 +332,6 @@ defineExpose<VPhoneInputExposed<Country, CountryInputComponent>>({
       </template>
     </component>
     <component
-      data-test="phone-input"
       :is="VTextField"
       v-bind="phoneInputProps"
     >

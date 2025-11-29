@@ -26,9 +26,9 @@ Component props for `VPhoneInput`.
 
 ### ariaLabel?
 
-> `readonly` `optional` **ariaLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\>
+> `readonly` `optional` **ariaLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:38
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:43
 
 Customize the phone input `aria-label`.
 
@@ -42,7 +42,7 @@ Customize the phone input `aria-label`.
 
 > `readonly` `optional` **countries**: `Country`[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:30
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:35
 
 List of available countries.
 
@@ -70,9 +70,9 @@ Currently selected country.
 
 ### countryAriaLabel?
 
-> `readonly` `optional` **countryAriaLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\>
+> `readonly` `optional` **countryAriaLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:53
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:58
 
 Customize the country input `aria-label`.
 
@@ -138,9 +138,9 @@ Country input component specific props.
 
 ### countryLabel?
 
-> `readonly` `optional` **countryLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\>
+> `readonly` `optional` **countryLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:44
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:49
 
 Customize the country input label.
 
@@ -154,7 +154,7 @@ Customize the country input label.
 
 > `readonly` `optional` **countryLocale**: `string`
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:10
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:15
 
 Locale to use when localizing country names.
 
@@ -172,7 +172,7 @@ Locale to use when localizing country names.
 
 > `readonly` `optional` **countryName**: (`iso2`) => `string`
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:19
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:24
 
 Resolve a country name from its ISO-2 code.
 
@@ -214,7 +214,7 @@ Properties to pass to the country input (`VSelect` or `VAutocomplete`).
 
 > `readonly` `optional` **defaultCountry**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:69
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:74
 
 Default country to use.
 
@@ -307,7 +307,7 @@ When using the composable, it is required to bind `countryInputRef` and
 
 > `readonly` `optional` **example**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`, `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:23
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:28
 
 Customize the phone input example.
 
@@ -325,7 +325,7 @@ Use `awesome-phonenumber` package's `getExample` function with current country.
 
 > `readonly` `optional` **exampleFormat**: [`PhoneNumberFormat`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#phone-number-formats) \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:14
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:19
 
 Format example phone.
 
@@ -347,7 +347,7 @@ Using `null` will disable formating example phone numbers.
 
 > `readonly` `optional` **excludeCountries**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:60
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:65
 
 List of countries to exclude.
 
@@ -408,7 +408,7 @@ Customize the phone input hint.
 
 > `readonly` `optional` **includeCountries**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:50
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:55
 
 List of countries to include.
 
@@ -425,9 +425,9 @@ from available countries.
 
 ### invalidMessage?
 
-> `readonly` `optional` **invalidMessage**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\>
+> `readonly` `optional` **invalidMessage**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:69
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:74
 
 Customize the phone input invalid message returned by the
 `validate` function generated rule.
@@ -446,7 +446,7 @@ Customize the phone input invalid message returned by the
 
 > `readonly` `optional` **label**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:32
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:37
 
 Customize the phone input label.
 
@@ -509,9 +509,9 @@ Properties to pass to the country input (`VTextField`).
 
 ### placeholder?
 
-> `readonly` `optional` **placeholder**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\>
+> `readonly` `optional` **placeholder**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:59
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:64
 
 Customize the phone input placeholder.
 
@@ -525,7 +525,7 @@ Customize the phone input placeholder.
 
 > `readonly` `optional` **preferCountries**: [`VPhoneInputCountryObjectOrIso2`](../type-aliases/VPhoneInputCountryObjectOrIso2.md)[]
 
-Defined in: dist/props/makePhoneInputCountryProps.d.ts:40
+Defined in: dist/props/makePhoneInputCountryProps.d.ts:45
 
 List of countries to prefer.
 
@@ -542,9 +542,9 @@ in available countries.
 
 ### validate?
 
-> `readonly` `optional` **validate**: (`phone`) => `boolean` \| `null`
+> `readonly` `optional` **validate**: (`phone`, `country`) => `boolean` \| `null`
 
-Defined in: dist/props/makePhoneInputComposableProps.d.ts:80
+Defined in: dist/props/makePhoneInputComposableProps.d.ts:81
 
 Validate a phone number.
 
@@ -554,7 +554,8 @@ Using `null` will disable the validation.
 
 #### Default Value
 
-`valid` property value of the given `ParsedPhoneNumber` object.
+Ensure `ParsedPhoneNumber.valid` is true and `ParsedPhoneNumber.regionCode` is a selectable
+country (not excluded from the countries list).
 
 #### Inherited from
 

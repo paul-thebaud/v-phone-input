@@ -75,6 +75,11 @@ function makePhoneInputComponentSpecificProps<
   } as const;
 }
 
+/**
+ * Make phone input properties definition.
+ *
+ * @internal
+ */
 export default function makePhoneInputProps<
   Country extends VPhoneInputCountryObject,
   CountryInputComponent extends VPhoneCountryInputComponent,

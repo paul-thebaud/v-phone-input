@@ -4,6 +4,11 @@ import type {
   VPhoneInputCountryObjectOrIso2,
 } from "../types.ts";
 
+/**
+ * Make phone input country composable properties definition.
+ *
+ * @internal
+ */
 export default function makePhoneInputCountryProps<
   Country extends VPhoneInputCountryObject,
 >() {

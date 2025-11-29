@@ -49,8 +49,6 @@ dev: ## Run dev docs.
 
 .PHONY: preview
 preview: ## Run preview docs.
-	@$(MAKE) --no-print-directory package
-	@$(MAKE) --no-print-directory typedoc
 	@$(PNPM) docs:preview --host --port 5173
 
 .PHONY: lint

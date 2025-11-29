@@ -31,6 +31,11 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
     options,
     "national" as const,
   );
+  const exampleFormatOption = useOption(
+    "exampleFormat",
+    options,
+    displayFormatOption,
+  );
   const displayFormatDelayOption = useOption("displayFormatDelay", options);
   const displayFormatOnBlurOption = useOption(
     "displayFormatOnBlur",
@@ -40,7 +45,8 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
   const validateOption = useOption(
     "validate",
     options,
-    (phone: ParsedPhoneNumber | null) => !phone || phone.valid,
+    (phone: ParsedPhoneNumber | null, country: Country) =>
+      !phone || (phone.valid && phone.regionCode === country.iso2),
   );
 
   const countryInputRef =
@@ -51,9 +57,6 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
   const phone = ref<string | null>(null);
   const country = options.country ?? ref<string | null>();
   const countryGuessing = ref(false);
-  const countryDefined = ref(!!country.value);
-
-  country.value = countries.fallbackCountry.value.iso2;
 
   const countryObject = computed({
     get: () =>
@@ -79,7 +82,7 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
       return null;
     }
 
-    return validateOption.value(phoneObject.value);
+    return validateOption.value(phoneObject.value, countryObject.value);
   });
 
   const phoneFormatted = computed(() => {
@@ -113,6 +116,21 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
     }
   };
 
+  const updateCountryFromPhone = () => {
+    if (phoneObject.value?.regionCode) {
+      const phoneCountry = countries.findCountry.value(
+        phoneObject.value.regionCode,
+      );
+      if (phoneCountry) {
+        countryObject.value = phoneCountry;
+
+        return phoneCountry;
+      }
+    }
+
+    return null;
+  };
+
   const onModelValueChange = (next: string | null | undefined) => {
     if (
       next !== (phoneObject.value?.number?.input ?? "") &&
@@ -127,8 +145,6 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
     next: string | null | undefined,
     prev: string | null | undefined,
   ) => {
-    countryDefined.value = true;
-
     if (!next || !countries.findCountry.value(next)) {
       country.value = prev ?? countries.fallbackCountry.value.iso2;
 
@@ -144,41 +160,19 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
     }
   };
 
-  const onPhoneChange = (
-    next: string | null | undefined,
-    prev: string | null | undefined,
-  ) => {
+  const onPhoneChange = (next: string | null | undefined) => {
     if (typeof next !== "string") {
       phone.value = "";
 
       return;
     }
 
-    const meaningLessCharsRegExp = /[^0-9]+/g;
-    if (
-      typeof prev === "string" &&
-      next.length < prev.length &&
-      next.replace(meaningLessCharsRegExp, "") ===
-        prev.replace(meaningLessCharsRegExp, "")
-    ) {
-      // User is removing non-number chars from the input, do not trigger formatting.
-      return;
-    }
-
-    if (phoneObject.value?.regionCode) {
-      const phoneCountry = countries.findCountry.value(
-        phoneObject.value.regionCode,
-      );
-      if (phoneCountry) {
-        countryObject.value = phoneCountry;
-      }
-    }
+    updateCountryFromPhone();
   };
 
   const onPhoneObjectChange = () => {
     const displayFormatDelay =
-      displayFormatOnBlurOption.value === null ||
-      !displayFormatOnBlurCanBound.value
+      !displayFormatOnBlurOption.value || !displayFormatOnBlurCanBound.value
         ? (displayFormatDelayOption.value ?? true)
         : displayFormatDelayOption.value;
     if (displayFormatDelay === true || typeof displayFormatDelay === "number") {
@@ -200,7 +194,7 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
   };
 
   const onInputBlur = () => {
-    if (displayFormatOnBlurOption.value ?? true) {
+    if (displayFormatOnBlurOption.value) {
       formatPhoneInputValue();
     }
   };
@@ -218,24 +212,21 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
     unrefElement(next)?.addEventListener("blur", onInputBlur);
   };
 
-  watch(displayFormatOption, formatPhoneInputValue);
-  watch(options.modelValue, onModelValueChange);
-  watch(phone, onPhoneChange);
-  watch(country, onCountryChange);
-  watch(phoneObject, onPhoneObjectChange);
-  watch(phoneFormatted, onPhoneFormattedChange);
-  watch(countryInputRef, onInputRefChange, { immediate: true });
-  watch(phoneInputRef, onInputRefChange, { immediate: true });
+  // Initialize the country to a validated country if available, or fallback.
+  const manualCountry = countries.findCountry.value(country.value);
+  country.value = (manualCountry ?? countries.fallbackCountry.value).iso2;
 
   // Trigger the phone input value watcher so an already filled number will
   // produce a country initialization.
   phone.value = options.modelValue.value ?? "";
+  const detectedCountry = updateCountryFromPhone();
   if (phoneValid.value) {
     formatPhoneInputValue();
   }
 
-  // If country input value is still non-user defined, we will try to guess it.
-  if (!countryDefined.value) {
+  // If country input value is not either manually defined or
+  // detected from phone, we will try to guess it.
+  if (!manualCountry && !detectedCountry) {
     const guessCountry = () => {
       if (countries.countries.value.length === 1) {
         return countries.countries.value[0];
@@ -276,14 +267,21 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
     }
   }
 
+  watch(displayFormatOption, formatPhoneInputValue);
+  watch(options.modelValue, onModelValueChange);
+  watch(phone, onPhoneChange);
+  watch(country, onCountryChange);
+  watch(phoneObject, onPhoneObjectChange);
+  watch(phoneFormatted, onPhoneFormattedChange);
+  watch(countryInputRef, onInputRefChange, { immediate: true });
+  watch(phoneInputRef, onInputRefChange, { immediate: true });
+
   return {
     ...countries,
     ...usePhoneInputMessages({
       ...options,
       country: countryObject,
-      exampleFormat: computed(
-        () => unref(options.displayFormat) ?? unref(options.exampleFormat),
-      ),
+      exampleFormat: exampleFormatOption,
     }),
     countryInputRef,
     phoneInputRef,

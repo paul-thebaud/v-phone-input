@@ -46,6 +46,7 @@
   "scripts": {
     "lint": "biome check src docs/components",
     "test": "vitest run --coverage --typecheck",
+    "test:watch": "vitest --typecheck",
     "build": "vue-tsc --noEmit && vite build",
     "docs:typedoc": "typedoc && rimraf docs/api/_media docs/api/index.md && cp -RT docs/api-handwritten docs/api",
     "docs:dev": "vitepress dev docs",
@@ -57,7 +58,7 @@
     "countries-list": "^3.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.7",
+    "@biomejs/biome": "^2.3.8",
     "@cypress/code-coverage": "^3.14.7",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@mdi/font": "^7.4.47",

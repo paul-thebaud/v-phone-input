@@ -1,8 +1,8 @@
-# Country list
+# Countries list
 
 <feature-tags component composable />
 
-VPhoneInput provides many ways to customize the country list, in addition to
+VPhoneInput provides many ways to customize the countries list, in addition to
 [country display](/guide/country-display) or [slots](/guide/component#slots).
 
 ## Default list
@@ -86,7 +86,7 @@ const vPhoneInput = createVPhoneInput({
 });
 ```
 
-## Changing whole country list
+## Changing whole countries list
 
 If you need additional country data, you can pass a custom list of countries.
 
@@ -94,7 +94,7 @@ If you need additional country data, you can pass a custom list of countries.
 [`usePhoneInput`](/api/functions/usePhoneInput) are generic and support any custom country objects
 which extends [`VPhoneInputCountryObject`](/api/interfaces/VPhoneInputCountryObject).
 
-To use a custom country list, just pass a
+To use a custom countries list, just pass a
 [`countries`](/api/interfaces/VPhoneInputProps#countries) property.
 
 ```ts [app.ts]
