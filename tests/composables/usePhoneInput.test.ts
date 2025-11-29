@@ -84,6 +84,27 @@ describe("usePhoneInput", () => {
     expect(wrapper.vm.invalidMessage).toBeUndefined();
   });
 
+  it("prohibits empty countries list", () => {
+    try {
+      mount(
+        defineComponent({
+          template: "< />",
+          setup: () =>
+            usePhoneInput({
+              modelValue: ref(),
+              countries: [],
+            }),
+        }),
+      );
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toHaveProperty(
+        'message',
+        "[VPhoneInput] Countries list must contain at least one country.",
+      );
+    }
+  });
+
   it("supports custom countries", () => {
     const fr = {
       iso2: "fr",

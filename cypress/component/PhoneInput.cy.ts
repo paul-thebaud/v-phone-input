@@ -1,4 +1,6 @@
 import "vuetify/styles";
+import { ref } from "vue";
+import { memoizeGuessPhoneCountry } from "../../src";
 import customPhoneInputTestTools from "../fixtures/composablePhoneInputTestTools";
 import vuetifyPhoneInputTestTools from "../fixtures/vuetifyPhoneInputTestTools";
 import clickOutside from "../support/utilities/clickOutside";
@@ -94,6 +96,43 @@ describe("PhoneInput", () => {
       it("inits with preferred country", () => {
         tools.mount({
           preferCountries: ["FR"],
+        });
+
+        tools.expectCountry("FR");
+      });
+
+      it("inits with country guesser: only one country possible", () => {
+        tools.mount({
+          includeCountries: ["FR"],
+          guessCountry: () => {
+            throw new Error("[test] Country guessing should not occur.");
+          },
+        });
+
+        tools.expectCountry("FR");
+      });
+
+      it("inits with country guesser and memoized country: get/set", () => {
+        tools.mount({
+          guessCountry: memoizeGuessPhoneCountry(
+            () => {
+              throw new Error("[test] Country guessing should not occur.");
+            },
+            () => "FR",
+            () => {
+              throw new Error("[test] Country guessing set should not occur.");
+            },
+          ),
+        });
+
+        tools.expectCountry("FR");
+      });
+
+      it("inits with country guesser and memoized country: ref", () => {
+        tools.mount({
+          guessCountry: memoizeGuessPhoneCountry(() => {
+            throw new Error("[test] Country guessing should not occur.");
+          }, ref("FR")),
         });
 
         tools.expectCountry("FR");
@@ -275,7 +314,7 @@ describe("PhoneInput", () => {
         });
 
         tools.expectCountrySelectable("AF");
-        tools.expectCountrySelectable("US");
+        tools.expectCountrySelectable("AX");
         tools.expectCountryNotSelectable("FR");
         tools.expectCountryNotSelectable("BE");
       });
@@ -286,7 +325,7 @@ describe("PhoneInput", () => {
         });
 
         tools.expectCountryNotSelectable("AF");
-        tools.expectCountryNotSelectable("US");
+        tools.expectCountryNotSelectable("AX");
         tools.expectCountrySelectable("FR");
         tools.expectCountrySelectable("BE");
       });

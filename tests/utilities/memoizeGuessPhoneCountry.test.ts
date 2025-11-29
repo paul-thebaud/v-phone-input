@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { memoizeGuessPhoneCountry } from "../../src";
 
 describe("memoize guess phone country", () => {
-  test("adds memoized property on guess phone function", async () => {
+  it("adds memoized property on guess phone function", async () => {
     const store: { country: string | null } = { country: null };
     const guessPhoneCountry = vi.fn(() => null);
     const memoizedGuessPhoneCountry = memoizeGuessPhoneCountry(
@@ -22,7 +22,7 @@ describe("memoize guess phone country", () => {
     expect(memoizedGuessPhoneCountry.memoized).toBeNull();
   });
 
-  test("adds memoized ref on guess phone function", async () => {
+  it("adds memoized ref on guess phone function", async () => {
     const country = ref<string | null>(null);
     const guessPhoneCountry = vi.fn(() => null);
     const memoizedGuessPhoneCountry = memoizeGuessPhoneCountry(

@@ -11,13 +11,13 @@ describe("guess phone country", () => {
     vi.unstubAllGlobals();
   });
 
-  test("handles failed fetch", async () => {
+  it("handles failed fetch", async () => {
     mockFetch(() => Promise.reject(new Error()));
 
     expect(await guessPhoneCountry()).toBeUndefined();
   });
 
-  test("handles failed response read", async () => {
+  it("handles failed response read", async () => {
     mockFetch(() =>
       Promise.resolve({ text: () => Promise.reject(new Error()) }),
     );
@@ -25,19 +25,19 @@ describe("guess phone country", () => {
     expect(await guessPhoneCountry()).toBeUndefined();
   });
 
-  test("handles empty response", async () => {
+  it("handles empty response", async () => {
     mockFetch(() => Promise.resolve({ text: () => Promise.resolve("") }));
 
     expect(await guessPhoneCountry()).toBeUndefined();
   });
 
-  test("handles failed response", async () => {
+  it("handles failed response", async () => {
     mockFetch(() => Promise.resolve({ text: () => Promise.resolve("0") }));
 
     expect(await guessPhoneCountry()).toBeUndefined();
   });
 
-  test("handles successful response", async () => {
+  it("handles successful response", async () => {
     mockFetch(() =>
       Promise.resolve({ text: () => Promise.resolve("1;FR;FRA;France") }),
     );

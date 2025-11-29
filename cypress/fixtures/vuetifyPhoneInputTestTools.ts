@@ -1,11 +1,33 @@
 import { getCountryCodeForRegionCode } from "awesome-phonenumber";
 import { mount } from "cypress/vue";
-import { h } from "vue";
+import { h, type VNode } from "vue";
 import { VApp, VContainer, VMain, type VSelect } from "vuetify/components";
 import { createVuetify } from "vuetify/framework";
 import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
 import { selectPhoneCountryInput, VPhoneInput, type VPhoneInputCountryObject } from "../../src";
 import makePhoneInputTestTools from "./makePhoneInputTestTools";
+
+const mountInApp = (vNode: VNode) =>
+  mount(
+    {
+      render: () => h(VApp, [h(VMain, [h(VContainer, [vNode])])]),
+    },
+    {
+      global: {
+        plugins: [
+          createVuetify({
+            icons: {
+              defaultSet: "mdi",
+              aliases,
+              sets: {
+                mdi,
+              },
+            },
+          }),
+        ],
+      },
+    },
+  );
 
 const countryName = (country: string) => {
   const name = new Intl.DisplayNames(["en"], { type: "region" }).of(country);
@@ -33,39 +55,15 @@ const openCountryMenu = () => countryInput().click();
 export default makePhoneInputTestTools({
   name: "Vuetify",
   mount: (props?) =>
-    mount(
-      {
-        render: () =>
-          h(VApp, [
-            h(VMain, [
-              h(VContainer, [
-                h(VPhoneInput<VPhoneInputCountryObject, typeof VSelect>, {
-                  ...selectPhoneCountryInput,
-                  country: props?.country,
-                  modelValue: props?.modelValue,
-                  ...props,
-                  // Eager is used to display error messages on mount.
-                  validateOn: "eager",
-                }),
-              ]),
-            ]),
-          ]),
-      },
-      {
-        global: {
-          plugins: [
-            createVuetify({
-              icons: {
-                defaultSet: "mdi",
-                aliases,
-                sets: {
-                  mdi,
-                },
-              },
-            }),
-          ],
-        },
-      },
+    mountInApp(
+      h(VPhoneInput<VPhoneInputCountryObject, typeof VSelect>, {
+        ...selectPhoneCountryInput,
+        country: props?.country,
+        modelValue: props?.modelValue,
+        ...props,
+        // Eager is used to display error messages on mount.
+        validateOn: "eager",
+      }),
     ),
   selectCountry: (country) => {
     openCountryMenu();
@@ -94,4 +92,5 @@ export default makePhoneInputTestTools({
   searchCountry: (text: string) => {
     countryInput().get('input[role="combobox"]').type(text);
   },
+  mountInApp,
 });

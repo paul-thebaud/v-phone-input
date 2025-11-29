@@ -39,20 +39,16 @@ function memoizeGuessPhoneCountry<
   get: Ref<string | null> | (() => string | null),
   set?: (value: string | null) => void,
 ) {
-  return Object.assign(
+  return Object.defineProperty(
     () => guess(),
+    "memoized",
     isRef(get)
       ? {
-          memoized: get,
+          value: get,
         }
       : {
-          get memoized() {
-            return get();
-          },
-          set memoized(value: string | null) {
-            // biome-ignore lint/style/noNonNullAssertion: set is mandatory as this stage.
-            set!(value);
-          },
+          get,
+          set,
         },
   );
 }

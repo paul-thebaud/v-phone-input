@@ -1,12 +1,14 @@
 import "vuetify/styles";
 import "flag-icons/css/flag-icons.min.css";
 import "world-flags-sprite/stylesheets/flags32.css";
+import { h } from "vue";
 import {
   autocompletePhoneCountryInput,
   selectPhoneCountryInput,
   VPhoneCountryFlagSprite,
   VPhoneCountryFlagSvg,
 } from "../../src";
+import SlotsPhoneInput from "../fixtures/SlotsPhoneInput.vue";
 import vuetifyPhoneInputTestTools from "../fixtures/vuetifyPhoneInputTestTools";
 
 declare global {
@@ -98,5 +100,11 @@ describe("VuetifyPhoneInput", () => {
         },
       );
     });
+  });
+
+  it("matches visual snapshot (custom slots)", () => {
+    tools.mountInApp(h(SlotsPhoneInput));
+
+    cy.compareSnapshot('v-phone-input-custom-slots');
   });
 });

@@ -10,7 +10,7 @@ import {
 } from "../src";
 
 describe("types", () => {
-  test("supports generic country and component in createVPhoneInput()", () => {
+  it("supports generic country and component in createVPhoneInput()", () => {
     createVPhoneInput({
       ...autocompletePhoneCountryInput,
       countryProps: {
@@ -42,7 +42,7 @@ describe("types", () => {
     });
   });
 
-  test("supports generic country and component in providePhoneInputOptions()", () => {
+  it("supports generic country and component in providePhoneInputOptions()", () => {
     providePhoneInputOptions({
       ...autocompletePhoneCountryInput,
       countryProps: {
@@ -74,7 +74,7 @@ describe("types", () => {
     });
   });
 
-  test("supports generic country and component in VPhoneInput", () => {
+  it("supports generic country and component in VPhoneInput", () => {
     type CustomCountryComponent = typeof VAutocomplete;
     type CustomCountryObject = {
       dialCode: string;
@@ -113,7 +113,7 @@ describe("types", () => {
     });
   });
 
-  test("supports generic country in usePhoneInput()", () => {
+  it("supports generic country in usePhoneInput()", () => {
     usePhoneInput({
       modelValue: ref(),
       countries: [
