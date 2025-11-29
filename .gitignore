@@ -9,6 +9,9 @@
 /.nyc_output/
 /coverage/
 /cypress/screenshots
+/cypress/.snapshots/reports
+/cypress/.snapshots/images/comparison
+/cypress/.snapshots/images/diff
 
 # vitepress
 /docs/.vitepress/dist

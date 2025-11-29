@@ -69,6 +69,7 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
     "cypress": "^15.7.0",
+    "cypress-image-diff-js": "^2.5.0",
     "markdown-it": "^14.1.0",
     "rimraf": "^6.1.2",
     "typedoc": "^0.28.14",

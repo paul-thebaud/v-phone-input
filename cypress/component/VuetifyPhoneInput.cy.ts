@@ -1,6 +1,21 @@
 import "vuetify/styles";
-import { autocompletePhoneCountryInput } from "../../src";
+import "flag-icons/css/flag-icons.min.css";
+import "world-flags-sprite/stylesheets/flags32.css";
+import {
+  autocompletePhoneCountryInput,
+  selectPhoneCountryInput,
+  VPhoneCountryFlagSprite,
+  VPhoneCountryFlagSvg,
+} from "../../src";
 import vuetifyPhoneInputTestTools from "../fixtures/vuetifyPhoneInputTestTools";
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      compareSnapshot(options: string): Chainable<Element>;
+    }
+  }
+}
 
 describe("VuetifyPhoneInput", () => {
   const tools = vuetifyPhoneInputTestTools;
@@ -13,11 +28,11 @@ describe("VuetifyPhoneInput", () => {
       },
     });
 
-    tools.selectCountry('FR');
-    tools.expectCountry('FR');
+    tools.selectCountry("FR");
+    tools.expectCountry("FR");
 
-    tools.countryInput().get(".v-field__clearable [role=\"button\"]").click();
-    tools.expectCountry('FR');
+    tools.countryInput().get('.v-field__clearable [role="button"]').click();
+    tools.expectCountry("FR");
   });
 
   it("searches country by name", () => {
@@ -25,13 +40,13 @@ describe("VuetifyPhoneInput", () => {
       ...autocompletePhoneCountryInput,
     });
 
-    tools.expectCountrySelectable('AF');
-    tools.expectCountrySelectable('FR');
+    tools.expectCountrySelectable("AF");
+    tools.expectCountrySelectable("FR");
 
-    tools.searchCountry('Fran');
+    tools.searchCountry("Fran");
 
-    tools.expectCountryNotSelectable('AF');
-    tools.expectCountrySelectable('FR');
+    tools.expectCountryNotSelectable("AF");
+    tools.expectCountrySelectable("FR");
   });
 
   it("searches country by dial code", () => {
@@ -39,12 +54,49 @@ describe("VuetifyPhoneInput", () => {
       ...autocompletePhoneCountryInput,
     });
 
-    tools.expectCountrySelectable('AF');
-    tools.expectCountrySelectable('FR');
+    tools.expectCountrySelectable("AF");
+    tools.expectCountrySelectable("FR");
 
-    tools.searchCountry('33');
+    tools.searchCountry("33");
 
-    tools.expectCountryNotSelectable('AF');
-    tools.expectCountrySelectable('FR');
+    tools.expectCountryNotSelectable("AF");
+    tools.expectCountrySelectable("FR");
+  });
+
+  (
+    [
+      ["select", selectPhoneCountryInput],
+      ["autocomplete", autocompletePhoneCountryInput],
+    ] as const
+  ).forEach(([countryInputName, countryInputProps]) => {
+    (
+      [
+        ["default", {}],
+        ["svg", { countryDisplayComponent: VPhoneCountryFlagSvg }],
+        ["sprite", { countryDisplayComponent: VPhoneCountryFlagSprite }],
+      ] as const
+    ).forEach(([countryDisplayName, countryDisplayProps]) => {
+      (["filled", "outlined", "solo", "plain", "underlined"] as const).forEach(
+        (variant) => {
+          (["default", "comfortable", "compact"] as const).forEach(
+            (density) => {
+              it(`matches visual snapshot (input=${countryInputName} display=${countryDisplayName} variant=${variant} density=${density}`, () => {
+                tools.mount({
+                  modelValue: "+33612346789",
+                  ...countryInputProps,
+                  ...countryDisplayProps,
+                  variant,
+                  density,
+                });
+
+                cy.compareSnapshot(
+                  `v-phone-input-${countryInputName}-${countryDisplayName}-${variant}-${density}`,
+                );
+              });
+            },
+          );
+        },
+      );
+    });
   });
 });
