@@ -6,6 +6,7 @@ if [ ! -d node_modules ]
 then
   echo "[Installing dependencies...]"
   pnpm install
+  # pnpm exec playwright install
 fi
 
 exec "$@"

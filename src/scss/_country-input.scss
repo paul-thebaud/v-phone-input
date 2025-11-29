@@ -7,6 +7,7 @@
   flex-shrink: 0;
 
   &.v-input--density-compact {
+
     .v-field--variant-plain, .v-field--variant-underlined {
       .v-field__append-inner .v-icon {
         font-size: $v-phone-input-country-icon-compact-height;
@@ -30,7 +31,7 @@
       border-radius: 0;
     }
 
-    &.v-field--variant-outlined:not(.v-field--focused) .v-field__outline .v-field__outline__end {
+    &.v-field--variant-outlined:not(.v-phone-input__country__input--focused) .v-field__outline .v-field__outline__end {
       border-inline-end-width: 0;
     }
 
@@ -63,7 +64,7 @@
       }
     }
 
-    &.v-phone-input--focused {
+    &.v-phone-input__country__input--focused {
       min-width: var(--v-phone-input-country-autocomplete-width, $v-phone-input-country-input-autocomplete-width);
       max-width: var(--v-phone-input-country-autocomplete-width, $v-phone-input-country-input-autocomplete-width);
 
