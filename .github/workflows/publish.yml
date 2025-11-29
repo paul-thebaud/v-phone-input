@@ -2,31 +2,30 @@ name: publish
 
 on:
   release:
-    types: [ created ]
+    types: [ published ]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v3.0.0
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: pnpm install
-      - name: Publish to NPM
+      - uses: ./.github/actions/install
+      - name: Build
+        run: pnpm build
+      - name: Publish prerelease
+        if: ${{ github.event.release.prerelease }}
+        run: pnpm publish --no-git-checks --tag next
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish release
+        if: ${{ !github.event.release.prerelease }}
         run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy:
-    name: Deploy website
     needs: [ publish ]
     uses: ./.github/workflows/deploy.yml
     secrets: inherit

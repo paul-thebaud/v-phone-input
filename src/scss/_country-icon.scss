@@ -4,7 +4,7 @@
   margin-inline: $v-phone-input-country-icon-margin;
 
   &.f32 {
-    height: var(--v-phone-input-country-icon-height, $v-phone-input-country-icon-default-height);
+    height: var(--v-phone-input-country-icon-height, $v-phone-input-country-icon-default-size);
 
     .flag {
       transform: scale(.75);
@@ -13,7 +13,9 @@
   }
 
   &.fi {
-    width: $v-phone-input-country-icon-default-height;
-    line-height: var(--v-phone-input-country-icon-height, $v-phone-input-country-icon-default-height);
+    min-width: $v-phone-input-country-icon-default-size;
+    max-width: $v-phone-input-country-icon-default-size;
+    width: $v-phone-input-country-icon-default-size;
+    line-height: var(--v-phone-input-country-icon-height, $v-phone-input-country-icon-default-size);
   }
 }
