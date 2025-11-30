@@ -23,6 +23,8 @@ export default defineConfig({
       : []),
   ],
   build: {
+    minify: false,
+    cssMinify: false,
     sourcemap: isDev,
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
