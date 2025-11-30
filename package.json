@@ -1,7 +1,7 @@
 {
   "name": "v-phone-input",
   "type": "module",
-  "version": "6.0.0-alpha.4",
+  "version": "6.0.0-alpha.5",
   "license": "MIT",
   "description": "International phone field for Vuetify 3 and Vue 3.",
   "homepage": "https://paul-thebaud.github.io/v-phone-input/",
