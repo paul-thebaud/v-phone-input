@@ -1,7 +1,7 @@
 {
   "name": "v-phone-input",
   "type": "module",
-  "version": "6.0.0-alpha.2",
+  "version": "6.0.0-alpha.3",
   "license": "MIT",
   "description": "International phone field for Vuetify 3 and Vue 3.",
   "homepage": "https://paul-thebaud.github.io/v-phone-input/",
@@ -41,7 +41,7 @@
   "main": "dist/v-phone-input.umd.cjs",
   "style": "dist/v-phone-input.css",
   "sideEffects": [
-    "*.vue"
+    "*.css"
   ],
   "scripts": {
     "lint": "biome check src docs/components",
