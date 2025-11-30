@@ -10,7 +10,7 @@ import type {
  *
  * @internal
  */
-export const V_PHONE_INPUT_INJECTION_KEY = Symbol(
+export const V_PHONE_INPUT_INJECTION_KEY = /* @__PURE__ */ Symbol(
   "VPhoneInput options injection key",
 );
 

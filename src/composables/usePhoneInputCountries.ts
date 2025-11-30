@@ -12,28 +12,35 @@ import type {
 } from "../types";
 import usePhoneInputPluginOptions from "./usePhoneInputPluginOptions.ts";
 
-const normalizeCountryIso2 = (country: string | null | undefined) =>
-  (country ?? "").toUpperCase();
+function normalizeCountryIso2(country: string | null | undefined) {
+  return (country ?? "").toUpperCase();
+}
 
-const normalizeCountry = (
+function normalizeCountry(
   country: VPhoneInputCountryObjectOrIso2 | null | undefined,
-) =>
-  normalizeCountryIso2(typeof country === "string" ? country : country?.iso2);
+) {
+  return normalizeCountryIso2(
+    typeof country === "string" ? country : country?.iso2,
+  );
+}
 
-const normalizeCountriesSet = (
+function normalizeCountriesSet(
   countries: MaybeRef<VPhoneInputCountryObjectOrIso2[] | undefined>,
-) => new Set((unref(countries) ?? []).map(normalizeCountry));
+) {
+  return new Set((unref(countries) ?? []).map(normalizeCountry));
+}
 
-const getDefaultCountries = (
+function getDefaultCountries(
   countryName: (iso2: string) => string,
-): VPhoneInputCountryObject[] =>
-  Object.keys(countriesJson)
+): VPhoneInputCountryObject[] {
+  return Object.keys(countriesJson)
     .map((iso2) => ({
       name: countryName(iso2),
       dialCode: `${getCountryCodeForRegionCode(iso2)}`,
       iso2,
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
+}
 
 /**
  * Composable to manage phone input countries.

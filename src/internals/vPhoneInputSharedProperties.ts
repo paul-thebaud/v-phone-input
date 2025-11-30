@@ -3,7 +3,7 @@
  *
  * @internal
  */
-export default [
+export default /* @__PURE__ */ [
   // TODO Check other properties which should be included (bgColor, etc.)
   "variant",
   "flat",

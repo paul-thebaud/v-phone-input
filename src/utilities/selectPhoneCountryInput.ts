@@ -4,7 +4,7 @@ import { VSelect } from "vuetify/components";
 /**
  * Properties to pass to use a `VSelect` country input for `VPhoneInput`.
  */
-export default {
-  countryInputComponent: markRaw(VSelect),
+export default /* @__PURE__ */ {
+  countryInputComponent: /* @__PURE__ */ markRaw(VSelect),
   countryInputComponentProps: {},
 };

@@ -3,4 +3,4 @@
  *
  * @internal
  */
-export default Symbol("VPhoneInput undefined boolean");
+export default /* @__PURE__ */ Symbol("VPhoneInput undefined boolean");

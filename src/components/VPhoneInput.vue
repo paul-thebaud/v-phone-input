@@ -9,12 +9,12 @@
 import { computed, ref, shallowRef, toRef, watch } from "vue";
 import type { VSelect } from "vuetify/components";
 import { VListItem, VTextField } from "vuetify/components";
-import type { makeVTextFieldProps } from "vuetify/lib/components/VTextField/VTextField.js";
 import usePhoneInput from "../composables/usePhoneInput";
 import usePhoneInputPluginOptions from "../composables/usePhoneInputPluginOptions.ts";
 import omitBy from "../internals/omitBy.ts";
 import pick from "../internals/pick";
 import vPhoneInputSharedProperties from "../internals/vPhoneInputSharedProperties";
+import makePhoneInputCompleteProps from "../props/makePhoneInputCompleteProps.ts";
 import makePhoneInputProps from "../props/makePhoneInputProps.ts";
 import type {
   VPhoneCountryInputComponent,
@@ -34,10 +34,9 @@ defineOptions({
 
 const slots = defineSlots<VPhoneInputSlots<Country, CountryInputComponent>>();
 const emit = defineEmits<VPhoneInputNonModelEmits<Country>>();
-const props = defineProps({
-  ...(VTextField.props as ReturnType<typeof makeVTextFieldProps>),
-  ...makePhoneInputProps<Country, CountryInputComponent>(),
-});
+const props = defineProps(
+  makePhoneInputCompleteProps<Country, CountryInputComponent>(),
+);
 
 const modelValue = defineModel<string>({ default: "" });
 const country = defineModel<string>("country", { default: "" });
