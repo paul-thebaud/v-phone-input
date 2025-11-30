@@ -56,6 +56,9 @@ export default function makePhoneInputMessagesProps<
     },
     /**
      * Customize the country input label.
+     *
+     * @defaultValue
+     * `'Country for <label>'` when using the composable, `null` otherwise.
      */
     countryLabel: {
       type: [
@@ -68,7 +71,7 @@ export default function makePhoneInputMessagesProps<
      * Customize the country input `aria-label`.
      *
      * @defaultValue
-     * `'Country for <label>'`
+     * `'Country for <label>'` when using the component, `null` otherwise.
      */
     countryAriaLabel: {
       type: [

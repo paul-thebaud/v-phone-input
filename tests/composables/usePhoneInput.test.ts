@@ -39,8 +39,8 @@ describe("usePhoneInput", () => {
     expect(wrapper.vm.example).toStrictEqual("023 456 7890");
     expect(wrapper.vm.label).toStrictEqual("Phone");
     expect(wrapper.vm.ariaLabel).toStrictEqual(undefined);
-    expect(wrapper.vm.countryLabel).toStrictEqual(undefined);
-    expect(wrapper.vm.countryAriaLabel).toStrictEqual('Country for "Phone"');
+    expect(wrapper.vm.countryLabel).toStrictEqual('Country for "Phone"');
+    expect(wrapper.vm.countryAriaLabel).toStrictEqual(undefined);
     expect(wrapper.vm.placeholder).toStrictEqual(undefined);
     expect(wrapper.vm.invalidMessage).toStrictEqual(
       'The "Phone" field is not a valid phone number (example: 023 456 7890).',

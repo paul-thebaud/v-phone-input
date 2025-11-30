@@ -38,13 +38,13 @@ export default function usePhoneInputMessages<
   );
   const labelOption = useOption("label", options, "Phone");
   const ariaLabelOption = useOption("ariaLabel", options);
-  const countryLabelOption = useOption("countryLabel", options);
-  const countryAriaLabelOption = useOption(
-    "countryAriaLabel",
+  const countryLabelOption = useOption(
+    "countryLabel",
     options,
     (ctx: VPhoneInputMessageFactoryContext<Country>) =>
       `Country for "${ctx.label}"`,
   );
+  const countryAriaLabelOption = useOption("countryAriaLabel", options);
   const placeholderOption = useOption("placeholder", options);
   const invalidMessageOption = useOption(
     "invalidMessage",

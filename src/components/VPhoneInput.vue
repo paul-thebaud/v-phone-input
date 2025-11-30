@@ -20,6 +20,7 @@ import type {
   VPhoneCountryInputComponent,
   VPhoneInputCountryObject,
   VPhoneInputExposed,
+  VPhoneInputMessageFactoryContext,
   VPhoneInputNonModelEmits,
   VPhoneInputSlots,
 } from "../types";
@@ -59,6 +60,13 @@ const guessLoadingOption = useOption("guessLoading", props, true);
 const wrapperAttrsOption = useOption("wrapperAttrs", props);
 const countryPropsOption = useOption("countryProps", props);
 const phonePropsOption = useOption("phoneProps", props);
+const countryLabelOption = useOption("countryLabel", props, null);
+const countryAriaLabelOption = useOption(
+  "countryAriaLabel",
+  props,
+  (ctx: VPhoneInputMessageFactoryContext<Country>) =>
+    `Country for "${ctx.label}"`,
+);
 const hintOption = useOption("hint", props);
 
 const countryInputRef = shallowRef<CountryInputComponent>();
@@ -100,8 +108,8 @@ const {
   validate: toRef(props, "validate"),
   example: toRef(props, "example"),
   exampleFormat: toRef(props, "exampleFormat"),
-  countryLabel: toRef(props, "countryLabel"),
-  countryAriaLabel: toRef(props, "countryAriaLabel"),
+  countryLabel: countryLabelOption,
+  countryAriaLabel: countryAriaLabelOption,
   label: toRef(props, "label"),
   ariaLabel: toRef(props, "ariaLabel"),
   placeholder: toRef(props, "placeholder"),
