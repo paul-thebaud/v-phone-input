@@ -1,33 +1,34 @@
-import VCountryIconSprite from '@/components/VCountryIconSprite';
-import VCountryIconSvg from '@/components/VCountryIconSvg';
-import VPhoneInput from '@/components/VPhoneInput.vue';
-import createVPhoneInput from '@/createVPhoneInput';
-import '@/scss/v-phone-input.scss';
-import countries from '@/utils/countries';
-import Ip2cCountryGuesser from '@/utils/countries/ip2cCountryGuesser';
-import MemoIp2cCountryGuesser from '@/utils/countries/memoIp2cCountryGuesser';
-import StorageMemoIp2cCountryGuesser from '@/utils/countries/storageMemoIp2cCountryGuesser';
-import { DEFAULT_OPTIONS, getOption, mergeOptions } from '@/utils/options';
-import formatPhone from '@/utils/phone/formatPhone';
-import makeExample from '@/utils/phone/makeExample';
-import makePhone from '@/utils/phone/makePhone';
+import "./scss/v-phone-input.scss";
+import VPhoneCountryFlagSprite from "./components/VPhoneCountryFlagSprite";
+import VPhoneCountryFlagSvg from "./components/VPhoneCountryFlagSvg";
+import VPhoneInput from "./components/VPhoneInput.vue";
+import usePhoneInput from "./composables/usePhoneInput";
+import createVPhoneInput from "./createVPhoneInput";
+import vPhoneInputSharedProperties from "./internals/vPhoneInputSharedProperties";
+import autocompletePhoneCountryInput from "./utilities/autocompletePhoneCountryInput";
+import guessPhoneCountry from "./utilities/guessPhoneCountry";
+import memoizeGuessPhoneCountry from "./utilities/memoizeGuessPhoneCountry";
+import providePhoneInputOptions from "./utilities/providePhoneInputOptions.ts";
+import selectPhoneCountryInput from "./utilities/selectPhoneCountryInput";
 
-export * from '@/types/countries';
-export * from '@/types/options';
+export * from "./types";
 
 export {
-  createVPhoneInput,
+  VPhoneCountryFlagSvg,
+  VPhoneCountryFlagSprite,
   VPhoneInput,
-  VCountryIconSprite,
-  VCountryIconSvg,
-  Ip2cCountryGuesser,
-  MemoIp2cCountryGuesser,
-  StorageMemoIp2cCountryGuesser,
-  makePhone,
-  makeExample,
-  formatPhone,
-  countries,
-  DEFAULT_OPTIONS,
-  mergeOptions,
-  getOption,
+  usePhoneInput,
+  createVPhoneInput,
+  selectPhoneCountryInput,
+  autocompletePhoneCountryInput,
+  providePhoneInputOptions,
+  guessPhoneCountry,
+  memoizeGuessPhoneCountry,
+  vPhoneInputSharedProperties,
 };
+
+declare module "vue" {
+  export interface GlobalComponents {
+    VPhoneInput: typeof VPhoneInput;
+  }
+}

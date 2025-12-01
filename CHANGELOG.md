@@ -1,5 +1,10 @@
 # Change log
 
+## 6.0.0
+
+v6 introduces multiple improvements and breaking changes, which won't be listed here.
+Please check the [migration guide](https://paul-thebaud.github.io/v-phone-input/guide/migration).
+
 ## 5.1.4
 
 ### Bug fixes
@@ -59,7 +64,7 @@
 
 ## 5.0.0
 
-Check the [migration guide](MIGRATION.md#migrate-from-4xx-to-5xx).
+Check the [migration guide](https://github.com/paul-thebaud/v-phone-input/blob/5.x.x/MIGRATION.md#migrate-from-4xx-to-5xx).
 
 ### Features
 
@@ -174,7 +179,7 @@ Migration to `awesome-phonenumber` V6.
 
 **BREAKING**
 
-Check the [migration guide](MIGRATION.md#migrate-from-3xx-to-4xx).
+Check the [migration guide](https://github.com/paul-thebaud/v-phone-input/blob/5.x.x/MIGRATION.md#migrate-from-3xx-to-4xx).
 
 Summary:
 
@@ -226,7 +231,7 @@ Migration to Vuetify 3 and Vue 3, props and exported modules changes, dependenci
 
 **BREAKING**
 
-Check the [migration guide](MIGRATION.md#migrate-from-2xx-to-3xx).
+Check the [migration guide](https://github.com/paul-thebaud/v-phone-input/blob/5.x.x/MIGRATION.md#migrate-from-2xx-to-3xx).
 
 Summary:
 
@@ -239,7 +244,7 @@ Migration to Vite bundler, plugin registration changes and dependencies upgrade.
 
 **BREAKING**
 
-Check the [migration guide](MIGRATION.md#migrate-from-1xx-to-2xx).
+Check the [migration guide](https://github.com/paul-thebaud/v-phone-input/blob/5.x.x/MIGRATION.md#migrate-from-1xx-to-2xx).
 
 Summary:
 

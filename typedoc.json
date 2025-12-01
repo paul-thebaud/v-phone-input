@@ -1,0 +1,30 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "tsconfig": "tsconfig.typedoc.json",
+  "sourceLinkTemplate": "https://github.com/paul-thebaud/v-phone-input/tree/main/{path}#L{line}",
+  "exclude": [
+    "api/index.md",
+    "api/packages.md"
+  ],
+  "plugin": [
+    "typedoc-plugin-markdown",
+    "typedoc-plugin-mdn-links",
+    "typedoc-vitepress-theme"
+  ],
+  "entryPoints": [
+    "./dist/index.d.ts"
+  ],
+  "out": "./docs/api",
+  "docsRoot": "./docs",
+  "externalSymbolLinkMappings": {
+    "awesome-phonenumber": {
+      "PhoneNumberFormat": "https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#phone-number-formats",
+      "ParsedPhoneNumber": "https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage"
+    },
+    "vuetify": {
+      "VAutocomplete": "https://vuetifyjs.com/en/components/autocompletes/",
+      "VSelect": "https://vuetifyjs.com/en/components/selects/",
+      "VTextField": "https://vuetifyjs.com/en/components/text-fields/"
+    }
+  }
+}
