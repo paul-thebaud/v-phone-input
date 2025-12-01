@@ -6,7 +6,7 @@ By default, VPhoneInput will ensure that
 [`ParsedPhoneNumber.valid`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage)
 is `true`, and that
 [`ParsedPhoneNumber.regionCode`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage)
-is a selectable country.
+matches the currently selected country.
 
 Additionally, it will append an additional rule when using the Vuetify component,
 which will print [`invalidMessage`](/api/interfaces/VPhoneInputProps#invalidMessage)
@@ -23,13 +23,23 @@ To customize the automatic validation of the phone input, you provide a
 [`validate`](/api/interfaces/VPhoneInputProps#validate) property or option, which takes a
 `ParsedPhoneNumber` and returns a boolean.
 
-For example, you may want to accept emergency numbers using `ParsedPhoneNumber.shortValid`
-inside your input:
+For example, you may want to accept emergency numbers using `ParsedPhoneNumber.shortValid`.
+Here is the default `validate` behavior, but with a support for short numbers:
 
 ```ts [app.ts]
 const vPhoneInput = createVPhoneInput({
-  // [!code ++]
-  validate: (phone) => phone.valid || phone.shortValid,
+  validate: (phone, country) => {
+    if (!phone) {
+      return true;
+    }
+    
+    if (phone.regionCode !== country.iso2) {
+      return false;
+    }
+    
+    // [!code warning]
+    return phone.valid || phone.shortValid;
+  },
 });
 ```
 
