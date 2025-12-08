@@ -32,6 +32,46 @@ import 'v-phone-input/dist/v-phone-input.css';
 import 'v-phone-input/styles';
 ```
 
+## Removed phone helpers
+
+Before `v6`, VPhoneInput was providing `makePhone`, `makeExample` and `formatPhone`, which
+are just helpers in fact calling `awesome-phonenumber` functions. To improve maintainability
+and avoid just forwarding calls to a lib's features, those functions are removed.
+
+You should now use `awesome-phonenumber` functions for those features:
+
+```ts
+// [!code --]
+import { makeExample, makePhone, formatPhone } from 'v-phone-input';
+// [!code ++]
+import { getExample, parsePhoneNumber } from 'awesome-phonenumber';
+
+// [!code --]
+const phone = makePhone('0612345678', 'FR');
+// [!code ++]
+const phone = parsePhoneNumber('0612345678', { regionCode: 'FR' });
+
+// [!code --]
+const example = makeExample('FR');
+// [!code ++]
+const example = getExample('FR');
+
+// [!code --]
+console.log(formatPhone(phone, 'national'));
+// [!code ++]
+console.log(phone.number?.national ?? phone.number?.input ?? '');
+```
+
+## Removed exported countries
+
+The exported `countries` list from the package's root has been removed:
+
+- If you were using the list to manage a custom phone input, you can use
+  [`usePhoneInput` composable](/guide/composable).
+- Otherwise, you should use your own countries list, as VPhoneInput will not export
+  the list anymore (internally, VPhoneInput uses
+  [`countries-list` package](https://www.npmjs.com/package/countries-list)).
+
 ## Country input mode
 
 Previously, `VPhoneInput` component shipped with default `VSelect` input for country selection.

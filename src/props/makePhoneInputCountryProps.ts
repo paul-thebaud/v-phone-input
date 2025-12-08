@@ -35,7 +35,7 @@ export default function makePhoneInputCountryProps<
      * List of available countries.
      *
      * @defaultValue
-     * Use `countries-list` two-letter codes, dial codes resolved using
+     * Uses `countries-list` two-letter codes, dial codes resolved using
      * `awesome-phonenumber` package's `getCountryCodeForRegionCode`, and
      * given locale (or `en`) translated names using `Intl.DisplayNames`.
      */
@@ -76,7 +76,7 @@ export default function makePhoneInputCountryProps<
      * Default country to use.
      *
      * @defaultValue
-     * First country from the available countries list.
+     * First country from the available `countries` list.
      */
     defaultCountry: {
       type: [String, Object] as PropType<VPhoneInputCountryObjectOrIso2>,

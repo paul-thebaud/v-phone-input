@@ -201,7 +201,17 @@ export default defineConfig({
       },
       {
         text: "API reference",
-        items: typedocSidebar,
+        items: [
+          {
+            text: "VPhoneInput",
+            link: "/api/variables/VPhoneInput",
+          },
+          {
+            text: "usePhoneInput",
+            link: "/api/functions/usePhoneInput",
+          },
+          ...typedocSidebar,
+        ],
       },
     ],
 

@@ -295,19 +295,23 @@ export interface VPhoneInputComposableOptions<
   /**
    * Phone model value ref, formatted using `modelFormat`.
    */
-  modelValue: Ref<string | null | undefined>;
+  readonly modelValue: Ref<string | null | undefined>;
   /**
    * Country model value ref.
    */
-  country?: Ref<string | null | undefined>;
+  readonly country?: Ref<string | null | undefined>;
   /**
    * Country input component or element ref to bind listeners to.
    */
-  countryInputRef?: Ref<{ $el: HTMLElement } | HTMLElement | null | undefined>;
+  readonly countryInputRef?: Ref<
+    { $el: HTMLElement } | HTMLElement | null | undefined
+  >;
   /**
    * Phone input component or element ref to bind listeners to.
    */
-  phoneInputRef?: Ref<{ $el: HTMLElement } | HTMLElement | null | undefined>;
+  readonly phoneInputRef?: Ref<
+    { $el: HTMLElement } | HTMLElement | null | undefined
+  >;
 }
 
 /**
@@ -500,7 +504,7 @@ export interface VPhoneInputCountrySlots<
    * Country list item prepended content.
    *
    * @defaultValue
-   * Use the `country-icon` slot with a decorative purpose.
+   * Use the `country-display` slot with a decorative purpose.
    */
   readonly "country-prepend":
     | ((scope: { country: Country }) => VNode[])
@@ -510,7 +514,7 @@ export interface VPhoneInputCountrySlots<
    * Country list item appended content.
    *
    * @defaultValue
-   * `'+<country.dialCode>'` if `countryIconMode` property, `country-icon` or
+   * `'+<country.dialCode>'` if `countryIconMode` property, `country-display` or
    * `country-prepend` is defined, nothing otherwise.
    */
   readonly "country-append":

@@ -62,7 +62,7 @@ Country list item appended content.
 
 #### Default Value
 
-`'+<country.dialCode>'` if `countryIconMode` property, `country-icon` or
+`'+<country.dialCode>'` if `countryIconMode` property, `country-display` or
 `country-prepend` is defined, nothing otherwise.
 
 ***
@@ -213,7 +213,7 @@ Country list item prepended content.
 
 #### Default Value
 
-Use the `country-icon` slot with a decorative purpose.
+Use the `country-display` slot with a decorative purpose.
 
 ***
 

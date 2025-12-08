@@ -30,7 +30,7 @@ List of available countries.
 
 #### Default Value
 
-Use `countries-list` two-letter codes, dial codes resolved using
+Uses `countries-list` two-letter codes, dial codes resolved using
 `awesome-phonenumber` package's `getCountryCodeForRegionCode`, and
 given locale (or `en`) translated names using `Intl.DisplayNames`.
 
@@ -96,9 +96,7 @@ Default country to use.
 
 #### Default Value
 
-```ts
-First country from the available countries list.
-```
+First country from the available `countries` list.
 
 #### Inherited from
 

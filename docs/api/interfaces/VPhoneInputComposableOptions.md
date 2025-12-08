@@ -44,7 +44,7 @@ List of available countries.
 
 #### Default Value
 
-Use `countries-list` two-letter codes, dial codes resolved using
+Uses `countries-list` two-letter codes, dial codes resolved using
 `awesome-phonenumber` package's `getCountryCodeForRegionCode`, and
 given locale (or `en`) translated names using `Intl.DisplayNames`.
 
@@ -56,7 +56,7 @@ given locale (or `en`) translated names using `Intl.DisplayNames`.
 
 ### country?
 
-> `optional` **country**: `Ref`\<`string` \| `null` \| `undefined`, `string` \| `null` \| `undefined`\>
+> `readonly` `optional` **country**: `Ref`\<`string` \| `null` \| `undefined`, `string` \| `null` \| `undefined`\>
 
 Defined in: dist/types.d.ts:220
 
@@ -68,13 +68,13 @@ Country model value ref.
 
 > `readonly` `optional` **countryAriaLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:58
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:61
 
 Customize the country input `aria-label`.
 
 #### Default Value
 
-`'Country for <label>'`
+`'Country for <label>'` when using the component, `null` otherwise.
 
 #### Inherited from
 
@@ -84,7 +84,7 @@ Customize the country input `aria-label`.
 
 ### countryInputRef?
 
-> `optional` **countryInputRef**: `Ref`\<\{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| `null` \| `undefined`, \{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| `null` \| `undefined`\>
+> `readonly` `optional` **countryInputRef**: `Ref`\<\{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| `null` \| `undefined`, \{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| `null` \| `undefined`\>
 
 Defined in: dist/types.d.ts:224
 
@@ -96,9 +96,13 @@ Country input component or element ref to bind listeners to.
 
 > `readonly` `optional` **countryLabel**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:49
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:52
 
 Customize the country input label.
+
+#### Default Value
+
+`'Country for <label>'` when using the composable, `null` otherwise.
 
 #### Inherited from
 
@@ -152,9 +156,7 @@ Default country to use.
 
 #### Default Value
 
-```ts
-First country from the available countries list.
-```
+First country from the available `countries` list.
 
 #### Inherited from
 
@@ -331,7 +333,7 @@ from available countries.
 
 > `readonly` `optional` **invalidMessage**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:74
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:77
 
 Customize the phone input invalid message returned by the
 `validate` function generated rule.
@@ -389,7 +391,7 @@ Using `null` will disable format feature and keep the input as is.
 
 ### modelValue
 
-> **modelValue**: `Ref`\<`string` \| `null` \| `undefined`\>
+> `readonly` **modelValue**: `Ref`\<`string` \| `null` \| `undefined`\>
 
 Defined in: dist/types.d.ts:216
 
@@ -399,7 +401,7 @@ Phone model value ref, formatted using `modelFormat`.
 
 ### phoneInputRef?
 
-> `optional` **phoneInputRef**: `Ref`\<[`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| \{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| `null` \| `undefined`, [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| \{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| `null` \| `undefined`\>
+> `readonly` `optional` **phoneInputRef**: `Ref`\<[`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| \{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| `null` \| `undefined`, [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement) \| \{ `$el`: [`HTMLElement`](https://developer.mozilla.org/docs/Web/API/HTMLElement); \} \| `null` \| `undefined`\>
 
 Defined in: dist/types.d.ts:230
 
@@ -411,7 +413,7 @@ Phone input component or element ref to bind listeners to.
 
 > `readonly` `optional` **placeholder**: `MaybeRef`\<[`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null` \| `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:64
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:67
 
 Customize the phone input placeholder.
 

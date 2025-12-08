@@ -48,7 +48,7 @@ List of available countries.
 
 #### Default Value
 
-Use `countries-list` two-letter codes, dial codes resolved using
+Uses `countries-list` two-letter codes, dial codes resolved using
 `awesome-phonenumber` package's `getCountryCodeForRegionCode`, and
 given locale (or `en`) translated names using `Intl.DisplayNames`.
 
@@ -72,13 +72,13 @@ Currently selected country.
 
 > `readonly` `optional` **countryAriaLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:58
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:61
 
 Customize the country input `aria-label`.
 
 #### Default Value
 
-`'Country for <label>'`
+`'Country for <label>'` when using the component, `null` otherwise.
 
 #### Inherited from
 
@@ -140,9 +140,13 @@ Country input component specific props.
 
 > `readonly` `optional` **countryLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:49
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:52
 
 Customize the country input label.
+
+#### Default Value
+
+`'Country for <label>'` when using the composable, `null` otherwise.
 
 #### Inherited from
 
@@ -220,9 +224,7 @@ Default country to use.
 
 #### Default Value
 
-```ts
-First country from the available countries list.
-```
+First country from the available `countries` list.
 
 #### Inherited from
 
@@ -427,7 +429,7 @@ from available countries.
 
 > `readonly` `optional` **invalidMessage**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:74
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:77
 
 Customize the phone input invalid message returned by the
 `validate` function generated rule.
@@ -511,7 +513,7 @@ Properties to pass to the country input (`VTextField`).
 
 > `readonly` `optional` **placeholder**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:64
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:67
 
 Customize the phone input placeholder.
 

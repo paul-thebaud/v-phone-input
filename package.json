@@ -47,7 +47,7 @@
     "test": "vitest run --coverage --typecheck",
     "test:watch": "vitest --typecheck",
     "build": "vue-tsc --noEmit && vite build",
-    "docs:typedoc": "typedoc && rimraf docs/api/_media docs/api/index.md && cp -RT docs/api-handwritten docs/api",
+    "docs:typedoc": "typedoc && rimraf docs/api/_media docs/api/index.md && cp -RT docs/api-handwritten docs/api && ts-node scripts/improveApiReference.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
@@ -71,6 +71,7 @@
     "cypress-image-diff-js": "^2.5.0",
     "markdown-it": "^14.1.0",
     "rimraf": "^6.1.2",
+    "ts-node": "^10.9.2",
     "typedoc": "^0.28.14",
     "typedoc-plugin-markdown": "^4.9.0",
     "typedoc-plugin-mdn-links": "^5.0.10",

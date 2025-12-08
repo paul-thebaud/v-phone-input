@@ -12,7 +12,7 @@ Depending on your needs, you should get start with one of the following:
   a [Vue composable](https://vuejs.org/guide/reusability/composables.html)
   composable to ease your custom implementation within any Vue project.
 
-## Demo
+## Try it online
 
 If you would like to try VPhoneInput, you can check out:
 

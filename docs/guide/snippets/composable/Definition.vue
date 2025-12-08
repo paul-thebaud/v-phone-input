@@ -2,15 +2,15 @@
   setup
   lang="ts"
 >
-import { usePhoneInput } from 'v-phone-input';
-import { toRef, useId } from 'vue';
+import { usePhoneInput } from "v-phone-input";
+import { toRef, useId } from "vue";
 
 const props = defineProps<{
   label?: string;
 }>();
 
-const country = defineModel<string>("country");
-const modelValue = defineModel<string>();
+const country = defineModel<string>("country", { default: "" });
+const modelValue = defineModel<string>({ default: "" });
 
 const id = useId();
 
@@ -32,7 +32,7 @@ const {
 </script>
 
 <template>
-  <div :class="$style.phoneInput">
+  <div :class="$style.wrapper">
     <label
       :for="`country-${id}`"
       :class="$style.label"
@@ -78,7 +78,7 @@ const {
 </template>
 
 <style module>
-.phoneInput {
+.wrapper {
   display: flex;
   flex-direction: column;
 }

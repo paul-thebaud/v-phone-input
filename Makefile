@@ -49,6 +49,7 @@ dev: ## Run dev docs.
 
 .PHONY: preview
 preview: ## Run preview docs.
+	@$(PNPM) docs:build
 	@$(PNPM) docs:preview --host --port 5173
 
 .PHONY: lint

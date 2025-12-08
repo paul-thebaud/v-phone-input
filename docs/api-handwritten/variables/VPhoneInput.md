@@ -16,25 +16,28 @@ Vuetify component implementation.
 
 ## Properties
 
-See:
+::: info
+`VPhoneInput` also forward any [Vuetify's `VTextField` properties](https://vuetifyjs.com/en/api/v-text-field/#props).
+:::
 
-- [`VPhoneInputProps`](../interfaces/VPhoneInputProps.md)
-- [Vuetify's `VTextField` properties](https://vuetifyjs.com/en/api/v-text-field/#props)
+[`VPhoneInputProps`](../interfaces/VPhoneInputProps.md)
+
+__properties__
 
 ## Slots
 
-See:
+[`VPhoneInputSlots`](../interfaces/VPhoneInputSlots.md)
 
-- [`VPhoneInputSlots`](../interfaces/VPhoneInputSlots.md)
+__slots__
 
 ## Events
 
-See:
+[`VPhoneInputEmits`](../interfaces/VPhoneInputEmits.md)
 
-- [`VPhoneInputEmits`](../interfaces/VPhoneInputEmits.md)
+__emits__
 
 ## Exposed
 
-See:
+[`VPhoneInputExposed`](../interfaces/VPhoneInputExposed.md)
 
-- [`VPhoneInputExposed`](../interfaces/VPhoneInputExposed.md)
+__exposed__
