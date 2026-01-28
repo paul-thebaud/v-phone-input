@@ -33,7 +33,8 @@ defineOptions({
   },
 });
 
-const slots = defineSlots<VPhoneInputSlots<Country, CountryInputComponent>>();
+// biome-ignore lint/suspicious/noExplicitAny: Temp TS fix for dynamic slots support.
+const slots: any = defineSlots<VPhoneInputSlots<Country, CountryInputComponent>>();
 const emit = defineEmits<VPhoneInputNonModelEmits<Country>>();
 const props = defineProps(
   makePhoneInputCompleteProps<Country, CountryInputComponent>(),
