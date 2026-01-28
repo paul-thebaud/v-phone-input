@@ -4,6 +4,10 @@ on:
   release:
     types: [ published ]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,13 +21,9 @@ jobs:
       - name: Publish prerelease
         if: ${{ github.event.release.prerelease }}
         run: pnpm publish --no-git-checks --tag next
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Publish release
         if: ${{ !github.event.release.prerelease }}
         run: pnpm publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy:
     needs: [ publish ]
