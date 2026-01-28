@@ -6,7 +6,7 @@
 
 <template>
   <div class="banner">
-    <div class="banner-underlay"/>
+    <div class="banner-underlay" />
     <p>
       This documentation is about <strong>upcoming VPhoneInput v6</strong>. If
       you want to use the <strong
