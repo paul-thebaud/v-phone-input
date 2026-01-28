@@ -11,7 +11,6 @@ export default /* @__PURE__ */ [
   "density",
   "singleLine",
   "hideDetails",
-  "direction",
   "reverse",
   "color",
   "bgColor",
