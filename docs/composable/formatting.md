@@ -30,7 +30,7 @@ const vPhoneInput = createVPhoneInput({
 ::: warning
 Using a `modelFormat` which does not hold country dial code, such as `national`, will make your
 phone number string lose its country awareness. Prefer using another format if you are not storing
-the country aside, such as `e164`, `rfc3966` or `international`.
+the country aside, such as `e164` or `international`.
 :::
 
 ## Formatting after a delay

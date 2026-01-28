@@ -278,6 +278,42 @@ describe("PhoneInput", () => {
         tools.expectPhone("06 12 34 56 78");
       });
 
+      it("rewrites country on phone when using e164 display format", () => {
+        tools.mount({
+          displayFormat: 'e164',
+        });
+
+        tools.typePhone("+33612345678");
+        clickOutside();
+
+        tools.expectCountry("FR");
+        tools.expectPhone("+33612345678");
+        tools.expectError(null);
+
+        tools.selectCountry("AF");
+        clickOutside();
+
+        tools.expectPhone("+93612345678");
+      });
+
+      it("rewrites country on phone when using international display format", () => {
+        tools.mount({
+          displayFormat: 'international',
+        });
+
+        tools.typePhone("+33612345678");
+        clickOutside();
+
+        tools.expectCountry("FR");
+        tools.expectPhone("+33 6 12 34 56 78");
+        tools.expectError(null);
+
+        tools.selectCountry("AF");
+        clickOutside();
+
+        tools.expectPhone("+93 61 234 5678");
+      });
+
       it("detects country from valid phone prefix", () => {
         tools.mount();
 

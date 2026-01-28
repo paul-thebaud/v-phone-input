@@ -1,4 +1,8 @@
-import { type ParsedPhoneNumber, parsePhoneNumber } from "awesome-phonenumber";
+import {
+  getCountryCodeForRegionCode,
+  type ParsedPhoneNumber,
+  parsePhoneNumber,
+} from "awesome-phonenumber";
 import { computed, isRef, ref, shallowRef, unref, watch } from "vue";
 import formatPhoneObject from "../internals/formatPhoneObject";
 import type {
@@ -149,6 +153,23 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
       country.value = prev ?? countries.fallbackCountry.value.iso2;
 
       return;
+    }
+
+    if (
+      phoneObject.value?.regionCode &&
+      phoneObject.value.regionCode !== next
+    ) {
+      const phoneSignificant = phoneObject.value.number?.significant;
+      if (phoneSignificant) {
+        const nextPhoneObject = parsePhoneNumber(
+          `+${getCountryCodeForRegionCode(next)}${phoneSignificant}`,
+        );
+
+        phone.value = formatPhoneObject(
+          displayFormatOption.value,
+          nextPhoneObject,
+        );
+      }
     }
 
     if (guessCountryOption.value && "memoized" in guessCountryOption.value) {
