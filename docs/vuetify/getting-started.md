@@ -146,6 +146,17 @@ Other properties will only be forwarded to the phone input.
 
 ### Plugin options
 
+::: info
+
+`VPhoneInput` might not follow
+make[Vuetify's defaults configuration](https://vuetifyjs.com/en/features/global-configuration/#setup).
+To provide default behaviors, such as a given variant or color, you should use
+[`countryProps`](/api/interfaces/VPhoneInputProps#countryprops) or
+[`phoneProps`](/api/interfaces/VPhoneInputProps#phoneprops) inside your
+`createVPhoneInput` configuration.
+
+:::
+
 If you want to share behavior or properties between multiple `VPhoneInput` usage within your
 application, you can pass default options to `createVPhoneInput` plugin factory.
 
