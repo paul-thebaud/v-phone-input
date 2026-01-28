@@ -1,29 +1,29 @@
-# Getting started
+# Introduction
 
 VPhoneInput aims to provide international phone number tools for Vue and Vuetify.
 
 Depending on your needs, you should get start with one of the following:
 
-- [`VPhoneInput`](/guide/component), a ready-to-use
+- [`usePhoneInput`](/composable/getting-started),
+  a [Vue composable](https://vuejs.org/guide/reusability/composables.html)
+  composable to ease your custom implementation within any Vue project.
+- [`VPhoneInput`](/vuetify/getting-started), a ready-to-use
   [Vuetify](https://vuetifyjs.com/) component, based on `VSelect` or
   `VAutocomplete` components for country selection, and `VTextField` for phone
   number.
-- [`usePhoneInput`](/guide/composable),
-  a [Vue composable](https://vuejs.org/guide/reusability/composables.html)
-  composable to ease your custom implementation within any Vue project.
 
 ## Try it online
 
 If you would like to try VPhoneInput, you can check out:
 
-- [the docs' playground](/playground)
-- [the Vuetify component StackBlitz project](https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev)
 - [the Vue composable StackBlitz project](https://stackblitz.com/edit/v-phone-input-composable?file=src%2FApp.vue&terminal=dev)
+- [the Vuetify component StackBlitz project](https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev)
+- [the Vuetify component docs' playground](/vuetify/playground)
 
 ## Migration to v6
 
 If you are using VPhoneInput v5 and would you like to migrate to v6, you
-should follow the [v6 migration guide](/guide/migration).
+should follow the [v6 migration guide](/migration).
 
 ## Vue 2 support
 

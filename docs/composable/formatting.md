@@ -1,11 +1,9 @@
 # Phone formatting
 
-<feature-tags component composable />
-
 By default, VPhoneInput will format phone number on input
 [`blur` event](https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event) using
 `national` format. It will also emit phone number using `e164` format on each input.
-Finally, examples displayed inside the [phone labels](/guide/localization) will use `national`
+Finally, examples displayed inside the [phone labels](/composable/localization) will use `national`
 format.
 
 Each of those formats can be customized to a valid

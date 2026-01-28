@@ -10,20 +10,20 @@ hero:
   actions:
     - theme: brand
       text: Getting started
-      link: /guide/getting-started
+      link: /introduction
     - theme: alt
-      text: Playground
-      link: /playground
+      text: Vuetify playground
+      link: /vuetify/playground
 
 features:
-  - icon: 📞
-    title: VPhoneInput
-    details: Read-to-use Vuetify component.
-    link: /guide/component
   - icon: 🧩
     title: usePhoneInput
     details: Vue composable for custom implementations.
-    link: /guide/composable
+    link: /composable/getting-started
+  - icon: 📞
+    title: VPhoneInput
+    details: Read-to-use Vuetify component.
+    link: /vuetify/getting-started
   - icon: 💪
     title: ESM and TypeScript support
     details: Tree-shaking and built-in types definition.

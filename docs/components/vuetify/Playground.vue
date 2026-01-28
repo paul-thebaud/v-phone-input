@@ -4,7 +4,7 @@
 >
 import "flag-icons/css/flag-icons.min.css";
 import "world-flags-sprite/stylesheets/flags32.css";
-import "../../src/scss/v-phone-input.scss";
+import "../../../src/scss/v-phone-input.scss";
 import {
   mdiCheckCircleOutline,
   mdiCloseCircleOutline,
@@ -23,8 +23,8 @@ import {
   VPhoneCountryFlagSprite,
   VPhoneCountryFlagSvg,
   VPhoneInput,
-} from "../../src";
-import PlaygroundPhoneInfo from "./playground/PlaygroundPhoneInfo.vue";
+} from "../../../src";
+import PlaygroundPhoneInfo from "./PlaygroundPhoneInfo.vue";
 
 type PlaygroundConfig = {
   countryInputMode: "select" | "autocomplete";

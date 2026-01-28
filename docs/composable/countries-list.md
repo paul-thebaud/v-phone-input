@@ -1,9 +1,7 @@
 # Countries list
 
-<feature-tags component composable />
-
 VPhoneInput provides many ways to customize the countries list, in addition to
-[country display](/guide/country-display) or [slots](/guide/component#slots).
+[country display](/vuetify/country-display) or [slots](/vuetify/getting-started#slots).
 
 ## Default list
 

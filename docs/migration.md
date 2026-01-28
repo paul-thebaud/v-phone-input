@@ -67,7 +67,7 @@ console.log(phone.number?.national ?? phone.number?.input ?? '');
 The exported `countries` list from the package's root has been removed:
 
 - If you were using the list to manage a custom phone input, you can use
-  [`usePhoneInput` composable](/guide/composable).
+  [`usePhoneInput` composable](/composable/getting-started).
 - Otherwise, you should use your own countries list, as VPhoneInput will not export
   the list anymore (internally, VPhoneInput uses
   [`countries-list` package](https://www.npmjs.com/package/countries-list)).
@@ -294,7 +294,7 @@ Here is a complete example to migrate some/all of your parametized `rules` usage
 
 `country-input` and `phone-input` could previously be used to provide custom input components
 to the input. Those two slots are now removed. If you need to fine-tune phone number inputs
-components, you should now use [`usePhoneInput` composable](/guide/composable).
+components, you should now use [`usePhoneInput` composable](/composable/getting-started).
 
 In addition, `country-icon` slot has been renamed to `country-display`.
 

@@ -1,7 +1,5 @@
 # Country autocomplete
 
-<feature-tags component />
-
 [`VPhoneInput`](/api/variables/VPhoneInput) supports VAutocomplete input for current phone's country.
 To use an autocomplete country input, you can use
 [`autocompletePhoneCountryInput`](/api/variables/autocompletePhoneCountryInput)

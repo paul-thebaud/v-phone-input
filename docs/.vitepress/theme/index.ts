@@ -10,9 +10,6 @@ import "vuetify/styles";
 import "./style.css";
 import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
 import Banner from "../../components/Banner.vue";
-import ComponentFeatureTag from "../../components/docs/ComponentFeatureTag.vue";
-import ComposableFeatureTag from "../../components/docs/ComposableFeatureTag.vue";
-import FeatureTags from "../../components/docs/FeatureTags.vue";
 
 const vuetify = createVuetify({
   components,
@@ -56,9 +53,5 @@ export default {
   },
   enhanceApp({ app }) {
     app.use(vuetify);
-
-    app.component("FeatureTags", FeatureTags);
-    app.component("ComponentFeatureTag", ComponentFeatureTag);
-    app.component("ComposableFeatureTag", ComposableFeatureTag);
   },
 } satisfies Theme;

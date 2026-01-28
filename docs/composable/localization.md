@@ -1,7 +1,5 @@
 # Labels localization
 
-<feature-tags component composable />
-
 VPhoneInput ships with english appropriate labels:
 
 - Label for the phone input: `"Phone"`;
@@ -31,7 +29,7 @@ Here are multiple examples of localization:
 
 ::: code-group
 
-<<< ./snippets/localization/LabelsLocalization.vue [SignInForm.vue]
+<<< ../snippets/composable/LabelsLocalization.vue [SignInForm.vue]
 
 ```ts [app.ts]
 const vPhoneInput = createVPhoneInput({

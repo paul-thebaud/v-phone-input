@@ -1,7 +1,5 @@
 # Phone validation
 
-<feature-tags component composable />
-
 By default, VPhoneInput will ensure that
 [`ParsedPhoneNumber.valid`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage)
 is `true`, and that
@@ -46,7 +44,7 @@ const vPhoneInput = createVPhoneInput({
 ::: tip
 
 To customize the `invalidMessage` displayed when the phone number is not valid, you check out
-the [labels localization guide](/guide/localization).
+the [labels localization guide](/composable/localization).
 
 :::
 

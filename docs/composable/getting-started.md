@@ -2,12 +2,7 @@
 
 [`usePhoneInput`](/api/functions/usePhoneInput) is a Vue composable
 you can use to create a custom phone input component. It is used internally by
-the [`VPhoneInput`](/api/variables/VPhoneInput) Vuetify component.
-It provides the same behavioral features ([automatic formatting](/guide/formatting),
-[country detection](/guide/country-detection), etc.), but does not provide UI related
-features ([autocomplete](/guide/country-autocomplete), [flags](/guide/country-display), etc.).
-Every feature which can be used with the composable will have
-a <composable-feature-tag /> tag inside this documentation.
+UI frameworks implementations, such as the [`VPhoneInput`](/api/variables/VPhoneInput) Vuetify component.
 
 ## Installation
 
@@ -43,13 +38,13 @@ through the native HTML `select` and `input` elements.
 After that, the `PhoneInput` component is used inside a `SignInForm` component.
 
 ::: code-group
-<<< ./snippets/composable/Definition.vue [PhoneInput.vue]
-<<< ./snippets/composable/SignInForm.vue [SignInForm.vue]
+<<< ../snippets/composable/Definition.vue [PhoneInput.vue]
+<<< ../snippets/composable/SignInForm.vue [SignInForm.vue]
 :::
 
 ::: info
 Passing `countryInputRef` and `phoneInputRef` is currently only used for
-[on-`blur` phone formatting](/guide/formatting).
+[on-`blur` phone formatting](/composable/formatting).
 :::
 
 ## Configuration
@@ -77,7 +72,7 @@ and [`phoneInputRef`](/api/interfaces/VPhoneInputComposableOptions#phoneInputRef
 must be refs and cannot be direct values.
 :::
 
-<<< ./snippets/composable/Config.vue
+<<< ../snippets/composable/Config.vue
 
 ### Providing default options
 
@@ -87,9 +82,9 @@ to a parent of the component using `usePhoneInput`.
 
 ::: code-group
 
-<<< ./snippets/composable/Provider.vue [PhoneInputOptionsProvider.vue]
+<<< ../snippets/composable/Provider.vue [PhoneInputOptionsProvider.vue]
 
-<<< ./snippets/composable/ProviderUsage.vue [SomeComponent.vue]
+<<< ../snippets/composable/ProviderUsage.vue [SomeComponent.vue]
 
 :::
 

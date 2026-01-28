@@ -1,7 +1,5 @@
 # Country detection
 
-<feature-tags component composable />
-
 By default, VPhoneInput will use the first country of the list as the default
 country if no country is defined or detected from the phone number.
 

@@ -1,9 +1,8 @@
 # Vuetify component
 
 [`VPhoneInput`](/api/variables/VPhoneInput) is a Vue component built
-for Vuetify. It provides all features presented inside this documentation.
-When a feature is available with `VPhoneInput` component, it will have
-a <component-feature-tag /> tag inside this documentation.
+for Vuetify. It provides all features presented inside this documentation,
+from the [core composable](/composable/getting-started) to Vuetify-only features.
 
 ## Installation
 
@@ -29,7 +28,7 @@ $ bun add v-phone-input flag-icons
 
 ::: tip
 You can generate your VPhoneInput dependencies install command and
-plugin creation code [on the playground](/playground).
+plugin creation code [on the playground](/vuetify/playground).
 :::
 
 ::: tip
@@ -38,13 +37,13 @@ In this guide, we suggest you to install `flag-icons` and use
 for the phone input
 [`countryDisplayComponent`](/api/interfaces/VPhoneInputProps#countryDisplayComponent-1).
 You can easily customize this behavior by following the
-[country display guide](/guide/country-display).
+[country display guide](/vuetify/country-display).
 :::
 
 ::: warning
 
 VPhoneInput component requires [Vuetify](https://vuetifyjs.com/).
-If you are not using Vuetify, you can still use [`usePhoneInput`](/guide/composable)
+If you are not using Vuetify, you can still use [`usePhoneInput`](/composable/getting-started)
 to implement your own phone number input.
 
 :::
@@ -60,8 +59,8 @@ to define the country input to be a `VSelect`, and
 [`countryDisplayComponent`](/api/interfaces/VPhoneInputProps#countryDisplayComponent-1)
 with [`VPhoneCountryFlagSvg`](/api/functions/VPhoneCountryFlagSvg) to
 use SVG flags to display countries. This may be changed to an
-[autocomplete input](/guide/country-autocomplete) with
-[other country display](/guide/country-display).
+[autocomplete input](/vuetify/country-autocomplete) with
+[other country display](/vuetify/country-display).
 
 After that, the `VPhoneInput` component
 will be registered inside your Vue application, and you will be able to use
@@ -91,7 +90,7 @@ app.use(vPhoneInput);
 app.mount('#app');
 ```
 
-<<< ./snippets/component/SignInForm.vue [SignInForm.vue]
+<<< ../snippets/vuetify/SignInForm.vue [SignInForm.vue]
 
 :::
 
@@ -107,7 +106,7 @@ Do not forget to:
 ## Model values
 
 `VPhoneInput` provides two-way data bindings through two component
-[`v-model`](https://vuejs.org/guide/components/v-model):
+[`v-model`](https://vuejs.org/vuetify/getting-starteds/v-model):
 
 - [`modelValue`](/api/interfaces/VPhoneInputProps#modelValue): the formatted phone
   number value;
@@ -143,7 +142,7 @@ Within the inherited properties, some properties will be passed to both the coun
 and phone inputs: [`vPhoneInputSharedProperties`](/api/variables/vPhoneInputSharedProperties).
 Other properties will only be forwarded to the phone input.
 
-<<< ./snippets/component/Config.vue
+<<< ../snippets/vuetify/Config.vue
 
 ### Plugin options
 
@@ -165,7 +164,7 @@ createVPhoneInput({
 
 ::: tip
 You can also provide default options after plugin registration, by using
-[`providePhoneInputOptions`](/guide/composable#providing-default-options).
+[`providePhoneInputOptions`](/composable/getting-started#providing-default-options).
 :::
 
 ### Slots
@@ -179,7 +178,7 @@ In addition to direct input slots, such as
 slots named `country-input:<name>` will be forwarded to the country input,
 and slots named `<name>` will be forwarded to the phone input.
 
-<<< ./snippets/component/Slots.vue
+<<< ../snippets/vuetify/Slots.vue
 
 ## Events
 

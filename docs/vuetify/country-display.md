@@ -1,7 +1,5 @@
 # Country display
 
-<feature-tags component />
-
 [`VPhoneInput`](/api/variables/VPhoneInput) country display customization
 allows you to change the way country are shown within the select input selection,
 or inside a select input list's item prepend slot. Currently, 3 built-in country
@@ -113,4 +111,4 @@ properties.
 You can also pass a `country-display` slot the `VPhoneInput` component. The slot will receive the
 same properties as if using a custom component.
 
-<<< ./snippets/country-display/Slot.vue
+<<< ../snippets/vuetify/CountryDisplaySlot.vue

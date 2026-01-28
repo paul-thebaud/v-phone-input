@@ -6,7 +6,7 @@ aside: false
 
 <script setup>
 import { computed, ref } from 'vue';
-import Playground from './components/Playground.vue';
+import Playground from '../components/vuetify/Playground.vue';
 
 const config = ref();
 

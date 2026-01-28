@@ -79,12 +79,12 @@ export default defineConfig({
     search: { provider: 'local' },
     nav: [
       {
-        text: "Guide",
-        link: "/guide/getting-started",
+        text: "Composable",
+        link: "/composable/getting-started",
       },
       {
-        text: "Playground",
-        link: "/playground",
+        text: "Vuetify",
+        link: "/vuetify/getting-started",
       },
       {
         text: "Links",
@@ -120,82 +120,72 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: "Guide",
+        text: "Introduction",
+        link: "/introduction",
+      },
+      {
+        text: "Migration to v6",
+        link: "/migration",
+      },
+      {
+        text: "Contributing",
+        link: "/contributing",
+      },
+      {
+        text: "Core composable",
         items: [
           {
             text: "Getting started",
-            link: "/guide/getting-started",
+            link: "/composable/getting-started",
           },
           {
-            text: "Component",
-            link: "/guide/component",
+            text: "Phone formatting",
+            link: "/composable/formatting",
           },
           {
-            text: "Composable",
-            link: "/guide/composable",
+            text: "Phone validation",
+            link: "/composable/validation",
           },
           {
-            text: "Features",
-            items: [
-              {
-                text: "Phone formatting",
-                link: "/guide/formatting",
-              },
-              {
-                text: "Phone validation",
-                link: "/guide/validation",
-              },
-              {
-                text: "Labels localization",
-                link: "/guide/localization",
-              },
-              {
-                text: "Country detection",
-                link: "/guide/country-detection",
-              },
-              {
-                text: "Country display (flags)",
-                link: "/guide/country-display",
-              },
-              {
-                text: "Country autocomplete",
-                link: "/guide/country-autocomplete",
-              },
-              {
-                text: "Countries list",
-                link: "/guide/countries-list",
-              },
-            ],
+            text: "Labels localization",
+            link: "/composable/localization",
           },
           {
-            text: "Migration to v6",
-            link: "/guide/migration",
+            text: "Country detection",
+            link: "/composable/country-detection",
           },
           {
-            text: "Contributing",
-            link: "/guide/contributing",
+            text: "Countries list",
+            link: "/composable/countries-list",
+          },
+          {
+            text: "StackBlitz playground",
+            link: "https://stackblitz.com/edit/v-phone-input-composable?file=src%2FApp.vue&terminal=dev",
           },
         ],
       },
       {
-        text: "Try it online",
+        text: "Vuetify",
         items: [
           {
-            text: "Playground",
-            link: "/playground",
+            text: "Getting started",
+            link: "/vuetify/getting-started",
           },
           {
-            text: "StackBlitz",
-            items: [
-              {
-                text: "Component",
-                link: "https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev",
-              },
-              {
-                text: "Composable",
-                link: "https://stackblitz.com/edit/v-phone-input-composable?file=src%2FApp.vue&terminal=dev",
-              },
-            ],
+            text: "Country display (flags)",
+            link: "/vuetify/country-display",
+          },
+          {
+            text: "Country autocomplete",
+            link: "/vuetify/country-autocomplete",
+          },
+          {
+            text: "Playground and configuration",
+            link: "/vuetify/playground",
+          },
+          {
+            text: "StackBlitz playground",
+            link: "https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev",
           },
         ],
       },
