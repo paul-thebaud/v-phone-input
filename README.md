@@ -7,31 +7,30 @@
 ![NPM downloads](https://img.shields.io/npm/dt/v-phone-input)
 ![MIT license](https://img.shields.io/npm/l/v-phone-input)
 
-VPhoneInput aims to provide international phone number tools for Vuetify and Vue 3:
+VPhoneInput aims to provide international phone number tools for Vue and Vuetify.
 
-- [`VPhoneInput`](https://paul-thebaud.github.io/v-phone-input/guide/component), a ready-to-use
+Depending on your needs, you should get start with one of the following:
+
+- [`usePhoneInput`](https://paul-thebaud.github.io/v-phone-input/composable/getting-started),
+  a [Vue composable](https://vuejs.org/guide/reusability/composables.html)
+  composable to ease your custom implementation within any Vue project.
+- [`VPhoneInput`](https://paul-thebaud.github.io/v-phone-input/vuetify/getting-started), a ready-to-use
   [Vuetify](https://vuetifyjs.com/) component, based on `VSelect` or
   `VAutocomplete` components for country selection, and `VTextField` for phone
   number.
-- [`usePhoneInput`](https://paul-thebaud.github.io/v-phone-input/guide/composable),
-  a [Vue composable](https://vuejs.org/guide/reusability/composables.html)
-  composable to ease your custom implementation within any Vue project.
-
-[Browser the docs](https://paul-thebaud.github.io/v-phone-input/) or try it
-inside [the playground](https://paul-thebaud.github.io/v-phone-input/playground).
 
 ## Try it online
 
 If you would like to try VPhoneInput, you can check out:
 
-- [the docs' playground](https://paul-thebaud.github.io/v-phone-input/playground)
-- [the Vuetify component StackBlitz project](https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev)
 - [the Vue composable StackBlitz project](https://stackblitz.com/edit/v-phone-input-composable?file=src%2FApp.vue&terminal=dev)
+- [the Vuetify component StackBlitz project](https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev)
+- [the Vuetify component docs' playground](https://paul-thebaud.github.io/v-phone-input/vuetify/playground)
 
 ## Migration to v6
 
 If you are using VPhoneInput v5 and would you like to migrate to v6, you
-should follow the [v6 migration guide](https://paul-thebaud.github.io/v-phone-input/guide/migration).
+should follow the [v6 migration guide](https://paul-thebaud.github.io/v-phone-input/migration).
 
 ## Vue 2 support
 
@@ -47,7 +46,7 @@ on providing great accessibility. This new library aims to provide both.
 
 ## Contributing
 
-Please see [contributing guide](https://paul-thebaud.github.io/v-phone-input/guide/contributing)
+Please see [contributing guide](https://paul-thebaud.github.io/v-phone-input/contributing)
 for more details.
 
 ## Credits
