@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": ["**/*.vue", "**/*.ts", "**/*.html"]
+  },
+  "formatter": {
+    "indentStyle": "space"
+  },
+  "html": {
+    "parser": { "interpolation": true },
+    "formatter": { "enabled": true, "attributePosition": "multiline" },
+    "experimentalFullSupportEnabled": true
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.vue"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useImportType": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off"
+          }
+        }
+      }
+    }
+  ]
+}

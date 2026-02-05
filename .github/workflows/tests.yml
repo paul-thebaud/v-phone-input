@@ -7,92 +7,73 @@ on:
   schedule:
     - cron: '0 0 1 * *'
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  lint-build:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3.0.0
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: pnpm install
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/install
       - name: Lint
         run: pnpm lint
-      - name: Build package
-        run: pnpm lib:build
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/install
+      - name: Build
+        run: pnpm build
   unit-tests:
     name: unit-tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3.0.0
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: pnpm install
-      - name: Unit tests
-        run: pnpm test:unit:coverage
-      - name: Store unit coverage artifact
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/install
+      - name: Run unit tests
+        run: pnpm test
+      - name: Store coverage artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-unit
-          path: coverage-unit
+          path: coverage/unit
   e2e-tests:
     name: e2e-tests
     runs-on: ubuntu-latest
     steps:
-      - name: Install `Xvfb` and others to run browsers for end-to-end testing in local CI/CD simulations
-        if: ${{ env.ACT }}
-        run: apt-get -yq update && apt-get install -yq libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3.0.0
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: pnpm install
-      - name: E2E tests
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/install
+      - name: Install Cypress binary
+        run: pnpm cypress install
+      - name: Run E2E tests
         uses: cypress-io/github-action@v6
         with:
-          build: pnpm demo:build --config vite.e2e.config.ts
-          start: pnpm demo:preview
-          wait-on: http://127.0.0.1:4173
-      - name: Store e2e coverage artifact
+          component: true
+      - name: Store coverage artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-e2e
-          path: coverage-e2e
+          path: coverage/e2e
   upload-coverage:
     name: upload-coverage
     needs: [ unit-tests, e2e-tests ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Download unit coverage artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v6
+      - name: Download unit coverage
+        uses: actions/download-artifact@v6
         with:
           name: coverage-unit
           path: coverage/coverage-unit
-      - name: Download e2e coverage artifacts
-        uses: actions/download-artifact@v4
+      - name: Download e2e coverage
+        uses: actions/download-artifact@v6
         with:
           name: coverage-e2e
           path: coverage/coverage-e2e
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5
         with:
           directory: coverage
           token: ${{ secrets.CODECOV_TOKEN }}
