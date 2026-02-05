@@ -9,7 +9,6 @@ import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 import "./style.css";
 import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
-import Banner from "../../components/Banner.vue";
 
 const vuetify = createVuetify({
   components,
@@ -48,7 +47,7 @@ export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
-      "layout-top": () => h(Banner),
+      // "layout-top": () => h(Banner),
     });
   },
   enhanceApp({ app }) {
