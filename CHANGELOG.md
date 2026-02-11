@@ -1,5 +1,10 @@
 # Change log
 
+## 6.0.1
+
+- fix: outlined inline end border display when country input focused (see #66)
+- fix: shared properties forwarding to phone input (see #67)
+
 ## 6.0.0
 
 v6 introduces multiple improvements and breaking changes, which won't be listed here.
