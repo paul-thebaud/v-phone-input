@@ -25,14 +25,12 @@
     &.v-field--variant-outlined {
       --v-input-chips-margin-top: 3px;
       --v-input-chips-margin-bottom: 3px;
+
+      margin-inline-end: -1px;
     }
 
     &.v-field--variant-outlined .v-field__outline .v-field__outline__end {
       border-radius: 0;
-    }
-
-    &.v-field--variant-outlined:not(.v-phone-input__country__input--focused) .v-field__outline .v-field__outline__end {
-      border-inline-end-width: 0;
     }
 
     .v-field__input {
