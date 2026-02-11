@@ -2,6 +2,8 @@
 
 ## 6.0.1
 
+### Bug fixes
+
 - fix: outlined inline end border display when country input focused (see #66)
 - fix: shared properties forwarding to phone input (see #67)
 
