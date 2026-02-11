@@ -193,6 +193,7 @@ const forwardedProps = computed(() =>
 );
 
 const phoneInputProps = computed(() => ({
+  ...pick(props, vPhoneInputSharedProperties),
   ...forwardedProps.value,
   ref: phoneInputRef,
   modelValue: phone.value,
