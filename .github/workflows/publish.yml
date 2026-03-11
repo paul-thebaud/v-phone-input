@@ -6,7 +6,7 @@ on:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
 
 jobs:
   publish:
@@ -18,18 +18,14 @@ jobs:
       - uses: ./.github/actions/install
       - name: Build
         run: pnpm build
-      - name: Build docs
-        if: ${{ !github.event.release.prerelease }}
-        run: pnpm docs:build --base=/v-phone-input/
       - name: Publish prerelease
         if: ${{ github.event.release.prerelease }}
         run: pnpm publish --no-git-checks --tag next
       - name: Publish release
         if: ${{ !github.event.release.prerelease }}
         run: pnpm publish --no-git-checks
-      - name: Deploy docs
-        if: ${{ !github.event.release.prerelease }}
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: docs/.vitepress/dist/
+
+  deploy:
+    needs: [ publish ]
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
