@@ -104,8 +104,12 @@ export default defineConfig({
         ],
       },
       {
-        text: "v6.x",
+        text: "v7.x",
         items: [
+          {
+            text: "v6.x / Vuetify prior 4.0",
+            link: "https://github.com/paul-thebaud/v-phone-input/tree/v6.0.1/docs",
+          },
           {
             text: "v5.x / Vuetify prior 3.10",
             link: "https://github.com/paul-thebaud/v-phone-input/blob/v5.1.1/README.md",
@@ -124,7 +128,7 @@ export default defineConfig({
         link: "/introduction",
       },
       {
-        text: "Migration to v6",
+        text: "Migration to v7 and v6",
         link: "/migration",
       },
       {

@@ -297,13 +297,13 @@ defineExpose<VPhoneInputExposed<Country, CountryInputComponent>>({
             <template #prepend>
               <slot
                 name="country-display"
-                :country="itemProps.item.raw"
+                :country="itemProps.item"
                 :decorative="true"
               >
                 <component
                   :is="countryDisplayComponentOption"
                   v-if="countryDisplayComponentOption"
-                  :country="itemProps.item.raw"
+                  :country="itemProps.item"
                   :decorative="true"
                 />
               </slot>
@@ -311,23 +311,23 @@ defineExpose<VPhoneInputExposed<Country, CountryInputComponent>>({
             <template #title>
               <slot
                 name="country-name"
-                :country="itemProps.item.raw"
+                :country="itemProps.item"
               >
                 <span class="v-phone-input__country__title">
-                  {{ itemProps.item.raw.name }}
+                  {{ itemProps.item.name }}
                 </span>
               </slot>
             </template>
             <template #append>
               <slot
                 name="country-append"
-                :country="itemProps.item.raw"
+                :country="itemProps.item"
               >
                 <span
                   v-if="countryDisplayComponentOption"
-                  class="v-phone-input__country__append text-body-2"
+                  class="v-phone-input__country__append"
                 >
-                  +{{ itemProps.item.raw.dialCode }}
+                  +{{ itemProps.item.dialCode }}
                 </span>
               </slot>
             </template>

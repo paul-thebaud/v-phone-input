@@ -1,5 +1,11 @@
 # Change log
 
+## 7.0.0
+
+### BREAKING CHANGES
+
+- Upgraded Vuetify from v3.0.0 to v4.0.0
+
 ## 6.0.1
 
 ### Bug fixes

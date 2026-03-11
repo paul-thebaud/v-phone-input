@@ -34,7 +34,7 @@ should follow the [v6 migration guide](https://paul-thebaud.github.io/v-phone-in
 
 ## Vue 2 support
 
-Since v3, VPhoneInput is only available in Vuetify 3 and Vue 3. If you are using
+Since v3, VPhoneInput is only available in Vuetify 3/4 and Vue 3. If you are using
 Vuetify 2 and Vue 2, you can still
 [install the package's v2](https://github.com/paul-thebaud/v-phone-input/tree/2.x.x).
 

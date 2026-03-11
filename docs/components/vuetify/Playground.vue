@@ -109,7 +109,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <v-app class="playground">
+  <v-app class="playground vp-raw">
     <v-row>
       <v-col
         cols="12"

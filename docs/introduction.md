@@ -20,14 +20,14 @@ If you would like to try VPhoneInput, you can check out:
 - [the Vuetify component StackBlitz project](https://stackblitz.com/edit/v-phone-input?file=src%2FApp.vue&terminal=dev)
 - [the Vuetify component docs' playground](/vuetify/playground)
 
-## Migration to v6
+## Migration to v7 and v6
 
-If you are using VPhoneInput v5 and would you like to migrate to v6, you
-should follow the [v6 migration guide](/migration).
+If you are using VPhoneInput v5 and would you like to migrate to v7 and v6, you
+should follow the [v7 and v6 migration guide](/migration).
 
 ## Vue 2 support
 
-Since v3, VPhoneInput is only available in Vuetify 3 and Vue 3. If you are using
+Since v3, VPhoneInput is only available in Vuetify 3/4 and Vue 3. If you are using
 Vuetify 2 and Vue 2, you can still
 [install the package's v2](https://github.com/paul-thebaud/v-phone-input/tree/2.x.x).
 

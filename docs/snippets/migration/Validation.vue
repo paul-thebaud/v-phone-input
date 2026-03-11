@@ -21,7 +21,7 @@ const rules = computed(() => [
   // [!code ++:4]
   (value) => {
     const phoneObject = parsePhoneNumber(value ?? '', { regionCode: country.value });
-    // equivalent in v6:
+    // equivalent in v7/v6:
     console.log(phone, country, label, example);
   },
 ]);

@@ -1,4 +1,4 @@
-# Migration to v6
+# Migration to v7 and v6
 
 ## Before reading
 
@@ -12,7 +12,10 @@ you can also apply those changes to the component properties if that's what you 
 
 ## Vue and Vuetify support
 
-VPhoneInput now requires Vue **`v3.5.0` or up**, and Vuetify **`v3.10.7` or up**.
+VPhoneInput now requires Vue **`v3.5.0` or up**, and Vuetify:
+
+- **`v4.0.0` or up** when using VPhoneInput `v7`.
+- **`v3.10.7` or up** when using VPhoneInput `v6`.
 
 ## Better TypeScript support
 

@@ -18,9 +18,9 @@ describe("usePhoneInput", () => {
 
     // Countries.
 
-    expect(wrapper.vm.countries.length).toStrictEqual(243);
+    expect(wrapper.vm.countries.length).toStrictEqual(245);
     expect(wrapper.vm.preferredCountries.length).toStrictEqual(0);
-    expect(wrapper.vm.unpreferredCountries.length).toStrictEqual(243);
+    expect(wrapper.vm.unpreferredCountries.length).toStrictEqual(245);
     expect(wrapper.vm.countries[0]).toStrictEqual({
       iso2: "AF",
       dialCode: "93",
