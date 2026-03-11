@@ -35,7 +35,7 @@ jobs:
       - name: Run unit tests
         run: pnpm test
       - name: Store coverage artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-unit
           path: coverage/unit
@@ -52,7 +52,7 @@ jobs:
         with:
           component: true
       - name: Store coverage artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-e2e
           path: coverage/e2e
@@ -63,12 +63,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Download unit coverage
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: coverage-unit
           path: coverage/coverage-unit
       - name: Download e2e coverage
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: coverage-e2e
           path: coverage/coverage-e2e

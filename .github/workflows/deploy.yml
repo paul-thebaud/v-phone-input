@@ -12,7 +12,7 @@ jobs:
       - uses: ./.github/actions/install
       - name: Build
         run: pnpm docs:build --base=/v-phone-input/
-      - name: Publish
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
