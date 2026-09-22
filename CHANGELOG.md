@@ -1,5 +1,11 @@
 # Change log
 
+## 7.0.1
+
+### Bug fixes
+
+- Upgraded Vuetify peer dependency from v4.0.1 to v4.2.1 (see #71)
+
 ## 7.0.0
 
 ### BREAKING CHANGES
