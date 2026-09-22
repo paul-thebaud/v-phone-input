@@ -85,15 +85,14 @@
     "vitest": "^4.0.18",
     "vue": "^3.5.30",
     "vue-component-type-helpers": "^3.2.5",
-    "vue-tsc": "^3.2.5",
-    "vuetify": "^4.0.1"
+    "vue-tsc": "^3.2.5"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
   },
   "optionalDependencies": {
     "flag-icons": "^7.5.0",
-    "vuetify": "^4.0.1",
+    "vuetify": "^4.2.0",
     "world-flags-sprite": "^0.0.2"
   },
   "engines": {
