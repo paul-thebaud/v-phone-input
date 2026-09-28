@@ -1,10 +1,16 @@
 # Change log
 
+## 7.0.2
+
+### Bug fixes
+
+- fix: VPhoneInput component type by creating a type alias for SFC (see #71)
+
 ## 7.0.1
 
 ### Bug fixes
 
-- Upgraded Vuetify peer dependency from v4.0.1 to v4.2.1 (see #71)
+- fix: upgraded Vuetify peer dependency from v4.0.1 to v4.2.1 (see #71)
 
 ## 7.0.0
 

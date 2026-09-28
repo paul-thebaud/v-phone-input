@@ -4,7 +4,11 @@ import { h, type VNode } from "vue";
 import { VApp, VContainer, VMain, type VSelect } from "vuetify/components";
 import { createVuetify } from "vuetify/framework";
 import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
-import { selectPhoneCountryInput, VPhoneInput, type VPhoneInputCountryObject } from "../../src";
+import {
+  selectPhoneCountryInput,
+  VPhoneInput,
+  type VPhoneInputCountryObject,
+} from "../../src";
 import makePhoneInputTestTools from "./makePhoneInputTestTools";
 
 const mountInApp = (vNode: VNode) =>

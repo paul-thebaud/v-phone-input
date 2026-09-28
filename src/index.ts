@@ -1,7 +1,7 @@
 import "./scss/v-phone-input.scss";
 import VPhoneCountryFlagSprite from "./components/VPhoneCountryFlagSprite";
 import VPhoneCountryFlagSvg from "./components/VPhoneCountryFlagSvg";
-import VPhoneInput from "./components/VPhoneInput.vue";
+import VPhoneInput from "./components/VPhoneInput.ts";
 import usePhoneInput from "./composables/usePhoneInput";
 import createVPhoneInput from "./createVPhoneInput";
 import vPhoneInputSharedProperties from "./internals/vPhoneInputSharedProperties";

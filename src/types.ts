@@ -439,11 +439,11 @@ export interface VPhoneInputEmits<Country extends VPhoneInputCountryObject>
   /**
    * Current phone number has been updated.
    */
-  "update:model-value": [string | null | undefined];
+  "update:model-value": [value: string | null | undefined];
   /**
    * Currently selected country has been updated.
    */
-  "update:country": [string];
+  "update:country": [value: string];
 }
 
 /**

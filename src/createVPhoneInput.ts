@@ -1,5 +1,5 @@
 import type { Plugin } from "vue";
-import VPhoneInput from "./components/VPhoneInput.vue";
+import VPhoneInput from "./components/VPhoneInput.ts";
 import { V_PHONE_INPUT_INJECTION_KEY } from "./internals/injectPhoneInputPluginOptions";
 import type {
   VPhoneCountryInputComponent,

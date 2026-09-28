@@ -7,9 +7,7 @@ import { selectPhoneCountryInput, VPhoneInput } from "../../src";
 
 <template>
   <v-phone-input v-bind="selectPhoneCountryInput">
-    <template #country-input:prepend-inner>
-      P
-    </template>
+    <template #country-input:prepend-inner> P </template>
     <template #country-display="{ country, decorative }">
       {{ country.iso2 }}
     </template>

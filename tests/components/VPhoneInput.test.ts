@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import type { ParsedPhoneNumber } from "awesome-phonenumber";
 import { expect } from "vitest";
 import { defineComponent, h, ref, shallowRef } from "vue";
-import { type VSelect } from "vuetify/components";
+import type { VSelect } from "vuetify/components";
 import { createVuetify } from "vuetify/framework";
 import {
   createVPhoneInput,
