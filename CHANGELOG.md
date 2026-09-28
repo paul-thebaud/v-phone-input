@@ -5,6 +5,7 @@
 ### Bug fixes
 
 - fix: VPhoneInput component type by creating a type alias for SFC (see #71)
+- fix: add type assertions for Vuetify components exports in defaults (see #71)
 
 ## 7.0.1
 
