@@ -110,6 +110,7 @@ const {
   validate: toRef(props, "validate"),
   example: toRef(props, "example"),
   exampleFormat: toRef(props, "exampleFormat"),
+  exampleType: toRef(props, "exampleType"),
   countryLabel: countryLabelOption,
   countryAriaLabel: countryAriaLabelOption,
   label: toRef(props, "label"),

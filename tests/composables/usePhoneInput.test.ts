@@ -99,7 +99,7 @@ describe("usePhoneInput", () => {
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toHaveProperty(
-        'message',
+        "message",
         "[VPhoneInput] Countries list must contain at least one country.",
       );
     }
@@ -136,5 +136,58 @@ describe("usePhoneInput", () => {
     expect(wrapper.vm.findCountry("Fr")).toStrictEqual(fr);
     expect(wrapper.vm.findCountry("FR")).toStrictEqual(fr);
     expect(wrapper.vm.findCountry("BE")).toStrictEqual(be);
+  });
+
+  it("supports customizing exampleType", async () => {
+    const exampleType = ref<"fixed-line" | "mobile">("fixed-line");
+
+    const wrapper = mount(
+      defineComponent({
+        template: "< />",
+        setup: () =>
+          usePhoneInput({
+            modelValue: ref(),
+            defaultCountry: "FR",
+            exampleType,
+          }),
+      }),
+    );
+
+    expect(wrapper.vm.example).toStrictEqual("01 23 45 67 89");
+    expect(wrapper.vm.invalidMessage).toStrictEqual(
+      'The "Phone" field is not a valid phone number (example: 01 23 45 67 89).',
+    );
+
+    exampleType.value = "mobile";
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.vm.example).toStrictEqual("06 12 34 56 78");
+    expect(wrapper.vm.invalidMessage).toStrictEqual(
+      'The "Phone" field is not a valid phone number (example: 06 12 34 56 78).',
+    );
+  });
+
+  it("supports customizing exampleType via plugin options", () => {
+    const wrapper = mount(
+      defineComponent({
+        template: "< />",
+        setup: () =>
+          usePhoneInput({
+            modelValue: ref(),
+            defaultCountry: "FR",
+          }),
+      }),
+      {
+        global: {
+          provide: {
+            [V_PHONE_INPUT_INJECTION_KEY]: {
+              exampleType: "mobile",
+            },
+          },
+        },
+      },
+    );
+
+    expect(wrapper.vm.example).toStrictEqual("06 12 34 56 78");
   });
 });

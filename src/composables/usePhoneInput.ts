@@ -40,6 +40,7 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
     options,
     displayFormatOption,
   );
+  const exampleTypeOption = useOption("exampleType", options);
   const displayFormatDelayOption = useOption("displayFormatDelay", options);
   const displayFormatOnBlurOption = useOption(
     "displayFormatOnBlur",
@@ -303,6 +304,7 @@ export default function usePhoneInput<Country extends VPhoneInputCountryObject>(
       ...options,
       country: countryObject,
       exampleFormat: exampleFormatOption,
+      exampleType: exampleTypeOption,
     }),
     countryInputRef,
     phoneInputRef,
