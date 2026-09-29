@@ -223,4 +223,27 @@ describe("VPhoneInput", () => {
     expect(input.vm.resetValidation).toBeTypeOf("function");
     expect(input.vm.validate).toBeTypeOf("function");
   });
+
+  it("uses exampleType prop for example generation", async () => {
+    const input = mount(VPhoneInput, {
+      props: {
+        ...selectPhoneCountryInput,
+        defaultCountry: "FR",
+        exampleType: "mobile",
+        displayFormatDelay: 0,
+      },
+      global: {
+        plugins: [vuetify],
+      },
+    });
+
+    await input
+      .get('.v-phone-input__phone__input input[type="tel"]')
+      .setValue("+33712345678");
+
+    expect(input.vm.isValid).toStrictEqual(false);
+    expect(input.vm.errorMessages).toStrictEqual([
+      'The "Phone" field is not a valid phone number (example: 06 12 34 56 78).',
+    ]);
+  });
 });
