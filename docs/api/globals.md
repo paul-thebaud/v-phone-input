@@ -32,6 +32,7 @@
 - [VPhoneInputExtractComposableOptions](type-aliases/VPhoneInputExtractComposableOptions.md)
 - [VPhoneInputMessage](type-aliases/VPhoneInputMessage.md)
 - [VPhoneInputMessageFactory](type-aliases/VPhoneInputMessageFactory.md)
+- [VPhoneInputOptions](type-aliases/VPhoneInputOptions.md)
 
 ## Variables
 

@@ -30,7 +30,7 @@ export default function makePhoneInputMessagesProps<
      * `'mobile'`
      */
     exampleType: {
-      type: [String, null] as PropType<PhoneNumberTypes | null>,
+      type: [String] as PropType<PhoneNumberTypes>,
     },
     /**
      * Customize the phone input example.

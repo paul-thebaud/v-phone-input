@@ -33,7 +33,7 @@ Component props for `VPhoneInput` (without models properties).
 
 > `readonly` `optional` **ariaLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:43
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:52
 
 Customize the phone input `aria-label`.
 
@@ -67,7 +67,7 @@ given locale (or `en`) translated names using `Intl.DisplayNames`.
 
 > `readonly` `optional` **countryAriaLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:61
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:70
 
 Customize the country input `aria-label`.
 
@@ -135,7 +135,7 @@ Country input component specific props.
 
 > `readonly` `optional` **countryLabel**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:52
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:61
 
 Customize the country input label.
 
@@ -304,7 +304,7 @@ When using the composable, it is required to bind `countryInputRef` and
 
 > `readonly` `optional` **example**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`, `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:28
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:37
 
 Customize the phone input example.
 
@@ -337,6 +337,24 @@ Using `null` will disable formating example phone numbers.
 #### Inherited from
 
 `Readonly.exampleFormat`
+
+***
+
+### exampleType?
+
+> `readonly` `optional` **exampleType**: [`PhoneNumberTypes`](https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#phone-number-types)
+
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:28
+
+Type of phone number to use for example phone.
+
+#### Default Value
+
+`'mobile'`
+
+#### Inherited from
+
+`Readonly.exampleType`
 
 ***
 
@@ -424,7 +442,7 @@ from available countries.
 
 > `readonly` `optional` **invalidMessage**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:77
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:86
 
 Customize the phone input invalid message returned by the
 `validate` function generated rule.
@@ -443,7 +461,7 @@ Customize the phone input invalid message returned by the
 
 > `readonly` `optional` **label**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`, `undefined`\>
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:37
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:46
 
 Customize the phone input label.
 
@@ -482,7 +500,7 @@ Using `null` will disable format feature and keep the input as is.
 
 ### phoneProps?
 
-> `readonly` `optional` **phoneProps**: [`NonNullable`](https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype)\<[`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<\{ `active`: `boolean`; `autofocus`: `boolean`; `centerAffix`: `boolean`; `clearable`: `boolean`; `clearIcon`: `IconValue`; `density`: `Density`; `direction`: `"horizontal"` \| `"vertical"`; `dirty`: `boolean`; `disabled`: `boolean`; `error`: `boolean`; `errorMessages`: `string` \| readonly `string`[] \| `null`; `flat`: `boolean`; `focused`: `boolean`; `glow`: `boolean`; `hideSpinButtons`: `boolean`; `maxErrors`: `string` \| `number`; `messages`: `string` \| readonly `string`[]; `persistentClear`: `boolean`; `persistentCounter`: `boolean`; `persistentHint`: `boolean`; `persistentPlaceholder`: `boolean`; `readonly`: `boolean` \| `null`; `reverse`: `boolean`; `rounded`: `string` \| `number` \| `boolean`; `rules`: readonly (`string` \| `boolean` \| `PromiseLike`\<`ValidationResult`\> \| \[`string`, `any`, `string`?\] \| (`value`) => `ValidationResult` \| (`value`) => `PromiseLike`\<`ValidationResult`\>)[]; `singleLine`: `boolean`; `style`: `StyleValue`; `tile`: `boolean`; `type`: `string`; `variant`: `"filled"` \| `"outlined"` \| `"plain"` \| `"solo"` \| `"solo-filled"` \| `"solo-inverted"` \| `"underlined"`; \}\> & [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)\<`object` & `VNodeProps` & `AllowedComponentProps` & `ComponentCustomProps`, `"type"` \| `"active"` \| `"autofocus"` \| `"centerAffix"` \| `"clearIcon"` \| `"clearable"` \| `"density"` \| `"direction"` \| `"dirty"` \| `"disabled"` \| `"error"` \| `"errorMessages"` \| `"flat"` \| `"focused"` \| `"glow"` \| `"hideSpinButtons"` \| `"maxErrors"` \| `"messages"` \| `"persistentClear"` \| `"persistentCounter"` \| `"persistentHint"` \| `"persistentPlaceholder"` \| `"readonly"` \| `"reverse"` \| `"rounded"` \| `"rules"` \| `"singleLine"` \| `"style"` \| `"tile"` \| `"variant"`\>\>
+> `readonly` `optional` **phoneProps**: [`NonNullable`](https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullabletype)\<[`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<\{ `active`: `boolean`; `autofocus`: `boolean`; `centerAffix`: `boolean`; `clearable`: `boolean`; `clearIcon`: `IconValue`; `counter`: `string` \| `number` \| `boolean` \| `null`; `density`: `Density`; `detailsActive`: `boolean`; `dirty`: `boolean`; `disabled`: `boolean`; `error`: `boolean`; `errorMessages`: `string` \| readonly `string`[] \| `null`; `flat`: `boolean`; `focused`: `boolean`; `glow`: `boolean`; `hideSpinButtons`: `boolean`; `indentDetails`: `boolean`; `maxErrors`: `string` \| `number`; `messages`: `string` \| readonly `string`[]; `persistentClear`: `boolean`; `persistentCounter`: `boolean`; `persistentHint`: `boolean`; `persistentPlaceholder`: `boolean`; `readonly`: `boolean` \| `null`; `reverse`: `boolean`; `rounded`: `string` \| `number` \| `boolean`; `rules`: readonly (`string` \| `boolean` \| `PromiseLike`\<`ValidationResult`\> \| \[`string`, `any`, `string`?\] \| (`value`) => `ValidationResult` \| (`value`) => `PromiseLike`\<`ValidationResult`\>)[]; `singleLine`: `boolean`; `style`: `StyleValue`; `tile`: `boolean`; `type`: `string`; `variant`: `"outlined"` \| `"plain"` \| `"filled"` \| `"solo"` \| `"solo-filled"` \| `"solo-inverted"` \| `"underlined"`; \}\> & [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)\<`object` & `VNodeProps` & `AllowedComponentProps` & `ComponentCustomProps`, `"type"` \| `"active"` \| `"autofocus"` \| `"centerAffix"` \| `"clearIcon"` \| `"clearable"` \| `"counter"` \| `"density"` \| `"detailsActive"` \| `"dirty"` \| `"disabled"` \| `"error"` \| `"errorMessages"` \| `"flat"` \| `"focused"` \| `"glow"` \| `"hideSpinButtons"` \| `"indentDetails"` \| `"maxErrors"` \| `"messages"` \| `"persistentClear"` \| `"persistentCounter"` \| `"persistentHint"` \| `"persistentPlaceholder"` \| `"readonly"` \| `"reverse"` \| `"rounded"` \| `"rules"` \| `"singleLine"` \| `"style"` \| `"tile"` \| `"variant"`\>\>
 
 Defined in: dist/props/makePhoneInputProps.d.ts:51
 
@@ -498,7 +516,7 @@ Properties to pass to the country input (`VTextField`).
 
 > `readonly` `optional` **placeholder**: [`VPhoneInputMessage`](../type-aliases/VPhoneInputMessage.md)\<`Country`\> \| `null`
 
-Defined in: dist/props/makePhoneInputMessagesProps.d.ts:67
+Defined in: dist/props/makePhoneInputMessagesProps.d.ts:76
 
 Customize the phone input placeholder.
 

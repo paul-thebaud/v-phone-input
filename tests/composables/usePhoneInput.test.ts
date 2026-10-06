@@ -36,14 +36,14 @@ describe("usePhoneInput", () => {
 
     // Messages.
 
-    expect(wrapper.vm.example).toStrictEqual("023 456 7890");
+    expect(wrapper.vm.example).toStrictEqual("070 123 4567");
     expect(wrapper.vm.label).toStrictEqual("Phone");
     expect(wrapper.vm.ariaLabel).toStrictEqual(undefined);
     expect(wrapper.vm.countryLabel).toStrictEqual('Country for "Phone"');
     expect(wrapper.vm.countryAriaLabel).toStrictEqual(undefined);
     expect(wrapper.vm.placeholder).toStrictEqual(undefined);
     expect(wrapper.vm.invalidMessage).toStrictEqual(
-      'The "Phone" field is not a valid phone number (example: 023 456 7890).',
+      'The "Phone" field is not a valid phone number (example: 070 123 4567).',
     );
   });
 
@@ -139,7 +139,7 @@ describe("usePhoneInput", () => {
   });
 
   it("supports customizing exampleType", async () => {
-    const exampleType = ref<"fixed-line" | "mobile">("fixed-line");
+    const exampleType = ref<"fixed-line" | "mobile">();
 
     const wrapper = mount(
       defineComponent({
@@ -152,6 +152,14 @@ describe("usePhoneInput", () => {
           }),
       }),
     );
+
+    expect(wrapper.vm.example).toStrictEqual("06 12 34 56 78");
+    expect(wrapper.vm.invalidMessage).toStrictEqual(
+      'The "Phone" field is not a valid phone number (example: 06 12 34 56 78).',
+    );
+
+    exampleType.value = "fixed-line";
+    await wrapper.vm.$nextTick();
 
     expect(wrapper.vm.example).toStrictEqual("01 23 45 67 89");
     expect(wrapper.vm.invalidMessage).toStrictEqual(

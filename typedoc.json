@@ -18,8 +18,8 @@
   "docsRoot": "./docs",
   "externalSymbolLinkMappings": {
     "awesome-phonenumber": {
-      "PhoneNumberFormat": "https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#phone-number-formats",
       "PhoneNumberTypes": "https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#phone-number-types",
+      "PhoneNumberFormat": "https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#phone-number-formats",
       "ParsedPhoneNumber": "https://github.com/grantila/awesome-phonenumber?tab=readme-ov-file#basic-usage"
     },
     "vuetify": {

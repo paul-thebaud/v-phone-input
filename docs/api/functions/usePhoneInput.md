@@ -35,6 +35,7 @@ selection and another for phone number.
 - [displayFormatOnBlur](/api/interfaces/VPhoneInputComposableOptions#displayFormatOnBlur)
 - [example](/api/interfaces/VPhoneInputComposableOptions#example)
 - [exampleFormat](/api/interfaces/VPhoneInputComposableOptions#exampleFormat)
+- [exampleType](/api/interfaces/VPhoneInputComposableOptions#exampleType)
 - [excludeCountries](/api/interfaces/VPhoneInputComposableOptions#excludeCountries)
 - [guessCountry](/api/interfaces/VPhoneInputComposableOptions#guessCountry)
 - [includeCountries](/api/interfaces/VPhoneInputComposableOptions#includeCountries)

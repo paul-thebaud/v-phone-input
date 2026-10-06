@@ -22,39 +22,39 @@ Component slots for `VPhoneInput`.
 
 ### append?
 
-> `readonly` `optional` **append**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"append"`\]
+> `readonly` `optional` **append**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"append"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1122
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1162
 
 ***
 
 ### append-inner?
 
-> `readonly` `optional` **append-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"append-inner"`\]
+> `readonly` `optional` **append-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"append-inner"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1139
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1179
 
 ***
 
 ### clear?
 
-> `readonly` `optional` **clear**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"clear"`\]
+> `readonly` `optional` **clear**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"clear"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1131
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1171
 
 ***
 
 ### counter?
 
-> `readonly` `optional` **counter**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"counter"`\]
+> `readonly` `optional` **counter**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"counter"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1154
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1196
 
 ***
 
 ### country-append?
 
-> `readonly` `optional` **country-append**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-append"`\]
+> `readonly` `optional` **country-append**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-append"`\]
 
 Defined in: dist/types.d.ts:402
 
@@ -69,7 +69,7 @@ Country list item appended content.
 
 ### country-display?
 
-> `readonly` `optional` **country-display**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-display"`\]
+> `readonly` `optional` **country-display**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-display"`\]
 
 Defined in: dist/types.d.ts:373
 
@@ -89,109 +89,121 @@ Country display component from `countryDisplayComponent` property if available,
 
 ### country-input:append?
 
-> `optional` **country-input:append**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:append"`\]
+> `optional` **country-input:append**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:append"`\]
 
 ***
 
 ### country-input:append-inner?
 
-> `optional` **country-input:append-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:append-inner"`\]
+> `optional` **country-input:append-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:append-inner"`\]
 
 ***
 
 ### country-input:append-item?
 
-> `optional` **country-input:append-item**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:append-item"`\]
+> `optional` **country-input:append-item**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:append-item"`\]
 
 ***
 
 ### country-input:chip?
 
-> `optional` **country-input:chip**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:chip"`\]
+> `optional` **country-input:chip**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:chip"`\]
 
 ***
 
 ### country-input:clear?
 
-> `optional` **country-input:clear**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:clear"`\]
+> `optional` **country-input:clear**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:clear"`\]
 
 ***
 
 ### country-input:details?
 
-> `optional` **country-input:details**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:details"`\]
+> `optional` **country-input:details**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:details"`\]
 
 ***
 
 ### country-input:divider?
 
-> `optional` **country-input:divider**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:divider"`\]
+> `optional` **country-input:divider**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:divider"`\]
 
 ***
 
 ### country-input:item?
 
-> `optional` **country-input:item**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:item"`\]
+> `optional` **country-input:item**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:item"`\]
 
 ***
 
 ### country-input:label?
 
-> `optional` **country-input:label**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:label"`\]
+> `optional` **country-input:label**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:label"`\]
 
 ***
 
 ### country-input:loader?
 
-> `optional` **country-input:loader**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:loader"`\]
+> `optional` **country-input:loader**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:loader"`\]
+
+***
+
+### country-input:menu-footer?
+
+> `optional` **country-input:menu-footer**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:menu-footer"`\]
+
+***
+
+### country-input:menu-header?
+
+> `optional` **country-input:menu-header**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:menu-header"`\]
 
 ***
 
 ### country-input:message?
 
-> `optional` **country-input:message**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:message"`\]
+> `optional` **country-input:message**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:message"`\]
 
 ***
 
 ### country-input:no-data?
 
-> `optional` **country-input:no-data**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:no-data"`\]
+> `optional` **country-input:no-data**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:no-data"`\]
 
 ***
 
 ### country-input:prepend?
 
-> `optional` **country-input:prepend**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:prepend"`\]
+> `optional` **country-input:prepend**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:prepend"`\]
 
 ***
 
 ### country-input:prepend-inner?
 
-> `optional` **country-input:prepend-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:prepend-inner"`\]
+> `optional` **country-input:prepend-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:prepend-inner"`\]
 
 ***
 
 ### country-input:prepend-item?
 
-> `optional` **country-input:prepend-item**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:prepend-item"`\]
+> `optional` **country-input:prepend-item**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:prepend-item"`\]
 
 ***
 
 ### country-input:selection?
 
-> `optional` **country-input:selection**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:selection"`\]
+> `optional` **country-input:selection**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:selection"`\]
 
 ***
 
 ### country-input:subheader?
 
-> `optional` **country-input:subheader**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:subheader"`\]
+> `optional` **country-input:subheader**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-input:subheader"`\]
 
 ***
 
 ### country-name?
 
-> `readonly` `optional` **country-name**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-name"`\]
+> `readonly` `optional` **country-name**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-name"`\]
 
 Defined in: dist/types.d.ts:383
 
@@ -205,7 +217,7 @@ Country list item title.
 
 ### country-prepend?
 
-> `readonly` `optional` **country-prepend**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-prepend"`\]
+> `readonly` `optional` **country-prepend**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"country-prepend"`\]
 
 Defined in: dist/types.d.ts:392
 
@@ -219,54 +231,54 @@ Use the `country-display` slot with a decorative purpose.
 
 ### default?
 
-> `readonly` `optional` **default**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"default"`\]
+> `readonly` `optional` **default**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"default"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1151
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1191
 
 ***
 
 ### details?
 
-> `readonly` `optional` **details**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"details"`\]
+> `readonly` `optional` **details**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"details"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1125
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1165
 
 ***
 
 ### label?
 
-> `readonly` `optional` **label**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"label"`\]
+> `readonly` `optional` **label**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"label"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1142
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1182
 
 ***
 
 ### loader?
 
-> `readonly` `optional` **loader**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"loader"`\]
+> `readonly` `optional` **loader**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"loader"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1148
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1188
 
 ***
 
 ### message?
 
-> `readonly` `optional` **message**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"message"`\]
+> `readonly` `optional` **message**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"message"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1128
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1168
 
 ***
 
 ### prepend?
 
-> `readonly` `optional` **prepend**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"prepend"`\]
+> `readonly` `optional` **prepend**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"prepend"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1119
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1159
 
 ***
 
 ### prepend-inner?
 
-> `readonly` `optional` **prepend-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\<K\>\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"prepend-inner"`\]
+> `readonly` `optional` **prepend-inner**: [`Partial`](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)\<[`VPhoneInputCountrySlots`](VPhoneInputCountrySlots.md)\<`Country`\> & \{ \[K in string \| number \| symbol as K extends string ? \`country-input:$\{K\}\` : never\]: ComponentSlots\<CountryComponent\>\[K\] \} & `object`\>\[`"prepend-inner"`\]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1136
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1176

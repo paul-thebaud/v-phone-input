@@ -46,7 +46,7 @@ Country object value has been updated (computed from country input value).
 
 ### update:model-value
 
-> **update:model-value**: \[`string` \| `null` \| `undefined`\]
+> **update:model-value**: \[`string` \| `null`\]
 
 Defined in: dist/types.d.ts:336
 

@@ -30,11 +30,15 @@ export default function usePhoneInputMessages<
     options,
     "national" as const,
   );
-  const exampleTypeOption = useOption("exampleType", options);
+  const exampleTypeOption = useOption(
+    "exampleType",
+    options,
+    "mobile" as const,
+  );
   const exampleOption = useOption("example", options, () =>
     formatPhoneObject(
       exampleFormatOption.value,
-      getExample(country.value.iso2, exampleTypeOption.value ?? undefined),
+      getExample(country.value.iso2, exampleTypeOption.value),
     ),
   );
   const labelOption = useOption("label", options, "Phone");

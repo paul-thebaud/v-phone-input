@@ -4,7 +4,7 @@
 
 > `const` **autocompletePhoneCountryInput**: `object`
 
-Defined in: dist/utilities/autocompletePhoneCountryInput.d.ts:4
+Defined in: dist/utilities/autocompletePhoneCountryInput.d.ts:5
 
 Properties to pass to use a `VAutocomplete` country input for `VPhoneInput`.
 
@@ -12,7 +12,7 @@ Properties to pass to use a `VAutocomplete` country input for `VPhoneInput`.
 
 ### countryInputComponent
 
-> **countryInputComponent**: `Raw`
+> **countryInputComponent**: *typeof* [`VAutocomplete`](https://vuetifyjs.com/en/components/autocompletes/)
 
 ### countryInputComponentProps
 

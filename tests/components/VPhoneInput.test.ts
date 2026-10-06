@@ -216,7 +216,7 @@ describe("VPhoneInput", () => {
 
     expect(input.vm.isValid).toStrictEqual(false);
     expect(input.vm.errorMessages).toStrictEqual([
-      'The "Phone" field is not a valid phone number (example: 01 23 45 67 89).',
+      'The "Phone" field is not a valid phone number (example: 06 12 34 56 78).',
     ]);
 
     expect(input.vm.reset).toBeTypeOf("function");

@@ -20,7 +20,7 @@ Component slots forwarded to `VSelect` or `VAutocomplete`.
 
 > `readonly` `optional` **append**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1122
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1162
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1122
 
 > `readonly` `optional` **append-inner**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1139
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1179
 
 #### Parameters
 
@@ -56,7 +56,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1139
 
 > `readonly` `optional` **clear**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1131
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1171
 
 #### Parameters
 
@@ -74,7 +74,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1131
 
 > `readonly` `optional` **counter**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1154
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1196
 
 #### Parameters
 
@@ -148,6 +148,18 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1154
 
 ***
 
+### country-input:menu-footer
+
+> **country-input:menu-footer**: `ComponentSlots`\<`CountryInputComponent`\>\[`"menu-footer"`\]
+
+***
+
+### country-input:menu-header
+
+> **country-input:menu-header**: `ComponentSlots`\<`CountryInputComponent`\>\[`"menu-header"`\]
+
+***
+
 ### country-input:message
 
 > **country-input:message**: `ComponentSlots`\<`CountryInputComponent`\>\[`"message"`\]
@@ -192,9 +204,17 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1154
 
 ### default()?
 
-> `readonly` `optional` **default**: () => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
+> `readonly` `optional` **default**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1151
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1191
+
+#### Parameters
+
+##### arg
+
+###### id
+
+[`Readonly`](https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype)\<`Ref`\<`string`\>\>
 
 #### Returns
 
@@ -206,7 +226,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1151
 
 > `readonly` `optional` **details**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1125
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1165
 
 #### Parameters
 
@@ -224,7 +244,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1125
 
 > `readonly` `optional` **label**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1142
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1182
 
 #### Parameters
 
@@ -242,7 +262,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1142
 
 > `readonly` `optional` **loader**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1148
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1188
 
 #### Parameters
 
@@ -260,7 +280,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1148
 
 > `readonly` `optional` **message**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1128
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1168
 
 #### Parameters
 
@@ -278,7 +298,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1128
 
 > `readonly` `optional` **prepend**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1119
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1159
 
 #### Parameters
 
@@ -296,7 +316,7 @@ Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1119
 
 > `readonly` `optional` **prepend-inner**: (`arg`) => `VNode`\<`RendererNode`, `RendererElement`, \{\[`key`: `string`\]: `any`; \}\>[]
 
-Defined in: node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1136
+Defined in: node\_modules/.pnpm/vuetify@4.2.1\_typescript@5.9.3\_vite-plugin-vuetify@2.1.3\_vue@3.5.30\_typescript@5.9.3\_/node\_modules/vuetify/lib/components/VTextField/VTextField.d.ts:1176
 
 #### Parameters
 

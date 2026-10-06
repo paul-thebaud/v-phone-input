@@ -2,7 +2,7 @@
 
 # Variable: vPhoneInputSharedProperties
 
-> `const` **vPhoneInputSharedProperties**: readonly \[`"variant"`, `"flat"`, `"tile"`, `"density"`, `"singleLine"`, `"hideDetails"`, `"direction"`, `"reverse"`, `"color"`, `"bgColor"`, `"theme"`, `"disabled"`, `"readonly"`, `"rounded"`\]
+> `const` **vPhoneInputSharedProperties**: readonly \[`"variant"`, `"flat"`, `"tile"`, `"density"`, `"singleLine"`, `"hideDetails"`, `"reverse"`, `"color"`, `"bgColor"`, `"theme"`, `"disabled"`, `"readonly"`, `"rounded"`\]
 
 Defined in: dist/internals/vPhoneInputSharedProperties.d.ts:6
 

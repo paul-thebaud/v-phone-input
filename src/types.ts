@@ -228,10 +228,6 @@ export interface VPhoneInputMessagesComposableOptions<
    * Country to resolve messages with.
    */
   readonly country: MaybeRef<Country>;
-  /**
-   * Phone number type to use for example phone.
-   */
-  readonly exampleType?: MaybeRef<PhoneNumberTypes | null | undefined>;
 }
 
 /**
@@ -316,10 +312,6 @@ export interface VPhoneInputComposableOptions<
   readonly phoneInputRef?: Ref<
     { $el: HTMLElement } | HTMLElement | null | undefined
   >;
-  /**
-   * Phone number type to use for example phone.
-   */
-  readonly exampleType?: MaybeRef<PhoneNumberTypes | null | undefined>;
 }
 
 /**
@@ -602,12 +594,7 @@ export interface VPhoneInputExposed<
 export interface VPhoneInputPluginOptions<
   Country extends VPhoneInputCountryObject,
   CountryInputComponent extends VPhoneCountryInputComponent,
-> extends VPhoneInputNonModelProps<Country, CountryInputComponent> {
-  /**
-   * Phone number type to use for example phone.
-   */
-  readonly exampleType?: PhoneNumberTypes | null | undefined;
-}
+> extends VPhoneInputNonModelProps<Country, CountryInputComponent> {}
 
 /**
  * Alias for `VPhoneInputPluginOptions`.
@@ -619,5 +606,3 @@ export type VPhoneInputOptions<
   CountryInputComponent extends
     VPhoneCountryInputComponent = VPhoneCountryInputComponent,
 > = VPhoneInputPluginOptions<Country, CountryInputComponent>;
-
-export type { PhoneNumberTypes };
