@@ -1,4 +1,4 @@
-import type { PhoneNumberFormat } from "awesome-phonenumber";
+import type { PhoneNumberFormat, PhoneNumberTypes } from "awesome-phonenumber";
 import type { PropType } from "vue";
 import type { VPhoneInputCountryObject, VPhoneInputMessage } from "../types.ts";
 
@@ -22,6 +22,15 @@ export default function makePhoneInputMessagesProps<
      */
     exampleFormat: {
       type: [String, null] as PropType<PhoneNumberFormat | null>,
+    },
+    /**
+     * Type of phone number to use for example phone.
+     *
+     * @defaultValue
+     * `'mobile'`
+     */
+    exampleType: {
+      type: [String, null] as PropType<PhoneNumberTypes | null>,
     },
     /**
      * Customize the phone input example.

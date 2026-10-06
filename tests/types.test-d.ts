@@ -14,10 +14,17 @@ describe("types", () => {
   it("supports defaults and generic countries in createVPhoneInput()", () => {
     createVPhoneInput({
       ...selectPhoneCountryInput,
+      exampleType: "mobile",
       countryProps: {
         filterMode: "union",
       },
       invalidMessage: ({ country }) => country.iso2,
+    });
+
+    createVPhoneInput({
+      ...selectPhoneCountryInput,
+      // @ts-expect-error
+      exampleType: "invalid",
     });
 
     createVPhoneInput({
@@ -58,10 +65,17 @@ describe("types", () => {
   it("supports defaults and generic countries in providePhoneInputOptions()", () => {
     providePhoneInputOptions({
       ...selectPhoneCountryInput,
+      exampleType: "mobile",
       countryProps: {
         filterMode: "union",
       },
       invalidMessage: ({ country }) => country.iso2,
+    });
+
+    providePhoneInputOptions({
+      ...selectPhoneCountryInput,
+      // @ts-expect-error
+      exampleType: "invalid",
     });
 
     providePhoneInputOptions({
@@ -101,10 +115,16 @@ describe("types", () => {
 
   it("supports defaults in VPhoneInput", () => {
     h(VPhoneInput<VPhoneInputCountryObject>, {
+      exampleType: "mobile",
       countryProps: {
         filterMode: "union",
       },
       invalidMessage: ({ country }) => country.iso2,
+    });
+
+    h(VPhoneInput<VPhoneInputCountryObject>, {
+      // @ts-expect-error
+      exampleType: "invalid",
     });
 
     h(VPhoneInput<VPhoneInputCountryObject>, {
@@ -207,7 +227,14 @@ describe("types", () => {
   it("supports defaults and generic countries in usePhoneInput()", () => {
     usePhoneInput({
       modelValue: ref(),
+      exampleType: "mobile",
       invalidMessage: ({ country }) => country.iso2,
+    });
+
+    usePhoneInput({
+      modelValue: ref(),
+      // @ts-expect-error
+      exampleType: "invalid",
     });
 
     usePhoneInput({

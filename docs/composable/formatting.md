@@ -17,13 +17,16 @@ using the appropriate properties or options:
   used for internal phone input value (e.g. passed through `v-model`)
 - [`exampleFormat`](/api/interfaces/VPhoneInputProps#exampleFormat) defaults to
   `displayFormat`, and will change the format used for examples inside labels (e.g. invalid message)
+- [`exampleType`](/api/interfaces/VPhoneInputProps#exampleType) defaults to
+  `undefined` (`'mobile'`), and will change the phone number type used for examples inside labels (e.g. invalid message)
 
 ```ts [app.ts]
 const vPhoneInput = createVPhoneInput({
-  // [!code ++:3]
+  // [!code ++:4]
   displayFormat: 'international',
   modelFormat: 'rfc3966',
   exampleFormat: 'international',
+  exampleType: 'mobile',
 });
 ```
 
