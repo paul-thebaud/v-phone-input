@@ -1,5 +1,16 @@
 # Change log
 
+## 7.1.0
+
+### Behavioral
+
+- The phone number example in message is now a mobile phone number instead of a
+  fixed line phone number, because this is the most common use case.
+
+### Features
+
+- feat: add `exampleType` to support changing the type of the example in messages.
+
 ## 7.0.2
 
 ### Bug fixes
