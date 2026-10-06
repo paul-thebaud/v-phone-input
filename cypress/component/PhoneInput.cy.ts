@@ -66,7 +66,7 @@ describe("PhoneInput", () => {
         tools.expectCountry("FR");
         tools.expectPhone("+33712345678");
         tools.expectError(
-          'The "Phone" field is not a valid phone number (example: 01 23 45 67 89).',
+          'The "Phone" field is not a valid phone number (example: 06 12 34 56 78).',
         );
       });
 
@@ -78,7 +78,7 @@ describe("PhoneInput", () => {
         tools.expectCountry("AF");
         tools.expectPhone("0123456789");
         tools.expectError(
-          'The "Phone" field is not a valid phone number (example: 023 456 7890).',
+          'The "Phone" field is not a valid phone number (example: 070 123 4567).',
         );
       });
 
@@ -194,7 +194,7 @@ describe("PhoneInput", () => {
         tools.expectCountry("FR");
         tools.expectPhone("+33712345678");
         tools.expectError(
-          'The "Phone" field is not a valid phone number (example: 01 23 45 67 89).',
+          'The "Phone" field is not a valid phone number (example: 06 12 34 56 78).',
         );
       });
 
@@ -212,7 +212,7 @@ describe("PhoneInput", () => {
         tools.expectCountry("FR");
         tools.expectPhone("0712 34 56 78");
         tools.expectError(
-          'The "Phone" field is not a valid phone number (example: 01 23 45 67 89).',
+          'The "Phone" field is not a valid phone number (example: 06 12 34 56 78).',
         );
       });
 
@@ -280,7 +280,7 @@ describe("PhoneInput", () => {
 
       it("rewrites country on phone when using e164 display format", () => {
         tools.mount({
-          displayFormat: 'e164',
+          displayFormat: "e164",
         });
 
         tools.typePhone("+33612345678");
@@ -298,7 +298,7 @@ describe("PhoneInput", () => {
 
       it("rewrites country on phone when using international display format", () => {
         tools.mount({
-          displayFormat: 'international',
+          displayFormat: "international",
         });
 
         tools.typePhone("+33612345678");
@@ -340,7 +340,7 @@ describe("PhoneInput", () => {
         tools.expectCountry("AF");
         tools.expectPhone("+33612345678");
         tools.expectError(
-          'The "Phone" field is not a valid phone number (example: 023 456 7890).',
+          'The "Phone" field is not a valid phone number (example: 070 123 4567).',
         );
       });
 
